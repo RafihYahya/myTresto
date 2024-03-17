@@ -1,0 +1,67 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tresto_v002a/Globals/webview_url_consts.dart';
+import 'package:tresto_v002a/LOGIC/Cubits/app_indexes_cubit.dart';
+import 'package:tresto_v002a/LOGIC/Cubits/dashboard_cubit.dart';
+import 'package:webview_flutter/webview_flutter.dart';
+
+class WebViewPage extends StatelessWidget {
+  final String url;
+  final String jsInjection;
+  final String jsChannelInterface;
+  final bool needRestoSwitch;
+  const WebViewPage(
+      {super.key,
+      required this.url,
+      required this.jsInjection,
+      required this.jsChannelInterface,
+      this.needRestoSwitch = true});
+
+  @override
+  Widget build(BuildContext context) {
+    String changeRestoInWebViewHandler(int i) {
+      String index = i.toString();
+      return '''document.querySelectorAll("div > a#menu-item-0")[$index].click();
+      window.location.href = '${url.substring(baseUrl.length, url.length)}'
+       ''';
+    }
+
+    //const jsRemoveSideBarInjection ='''document.getElementById('sidebar-btn-container').remove()''';
+    //const jsRemoveNavInjection = '''document.querySelectorAll("nav").forEach(e => e.remove());'''
+    //'document.getElementById("sidebar-btn-container").remove();';
+    //document.querySelector("div > button").remove()
+    WebViewController controller = WebViewController();
+    WebViewCookie cookie = WebViewCookie(
+      name: "tresto_session",
+      value:
+          'iSUjVErf6kwsOnHQvhVEXqBosOvp1Ljj2pV8Hn9q', //BlocProvider.of<DashBoardCubit>(context).state.token,
+      domain: WebViewUrls.home,
+      path: "/", // Adjust the path if needed
+    );
+    WebViewCookieManager().setCookie(cookie);
+    controller.setJavaScriptMode(JavaScriptMode.unrestricted);
+    controller.addJavaScriptChannel('Print',
+        onMessageReceived: (JavaScriptMessage message) {
+      print(message.message);
+    });
+    controller.setNavigationDelegate(NavigationDelegate(
+      onPageStarted: (url) {
+        if (needRestoSwitch) {
+          controller.runJavaScript(JsInjection.rmNavBarNoFlicker);
+          String jsOnClickHandler = changeRestoInWebViewHandler(
+              BlocProvider.of<IndexesCubit>(context).state.restoIndex);
+          controller.runJavaScript(jsOnClickHandler);
+        }
+      },
+      onProgress: (progress) {
+                  controller.runJavaScript(jsInjection);
+
+      },
+      onPageFinished: (url) {
+        controller.runJavaScript(jsChannelInterface);
+      },
+    ));
+    controller.loadRequest(Uri.parse(url));
+    return Scaffold(body: WebViewWidget(controller: controller));
+  }
+}
