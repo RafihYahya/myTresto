@@ -14,3 +14,11 @@ final class DashboardAdd extends DashboardEvent {
 final class DashboardUpdate extends DashboardEvent {
   DashboardUpdate();
 }
+
+final class DashboardRemove extends DashboardEvent {
+  DashboardRemove();
+}
+
+final class DashboardNewResto extends DashboardEvent {
+  DashboardNewResto();
+}

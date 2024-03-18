@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:heroicons/heroicons.dart';
-import 'package:tresto_v002a/LOGIC/Models/dashboard_model.dart';
 
 class DashboardMainTile extends StatelessWidget {
   final Color tileColor;
@@ -9,16 +8,13 @@ class DashboardMainTile extends StatelessWidget {
   final Color secondaryTextColor;
   final Color iconsColor;
   final HeroIcons icon;
-  final DashboardTileData data;
   const DashboardMainTile(
       {super.key,
       required this.tileColor,
       required this.textColor,
       required this.secondaryTextColor,
-      required this.data,
       required this.iconsColor,
-      required this.icon
-      });
+      required this.icon});
 
   @override
   Widget build(BuildContext context) {
@@ -39,8 +35,10 @@ class DashboardMainTile extends StatelessWidget {
               color: iconsColor,
               size: 22,
             ),
-            const SizedBox(height: 4.0,),
-            Text(data.number.toString(),
+            const SizedBox(
+              height: 4.0,
+            ),
+            Text('',
                 style: GoogleFonts.poppins(
                   textStyle: TextStyle(
                       fontSize: 20.0,
@@ -50,15 +48,13 @@ class DashboardMainTile extends StatelessWidget {
             const SizedBox(
               height: 1.0,
             ),
-            Text(data.title,
+            Text('',
                 style: GoogleFonts.poppins(
                   textStyle: TextStyle(
                       fontSize: 11.0,
                       fontWeight: FontWeight.w500,
                       color: secondaryTextColor),
                 )),
-            
-            
           ],
         ),
       ),

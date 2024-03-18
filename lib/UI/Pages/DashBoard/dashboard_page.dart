@@ -2,12 +2,9 @@ import 'dart:math';
 
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:heroicons/heroicons.dart';
 import 'package:tresto_v002a/Global/constants.dart';
-import 'package:tresto_v002a/LOGIC/Cubits/app_indexes_cubit.dart';
-import 'package:tresto_v002a/LOGIC/Models/Global/app_indexes_data.dart';
 import 'package:tresto_v002a/UI/Widgets/DashBoardComp/dashboard_chart.dart';
 import 'package:tresto_v002a/UI/Widgets/DashBoardComp/dashboard_tile.dart';
 
@@ -55,62 +52,31 @@ class _DashBoardPageState extends State<DashBoardPage> {
           const SizedBox(
             height: 15.0,
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 12.0),
+          const Padding(
+            padding:  EdgeInsets.symmetric(horizontal: 12.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Expanded(
-                  child: BlocBuilder<IndexesCubit, AppIndexes>(
-                    builder: (context, stateIndex) {
-                      return BlocBuilder<DashBoardCubit, DashBoardState>(
-                        builder: (context, stateDash) {
-                          return DashboardMainTile(
-                            data:
-                                stateDash.dashboardData.dashBoardFull.length >
-                                        stateIndex.restoIndex 
-                                    ? stateDash
-                                        .dashboardData
-                                        .dashBoardFull[stateIndex.restoIndex]
-                                        ?.dashList[0]
-                                    : null,
-                            tileColor: Colors.white,
-                            iconsColor: Colors.pink,
-                            textColor: const Color(0xFF141414),
-                            secondaryTextColor: AppColor.textGrey1,
-                            icon: HeroIcons.shoppingBag,
-                          );
-                        },
-                      );
-                    },
+                 Expanded(
+                  child:  DashboardMainTile(                               
+                    tileColor: Colors.white,
+                    iconsColor: Colors.pink,
+                    textColor:  Color(0xFF141414),
+                    secondaryTextColor: AppColor.textGrey1,
+                    icon: HeroIcons.shoppingBag,
                   ),
                 ),
-                const SizedBox(
+                 SizedBox(
                   width: 12.0,
                 ),
-                Expanded(
-                  child: BlocBuilder<IndexesCubit, AppIndexes>(
-                    builder: (context, stateIndex) {
-                      return BlocBuilder<DashBoardCubit, DashBoardState>(
-                        builder: (context, stateDash) {
-                          return DashboardMainTile(
-                            data:
-                                stateDash.dashboardData.dashBoardFull.length >
-                                        stateIndex.restoIndex 
-                                    ? stateDash
-                                        .dashboardData
-                                        .dashBoardFull[stateIndex.restoIndex]
-                                        ?.dashList[1]
-                                    : null,
-                            tileColor: Colors.white,
-                            iconsColor: Colors.green,
-                            textColor: const Color(0xFF141414),
-                            secondaryTextColor: AppColor.textGrey1,
-                            icon: HeroIcons.banknotes,
-                          );
-                        },
-                      );
-                    },
+                 Expanded(
+                  child: DashboardMainTile(
+                    
+                    tileColor: Colors.white,
+                    iconsColor: Colors.green,
+                    textColor:  Color(0xFF141414),
+                    secondaryTextColor: AppColor.textGrey1,
+                    icon: HeroIcons.banknotes,
                   ),
                 ),
               ],
@@ -119,61 +85,31 @@ class _DashBoardPageState extends State<DashBoardPage> {
           const SizedBox(
             height: 12.0,
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 12.0),
+          const Padding(
+            padding:  EdgeInsets.symmetric(horizontal: 12.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Expanded(
-                  child: BlocBuilder<IndexesCubit, AppIndexes>(
-                    builder: (context, stateIndex) {
-                      return BlocBuilder<DashBoardCubit, DashBoardState>(
-                        builder: (context, stateDash) {
-                          return DashboardMainTile(
-                              data: stateDash
-                                          .dashboardData.dashBoardFull.length >
-                                      stateIndex.restoIndex 
-                                  ? stateDash
-                                      .dashboardData
-                                      .dashBoardFull[stateIndex.restoIndex]
-                                      ?.dashList[2]
-                                  : null,
-                              tileColor: Colors.white,
-                              iconsColor: Colors.purple,
-                              textColor: const Color(0xFF141414),
-                              secondaryTextColor: AppColor.textGrey1,
-                              icon: HeroIcons.arrowPathRoundedSquare);
-                        },
-                      );
-                    },
-                  ),
+                  child: DashboardMainTile(
+                      
+                      tileColor: Colors.white,
+                      iconsColor: Colors.purple,
+                      textColor:  Color(0xFF141414),
+                      secondaryTextColor: AppColor.textGrey1,
+                      icon: HeroIcons.arrowPathRoundedSquare),
                 ),
-                const SizedBox(
+                 SizedBox(
                   width: 12.0,
                 ),
                 Expanded(
-                  child: BlocBuilder<IndexesCubit, AppIndexes>(
-                    builder: (context, stateIndex) {
-                      return BlocBuilder<DashBoardCubit, DashBoardState>(
-                        builder: (context, stateDash) {
-                          return DashboardMainTile(
-                            data:
-                                stateDash.dashboardData.dashBoardFull.length >
-                                        stateIndex.restoIndex 
-                                    ? stateDash
-                                        .dashboardData
-                                        .dashBoardFull[stateIndex.restoIndex]
-                                        ?.dashList[3]
-                                    : null,
-                            tileColor: Colors.white,
-                            iconsColor: Colors.blue,
-                            textColor: const Color(0xFF141414),
-                            secondaryTextColor: AppColor.textGrey1,
-                            icon: HeroIcons.eye,
-                          );
-                        },
-                      );
-                    },
+                  child: DashboardMainTile(
+                    
+                    tileColor: Colors.white,
+                    iconsColor: Colors.blue,
+                    textColor:  Color(0xFF141414),
+                    secondaryTextColor: AppColor.textGrey1,
+                    icon: HeroIcons.eye,
                   ),
                 ),
               ],

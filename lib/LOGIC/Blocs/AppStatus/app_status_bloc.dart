@@ -1,14 +1,15 @@
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
+import 'package:tresto_v002a/LOGIC/Blocs/AppStatus/app_status_state.dart';
 
 part 'app_status_event.dart';
-part 'app_status_statev1.dart.olf';
 
 class AppStatusBloc extends Bloc<AppStatusEvent, AppStatusState> {
-  AppStatusBloc() : super(AppStatusInitial()) {
+  AppStatusBloc() : super(AppStatusState.initial()) {
+    on<CheckApiStatus>(printApiStatus);
+  }
 
-    on<CheckApiStatus>((event, emit) {
-      print('object');
-    });
+  void printApiStatus(CheckApiStatus event, Emitter<AppStatusState> emit) {
+    print(state.apiStatus);
   }
 }

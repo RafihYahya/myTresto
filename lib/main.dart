@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tresto_v002a/Global/constants.dart';
 import 'package:tresto_v002a/LOGIC/Blocs/AppStatus/app_status_bloc.dart';
+import 'package:tresto_v002a/LOGIC/Blocs/AppStatus/app_status_state.dart';
 import 'package:tresto_v002a/LOGIC/Blocs/Dashboard/dashboard_bloc.dart';
 import 'package:tresto_v002a/LOGIC/Cubits/app_indexes_cubit.dart';
 import 'package:tresto_v002a/LOGIC/Cubits/app_settings.cubit.dart';
@@ -9,8 +10,8 @@ import 'package:tresto_v002a/LOGIC/Models/Global/app_settings.dart';
 import 'package:tresto_v002a/LOGIC/Repositories/app_settings_repo.dart';
 import 'package:tresto_v002a/LOGIC/Repositories/dashboard_repo.dart';
 import 'package:tresto_v002a/LOGIC/Models/Global/app_indexes_data.dart';
-import 'package:tresto_v002a/app_routing.dart';
 import 'package:tresto_v002a/UI/Pages/login_page.dart';
+import 'package:tresto_v002a/app_routing.dart';
 import 'package:tresto_v002a/mainobserver.dart';
 
 void main() async {
@@ -69,15 +70,13 @@ class MainApp extends StatelessWidget {
             useMaterial3: true,
           ),
           home: Scaffold(
-            //Rebuild the widget when the Status changes
-            body: BlocBuilder<AppStatusBloc,AppStatusState>(
-              builder: (context,state){
-                return state.
-              }
-                
-                
-              )
-          ),
+              //Rebuild the widget when the Status changes
+              body: BlocBuilder<AppStatusBloc, AppStatusState>(
+            builder: (context, state) =>
+                state.loginStatus == AppStatusLogin.loggedOut
+                    ? const LoginPage()
+                    : const AppRouting(),
+          )),
         );
       },
     );

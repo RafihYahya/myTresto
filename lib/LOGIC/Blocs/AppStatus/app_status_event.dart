@@ -14,3 +14,6 @@ final class CheckApiStatus extends AppStatusEvent {
 final class CheckLocalStorageStatus extends AppStatusEvent {
   CheckLocalStorageStatus();
 }
+final class CheckLoginStatus extends AppStatusEvent{
+  CheckLoginStatus();
+}

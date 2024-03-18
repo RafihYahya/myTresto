@@ -31,4 +31,11 @@ final class AppStatusState {
         networkStatus: networkStatus ?? this.networkStatus,
         loginStatus: loginStatus ?? this.loginStatus);
   }
+
+  AppStatusState.initial({
+   this.apiStatus = AppStatusApi.working,
+     this.localStorageStatus = AppStatusLocalStorage.working,
+     this.networkStatus = AppStatusNetwork.working,
+     this.loginStatus = AppStatusLogin.loggedOut,
+  });
 }
