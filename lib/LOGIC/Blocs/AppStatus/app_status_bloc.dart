@@ -6,7 +6,7 @@ part 'app_status_state.dart';
 
 class AppStatusBloc extends Bloc<AppStatusEvent, AppStatusState> {
   AppStatusBloc() : super(AppStatusInitial()) {
-    on<CheckApi>((event, emit) {
+    on<CheckApiStatus>((event, emit) {
       print('object');
     });
   }

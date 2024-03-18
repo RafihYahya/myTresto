@@ -6,7 +6,6 @@ import 'package:tresto_v002a/LOGIC/Blocs/Dashboard/dashboard_bloc.dart';
 import 'package:tresto_v002a/LOGIC/Cubits/app_indexes_cubit.dart';
 import 'package:tresto_v002a/LOGIC/Cubits/app_settings.cubit.dart';
 import 'package:tresto_v002a/LOGIC/Models/Global/app_settings.dart';
-import 'package:tresto_v002a/LOGIC/Models/Global/app_status.dart';
 import 'package:tresto_v002a/LOGIC/Repositories/app_settings_repo.dart';
 import 'package:tresto_v002a/LOGIC/Repositories/dashboard_repo.dart';
 import 'package:tresto_v002a/LOGIC/Models/Global/app_indexes_data.dart';
@@ -71,13 +70,12 @@ class MainApp extends StatelessWidget {
           ),
           home: Scaffold(
             //Rebuild the widget when the Status changes
-            body: BlocBuilder<AppStatusBloc, AppStatusState>(
-              builder: (context, state) {
-                return state
-                    ? const LoginPage() // use TestPage here for testing
-                    : const AppRouting();
-              },
-            ),
+            body: BlocBuilder<AppStatusBloc,AppStatusState>(
+              builder: (context,state) => 
+                state.
+                ? const LoginPage() // use TestPage here for testing
+                : const AppRouting(),
+              )
           ),
         );
       },

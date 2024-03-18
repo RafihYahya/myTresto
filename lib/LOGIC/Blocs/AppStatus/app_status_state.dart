@@ -6,55 +6,42 @@ enum AppStatusApi { idle, working, failure }
 
 enum AppStatusLocal { idle, working, failure }
 
-enum AppStatusLogin {loggedIn, loggedOut}
+enum AppStatusLogin { loggedIn, loggedOut }
 
 @immutable
 sealed class AppStatusState {}
 
 final class AppStatusInitial extends AppStatusState {
-  final AppStatusApi apiStatus;
-  final AppStatusNetwork networkStatus;
-  final AppStatusLocal localStatus;
-  final AppStatusLogin loginStatus;
+  final AppStatusApi apiStatus = AppStatusApi.idle;
+  final AppStatusNetwork networkStatus = AppStatusNetwork.idle;
+  final AppStatusLocal localStatus = AppStatusLocal.idle;
+  final AppStatusLogin loginStatus = AppStatusLogin.loggedOut;
 
-  AppStatusInitial(
-      {this.apiStatus = AppStatusApi.idle,
-      this.localStatus = AppStatusLocal.idle,
-      this.networkStatus = AppStatusNetwork.idle,
-      this.loginStatus = AppStatusLogin.loggedOut
-      });
+  AppStatusInitial();
 }
 
 final class AppStatusWorking extends AppStatusState {
-  final AppStatusApi apiStatus;
-  final AppStatusNetwork networkStatus;
-  final AppStatusLocal localStatus;
-    final AppStatusLogin loginStatus;
+  final AppStatusApi apiStatus = AppStatusApi.working;
+  final AppStatusNetwork networkStatus = AppStatusNetwork.working;
+  final AppStatusLocal localStatus = AppStatusLocal.working;
+  final AppStatusLogin loginStatus;
 
-
-  AppStatusWorking(
-      {this.apiStatus = AppStatusApi.working,
-      this.localStatus = AppStatusLocal.working,
-      this.networkStatus = AppStatusNetwork.working,
-      required this.loginStatus
-      });
+  AppStatusWorking({required this.loginStatus});
 }
 
 final class AppStatusDefault extends AppStatusState {
   final AppStatusApi apiStatus;
   final AppStatusNetwork networkStatus;
   final AppStatusLocal localStatus;
-    final AppStatusLogin loginStatus;
-
+  final AppStatusLogin loginStatus;
 
   AppStatusDefault(
       {required this.apiStatus,
       required this.localStatus,
       required this.networkStatus,
-      required this.loginStatus
-      });
+      required this.loginStatus});
 }
 
-class ApiStatusError extends AppStatusState {
+final class ApiStatusError extends AppStatusState {
   ApiStatusError();
 }

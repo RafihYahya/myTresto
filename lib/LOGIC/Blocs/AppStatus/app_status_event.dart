@@ -3,14 +3,14 @@ part of 'app_status_bloc.dart';
 @immutable
 sealed class AppStatusEvent {}
 
-final class CheckNetwork extends AppStatusEvent {
-  CheckNetwork();
+final class CheckNetworkStatus extends AppStatusEvent {
+  CheckNetworkStatus();
 }
 
-final class CheckApi extends AppStatusEvent {
-  CheckApi();
+final class CheckApiStatus extends AppStatusEvent {
+  CheckApiStatus();
 }
 
-final class CheckLocalStorage extends AppStatusEvent {
-  CheckLocalStorage();
+final class CheckLocalStorageStatus extends AppStatusEvent {
+  CheckLocalStorageStatus();
 }
