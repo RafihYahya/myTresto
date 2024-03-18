@@ -201,11 +201,11 @@ class _LoginPageState extends State<LoginPage> {
                               const SizedBox(
                                 height: 24,
                               ),
-                              Row(
+                              const Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                  BlocBuilder<DashBoardCubit, DashBoardState>(
+                                  /* BlocBuilder<DashBoardCubit, DashBoardState>(
                                     builder: (context2, state) {
                                       return ElevatedButton(
                                         onPressed: () async {
@@ -266,7 +266,7 @@ class _LoginPageState extends State<LoginPage> {
                                         ) : CircularProgressIndicator() ,
                                       );
                                     },
-                                  ),
+                                  ), */
                                 ],
                               ),
                             ],

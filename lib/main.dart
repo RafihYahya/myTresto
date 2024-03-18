@@ -71,10 +71,11 @@ class MainApp extends StatelessWidget {
           home: Scaffold(
             //Rebuild the widget when the Status changes
             body: BlocBuilder<AppStatusBloc,AppStatusState>(
-              builder: (context,state) => 
-                state.
-                ? const LoginPage() // use TestPage here for testing
-                : const AppRouting(),
+              builder: (context,state){
+                return state.
+              }
+                
+                
               )
           ),
         );

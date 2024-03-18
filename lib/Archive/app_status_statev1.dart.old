@@ -1,0 +1,34 @@
+part of 'app_status_bloc.dart';
+
+enum AppStatusNetwork { working, failure }
+
+enum AppStatusApi { working, failure }
+
+enum AppStatusLocal { working, failure }
+
+enum AppStatusLogin { loggedIn, loggedOut }
+
+@immutable
+sealed class AppStatusState {}
+
+final class AppStatusInitial extends AppStatusState {
+  final AppStatusApi apiStatus;
+  final AppStatusNetwork networkStatus;
+  final AppStatusLocal localStatus;
+  final AppStatusLogin loginStatus;
+
+  AppStatusInitial(
+      {this.apiStatus = AppStatusApi.working,
+      this.localStatus = AppStatusLocal.working,
+      this.networkStatus = AppStatusNetwork.working,
+      this.loginStatus = AppStatusLogin.loggedOut});
+}
+
+final class AppStatusLoggedIn extends AppStatusState {
+  final AppStatusLogin loginStatus = AppStatusLogin.loggedIn;
+  AppStatusLoggedIn();
+}
+
+final class ApiStatusError extends AppStatusState {
+  ApiStatusError();
+}

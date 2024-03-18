@@ -1,47 +1,34 @@
-part of 'app_status_bloc.dart';
+enum AppStatusNetwork { working, failure }
 
-enum AppStatusNetwork { idle, working, failure }
+enum AppStatusApi { working, failure }
 
-enum AppStatusApi { idle, working, failure }
-
-enum AppStatusLocal { idle, working, failure }
+enum AppStatusLocalStorage { working, failure }
 
 enum AppStatusLogin { loggedIn, loggedOut }
 
-@immutable
-sealed class AppStatusState {}
-
-final class AppStatusInitial extends AppStatusState {
-  final AppStatusApi apiStatus = AppStatusApi.idle;
-  final AppStatusNetwork networkStatus = AppStatusNetwork.idle;
-  final AppStatusLocal localStatus = AppStatusLocal.idle;
-  final AppStatusLogin loginStatus = AppStatusLogin.loggedOut;
-
-  AppStatusInitial();
-}
-
-final class AppStatusWorking extends AppStatusState {
-  final AppStatusApi apiStatus = AppStatusApi.working;
-  final AppStatusNetwork networkStatus = AppStatusNetwork.working;
-  final AppStatusLocal localStatus = AppStatusLocal.working;
-  final AppStatusLogin loginStatus;
-
-  AppStatusWorking({required this.loginStatus});
-}
-
-final class AppStatusDefault extends AppStatusState {
+final class AppStatusState {
   final AppStatusApi apiStatus;
+  final AppStatusLocalStorage localStorageStatus;
   final AppStatusNetwork networkStatus;
-  final AppStatusLocal localStatus;
   final AppStatusLogin loginStatus;
 
-  AppStatusDefault(
-      {required this.apiStatus,
-      required this.localStatus,
-      required this.networkStatus,
-      required this.loginStatus});
-}
+  AppStatusState({
+    required this.apiStatus,
+    required this.localStorageStatus,
+    required this.networkStatus,
+    required this.loginStatus,
+  });
 
-final class ApiStatusError extends AppStatusState {
-  ApiStatusError();
+  AppStatusState copyWith({
+    AppStatusApi? apiStatus,
+    AppStatusLocalStorage? localStorageStatus,
+    AppStatusNetwork? networkStatus,
+    AppStatusLogin? loginStatus,
+  }) {
+    return AppStatusState(
+        apiStatus: apiStatus ?? this.apiStatus,
+        localStorageStatus: localStorageStatus ?? this.localStorageStatus,
+        networkStatus: networkStatus ?? this.networkStatus,
+        loginStatus: loginStatus ?? this.loginStatus);
+  }
 }
