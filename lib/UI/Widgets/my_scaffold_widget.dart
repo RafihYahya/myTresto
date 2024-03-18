@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tresto_v002a/Globals/constants.dart';
+import 'package:tresto_v002a/Global/constants.dart';
 import 'package:tresto_v002a/UI/Widgets/bottom_nav_bar.dart';
 import 'package:tresto_v002a/UI/Widgets/top_app_bar.dart';
 

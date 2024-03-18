@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:tresto_v002a/Globals/constants.dart';
+import 'package:tresto_v002a/Global/constants.dart';
 
 class CustomAlert extends StatelessWidget {
   const CustomAlert({super.key});

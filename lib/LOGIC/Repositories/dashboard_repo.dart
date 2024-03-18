@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:tresto_v002a/LOGIC/DataProviders/Api/dashboard_data_provider.dart';
 import 'package:tresto_v002a/LOGIC/DataProviders/Api/token_provider.dart';
-import 'package:tresto_v002a/LOGIC/Models/DashBoard_RestoModels/dashboard_data.dart';
 import 'package:tresto_v002a/mock_data_testing.dart';
 
 class DashBoardRepository {

@@ -5,11 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:heroicons/heroicons.dart';
-import 'package:tresto_v002a/Globals/constants.dart';
+import 'package:tresto_v002a/Global/constants.dart';
 import 'package:tresto_v002a/LOGIC/Cubits/app_indexes_cubit.dart';
-import 'package:tresto_v002a/LOGIC/Cubits/dashboard_cubit.dart';
-import 'package:tresto_v002a/LOGIC/Cubits/dashboard_state.dart';
-import 'package:tresto_v002a/LOGIC/Models/GlobalModeles/app_indexes_data.dart';
+import 'package:tresto_v002a/LOGIC/Models/Global/app_indexes_data.dart';
 import 'package:tresto_v002a/UI/Widgets/DashBoardComp/dashboard_chart.dart';
 import 'package:tresto_v002a/UI/Widgets/DashBoardComp/dashboard_tile.dart';
 

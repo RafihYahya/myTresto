@@ -1,4 +1,4 @@
-import 'package:tresto_v002a/Globals/constants.dart';
+import 'package:tresto_v002a/Global/constants.dart';
 
 class AppSettings {
   final bool isDarkMode;

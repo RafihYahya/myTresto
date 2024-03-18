@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:tresto_v002a/UI/Widgets/MenuPageComps/create_product_comp.dart';
-import 'package:tresto_v002a/UI/Widgets/MenuPageComps/create_resto_comp.dart';
-import 'package:tresto_v002a/UI/Widgets/MenuPageComps/creation_tab_menu.dart';
+import 'package:tresto_v002a/Archive/MenuPageComps/create_product_comp.dart.old';
+import 'package:tresto_v002a/UI/Widgets/MenuPageComps/create_resto_comp.dart.old';
+import 'package:tresto_v002a/Archive/MenuPageComps/creation_tab_menu.dart.old';
 
 class MenuCreatePage extends StatefulWidget {
   const MenuCreatePage({super.key});

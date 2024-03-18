@@ -2,7 +2,7 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:tresto_v002a/Globals/constants.dart';
+import 'package:tresto_v002a/Global/constants.dart';
 
 class DashboardChart extends StatelessWidget {
   final List<FlSpot> data;

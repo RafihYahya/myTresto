@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:tresto_v002a/Globals/webview_url_consts.dart';
+import 'package:tresto_v002a/Global/webview_url_consts.dart';
 import 'package:tresto_v002a/LOGIC/Cubits/app_indexes_cubit.dart';
-import 'package:tresto_v002a/LOGIC/Cubits/app_status_cubit.dart';
-import 'package:tresto_v002a/LOGIC/Cubits/dashboard_cubit.dart';
-import 'package:tresto_v002a/LOGIC/Cubits/dashboard_state.dart';
-import 'package:tresto_v002a/Globals/constants.dart';
+import 'package:tresto_v002a/Global/constants.dart';
 import 'package:tresto_v002a/app_routing.dart';
 
 class LoginPage extends StatefulWidget {

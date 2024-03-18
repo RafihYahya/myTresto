@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:tresto_v002a/Globals/constants.dart';
-import 'package:tresto_v002a/UI/Widgets/MenuPageComps/menu_information_image_comp.dart';
+import 'package:tresto_v002a/Global/constants.dart';
+import 'package:tresto_v002a/Archive/MenuPageComps/menu_information_image_comp.dart.old';
 
 class MenuInformationPage extends StatelessWidget {
   const MenuInformationPage({super.key});
