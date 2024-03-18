@@ -4,7 +4,7 @@ import 'package:tresto_v002a/Global/webview_url_consts.dart';
 import 'package:tresto_v002a/LOGIC/Cubits/app_indexes_cubit.dart';
 import 'package:tresto_v002a/LOGIC/Models/Global/app_indexes_data.dart';
 import 'package:tresto_v002a/UI/Pages/Orders/order_page.dart';
-import 'package:tresto_v002a/UI/Pages/dashboard_page.dart';
+import 'package:tresto_v002a/UI/Pages/DashBoard/dashboard_page.dart';
 import 'package:tresto_v002a/UI/Pages/inappwebview_page.dart';
 import 'package:tresto_v002a/UI/Pages/Menu/menu_page.dart';
 import 'package:tresto_v002a/UI/Widgets/my_scaffold_widget.dart';
