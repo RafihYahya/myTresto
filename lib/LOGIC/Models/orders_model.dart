@@ -2,12 +2,10 @@ import 'package:flutter/material.dart';
 
 enum OrderStatus { accepted, rejected, pending }
 
-
-
 class OrderClientDetails {
-  final String phoneNumber;
-  final String address;
-  final String deliveryZone;
+  final String? phoneNumber;
+  final String? address;
+  final String? deliveryZone;
 
   OrderClientDetails({
     required this.phoneNumber,
@@ -18,12 +16,12 @@ class OrderClientDetails {
 
 //
 class OrderDetails {
-  final Image productImage;
-  final String productTitle;
-  final String productCategoryName;
-  final double taxPrice;
-  final double priceDelivery;
-  final OrderClientDetails clientDetails;
+  final Image? productImage;
+  final String? productTitle;
+  final String? productCategoryName;
+  final double? taxPrice;
+  final double? priceDelivery;
+  final OrderClientDetails? clientDetails;
   OrderDetails(
       {required this.productImage,
       required this.productTitle,
@@ -36,13 +34,13 @@ class OrderDetails {
 //
 
 class OrderData {
-  final int orderId;
-  final String customerName;
-  final String price;
-  final int amount;
-  final String date;
-  final OrderStatus status;
-  final OrderDetails details;
+  final int? orderId;
+  final String? customerName;
+  final String? price;
+  final int? amount;
+  final String? date;
+  final OrderStatus? status;
+  final OrderDetails? details;
 
   OrderData(
       {required this.orderId,
@@ -59,7 +57,8 @@ class OrderData {
 ///
 class OrderListData {
   final List<OrderData> ordersList;
-  OrderListData({required this.ordersList});
+  final String? restoName;
+  OrderListData({required this.ordersList, required this.restoName});
 }
 
 ///

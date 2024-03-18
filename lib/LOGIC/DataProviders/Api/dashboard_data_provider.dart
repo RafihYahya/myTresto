@@ -1,8 +1,8 @@
 
 import 'package:http/http.dart' as http;
 
-class DashBoardFullListDataProvider {
-  DashBoardFullListDataProvider();
+class DashBoardRestoListProvider {
+  DashBoardRestoListProvider();
   //dashboard provider used to get pretty mcuh all application datat as raw data from the relevant api
   //
   static String apiUrl = 'Put Url here';

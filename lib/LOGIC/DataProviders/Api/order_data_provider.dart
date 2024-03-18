@@ -1,7 +1,7 @@
 import 'package:http/http.dart' as http;
 
-class OrderDataFullListDataProvider {
-  OrderDataFullListDataProvider();
+class OrderRestoListProvider {
+  OrderRestoListProvider();
   //order provider that might be used to retrieve raw data from api 
   //I said might cause we might not use it in future
   static String apiUrl = 'Put Url here';

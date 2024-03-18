@@ -40,6 +40,7 @@ void main() async {
               create: (context) => IndexesCubit(AppIndexes(
                     index: 0,
                     restoIndex: 0,
+                    maxRestoNumber: 0
                   ))),
         ],
         child: RepositoryProvider(
