@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tresto_v002a/Global/constants.dart';
+import 'package:tresto_v002a/LOGIC/Blocs/AppStatus/app_status_bloc.dart';
 import 'package:tresto_v002a/LOGIC/Blocs/Dashboard/dashboard_bloc.dart';
 import 'package:tresto_v002a/LOGIC/Cubits/app_indexes_cubit.dart';
 import 'package:tresto_v002a/LOGIC/Cubits/app_settings.cubit.dart';
@@ -12,7 +13,6 @@ import 'package:tresto_v002a/LOGIC/Models/Global/app_indexes_data.dart';
 import 'package:tresto_v002a/app_routing.dart';
 import 'package:tresto_v002a/UI/Pages/login_page.dart';
 import 'package:tresto_v002a/mainobserver.dart';
-import 'package:tresto_v002a/mock_data_testing.dart';
 
 void main() async {
   //Observe State Changes For debugging
@@ -35,7 +35,7 @@ void main() async {
                 RepositoryProvider.of<AppSettingsRepository>(context)),
           ),
           BlocProvider(
-            create: (context) => AppStatusCubit(),
+            create: (context) => AppStatusBloc(),
           ),
           BlocProvider(
               create: (context) => IndexesCubit(
@@ -71,9 +71,9 @@ class MainApp extends StatelessWidget {
           ),
           home: Scaffold(
             //Rebuild the widget when the Status changes
-            body: BlocBuilder<AppStatusCubit, AppStatus>(
+            body: BlocBuilder<AppStatusBloc, AppStatusState>(
               builder: (context, state) {
-                return state.loginStatus == LoginStatus.loggedIn
+                return state
                     ? const LoginPage() // use TestPage here for testing
                     : const AppRouting();
               },

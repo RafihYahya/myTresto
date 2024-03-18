@@ -7,7 +7,17 @@ final class DashboardInitial extends DashboardState {}
 
 final class DashboardLoading extends DashboardState {}
 
-final class DashboardComplete extends DashboardState {
+final class DashboardSuccess extends DashboardState {
   final DashBoardRestoList dashBoardRestoList;
-  DashboardComplete(this.dashBoardRestoList);
+  DashboardSuccess(this.dashBoardRestoList);
+
+  DashboardSuccess copyWith({
+    DashBoardRestoList? dashBoardRestoList,
+  }) {
+    return DashboardSuccess(dashBoardRestoList ?? this.dashBoardRestoList);
+  }
+}
+
+final class DashboardError extends DashboardState {
+  DashboardError();
 }

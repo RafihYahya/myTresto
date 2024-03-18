@@ -8,7 +8,10 @@ part 'dashboard_state.dart';
 class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
   final DashBoardRepository dashBoard;
   DashboardBloc({required this.dashBoard}) : super(DashboardInitial()) {
-    on<DashboardEvent>((event, emit) {
+    on<DashboardInit>((event, emit) {
+      print('miaw');
     });
+
+
   }
 }
