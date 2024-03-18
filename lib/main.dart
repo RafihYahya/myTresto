@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tresto_v002a/Global/constants.dart';
+import 'package:tresto_v002a/LOGIC/Blocs/Dashboard/dashboard_bloc.dart';
 import 'package:tresto_v002a/LOGIC/Cubits/app_indexes_cubit.dart';
 import 'package:tresto_v002a/LOGIC/Cubits/app_settings.cubit.dart';
 import 'package:tresto_v002a/LOGIC/Models/Global/app_settings.dart';
@@ -37,22 +38,14 @@ void main() async {
             create: (context) => AppStatusCubit(),
           ),
           BlocProvider(
-              create: (context) => IndexesCubit(AppIndexes(
-                    index: 0,
-                    restoIndex: 0,
-                    maxRestoNumber: 0
-                  ))),
+              create: (context) => IndexesCubit(
+                  AppIndexes(index: 0, restoIndex: 0, maxRestoNumber: 0))),
         ],
         child: RepositoryProvider(
           create: (context) => DashBoardRepository(),
           child: BlocProvider(
-            create: (context) => DashBoardCubit(
-              DashBoardState(
-                  dashboardData: dashboardfull2,
-                  dashBoardStateApiEnum: DashBoardStateApiEnum.nothing,
-                  authToken: ''
-                  ),
-              RepositoryProvider.of<DashBoardRepository>(context),
+            create: (context) => DashboardBloc(
+              dashBoard: RepositoryProvider.of<DashBoardRepository>(context),
             ),
             child: const MainApp(),
           ),
@@ -67,7 +60,6 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-   
     //rebuild entire App when Settings Change
     return BlocBuilder<AppSettingsCubit, AppSettings>(
       builder: (context, state) {
