@@ -7,19 +7,20 @@ part 'orders_state.dart';
 
 class OrdersBloc extends Bloc<OrdersEvent, OrdersState> {
   OrdersBloc() : super(OrdersInitial()) {
-    on<OrdersEvent>((event, emit) {
-    });
+    on<OrdersEvent>((event, emit) {});
   }
 
-   List<String> restoListCollector() {
-    var index = 0;
+  List<String> restoListCollector() {
     var restoList = <String>[];
-    for (var e in state.) {
-      restoList.add(e.restoName + index.toString());
+    final state = this.state;
+    if (state is OrdersReady) {
+      var index = 0;
+      for (var e in state.ordersRestoList.ordersRestoList) {
+        restoList.add((e.restoName ?? 'No Name') + index.toString());
+      }
+      return restoList;
+    } else {
+      return restoList;
     }
-    if(state is OrdersReady){
-      state.
-    }
-    return restoList;
   }
 }

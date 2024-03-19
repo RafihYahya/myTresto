@@ -11,7 +11,5 @@ final class DashboardUpdate extends DashboardEvent {}
 
 final class DashboardRemove extends DashboardEvent {}
 
-final class DashboardNewResto extends DashboardEvent {}
 
-final class DashboardGetToken extends DashboardEvent {}
 
