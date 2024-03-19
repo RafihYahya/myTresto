@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:tresto_v002a/LOGIC/DataProviders/Api/token_provider.dart';
+import 'package:tresto_v002a/LOGIC/Providers/Api/token_provider.dart';
 
 final class AppStatusRepository {
   final TokenProvider tokenProvider = TokenProvider();

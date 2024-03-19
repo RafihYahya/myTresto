@@ -1,4 +1,4 @@
-import 'package:tresto_v002a/LOGIC/DataProviders/LocalStorage/appsettings_provider.dart';
+import 'package:tresto_v002a/LOGIC/Providers/LocalStorage/appsettings_provider.dart';
 
 class AppSettingsRepository {
   AppSettingsRepository();

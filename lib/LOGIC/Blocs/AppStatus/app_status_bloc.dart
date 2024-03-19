@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:tresto_v002a/LOGIC/Blocs/AppStatus/app_status_state.dart';
-import 'package:tresto_v002a/LOGIC/Repositories/app_status_repo.dart';
+import 'package:tresto_v002a/LOGIC/Repos/app_status_repo.dart';
 
 part 'app_status_event.dart';
 
