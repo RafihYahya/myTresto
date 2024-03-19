@@ -6,11 +6,14 @@ enum AppStatusLocalStorage { working, failure }
 
 enum AppStatusLogin { loggedIn, loggedOut }
 
+enum AppStatusDataError { none, minor, major }
+
 final class AppStatusState {
   final AppStatusApi apiStatus;
   final AppStatusLocalStorage localStorageStatus;
   final AppStatusNetwork networkStatus;
   final AppStatusLogin loginStatus;
+  final AppStatusDataError dataError;
   final String authToken;
 
   AppStatusState({
@@ -18,6 +21,7 @@ final class AppStatusState {
     required this.localStorageStatus,
     required this.networkStatus,
     required this.loginStatus,
+    required this.dataError,
     required this.authToken,
   });
 
@@ -25,6 +29,7 @@ final class AppStatusState {
     AppStatusApi? apiStatus,
     AppStatusLocalStorage? localStorageStatus,
     AppStatusNetwork? networkStatus,
+    AppStatusDataError? dataError,
     AppStatusLogin? loginStatus,
     String? authToken,
   }) {
@@ -33,15 +38,15 @@ final class AppStatusState {
         localStorageStatus: localStorageStatus ?? this.localStorageStatus,
         networkStatus: networkStatus ?? this.networkStatus,
         loginStatus: loginStatus ?? this.loginStatus,
-        authToken: authToken ?? this.authToken
-        );
+        dataError: dataError ?? this.dataError,
+        authToken: authToken ?? this.authToken);
   }
 
-  AppStatusState.initial({
-   this.apiStatus = AppStatusApi.working,
-     this.localStorageStatus = AppStatusLocalStorage.working,
-     this.networkStatus = AppStatusNetwork.working,
-     this.loginStatus = AppStatusLogin.loggedOut,
-     this.authToken = '',
-  });
+  AppStatusState.initial(
+      {this.apiStatus = AppStatusApi.working,
+      this.localStorageStatus = AppStatusLocalStorage.working,
+      this.networkStatus = AppStatusNetwork.working,
+      this.loginStatus = AppStatusLogin.loggedOut,
+      this.authToken = '',
+      this.dataError = AppStatusDataError.none});
 }

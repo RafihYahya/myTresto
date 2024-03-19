@@ -21,7 +21,11 @@ class AppStatusBloc extends Bloc<AppStatusEvent, AppStatusState> {
   }
 
   Future<void> updateToken(GetToken event, Emitter<AppStatusState> emit) async {
-    var token = await getToken('test2@gmail.com', 'test2@gmail.com');
-    emit(state.copyWith(authToken: token));
+    try {
+      var token = await getToken('test2@gmail.com', 'test2@gmail.com');
+      emit(state.copyWith(authToken: token));
+    } catch (e) {
+      emit(state.copyWith(apiStatus: AppStatusApi.failure));
+    }
   }
 }

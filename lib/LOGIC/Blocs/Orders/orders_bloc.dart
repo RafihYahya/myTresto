@@ -10,4 +10,16 @@ class OrdersBloc extends Bloc<OrdersEvent, OrdersState> {
     on<OrdersEvent>((event, emit) {
     });
   }
+
+   List<String> restoListCollector() {
+    var index = 0;
+    var restoList = <String>[];
+    for (var e in state.) {
+      restoList.add(e.restoName + index.toString());
+    }
+    if(state is OrdersReady){
+      state.
+    }
+    return restoList;
+  }
 }

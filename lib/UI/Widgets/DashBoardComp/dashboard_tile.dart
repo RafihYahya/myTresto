@@ -5,6 +5,8 @@ import 'package:heroicons/heroicons.dart';
 import 'package:tresto_v002a/LOGIC/Blocs/Dashboard/dashboard_bloc.dart';
 import 'package:tresto_v002a/LOGIC/Cubits/app_indexes_cubit.dart';
 import 'package:tresto_v002a/LOGIC/Models/Global/app_indexes_data.dart';
+import 'package:tresto_v002a/UI/Widgets/CustomUtils/custom_error.dart';
+import 'package:tresto_v002a/UI/Widgets/CustomUtils/custom_loading.dart';
 
 class DashboardMainTile extends StatelessWidget {
   final int index;
@@ -46,21 +48,30 @@ class DashboardMainTile extends StatelessWidget {
             ),
             BlocBuilder<IndexesCubit, AppIndexes>(
               builder: (context, state) {
-                return Text(
-                    context
-                        .read<DashboardBloc>()
-                        .state
-                        .dashBoardRestoList
-                        .dashBoardRestoList[state.restoIndex]
-                        .dashBoardList[index]
-                        .number
-                        .toString(),
-                    style: GoogleFonts.poppins(
-                      textStyle: TextStyle(
-                          fontSize: 20.0,
-                          fontWeight: FontWeight.bold,
-                          color: textColor),
-                    ));
+                return BlocBuilder<DashboardBloc, DashboardState>(
+                  builder: (context, stateDash) {
+                    return switch (stateDash.status) {
+                      DashboardStateStatus.error => CustomError(),
+                      DashboardStateStatus.loading => CustomLoading(),
+                      DashboardStateStatus.ready => Text(
+                          context
+                              .read<DashboardBloc>()
+                              .state
+                              .dashBoardRestoList
+                              .dashBoardRestoList[state.restoIndex]
+                              .dashBoardList[index]
+                              .number
+                              .toString(),
+                          style: GoogleFonts.poppins(
+                            textStyle: TextStyle(
+                                fontSize: 20.0,
+                                fontWeight: FontWeight.bold,
+                                color: textColor),
+                          )),
+                      DashboardStateStatus.initial => Text(''),
+                    };
+                  },
+                );
               },
             ),
             const SizedBox(
@@ -68,20 +79,29 @@ class DashboardMainTile extends StatelessWidget {
             ),
             BlocBuilder<IndexesCubit, AppIndexes>(
               builder: (context, state) {
-                return Text(
-                    context
-                        .read<DashboardBloc>()
-                        .state
-                        .dashBoardRestoList
-                        .dashBoardRestoList[state.restoIndex]
-                        .dashBoardList[index]
-                        .title,
-                    style: GoogleFonts.poppins(
-                      textStyle: TextStyle(
-                          fontSize: 11.0,
-                          fontWeight: FontWeight.w500,
-                          color: secondaryTextColor),
-                    ));
+                return BlocBuilder<DashboardBloc, DashboardState>(
+                  builder: (context, stateDash) {
+                    return switch (stateDash.status) {
+                      DashboardStateStatus.error => CustomError(),
+                      DashboardStateStatus.loading => CustomLoading(),
+                      DashboardStateStatus.ready => Text(
+                          context
+                              .read<DashboardBloc>()
+                              .state
+                              .dashBoardRestoList
+                              .dashBoardRestoList[state.restoIndex]
+                              .dashBoardList[index]
+                              .title,
+                          style: GoogleFonts.poppins(
+                            textStyle: TextStyle(
+                                fontSize: 20.0,
+                                fontWeight: FontWeight.bold,
+                                color: textColor),
+                          )),
+                      DashboardStateStatus.initial => Text(''),
+                    };
+                  },
+                );
               },
             ),
           ],

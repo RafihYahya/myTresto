@@ -8,12 +8,25 @@ import 'package:tresto_v002a/LOGIC/Models/Global/app_indexes_data.dart';
 import 'package:tresto_v002a/Global/constants.dart';
 import 'package:tresto_v002a/LOGIC/Models/orders_model.dart';
 import 'package:tresto_v002a/UI/Pages/Orders/order_details_page.dart';
-import 'package:tresto_v002a/UI/Widgets/custom_error.dart';
-import 'package:tresto_v002a/UI/Widgets/custom_loading.dart';
+import 'package:tresto_v002a/UI/Widgets/CustomUtils/custom_error.dart';
+import 'package:tresto_v002a/UI/Widgets/CustomUtils/custom_loading.dart';
 
-class OrderPage extends StatelessWidget {
+class OrderPage extends StatefulWidget {
   const OrderPage({super.key});
 
+  @override
+  State<OrderPage> createState() => _OrderPageState();
+}
+
+class _OrderPageState extends State<OrderPage> {
+
+
+  
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Column(

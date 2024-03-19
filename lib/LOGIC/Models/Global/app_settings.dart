@@ -1,8 +1,6 @@
-import 'package:tresto_v002a/Global/constants.dart';
 
 class AppSettings {
   final bool isDarkMode;
-  final AppColor appColor;
   final double textSize;
   final double appScale;
   final bool isNotificationOn;
@@ -10,10 +8,17 @@ class AppSettings {
 
   AppSettings(
       {required this.isDarkMode,
-      required this.appColor,
       required this.textSize,
       required this.appScale,
       required this.isNotificationOn,
       required this.stayLoggedIn
+      });
+
+      const AppSettings.initial({
+        this.isDarkMode = false,
+        this.textSize = 12.0,
+        this.appScale = 1.0,
+        this.isNotificationOn = true,
+        this.stayLoggedIn = true,
       });
 }

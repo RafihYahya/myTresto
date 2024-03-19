@@ -6,7 +6,7 @@ import 'package:tresto_v002a/LOGIC/Blocs/Dashboard/dashboard_bloc.dart';
 import 'package:tresto_v002a/LOGIC/Cubits/app_indexes_cubit.dart';
 import 'package:tresto_v002a/LOGIC/Models/Global/app_indexes_data.dart';
 import 'package:tresto_v002a/Global/constants.dart';
-import 'package:tresto_v002a/UI/Widgets/custom_alert_dialogue.dart';
+import 'package:tresto_v002a/UI/Widgets/CustomUtils/custom_alert_dialogue.dart';
 import 'package:tresto_v002a/UI/Widgets/navbar_popup_menu.dart';
 
 class AlternativeCNavBar extends StatelessWidget {
@@ -36,7 +36,8 @@ class AlternativeCNavBar extends StatelessWidget {
                   ),
                   Row(
                     children: [
-                      BlocProvider.of<IndexesCubit>(context).state.index != 2
+                      BlocProvider.of<IndexesCubit>(context).state.index !=
+                              2 & 3
                           ? Container(
                               padding: const EdgeInsets.symmetric(
                                   vertical: 5, horizontal: 8),
@@ -48,9 +49,15 @@ class AlternativeCNavBar extends StatelessWidget {
                                 children: [
                                   Text(
                                       context
-                                              .read<DashboardBloc>()
-                                              .restoListCollector()[
-                                          stateIndex.restoIndex],
+                                                  .read<DashboardBloc>()
+                                                  .restoListCollector()
+                                                  .length >
+                                              stateIndex.maxRestoNumber
+                                          ? context
+                                                  .read<DashboardBloc>()
+                                                  .restoListCollector()[
+                                              stateIndex.restoIndex]
+                                          : 'Error',
                                       style: GoogleFonts.poppins(
                                           fontWeight: FontWeight.w400,
                                           fontSize: 12,
@@ -59,7 +66,13 @@ class AlternativeCNavBar extends StatelessWidget {
                                   const SizedBox(
                                     width: 10,
                                   ),
-                                  const NavPopupMenu(),
+                                  context
+                                              .read<DashboardBloc>()
+                                              .restoListCollector()
+                                              .length >
+                                          stateIndex.maxRestoNumber
+                                      ? const NavPopupMenu()
+                                      : const SizedBox(),
                                 ],
                               ),
                             )

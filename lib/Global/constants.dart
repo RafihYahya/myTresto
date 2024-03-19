@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class AppColor {
+final class AppColor {
   static const Color primaryColor = Color(0xffFF006B);
   static const Color primaryColor1 = Color(0xffFFEDF4);
   static const Color primaryBackgroundColor = Color(0xffFFFBFB);
@@ -106,6 +106,7 @@ class DashBoardTitles {
   static const String totalClient = 'Total Clients';
   static const String totalSales = 'Total Sales';
 }
+
 
 
 

@@ -26,6 +26,12 @@ class _DashBoardPageState extends State<DashBoardPage> {
   }
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     final List<FlSpot> dummyData1 = List.generate(7, (index) {

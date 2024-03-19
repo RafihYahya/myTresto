@@ -12,5 +12,11 @@ class AppIndexes {
     required this.restoIndex,
     required this.maxRestoNumber
   });
+
+  AppIndexes.initial({
+    this.index = 0,
+    this.restoIndex = 0,
+    this.maxRestoNumber = 0,
+  });
 }
 

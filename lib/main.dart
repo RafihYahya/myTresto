@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tresto_v002a/Global/constants.dart';
 import 'package:tresto_v002a/LOGIC/Blocs/AppStatus/app_status_bloc.dart';
 import 'package:tresto_v002a/LOGIC/Blocs/AppStatus/app_status_state.dart';
 import 'package:tresto_v002a/LOGIC/Blocs/Dashboard/dashboard_bloc.dart';
+import 'package:tresto_v002a/LOGIC/Blocs/Orders/orders_bloc.dart';
 import 'package:tresto_v002a/LOGIC/Cubits/app_indexes_cubit.dart';
 import 'package:tresto_v002a/LOGIC/Cubits/app_settings.cubit.dart';
 import 'package:tresto_v002a/LOGIC/Models/Global/app_settings.dart';
@@ -19,53 +19,25 @@ void main() async {
   //Observe State Changes For debugging
   Bloc.observer = MainObserver();
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(
-    RepositoryProvider(
-      create: (context) => AppSettingsRepository(),
-      child: MultiBlocProvider(
-        providers: [
-          BlocProvider(
-            create: (context) => AppSettingsCubit(
-                AppSettings(
-                    isDarkMode: false,
-                    appColor: AppColor(),
-                    textSize: 12,
-                    appScale: 1.0,
-                    isNotificationOn: true,
-                    stayLoggedIn: false),
-                RepositoryProvider.of<AppSettingsRepository>(context)),
-          ),
-          RepositoryProvider(
-            create: (context) => AppStatusRepository(),
-            child: BlocProvider(
-              create: (context) => AppStatusBloc(AppStatusRepository()),
-            ),
-          ),
-          BlocProvider(
-              create: (context) => IndexesCubit(
-                  AppIndexes(index: 0, restoIndex: 0, maxRestoNumber: 0))),
-        ],
-        child: RepositoryProvider(
-          create: (context) => DashBoardRepository(),
-          child: BlocProvider(
-            create: (context) => DashboardBloc(
-              dashBoard: RepositoryProvider.of<DashBoardRepository>(context),
-            ),
-            child: BlocListener<DashboardBloc, DashboardState>(
-              listener: (context, state) {
-                BlocProvider.of<IndexesCubit>(context).changeMaxRestoNum(
-                    maxRestoNumber: context
-                        .read<DashboardBloc>()
-                        .restoListCollector()
-                        .length);
-              },
-              child: const MainApp(),
-            ),
-          ),
-        ),
-      ),
-    ),
-  );
+  runApp(MultiRepositoryProvider(
+      providers: [
+        RepositoryProvider(create: (context) => AppSettingsRepository()),
+        RepositoryProvider(create: (context) => AppStatusRepository()),
+        RepositoryProvider(create: (context) => DashBoardRepository()),
+      ],
+      child: MultiBlocProvider(providers: [
+        BlocProvider(
+            create: (context) => AppSettingsCubit(const AppSettings.initial(),
+                context.read<AppSettingsRepository>())),
+        BlocProvider(
+            create: (context) =>
+                AppStatusBloc(context.read<AppStatusRepository>())),
+        BlocProvider(
+            create: (context) =>
+                DashboardBloc(dashBoard: context.read<DashBoardRepository>())),
+        BlocProvider(create: (context) => OrdersBloc()),
+        BlocProvider(create: (context) => IndexesCubit(AppIndexes.initial())),
+      ], child: const MainApp())));
 }
 
 class MainApp extends StatelessWidget {
@@ -84,13 +56,34 @@ class MainApp extends StatelessWidget {
           ),
           home: Scaffold(
               //Rebuild the widget when the Status changes
-              body: BlocBuilder<AppStatusBloc, AppStatusState>(
-                  builder: (context, state) {
-            return switch (state.loginStatus) {
-              AppStatusLogin.loggedIn => const AppRouting(),
-              AppStatusLogin.loggedOut => const LoginPage()
-            };
-          })),
+              body: MultiBlocListener(
+            listeners: [
+              BlocListener<DashboardBloc, DashboardState>(
+                  listener: (context, state) => context
+                      .read<IndexesCubit>()
+                      .changeMaxRestoNum(
+                          maxRestoNumber: context
+                              .read<DashboardBloc>()
+                              .restoListCollector()
+                              .length)),
+              BlocListener<OrdersBloc, OrdersState>(
+                listener: (context, state) {
+                  BlocProvider.of<IndexesCubit>(context).changeMaxRestoNum(
+                      maxRestoNumber: context
+                          .read<OrdersBloc>()
+                          .restoListCollector()
+                          .length);
+                },
+              ),
+            ],
+            child: BlocBuilder<AppStatusBloc, AppStatusState>(
+                builder: (context, state) {
+              return switch (state.loginStatus) {
+                AppStatusLogin.loggedIn => const AppRouting(),
+                AppStatusLogin.loggedOut => const LoginPage()
+              };
+            }),
+          )),
         );
       },
     );
