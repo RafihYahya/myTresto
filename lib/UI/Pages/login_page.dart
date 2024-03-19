@@ -5,6 +5,8 @@ import 'package:tresto_v002a/Global/webview_url_consts.dart';
 import 'package:tresto_v002a/LOGIC/Blocs/AppStatus/app_status_bloc.dart';
 import 'package:tresto_v002a/LOGIC/Blocs/Dashboard/dashboard_bloc.dart';
 import 'package:tresto_v002a/Global/constants.dart';
+import 'package:tresto_v002a/UI/Widgets/custom_error.dart';
+import 'package:tresto_v002a/UI/Widgets/custom_loading.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -221,9 +223,9 @@ class _LoginPageState extends State<LoginPage> {
                                         return switch (state.status) {
                                           DashboardStateStatus.ready => const SnackBar(content: Text('Successful Login ')),
                                           DashboardStateStatus.error =>
-                                            const Text('Error'),
+                                            const CustomError(),
                                           DashboardStateStatus.loading =>
-                                            const CircularProgressIndicator(),
+                                            const CustomLoading(),
                                           DashboardStateStatus.initial =>
                                             ElevatedButton(
                                                 onPressed: () async {

@@ -2,11 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:heroicons/heroicons.dart';
+import 'package:tresto_v002a/LOGIC/Blocs/Orders/orders_bloc.dart';
 import 'package:tresto_v002a/LOGIC/Cubits/app_indexes_cubit.dart';
 import 'package:tresto_v002a/LOGIC/Models/Global/app_indexes_data.dart';
 import 'package:tresto_v002a/Global/constants.dart';
 import 'package:tresto_v002a/LOGIC/Models/orders_model.dart';
 import 'package:tresto_v002a/UI/Pages/Orders/order_details_page.dart';
+import 'package:tresto_v002a/UI/Widgets/custom_error.dart';
+import 'package:tresto_v002a/UI/Widgets/custom_loading.dart';
 
 class OrderPage extends StatelessWidget {
   const OrderPage({super.key});
@@ -92,31 +95,20 @@ class OrderPage extends StatelessWidget {
         Expanded(
           child: BlocBuilder<IndexesCubit, AppIndexes>(
             builder: (context, stateIndex) {
-              return BlocBuilder<DashBoardCubit, DashBoardState>(
-                builder: (context, stateDash) {
-                  return ListView.builder(
-                      itemCount: stateDash.dashboardData.orderslistFull
-                                  .ordersFullList.length >
-                              stateIndex.restoIndex
-                          ? stateDash
-                              .dashboardData
-                              .orderslistFull
-                              .ordersFullList[stateIndex.restoIndex]
-                              ?.ordersList
-                              .length
-                          : 0,
+              return BlocBuilder<OrdersBloc, OrdersState>(
+                builder: (context, state) {
+                  if(state is OrdersError) {
+                    return const CustomError();
+                  }else if(state is OrdersReady){
+                    return ListView.builder(
+                      itemCount: 0,
                       itemBuilder: (context, index) =>
-                          BlocBuilder<IndexesCubit, AppIndexes>(
-                            builder: (context, stateIndex) {
-                              return CustomOrdersTile(
-                                orders: stateDash
-                                    .dashboardData
-                                    .orderslistFull
-                                    .ordersFullList[stateIndex.restoIndex]
-                                    ?.ordersList[index],
-                              );
-                            },
+                          CustomOrdersTile(
+                            orders: state.ordersRestoList.ordersRestoList[stateIndex.restoIndex].ordersList[index],
                           ));
+                  } else {
+                      return const CustomLoading();
+                  }
                 },
               );
             },
@@ -336,7 +328,7 @@ class CustomOrdersTile extends StatelessWidget {
                     onTap: () {
                       Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) => BlocProvider.value(
-                              value: BlocProvider.of<DashBoardCubit>(context),
+                              value: BlocProvider.of<OrdersBloc>(context),
                                 child: const OrderDetailsPage()
                               )));
                     },
