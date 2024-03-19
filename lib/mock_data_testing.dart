@@ -13,7 +13,12 @@ String generateString(int length) {
       length, (_) => chars.codeUnitAt(Random().nextInt(chars.length))));
 }
 
-DashBoardRestoList dashboardFull = DashBoardRestoList(
+  DashBoardRestoList dashboardFullEmpty =
+     const DashBoardRestoList(dashBoardRestoList: []);
+
+final OrderRestoList ordersFullEmpty = OrderRestoList(ordersRestoList: []);
+
+final DashBoardRestoList dashboardFull = DashBoardRestoList(
     dashBoardRestoList: List.filled(
         restoNum,
         DashBoardListData(
@@ -22,10 +27,10 @@ DashBoardRestoList dashboardFull = DashBoardRestoList(
                 DashboardTileData(
                     number: Random().nextInt(1500),
                     title: tileTitles[Random().nextInt(tileTitles.length)])),
-            dashBoardChartData: DashBoardChartData(),
+            dashBoardChartData: const DashBoardChartData(),
             restoName: restoName)));
 
-OrderRestoList ordersFull = OrderRestoList(
+final OrderRestoList ordersFull = OrderRestoList(
     ordersRestoList: List.filled(
         restoNum,
         OrderListData(

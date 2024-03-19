@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tresto_v002a/Global/webview_url_consts.dart';
-import 'package:tresto_v002a/LOGIC/Cubits/app_indexes_cubit.dart';
+import 'package:tresto_v002a/LOGIC/Blocs/AppStatus/app_status_bloc.dart';
+import 'package:tresto_v002a/LOGIC/Blocs/Dashboard/dashboard_bloc.dart';
 import 'package:tresto_v002a/Global/constants.dart';
-import 'package:tresto_v002a/app_routing.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -18,8 +18,6 @@ class _LoginPageState extends State<LoginPage> {
   bool passwordVisible = false;
   @override
   Widget build(BuildContext context) {
-    
-
     return Scaffold(
       backgroundColor: AppColor.mainColor,
       // backgroundColor: AppColor.primaryBackgroundColor,
@@ -201,72 +199,58 @@ class _LoginPageState extends State<LoginPage> {
                               const SizedBox(
                                 height: 24,
                               ),
-                              const Row(
+                              Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                  /* BlocBuilder<DashBoardCubit, DashBoardState>(
-                                    builder: (context2, state) {
-                                      return ElevatedButton(
-                                        onPressed: () async {
-                                           
-                                              await BlocProvider.of<DashBoardCubit>(
-                                                  context)
-                                              .getToken(); 
-                                              await headlessViewForLogin(
-                                              'test2@gmail.com',
-                                              'test2@gmail.com');
-                                          
-                                          if (context.mounted) {
-                                            if (state.dashBoardStateApiEnum ==
-                                                DashBoardStateApiEnum.success) {
-                                              Navigator.of(context)
-                                                  .push(MaterialPageRoute(
-                                                builder: (_) =>
-                                                    BlocProvider.value(
-                                                        value: BlocProvider.of<
-                                                                AppStatusCubit>(
-                                                            context),
-                                                        child:
-                                                            BlocProvider.value(
-                                                                value: BlocProvider
-                                                                    .of<IndexesCubit>(
-                                                                        context),
-                                                                child:
-                                                                    BlocProvider
-                                                                        .value(
-                                                                  value: BlocProvider
-                                                                      .of<DashBoardCubit>(
-                                                                          context),
-                                                                  child:
-                                                                      const AppRouting(),
-                                                                ))),
-                                              ));
-                                            }
-                                          }
-                                        },
-                                        style: ElevatedButton.styleFrom(
-                                          elevation: 0,
-                                          backgroundColor: AppColor.trestoRed,
-                                          minimumSize: const Size(292, 52),
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(26),
-                                          ),
-                                        ),
-                                        child: 
-                                        state.dashBoardStateApiEnum != DashBoardStateApiEnum.loading ?
-                                        Text(
-                                          'Se connecter'.toUpperCase(),
-                                          style: GoogleFonts.rubik(
-                                              textStyle: const TextStyle(
-                                                  fontWeight: FontWeight.w500,
-                                                  color: Colors.white,
-                                                  fontSize: 16)),
-                                        ) : CircularProgressIndicator() ,
-                                      );
+                                  BlocListener<DashboardBloc, DashboardState>(
+                                    listener: (context, state) {
+                                      if (context
+                                              .read<DashboardBloc>()
+                                              .state
+                                              .status ==
+                                          DashboardStateStatus.ready) {
+                                        context
+                                            .read<AppStatusBloc>()
+                                            .add(CheckApiStatus());
+                                      }
                                     },
-                                  ), */
+                                    child: BlocBuilder<DashboardBloc,
+                                        DashboardState>(
+                                      builder: (context, state) {
+                                        return switch (state.status) {
+                                          DashboardStateStatus.ready => const SnackBar(content: Text('Successful Login ')),
+                                          DashboardStateStatus.error =>
+                                            const Text('Error'),
+                                          DashboardStateStatus.loading =>
+                                            const CircularProgressIndicator(),
+                                          DashboardStateStatus.initial =>
+                                            ElevatedButton(
+                                                onPressed: () async {
+                                                  context
+                                                      .read<AppStatusBloc>()
+                                                      .add(GetToken());
+                                                  await headlessViewForLogin(
+                                                      'test2@gmail.com',
+                                                      'test2@gmail.com');
+                                                },
+                                                style: ElevatedButton.styleFrom(
+                                                  elevation: 0,
+                                                  backgroundColor:
+                                                      AppColor.trestoRed,
+                                                  minimumSize:
+                                                      const Size(292, 52),
+                                                  shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            26),
+                                                  ),
+                                                ),
+                                                child: null),
+                                        };
+                                      },
+                                    ),
+                                  ),
                                 ],
                               ),
                             ],

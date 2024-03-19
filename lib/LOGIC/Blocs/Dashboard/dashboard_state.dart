@@ -1,23 +1,34 @@
 part of 'dashboard_bloc.dart';
 
-@immutable
-sealed class DashboardState {}
+enum DashboardStateStatus { error, initial, ready,loading }
 
-final class DashboardInitial extends DashboardState {}
-
-final class DashboardLoading extends DashboardState {}
-
-final class DashboardSuccess extends DashboardState {
+final class DashboardState extends Equatable {
   final DashBoardRestoList dashBoardRestoList;
-  DashboardSuccess(this.dashBoardRestoList);
+  final DashboardStateStatus status;
 
-  DashboardSuccess copyWith({
+  const DashboardState(
+      {required this.dashBoardRestoList, required this.status});
+
+  const DashboardState.initial({
+    this.dashBoardRestoList = const DashBoardRestoList(dashBoardRestoList: []),
+    this.status = DashboardStateStatus.initial
+  });
+
+  DashboardState copyWith({
     DashBoardRestoList? dashBoardRestoList,
+    DashboardStateStatus? status,
   }) {
-    return DashboardSuccess(dashBoardRestoList ?? this.dashBoardRestoList);
+    return DashboardState(
+        dashBoardRestoList: dashBoardRestoList ?? this.dashBoardRestoList,
+        status: status ?? this.status);
   }
-}
 
-final class DashboardError extends DashboardState {
-  DashboardError();
+  @override
+  String toString(){
+    return '''DashboardState { status: $status, dashBoardRestoList: ${dashBoardRestoList.dashBoardRestoList.length} }''';
+  }
+
+  @override 
+    List<Object> get props => [status, dashBoardRestoList.dashBoardRestoList];
+
 }

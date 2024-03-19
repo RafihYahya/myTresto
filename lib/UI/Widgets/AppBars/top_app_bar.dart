@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:heroicons/heroicons.dart';
+import 'package:tresto_v002a/LOGIC/Blocs/Dashboard/dashboard_bloc.dart';
 import 'package:tresto_v002a/LOGIC/Cubits/app_indexes_cubit.dart';
 import 'package:tresto_v002a/LOGIC/Models/Global/app_indexes_data.dart';
 import 'package:tresto_v002a/Global/constants.dart';
@@ -17,7 +18,7 @@ class AlternativeCNavBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<IndexesCubit, AppIndexes>(
       builder: (context, stateIndex) {
-        return BlocBuilder<DashBoardCubit, DashBoardState>(
+        return BlocBuilder<DashboardBloc, DashboardState>(
           builder: (context, stateDash) {
             return AppBar(
               backgroundColor: Colors.white,
@@ -46,10 +47,10 @@ class AlternativeCNavBar extends StatelessWidget {
                               child: Row(
                                 children: [
                                   Text(
-                                      stateDash
-                                          .dashboardData
-                                          .restoList[stateIndex.restoIndex]!
-                                          .restoName!,
+                                      context
+                                              .read<DashboardBloc>()
+                                              .restoListCollector()[
+                                          stateIndex.restoIndex],
                                       style: GoogleFonts.poppins(
                                           fontWeight: FontWeight.w400,
                                           fontSize: 12,

@@ -8,6 +8,7 @@ import 'package:tresto_v002a/LOGIC/Cubits/app_indexes_cubit.dart';
 import 'package:tresto_v002a/LOGIC/Cubits/app_settings.cubit.dart';
 import 'package:tresto_v002a/LOGIC/Models/Global/app_settings.dart';
 import 'package:tresto_v002a/LOGIC/Repositories/app_settings_repo.dart';
+import 'package:tresto_v002a/LOGIC/Repositories/app_status_repo.dart';
 import 'package:tresto_v002a/LOGIC/Repositories/dashboard_repo.dart';
 import 'package:tresto_v002a/LOGIC/Models/Global/app_indexes_data.dart';
 import 'package:tresto_v002a/UI/Pages/login_page.dart';
@@ -34,8 +35,11 @@ void main() async {
                     stayLoggedIn: false),
                 RepositoryProvider.of<AppSettingsRepository>(context)),
           ),
-          BlocProvider(
-            create: (context) => AppStatusBloc(),
+          RepositoryProvider(
+            create: (context) => AppStatusRepository(),
+            child: BlocProvider(
+              create: (context) => AppStatusBloc(AppStatusRepository()),
+            ),
           ),
           BlocProvider(
               create: (context) => IndexesCubit(
@@ -47,7 +51,16 @@ void main() async {
             create: (context) => DashboardBloc(
               dashBoard: RepositoryProvider.of<DashBoardRepository>(context),
             ),
-            child: const MainApp(),
+            child: BlocListener<DashboardBloc, DashboardState>(
+              listener: (context, state) {
+                BlocProvider.of<IndexesCubit>(context).changeMaxRestoNum(
+                    maxRestoNumber: context
+                        .read<DashboardBloc>()
+                        .restoListCollector()
+                        .length);
+              },
+              child: const MainApp(),
+            ),
           ),
         ),
       ),
@@ -72,11 +85,12 @@ class MainApp extends StatelessWidget {
           home: Scaffold(
               //Rebuild the widget when the Status changes
               body: BlocBuilder<AppStatusBloc, AppStatusState>(
-            builder: (context, state) =>
-                state.loginStatus == AppStatusLogin.loggedOut
-                    ? const LoginPage()
-                    : const AppRouting(),
-          )),
+                  builder: (context, state) {
+            return switch (state.loginStatus) {
+              AppStatusLogin.loggedIn => const AppRouting(),
+              AppStatusLogin.loggedOut => const LoginPage()
+            };
+          })),
         );
       },
     );

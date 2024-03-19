@@ -3,22 +3,15 @@ part of 'dashboard_bloc.dart';
 @immutable
 sealed class DashboardEvent {}
 
-final class DashboardInit extends DashboardEvent {
-  DashboardInit();
-}
+final class DashboardInit extends DashboardEvent {}
 
-final class DashboardAdd extends DashboardEvent {
-  DashboardAdd();
-}
+final class DashboardAdd extends DashboardEvent {}
 
-final class DashboardUpdate extends DashboardEvent {
-  DashboardUpdate();
-}
+final class DashboardUpdate extends DashboardEvent {}
 
-final class DashboardRemove extends DashboardEvent {
-  DashboardRemove();
-}
+final class DashboardRemove extends DashboardEvent {}
 
-final class DashboardNewResto extends DashboardEvent {
-  DashboardNewResto();
-}
+final class DashboardNewResto extends DashboardEvent {}
+
+final class DashboardGetToken extends DashboardEvent {}
+

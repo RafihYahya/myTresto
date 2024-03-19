@@ -58,7 +58,8 @@ class _DashBoardPageState extends State<DashBoardPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                  Expanded(
-                  child:  DashboardMainTile(                               
+                  child:  DashboardMainTile(     
+                    index: 0,                          
                     tileColor: Colors.white,
                     iconsColor: Colors.pink,
                     textColor:  Color(0xFF141414),
@@ -71,7 +72,7 @@ class _DashBoardPageState extends State<DashBoardPage> {
                 ),
                  Expanded(
                   child: DashboardMainTile(
-                    
+                    index: 1,
                     tileColor: Colors.white,
                     iconsColor: Colors.green,
                     textColor:  Color(0xFF141414),
@@ -92,7 +93,7 @@ class _DashBoardPageState extends State<DashBoardPage> {
               children: [
                 Expanded(
                   child: DashboardMainTile(
-                      
+                      index: 2,
                       tileColor: Colors.white,
                       iconsColor: Colors.purple,
                       textColor:  Color(0xFF141414),
@@ -104,7 +105,7 @@ class _DashBoardPageState extends State<DashBoardPage> {
                 ),
                 Expanded(
                   child: DashboardMainTile(
-                    
+                    index: 3,
                     tileColor: Colors.white,
                     iconsColor: Colors.blue,
                     textColor:  Color(0xFF141414),

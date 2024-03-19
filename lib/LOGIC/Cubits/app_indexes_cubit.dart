@@ -18,4 +18,11 @@ class IndexesCubit extends Cubit<AppIndexes> {
         restoIndex: restoIndex,
         maxRestoNumber: state.maxRestoNumber));
   }
+
+  void changeMaxRestoNum({required int maxRestoNumber}) {
+    emit(AppIndexes(
+        index: state.index,
+        restoIndex: state.restoIndex,
+        maxRestoNumber: maxRestoNumber));
+  }
 }
