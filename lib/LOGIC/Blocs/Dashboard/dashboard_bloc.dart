@@ -13,9 +13,13 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
     on<DashboardInit>((event, emit) {
       print('miaw');
     });
+    on<DashboardStateChange>(changeDashStatus);
   }
 
-
+  Future<void> changeDashStatus(
+      DashboardStateChange event, Emitter<DashboardState> emit) async {
+    emit(state.copyWith(status: event.status));
+  }
 
   List<String> restoListCollector() {
     var index = 0;
@@ -25,6 +29,4 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
     }
     return restoList;
   }
-
-  
 }

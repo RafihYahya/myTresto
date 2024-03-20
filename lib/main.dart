@@ -4,11 +4,13 @@ import 'package:tresto_v002a/LOGIC/Blocs/AppStatus/app_status_bloc.dart';
 import 'package:tresto_v002a/LOGIC/Blocs/AppStatus/app_status_state.dart';
 import 'package:tresto_v002a/LOGIC/Blocs/Dashboard/dashboard_bloc.dart';
 import 'package:tresto_v002a/LOGIC/Blocs/Orders/orders_bloc.dart';
+import 'package:tresto_v002a/LOGIC/Blocs/Auth/auth_bloc_bloc.dart';
 import 'package:tresto_v002a/LOGIC/Cubits/app_indexes_cubit.dart';
 import 'package:tresto_v002a/LOGIC/Cubits/app_settings.cubit.dart';
 import 'package:tresto_v002a/LOGIC/Models/Global/app_settings.dart';
 import 'package:tresto_v002a/LOGIC/Repos/app_settings_repo.dart';
 import 'package:tresto_v002a/LOGIC/Repos/app_status_repo.dart';
+import 'package:tresto_v002a/LOGIC/Repos/auth_repo.dart';
 import 'package:tresto_v002a/LOGIC/Repos/dashboard_repo.dart';
 import 'package:tresto_v002a/LOGIC/Models/Global/app_indexes_data.dart';
 import 'package:tresto_v002a/UI/Pages/login_page.dart';
@@ -24,6 +26,7 @@ void main() async {
         RepositoryProvider(create: (context) => AppSettingsRepository()),
         RepositoryProvider(create: (context) => AppStatusRepository()),
         RepositoryProvider(create: (context) => DashBoardRepository()),
+        RepositoryProvider(create: (context) => AuthRepository()),
       ],
       child: MultiBlocProvider(providers: [
         BlocProvider(
@@ -37,6 +40,8 @@ void main() async {
                 DashboardBloc(dashBoard: context.read<DashBoardRepository>())),
         BlocProvider(create: (context) => OrdersBloc()),
         BlocProvider(create: (context) => IndexesCubit(AppIndexes.initial())),
+        BlocProvider(
+            create: (context) => AuthBlocBloc(context.read<AuthRepository>())),
       ], child: const MainApp())));
 }
 

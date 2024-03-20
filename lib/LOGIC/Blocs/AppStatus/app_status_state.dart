@@ -14,7 +14,6 @@ final class AppStatusState {
   final AppStatusNetwork networkStatus;
   final AppStatusLogin loginStatus;
   final AppStatusDataError dataError;
-  final String authToken;
 
   AppStatusState({
     required this.apiStatus,
@@ -22,7 +21,6 @@ final class AppStatusState {
     required this.networkStatus,
     required this.loginStatus,
     required this.dataError,
-    required this.authToken,
   });
 
   AppStatusState copyWith({
@@ -39,7 +37,7 @@ final class AppStatusState {
         networkStatus: networkStatus ?? this.networkStatus,
         loginStatus: loginStatus ?? this.loginStatus,
         dataError: dataError ?? this.dataError,
-        authToken: authToken ?? this.authToken);
+      );
   }
 
   AppStatusState.initial(
@@ -47,6 +45,5 @@ final class AppStatusState {
       this.localStorageStatus = AppStatusLocalStorage.working,
       this.networkStatus = AppStatusNetwork.working,
       this.loginStatus = AppStatusLogin.loggedOut,
-      this.authToken = '',
       this.dataError = AppStatusDataError.none});
 }

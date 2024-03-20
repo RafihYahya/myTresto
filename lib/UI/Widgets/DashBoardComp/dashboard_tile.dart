@@ -68,7 +68,7 @@ class DashboardMainTile extends StatelessWidget {
                                 fontWeight: FontWeight.bold,
                                 color: textColor),
                           )),
-                      DashboardStateStatus.initial => Text(''),
+                      DashboardStateStatus.initial => CustomLoading(),
                     };
                   },
                 );
@@ -83,7 +83,7 @@ class DashboardMainTile extends StatelessWidget {
                   builder: (context, stateDash) {
                     return switch (stateDash.status) {
                       DashboardStateStatus.error => CustomError(),
-                      DashboardStateStatus.loading => CustomLoading(),
+                      DashboardStateStatus.loading => SizedBox(),
                       DashboardStateStatus.ready => Text(
                           context
                               .read<DashboardBloc>()
@@ -98,7 +98,7 @@ class DashboardMainTile extends StatelessWidget {
                                 fontWeight: FontWeight.bold,
                                 color: textColor),
                           )),
-                      DashboardStateStatus.initial => Text(''),
+                      DashboardStateStatus.initial => SizedBox(),
                     };
                   },
                 );

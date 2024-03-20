@@ -1,6 +1,6 @@
 part of 'dashboard_bloc.dart';
 
-enum DashboardStateStatus { error, initial, ready,loading }
+enum DashboardStateStatus { error, initial,loading , ready}
 
 final class DashboardState extends Equatable {
   final DashBoardRestoList dashBoardRestoList;

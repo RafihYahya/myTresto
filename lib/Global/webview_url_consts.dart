@@ -122,9 +122,10 @@ String loginFromHeadlessWebView(String email, String password) {
   return '''  
               window.location.reload();
               document.querySelector("button").addEventListener('click',() => {
-             document.querySelector("#user-email").value = '$email';
-             document.querySelector("#user-password").value = '$password';
+             document.querySelector("#user-email").value = 'test2@gmail.com';
+             document.querySelector("#user-password").value = 'test2@gmail.com';
               });
+              console.log(document.querySelector("#user-password").value)
               document.querySelector("button").click();
 
           ''';

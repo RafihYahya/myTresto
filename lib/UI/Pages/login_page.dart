@@ -4,9 +4,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:tresto_v002a/Global/webview_url_consts.dart';
 import 'package:tresto_v002a/LOGIC/Blocs/AppStatus/app_status_bloc.dart';
 import 'package:tresto_v002a/LOGIC/Blocs/AppStatus/app_status_state.dart';
-import 'package:tresto_v002a/LOGIC/Blocs/Dashboard/dashboard_bloc.dart';
 import 'package:tresto_v002a/Global/constants.dart';
-import 'package:tresto_v002a/UI/Widgets/CustomUtils/custom_error.dart';
+import 'package:tresto_v002a/LOGIC/Blocs/Auth/auth_bloc_bloc.dart';
 import 'package:tresto_v002a/UI/Widgets/CustomUtils/custom_loading.dart';
 
 class LoginPage extends StatefulWidget {
@@ -218,58 +217,57 @@ class _LoginPageState extends State<LoginPage> {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
-                                    BlocListener<DashboardBloc, DashboardState>(
+                                    BlocConsumer<AuthBlocBloc, AuthBlocState>(
                                       listener: (context, state) {
-                                        if (context
-                                                .read<DashboardBloc>()
-                                                .state
-                                                .status ==
-                                            DashboardStateStatus.ready) {
-                                          context
-                                              .read<AppStatusBloc>()
-                                              .add(CheckApiStatus());
+                                        if (state.status == AuthState.failure) {
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(const SnackBar(
+                                                  backgroundColor: Colors.red,
+                                                  content: Text(
+                                                      'An Error Has Occured')));
                                         }
                                       },
-                                      child: BlocBuilder<DashboardBloc,
-                                          DashboardState>(
-                                        builder: (context, state) {
-                                          return switch (state.status) {
-                                            DashboardStateStatus.ready =>
-                                              const SnackBar(
-                                                  content: Text(
-                                                      'Successful Login ')),
-                                            DashboardStateStatus.error =>
-                                              const CustomError(),
-                                            DashboardStateStatus.loading =>
-                                              const CustomLoading(),
-                                            DashboardStateStatus.initial =>
-                                              ElevatedButton(
-                                                  onPressed: () async {
-                                                    context
-                                                        .read<AppStatusBloc>()
-                                                        .add(GetToken());
-                                                    await headlessViewForLogin(
-                                                        'test2@gmail.com',
-                                                        'test2@gmail.com');
-                                                  },
-                                                  style:
-                                                      ElevatedButton.styleFrom(
-                                                    elevation: 0,
-                                                    backgroundColor:
-                                                        AppColor.trestoRed,
-                                                    minimumSize:
-                                                        const Size(292, 52),
-                                                    shape:
-                                                        RoundedRectangleBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              26),
-                                                    ),
+                                      builder: (context, state) {
+                                        if (state.status == AuthState.loading) {
+                                          return const CustomLoading();
+                                        } else {
+                                          return BlocListener<AppStatusBloc,
+                                              AppStatusState>(
+                                            listener: (context, stateLog) {
+                                              if (state.status ==
+                                                  AuthState.done) {
+                                                context
+                                                    .read<AppStatusBloc>()
+                                                    .add(UpdateLoginStatus(
+                                                        status: AppStatusLogin
+                                                            .loggedIn));
+                                              }
+                                            },
+                                            child: ElevatedButton(
+                                                onPressed: () async {
+                                                  context
+                                                      .read<AuthBlocBloc>()
+                                                      .add(TokenRequest());
+                                                  await headlessViewForLogin(
+                                                      'test2@gmail.com',
+                                                      'test2@gmail.com');
+                                                },
+                                                style: ElevatedButton.styleFrom(
+                                                  elevation: 0,
+                                                  backgroundColor:
+                                                      AppColor.trestoRed,
+                                                  minimumSize:
+                                                      const Size(292, 52),
+                                                  shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            26),
                                                   ),
-                                                  child: null),
-                                          };
-                                        },
-                                      ),
+                                                ),
+                                                child: const Text('Login')),
+                                          );
+                                        }
+                                      },
                                     ),
                                   ],
                                 ),

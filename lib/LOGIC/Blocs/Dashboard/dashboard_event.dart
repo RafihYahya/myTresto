@@ -11,5 +11,9 @@ final class DashboardUpdate extends DashboardEvent {}
 
 final class DashboardRemove extends DashboardEvent {}
 
-
-
+final class DashboardStateChange extends DashboardEvent {
+  final DashboardStateStatus status;
+  DashboardStateChange({
+    required this.status,
+  });
+}
