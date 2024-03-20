@@ -36,8 +36,8 @@ class AlternativeCNavBar extends StatelessWidget {
                   ),
                   Row(
                     children: [
-                      BlocProvider.of<IndexesCubit>(context).state.index !=
-                              2 & 3
+                      stateIndex.index !=
+                              2 && stateIndex.index != 3
                           ? Container(
                               padding: const EdgeInsets.symmetric(
                                   vertical: 5, horizontal: 8),
@@ -57,7 +57,7 @@ class AlternativeCNavBar extends StatelessWidget {
                                                   .read<DashboardBloc>()
                                                   .restoListCollector()[
                                               stateIndex.restoIndex]
-                                          : 'Error',
+                                          : 'Loading...',
                                       style: GoogleFonts.poppins(
                                           fontWeight: FontWeight.w400,
                                           fontSize: 12,

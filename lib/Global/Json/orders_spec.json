@@ -1,0 +1,58 @@
+{
+  "ordersRestoList": [
+    {  
+      "ordersList": [
+        {
+          "orderId": 12345,
+          "customerName": "John Doe",
+          "price": "100.00",
+          "amount": 2,
+          "date": "2024-03-20",
+          "status": "accepted",
+          "details": {
+            "productImage": null, 
+            "productTitle": "Pizza",
+            "productCategoryName": "Italian Food",
+            "taxPrice": 5.00,
+            "priceDelivery": 2.50,
+            "clientDetails": {
+              "phoneNumber": "+1234567890",
+              "address": "123 Main Street",
+              "deliveryZone": "Zone A"
+            }
+          }
+        }
+      ],
+      "restoName": "My Pizzeria"  
+    },
+    {  
+      "ordersList": [
+        {
+          "orderId": 54321,
+          "customerName": "Jane Smith",
+          "price": "75.50",
+          "amount": 1,
+          "date": "2024-03-19",
+          "status": "pending",
+          "details": {
+            "productImage": null, 
+            "productTitle": "Pasta",
+            "productCategoryName": "Italian Food",
+            "taxPrice": 3.75,
+            "priceDelivery": 1.50,
+            "clientDetails": {
+              "phoneNumber": "+9876543210",
+              "address": "456 Elm Street",
+              "deliveryZone": "Zone B"
+            }
+          }
+        }
+        
+      ],
+      "restoName": "Another Restaurant"  
+    }
+  ]
+}
+
+
+

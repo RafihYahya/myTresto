@@ -24,11 +24,16 @@ class _DashBoardPageState extends State<DashBoardPage> {
       selectedIndex = i;
     });
   }
+  Future<void> testFunc() async {
+    await Future.delayed(const Duration(seconds: 2), () {
+      print('hello we execute');
+    });
+  }
 
   @override
   void initState() {
     // TODO: implement initState
-    print("hellow we Execue");
+    testFunc();
     super.initState();
   }
 

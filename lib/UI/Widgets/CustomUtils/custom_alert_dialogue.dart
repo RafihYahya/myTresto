@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tresto_v002a/Global/constants.dart';
+import 'package:tresto_v002a/LOGIC/Blocs/AppStatus/app_status_bloc.dart';
+import 'package:tresto_v002a/LOGIC/Blocs/AppStatus/app_status_state.dart';
 
 class CustomAlert extends StatelessWidget {
   const CustomAlert({super.key});
@@ -37,7 +40,9 @@ class CustomAlert extends StatelessWidget {
             ),
             onPressed: () {
               Navigator.of(context).pop();
-              Navigator.of(context).pop();
+              context
+                  .read<AppStatusBloc>()
+                  .add(UpdateLoginStatus(status: AppStatusLogin.loggedOut));
             },
             child: Text(
               'Leave',

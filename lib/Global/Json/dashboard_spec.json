@@ -1,0 +1,53 @@
+
+
+{
+    "dashBoardRestoList": [
+      {  
+        "dashBoardList": [
+          {
+            "number": 1000,
+            "title": "Total Vues"
+          },
+          {
+            "number": 50,
+            "title": "Total Orders"
+          },
+          {
+            "number": 1200,
+            "title": "Total Profit"
+          },
+          {
+            "number": 2500,
+            "title": "Total Sales"
+          }
+        ],
+        "dashBoardChartData": {},
+        "restoName": "My Restaurant"
+      },
+      {  
+        "dashBoardList": [
+          {
+            "number": 800,
+            "title": "Total Vues"
+          },
+          {
+            "number": 30,
+            "title": "Total Orders"
+          },
+          {
+            "number": 900,
+            "title": "Total Profit"
+          },
+          {
+            "number": 1800,
+            "title": "Total Sales"
+          }
+        ],
+        "dashBoardChartData": {},
+        "restoName": "Another Restaurant"
+      }
+    ]
+  }
+
+
+  

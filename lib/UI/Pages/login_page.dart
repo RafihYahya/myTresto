@@ -1,7 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:tresto_v002a/Global/webview_url_consts.dart';
 import 'package:tresto_v002a/LOGIC/Blocs/AppStatus/app_status_bloc.dart';
 import 'package:tresto_v002a/LOGIC/Blocs/AppStatus/app_status_state.dart';
 import 'package:tresto_v002a/Global/constants.dart';
@@ -27,8 +27,9 @@ class _LoginPageState extends State<LoginPage> {
       body: BlocListener<AppStatusBloc, AppStatusState>(
         listener: (context, state) {
           if (state.apiStatus == AppStatusApi.failure) {
-            ScaffoldMessenger.of(context)
-                .showSnackBar(const SnackBar(content: Text('Api Error')));
+            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                backgroundColor: AppColor.trestoRed,
+                content: Text('An Error Has Occurred')));
           }
         },
         child: SingleChildScrollView(
@@ -226,46 +227,46 @@ class _LoginPageState extends State<LoginPage> {
                                                   content: Text(
                                                       'An Error Has Occured')));
                                         }
+                                        if (state.status == AuthState.done) {
+                                          context.read<AppStatusBloc>().add(
+                                              UpdateLoginStatus(
+                                                  status:
+                                                      AppStatusLogin.loggedIn));
+                                        }
                                       },
                                       builder: (context, state) {
                                         if (state.status == AuthState.loading) {
                                           return const CustomLoading();
                                         } else {
-                                          return BlocListener<AppStatusBloc,
-                                              AppStatusState>(
-                                            listener: (context, stateLog) {
-                                              if (state.status ==
-                                                  AuthState.done) {
+                                          return ElevatedButton(
+                                              onPressed: () async {
                                                 context
-                                                    .read<AppStatusBloc>()
-                                                    .add(UpdateLoginStatus(
-                                                        status: AppStatusLogin
-                                                            .loggedIn));
-                                              }
-                                            },
-                                            child: ElevatedButton(
-                                                onPressed: () async {
-                                                  context
-                                                      .read<AuthBlocBloc>()
-                                                      .add(TokenRequest());
-                                                  await headlessViewForLogin(
-                                                      'test2@gmail.com',
-                                                      'test2@gmail.com');
-                                                },
-                                                style: ElevatedButton.styleFrom(
-                                                  elevation: 0,
-                                                  backgroundColor:
-                                                      AppColor.trestoRed,
-                                                  minimumSize:
-                                                      const Size(292, 52),
-                                                  shape: RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            26),
-                                                  ),
+                                                    .read<AuthBlocBloc>()
+                                                    .add(TokenRequest());
+                                                /* await headlessViewForLogin(
+                                                    'test2@gmail.com',
+                                                    'test2@gmail.com'); */
+                                              },
+                                              style: ElevatedButton.styleFrom(
+                                                elevation: 0,
+                                                backgroundColor:
+                                                    AppColor.trestoRed,
+                                                minimumSize:
+                                                    const Size(290, 50),
+                                                shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(25),
                                                 ),
-                                                child: const Text('Login')),
-                                          );
+                                              ),
+                                              child: Text(
+                                                'Login',
+                                                style: GoogleFonts.poppins(
+                                                    textStyle: const TextStyle(
+                                                        color: Colors.white,
+                                                        fontSize: 14.0,
+                                                        fontWeight:
+                                                            FontWeight.w500)),
+                                              ));
                                         }
                                       },
                                     ),

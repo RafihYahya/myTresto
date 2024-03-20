@@ -26,87 +26,93 @@ class DashboardMainTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 190,
-      height: 110,
-      decoration: BoxDecoration(
-          color: tileColor, borderRadius: BorderRadius.circular(12.0)),
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            HeroIcon(
-              icon,
-              style: HeroIconStyle.solid,
-              color: iconsColor,
-              size: 22,
-            ),
-            const SizedBox(
-              height: 4.0,
-            ),
-            BlocBuilder<IndexesCubit, AppIndexes>(
-              builder: (context, state) {
-                return BlocBuilder<DashboardBloc, DashboardState>(
-                  builder: (context, stateDash) {
-                    return switch (stateDash.status) {
-                      DashboardStateStatus.error => CustomError(),
-                      DashboardStateStatus.loading => CustomLoading(),
-                      DashboardStateStatus.ready => Text(
-                          context
-                              .read<DashboardBloc>()
-                              .state
-                              .dashBoardRestoList
-                              .dashBoardRestoList[state.restoIndex]
-                              .dashBoardList[index]
-                              .number
-                              .toString(),
-                          style: GoogleFonts.poppins(
-                            textStyle: TextStyle(
-                                fontSize: 20.0,
-                                fontWeight: FontWeight.bold,
-                                color: textColor),
-                          )),
-                      DashboardStateStatus.initial => CustomLoading(),
-                    };
-                  },
-                );
-              },
-            ),
-            const SizedBox(
-              height: 1.0,
-            ),
-            BlocBuilder<IndexesCubit, AppIndexes>(
-              builder: (context, state) {
-                return BlocBuilder<DashboardBloc, DashboardState>(
-                  builder: (context, stateDash) {
-                    return switch (stateDash.status) {
-                      DashboardStateStatus.error => CustomError(),
-                      DashboardStateStatus.loading => SizedBox(),
-                      DashboardStateStatus.ready => Text(
-                          context
-                              .read<DashboardBloc>()
-                              .state
-                              .dashBoardRestoList
-                              .dashBoardRestoList[state.restoIndex]
-                              .dashBoardList[index]
-                              .title,
-                          style: GoogleFonts.poppins(
-                            textStyle: TextStyle(
-                                fontSize: 20.0,
-                                fontWeight: FontWeight.bold,
-                                color: textColor),
-                          )),
-                      DashboardStateStatus.initial => SizedBox(),
-                    };
-                  },
-                );
-              },
-            ),
-          ],
-        ),
-      ),
+    return BlocBuilder<IndexesCubit, AppIndexes>(
+      builder: (context, state) {
+        return BlocBuilder<DashboardBloc, DashboardState>(
+          builder: (context, stateDash) {
+            return switch (stateDash.status) {
+              DashboardStateStatus.initial => const MyCustomLoader(),
+              DashboardStateStatus.error => const CustomError(),
+              DashboardStateStatus.loading => const MyCustomLoader(),
+              DashboardStateStatus.ready => Container(
+                  width: 190,
+                  height: 110,
+                  decoration: BoxDecoration(
+                      color: tileColor,
+                      borderRadius: BorderRadius.circular(12.0)),
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        HeroIcon(
+                          icon,
+                          style: HeroIconStyle.solid,
+                          color: iconsColor,
+                          size: 22,
+                        ),
+                        const SizedBox(
+                          height: 4.0,
+                        ),
+                        Text(
+                            context
+                                .read<DashboardBloc>()
+                                .state
+                                .dashBoardRestoList
+                                .dashBoardRestoList[state.restoIndex]
+                                .dashBoardList[index]
+                                .number
+                                .toString(),
+                            style: GoogleFonts.poppins(
+                              textStyle: TextStyle(
+                                  fontSize: 20.0,
+                                  fontWeight: FontWeight.bold,
+                                  color: textColor),
+                            )),
+                        const SizedBox(
+                          height: 1.0,
+                        ),
+                        Text(
+                            context
+                                .read<DashboardBloc>()
+                                .state
+                                .dashBoardRestoList
+                                .dashBoardRestoList[state.restoIndex]
+                                .dashBoardList[index]
+                                .title,
+                            style: GoogleFonts.poppins(
+                              textStyle: TextStyle(
+                                  fontSize: 20.0,
+                                  fontWeight: FontWeight.bold,
+                                  color: textColor),
+                            )),
+                      ],
+                    ),
+                  ),
+                ),
+            };
+          },
+        );
+      },
     );
+  }
+}
+
+class MyCustomLoader extends StatelessWidget {
+  const MyCustomLoader({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        height: 110,
+        width: 190,
+        decoration: BoxDecoration(borderRadius: BorderRadius.circular(12.0)),
+        child: const Padding(
+          padding: EdgeInsets.all(16.0),
+          child: Center(child: CustomLoading()),
+        ));
   }
 }
