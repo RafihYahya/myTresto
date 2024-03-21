@@ -1,4 +1,5 @@
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 const String baseUrl = 'https://www.tresto.ma';
 
@@ -118,14 +119,11 @@ String changeRestoInWebViewHandler(int maxL, String restoName) {
       ''';
 }
 
-String loginFromHeadlessWebView(String email, String password) {
-  return '''  
-              //window.location.reload();
-              document.querySelector("button").addEventListener('click',() => {
-             document.querySelector("#user-email").value = 'test2@gmail.com';
-             document.querySelector("#user-password").value = 'test2@gmail.com';
-              });
-              console.log(document.querySelector("#user-password").value)
+String loginFromHeadlessWebView() {
+  return '''
+              console.log('praise the miaw miaw');
+              document.querySelector("#user-email").value = 'test2@gmail.com';
+              document.querySelector("#user-password").value = 'test2@gmail.com';
               document.querySelector("button").click();
 
           ''';
@@ -152,14 +150,12 @@ Future<void> headlessView(int maxL, String restoName) async {
 }
 
 Future<void> headlessViewForLogin(String email, String password) async {
+  const myStorage =  FlutterSecureStorage();
   /* final myCookie = await cookieManager.getCookie(
           url: WebUri(WebViewUrls.home), name: 'tresto_session'); */
   CookieManager cookieManager = CookieManager.instance();
 
   final headlessWebView = HeadlessInAppWebView(
-    shouldOverrideUrlLoading: (controller, navigationAction) async {
-      return NavigationActionPolicy.CANCEL;
-    },
     initialUrlRequest: URLRequest(url: WebUri(WebViewUrls.login)),
     onWebViewCreated: (controller) {
       /* controller.addJavaScriptHandler(
@@ -169,10 +165,24 @@ Future<void> headlessViewForLogin(String email, String password) async {
             print(args.first);
           })); */
     },
-    onLoadStop: (controller, url) {
-      cookieManager.deleteAllCookies();
-      controller.evaluateJavascript(
-          source: loginFromHeadlessWebView(email, password));
+    onLoadStop: (controller, url) async {
+      String temp = await myStorage.read(key: 'tresto_session') ?? '';
+      if (temp.isEmpty || temp == '') {
+        await controller.evaluateJavascript(source: loginFromHeadlessWebView());
+        await Future.delayed(Duration(milliseconds: 500));
+        var trestoHiddenCookie = await cookieManager.getCookie(
+            url: WebUri(WebViewUrls.home), name: 'tresto_session');
+        await myStorage.write(
+            key: 'tresto_session', value: trestoHiddenCookie?.value);
+        print('Old Value');
+        print(trestoHiddenCookie?.value);    
+      } else {
+        String temp2 = await myStorage.read(key: 'tresto_session') ?? '';
+        await cookieManager.setCookie(
+            url: WebUri(WebViewUrls.home), name: 'tresto_session', value: temp2);
+            print('NewValue');
+            print(temp2);
+      }
     },
   );
   await headlessWebView.run();

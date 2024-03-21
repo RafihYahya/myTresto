@@ -2,6 +2,7 @@ import 'dart:collection';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:tresto_v002a/Global/webview_url_consts.dart';
 
 class InAppWebViewPage extends StatefulWidget {
@@ -22,10 +23,9 @@ class _InAppWebViewPageState extends State<InAppWebViewPage> {
   InAppWebViewController? webViewController;
   @override
   Widget build(BuildContext context) {
-    
-
 /*     CookieManager cookieManager = CookieManager.instance();
- */    final GlobalKey webViewKey = GlobalKey();
+ */
+    final GlobalKey webViewKey = GlobalKey();
     /* cookieManager.setCookie(
         url: WebUri(widget.url),
         name: 'tresto_session',
@@ -34,6 +34,10 @@ class _InAppWebViewPageState extends State<InAppWebViewPage> {
     InAppWebViewSettings settings = InAppWebViewSettings(
       useShouldOverrideUrlLoading: true,
     );
+    const myStorage = FlutterSecureStorage();
+    CookieManager cookieManager = CookieManager.instance();
+    /* myStorage.delete(key: 'tresto_session');
+    cookieManager.deleteAllCookies(); */
     return InAppWebView(
       key: webViewKey,
       initialSettings: settings,
@@ -42,22 +46,26 @@ class _InAppWebViewPageState extends State<InAppWebViewPage> {
         UserScript(
             source: widget.changeTresto ? JsInjection.rmNavBarNoFlicker : '',
             injectionTime: UserScriptInjectionTime.AT_DOCUMENT_START),
-        
       ]),
       shouldOverrideUrlLoading: (controller, navigationAction) async {
         return widget.allowRedirect
             ? NavigationActionPolicy.ALLOW
             : NavigationActionPolicy.CANCEL;
       },
-      onWebViewCreated: (controller) {
+      onWebViewCreated: (controller) async {
+        String trestoCookie = await myStorage.read(key: 'tresto_session') ?? '';
+
+        cookieManager.setCookie(
+            url: WebUri(WebViewUrls.home),
+            name: 'tresto_session',
+            value: trestoCookie);
+            print('myCookie');
+            print(trestoCookie);
         webViewController = controller;
-        
       },
-      onLoadStart: (controller, url) {
-        
-      },
+      onLoadStart: (controller, url) {},
       onProgressChanged: (controller, progress) {
-       /*  widget.changeTresto ? controller.evaluateJavascript(source: '''
+        /*  widget.changeTresto ? controller.evaluateJavascript(source: '''
                 document.querySelectorAll("div > a#menu-item-0")[0].click();
                 window.location.href = '${widget.url.substring(baseUrl.length, widget.url.length)}'
                 
@@ -71,7 +79,6 @@ class _InAppWebViewPageState extends State<InAppWebViewPage> {
             ? controller.evaluateJavascript(
                 source: JsInjection.addEventListenerAndRedirect)
             : '';
-        
       },
     );
   }

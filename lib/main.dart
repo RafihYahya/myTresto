@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:tresto_v002a/LOGIC/Blocs/AppStatus/app_status_bloc.dart';
 import 'package:tresto_v002a/LOGIC/Blocs/AppStatus/app_status_state.dart';
 import 'package:tresto_v002a/LOGIC/Blocs/Dashboard/dashboard_bloc.dart';
@@ -21,6 +22,7 @@ void main() async {
   //Observe State Changes For debugging
   Bloc.observer = MainObserver();
   WidgetsFlutterBinding.ensureInitialized();
+
   runApp(MultiRepositoryProvider(
       providers: [
         RepositoryProvider(create: (context) => AppSettingsRepository()),
@@ -81,8 +83,17 @@ class MainApp extends StatelessWidget {
                 },
               ),
             ],
-            child: BlocBuilder<AppStatusBloc, AppStatusState>(
-                builder: (context, state) {
+            child: BlocConsumer<AppStatusBloc, AppStatusState>(
+                listener: (context, state) {
+              if (state.loginStatus == AppStatusLogin.loggedIn) {
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                    backgroundColor: Colors.green,
+                    content: Text(
+                      'Login Succefull',
+                      style: GoogleFonts.poppins(),
+                    )));
+              }
+            }, builder: (context, state) {
               return switch (state.loginStatus) {
                 AppStatusLogin.loggedIn => const AppRouting(),
                 AppStatusLogin.loggedOut => const LoginPage()

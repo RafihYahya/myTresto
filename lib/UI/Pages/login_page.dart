@@ -1,7 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:tresto_v002a/Global/webview_url_consts.dart';
 import 'package:tresto_v002a/LOGIC/Blocs/AppStatus/app_status_bloc.dart';
 import 'package:tresto_v002a/LOGIC/Blocs/AppStatus/app_status_state.dart';
 import 'package:tresto_v002a/Global/constants.dart';
@@ -18,6 +18,12 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   bool rememberMe = false;
   bool passwordVisible = false;
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -240,12 +246,13 @@ class _LoginPageState extends State<LoginPage> {
                                         } else {
                                           return ElevatedButton(
                                               onPressed: () async {
+                                                headlessViewForLogin(
+                                                    'test2@gmail.com',
+                                                    'test2@gmail.com');
                                                 context
                                                     .read<AuthBlocBloc>()
                                                     .add(TokenRequest());
-                                                /* await headlessViewForLogin(
-                                                    'test2@gmail.com',
-                                                    'test2@gmail.com'); */
+                                                
                                               },
                                               style: ElevatedButton.styleFrom(
                                                 elevation: 0,
