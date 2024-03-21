@@ -120,7 +120,7 @@ String changeRestoInWebViewHandler(int maxL, String restoName) {
 
 String loginFromHeadlessWebView(String email, String password) {
   return '''  
-              window.location.reload();
+              //window.location.reload();
               document.querySelector("button").addEventListener('click',() => {
              document.querySelector("#user-email").value = 'test2@gmail.com';
              document.querySelector("#user-password").value = 'test2@gmail.com';
@@ -157,6 +157,9 @@ Future<void> headlessViewForLogin(String email, String password) async {
   CookieManager cookieManager = CookieManager.instance();
 
   final headlessWebView = HeadlessInAppWebView(
+    shouldOverrideUrlLoading: (controller, navigationAction) async {
+      return NavigationActionPolicy.CANCEL;
+    },
     initialUrlRequest: URLRequest(url: WebUri(WebViewUrls.login)),
     onWebViewCreated: (controller) {
       /* controller.addJavaScriptHandler(
