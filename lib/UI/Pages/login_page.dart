@@ -19,9 +19,21 @@ class _LoginPageState extends State<LoginPage> {
   bool rememberMe = false;
   bool passwordVisible = false;
 
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+
   @override
   void initState() {
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    // Clean up the controller when the widget is removed from the
+    // widget tree.
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
   }
 
   @override
@@ -99,7 +111,7 @@ class _LoginPageState extends State<LoginPage> {
                                   height: 4,
                                 ),
                                 TextFormField(
-                                  // controller: authController.emailController,
+                                  controller: emailController,
                                   validator: (value) {
                                     if (value!.isEmpty ||
                                         !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
@@ -156,7 +168,7 @@ class _LoginPageState extends State<LoginPage> {
                                 ),
                                 TextFormField(
                                   obscureText: passwordVisible,
-                                  // controller: authController.passwordController,
+                                  controller: passwordController,
                                   validator: (value) {
                                     if (value!.isEmpty ||
                                         !RegExp(r"^.{6,}").hasMatch(value)) {
@@ -235,8 +247,8 @@ class _LoginPageState extends State<LoginPage> {
                                         }
                                         if (state.status == AuthState.done) {
                                           headlessViewForLogin(
-                                                    'test2@gmail.com',
-                                                    'test2@gmail.com');
+                                              'test2@gmail.com',
+                                              'test2@gmail.com');
                                           context.read<AppStatusBloc>().add(
                                               UpdateLoginStatus(
                                                   status:
@@ -251,7 +263,12 @@ class _LoginPageState extends State<LoginPage> {
                                               onPressed: () async {
                                                 context
                                                     .read<AuthBlocBloc>()
-                                                    .add(TokenRequest(email: '',password: ''));
+                                                    .add(TokenRequest(
+                                                        email: emailController
+                                                            .text,
+                                                        password:
+                                                            passwordController
+                                                                .text));
                                               },
                                               style: ElevatedButton.styleFrom(
                                                 elevation: 0,

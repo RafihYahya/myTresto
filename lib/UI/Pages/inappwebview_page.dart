@@ -59,8 +59,8 @@ class _InAppWebViewPageState extends State<InAppWebViewPage> {
             url: WebUri(WebViewUrls.home),
             name: 'tresto_session',
             value: trestoCookie);
-            print('myCookie');
-            print(trestoCookie);
+        print('myCookie');
+        print(trestoCookie);
         webViewController = controller;
       },
       onLoadStart: (controller, url) {},
@@ -72,9 +72,12 @@ class _InAppWebViewPageState extends State<InAppWebViewPage> {
                 ''') : ''; */
       },
       onLoadStop: (controller, url) {
-        !widget.changeTresto
-            ? controller.evaluateJavascript(source: JsInjection.rmBtn)
-            : '';
+        if (!widget.changeTresto) {
+          controller.evaluateJavascript(source: JsInjection.rmBtn);
+        } else {
+          /* controller.evaluateJavascript(
+              source: JsInjection.removeConfigLongButton); */
+        }
         !widget.changeTresto
             ? controller.evaluateJavascript(
                 source: JsInjection.addEventListenerAndRedirect)

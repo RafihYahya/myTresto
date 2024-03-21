@@ -51,9 +51,86 @@ const config = { childList: true };
 // Start observing the target node
 observer.observe(targetNode, config);''';
   static const String jsAlert = r'''console.log('miaw')''';
+
+  static const String removeNotifButton =
+      r'''document.querySelector("div > button.p-3").remove()​''';
+
+  static const String removeConfigLongButton =
+      r'''document.querySelector("div.fixed > button").remove()''';
+
+  static const String rmConfLbtnMutObs = r'''
+const DEL_SELECTOR0 = 'div.fixed > button';
+const mo2 = new MutationObserver(onMutation);
+onMutation([{addedNodes: [document.documentElement]}]);
+observe();
+function onMutation(mutations) {
+  let stopped;
+  for (const {addedNodes} of mutations) {
+    for (const n of addedNodes) {
+      if (n.tagName) {
+        if (n.matches(DEL_SELECTOR0)) {
+          stopped = true;
+          mo2.disconnect();
+          n.remove();   //n.remove();
+         //n.remove();
+        } else if (n.firstElementChild && n.querySelector(DEL_SELECTOR0)) {
+          stopped = true;
+          mo2.disconnect();
+          for (const el of n.querySelectorAll(DEL_SELECTOR0)) el.remove();
+        }
+      }
+    }
+  }
+  if (stopped) observe();
+}
+
+function observe() {
+  mo2.observe(document, {
+    subtree: true,
+    childList: true,
+  });
+}
+  ''';
+
+  static const String removeNotifBtnMutObserver = r'''
+ const DEL_SELECTOR1 = 'div > button.p-3';
+const mo1 = new MutationObserver(onMutation);
+onMutation([{addedNodes: [document.documentElement]}]);
+observe();
+function onMutation(mutations) {
+  let stopped;
+  for (const {addedNodes} of mutations) {
+    for (const n of addedNodes) {
+      if (n.tagName) {
+        if (n.matches(DEL_SELECTOR1)) {
+          stopped = true;
+          mo1.disconnect();
+          n.remove();   //n.remove();
+         //n.remove();
+        } else if (n.querySelector(DEL_SELECTOR1)) {
+          stopped = true;
+          mo1.disconnect();
+          for (const el of n.querySelectorAll(DEL_SELECTOR1)) el.remove();
+        }
+      }
+    }
+  }
+  if (stopped) observe();
+}
+
+function observe() {
+  mo1.observe(document, {
+    subtree: true,
+    childList: true,
+  });
+}
+
+  
+  ''';
+
   static const String rmNavBarNoFlicker = r'''
 
-const DEL_SELECTOR = 'nav';
+const DEL_SELECTOR = 'nav,div > button.p-3.rounded-full, div.fixed > button';
 const mo = new MutationObserver(onMutation);
 onMutation([{addedNodes: [document.documentElement]}]);
 observe();
@@ -62,7 +139,7 @@ function onMutation(mutations) {
   for (const {addedNodes} of mutations) {
     for (const n of addedNodes) {
       if (n.tagName) {
-        if (n.matches(DEL_SELECTOR)) {
+        if (n.matches(DEL_SELECTOR)  ) {
           stopped = true;
           mo.disconnect();
           n.remove();   //n.remove();
@@ -88,6 +165,7 @@ function observe() {
  ''';
   static const String rmBtn =
       r'''document.querySelector('button[wire\\:click="nextStep(1)"]').remove()''';
+
   static const String addEventListenerAndRedirect =
       '''document.querySelector("div > button").addEventListener("click",() => 
                 { 
@@ -150,7 +228,7 @@ Future<void> headlessView(int maxL, String restoName) async {
 }
 
 Future<void> headlessViewForLogin(String email, String password) async {
-  const myStorage =  FlutterSecureStorage();
+  const myStorage = FlutterSecureStorage();
   /* final myCookie = await cookieManager.getCookie(
           url: WebUri(WebViewUrls.home), name: 'tresto_session'); */
   CookieManager cookieManager = CookieManager.instance();
@@ -175,13 +253,15 @@ Future<void> headlessViewForLogin(String email, String password) async {
         await myStorage.write(
             key: 'tresto_session', value: trestoHiddenCookie?.value);
         print('Old Value');
-        print(trestoHiddenCookie?.value);    
+        print(trestoHiddenCookie?.value);
       } else {
         String temp2 = await myStorage.read(key: 'tresto_session') ?? '';
         await cookieManager.setCookie(
-            url: WebUri(WebViewUrls.home), name: 'tresto_session', value: temp2);
-            print('NewValue');
-            print(temp2);
+            url: WebUri(WebViewUrls.home),
+            name: 'tresto_session',
+            value: temp2);
+        print('NewValue');
+        print(temp2);
       }
     },
   );

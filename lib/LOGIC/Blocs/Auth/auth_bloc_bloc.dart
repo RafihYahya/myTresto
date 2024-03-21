@@ -29,4 +29,6 @@ class AuthBlocBloc extends Bloc<AuthBlocEvent, AuthBlocState> {
   Future<void> emptyToken(EmptyToken event, Emitter<AuthBlocState> emit) async {
     await authRepo.setTokenToValue('');
   }
+
+  
 }

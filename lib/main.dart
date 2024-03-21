@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:tresto_v002a/Global/constants.dart';
 import 'package:tresto_v002a/LOGIC/Blocs/AppStatus/app_status_bloc.dart';
 import 'package:tresto_v002a/LOGIC/Blocs/AppStatus/app_status_state.dart';
 import 'package:tresto_v002a/LOGIC/Blocs/Dashboard/dashboard_bloc.dart';
@@ -35,8 +36,9 @@ void main() async {
             create: (context) => AppSettingsCubit(const AppSettings.initial(),
                 context.read<AppSettingsRepository>())),
         BlocProvider(
-            create: (context) =>
-                AppStatusBloc(context.read<AppStatusRepository>())),
+            create: (context) => AppStatusBloc(
+                context.read<AppStatusRepository>(),
+                context.read<AuthRepository>())),
         BlocProvider(
             create: (context) =>
                 DashboardBloc(dashBoard: context.read<DashBoardRepository>())),
@@ -47,8 +49,21 @@ void main() async {
       ], child: const MainApp())));
 }
 
-class MainApp extends StatelessWidget {
+class MainApp extends StatefulWidget {
   const MainApp({super.key});
+
+  @override
+  State<MainApp> createState() => _MainAppState();
+}
+
+class _MainAppState extends State<MainApp> {
+  @override
+  void initState() {
+    context
+        .read<AppStatusBloc>()
+        .add(BypassLogin(key: LocalStorageConsts.authToken));
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -89,7 +104,7 @@ class MainApp extends StatelessWidget {
                 ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                     backgroundColor: Colors.green,
                     content: Text(
-                      'Login Succefull',
+                      'Login Successful',
                       style: GoogleFonts.poppins(),
                     )));
               }

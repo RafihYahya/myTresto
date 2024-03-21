@@ -88,7 +88,7 @@ final class AppColor {
 
 }
 
-class Images {
+final class Images {
   static const String imgLink = 'assets/logo.png';
   static const String restoImgUrl =
       'https://t3.ftcdn.net/jpg/03/24/73/92/360_F_324739203_keeq8udvv0P2h1MLYJ0GLSlTBagoXS48.jpg';
@@ -99,12 +99,16 @@ class Images {
   static const String  fries = 'assets/fries.png';
   static const String  cafe = 'assets/espresso_doppio.jpeg';
 }
-class DashBoardTitles {
+final class DashBoardTitles {
   static const String totalOrders = 'Total Orders';
   static const String totalViews = 'Total Views';
   static const String totalRevenue = 'Total Revenue';
   static const String totalClient = 'Total Clients';
   static const String totalSales = 'Total Sales';
+}
+
+final class LocalStorageConsts {
+  static const String authToken = 'authToken';
 }
 
 

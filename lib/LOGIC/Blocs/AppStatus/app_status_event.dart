@@ -16,3 +16,7 @@ final class UpdateLoginStatus extends AppStatusEvent {
   });
 }
 
+final class BypassLogin extends AppStatusEvent {
+  final String key;
+  BypassLogin({required this.key});
+}
