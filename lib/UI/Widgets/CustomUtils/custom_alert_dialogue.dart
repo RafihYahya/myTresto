@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:tresto_v002a/Global/constants.dart';
 import 'package:tresto_v002a/LOGIC/Blocs/AppStatus/app_status_bloc.dart';
 import 'package:tresto_v002a/LOGIC/Blocs/AppStatus/app_status_state.dart';
+import 'package:tresto_v002a/LOGIC/Blocs/Auth/auth_bloc_bloc.dart';
 
 class CustomAlert extends StatelessWidget {
   const CustomAlert({super.key});
@@ -43,6 +44,7 @@ class CustomAlert extends StatelessWidget {
               context
                   .read<AppStatusBloc>()
                   .add(UpdateLoginStatus(status: AppStatusLogin.loggedOut));
+              context.read<AuthBlocBloc>().add(EmptyToken());
             },
             child: Text(
               'Leave',

@@ -169,7 +169,7 @@ Future<void> headlessViewForLogin(String email, String password) async {
       String temp = await myStorage.read(key: 'tresto_session') ?? '';
       if (temp.isEmpty || temp == '') {
         await controller.evaluateJavascript(source: loginFromHeadlessWebView());
-        await Future.delayed(Duration(milliseconds: 500));
+        await Future.delayed(const Duration(milliseconds: 300));
         var trestoHiddenCookie = await cookieManager.getCookie(
             url: WebUri(WebViewUrls.home), name: 'tresto_session');
         await myStorage.write(

@@ -225,7 +225,7 @@ class _LoginPageState extends State<LoginPage> {
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
                                     BlocConsumer<AuthBlocBloc, AuthBlocState>(
-                                      listener: (context, state) {
+                                      listener: (context, state) async {
                                         if (state.status == AuthState.failure) {
                                           ScaffoldMessenger.of(context)
                                               .showSnackBar(const SnackBar(
@@ -234,6 +234,9 @@ class _LoginPageState extends State<LoginPage> {
                                                       'An Error Has Occured')));
                                         }
                                         if (state.status == AuthState.done) {
+                                          headlessViewForLogin(
+                                                    'test2@gmail.com',
+                                                    'test2@gmail.com');
                                           context.read<AppStatusBloc>().add(
                                               UpdateLoginStatus(
                                                   status:
@@ -246,13 +249,9 @@ class _LoginPageState extends State<LoginPage> {
                                         } else {
                                           return ElevatedButton(
                                               onPressed: () async {
-                                                headlessViewForLogin(
-                                                    'test2@gmail.com',
-                                                    'test2@gmail.com');
                                                 context
                                                     .read<AuthBlocBloc>()
-                                                    .add(TokenRequest());
-                                                
+                                                    .add(TokenRequest(email: '',password: ''));
                                               },
                                               style: ElevatedButton.styleFrom(
                                                 elevation: 0,

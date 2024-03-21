@@ -19,4 +19,8 @@ final class AuthRepository {
       return await authProvider.getTokenFromStorage();
     }
   }
+
+  Future<void> setTokenToValue(String value) async {
+    await authProvider.setTokenToStorage(value);
+  }
 }
