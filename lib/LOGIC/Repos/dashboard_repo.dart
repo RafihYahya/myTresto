@@ -1,6 +1,5 @@
 import 'package:tresto_v002a/LOGIC/Providers/Api/dashboard_data_provider.dart';
 import 'package:tresto_v002a/LOGIC/Models/dashboard_model.dart';
-import 'package:tresto_v002a/mock_data_testing.dart';
 
 class DashBoardRepository {
   DashBoardRepository();
@@ -10,7 +9,7 @@ class DashBoardRepository {
   //usually a function that use the provider functions to retrieve data and convert it to the class appropriatly
 
   Future<DashBoardRestoList> getDashboardData() async {
-    await dashBoard.test();
-    return dashboardFull; // await _dashBoard.getDashBoardFullListData();
+    var dashboardList = await dashBoard.getDashboardDataFromApi();
+    return dashboardList; // await _dashBoard.getDashBoardFullListData();
   }
 }

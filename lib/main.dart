@@ -15,6 +15,7 @@ import 'package:tresto_v002a/LOGIC/Repos/app_status_repo.dart';
 import 'package:tresto_v002a/LOGIC/Repos/auth_repo.dart';
 import 'package:tresto_v002a/LOGIC/Repos/dashboard_repo.dart';
 import 'package:tresto_v002a/LOGIC/Models/Global/app_indexes_data.dart';
+import 'package:tresto_v002a/LOGIC/Repos/orders_repo.dart';
 import 'package:tresto_v002a/UI/Pages/login_page.dart';
 import 'package:tresto_v002a/app_routing.dart';
 import 'package:tresto_v002a/mainobserver.dart';
@@ -42,7 +43,8 @@ void main() async {
         BlocProvider(
             create: (context) =>
                 DashboardBloc(dashBoard: context.read<DashBoardRepository>())),
-        BlocProvider(create: (context) => OrdersBloc()),
+        BlocProvider(
+            create: (context) => OrdersBloc(context.read<OrdersRepository>())),
         BlocProvider(create: (context) => IndexesCubit(AppIndexes.initial())),
         BlocProvider(
             create: (context) => AuthBlocBloc(context.read<AuthRepository>())),

@@ -8,4 +8,9 @@ class OrderRestoListProvider {
   Future<http.Response> getOrdersFullListData() async {
     return await  http.get(Uri.parse(apiUrl));
   }
+
+   Future<dynamic> getOrdersDataFromApi() async {
+    final response = await http.get(Uri.parse('uri'));
+    return response;
+  }
 }

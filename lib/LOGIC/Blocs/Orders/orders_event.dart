@@ -5,6 +5,8 @@ sealed class OrdersEvent {}
 
 final class OrdersInit extends OrdersEvent {}
 
+final class GetOrders extends OrdersEvent{}
+
 final class UpdateOrder extends OrdersEvent {}
 
 final class RemoveOrder extends OrdersEvent {}

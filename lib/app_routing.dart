@@ -9,8 +9,20 @@ import 'package:tresto_v002a/UI/Pages/inappwebview_page.dart';
 import 'package:tresto_v002a/UI/Pages/Menu/menu_page.dart';
 import 'package:tresto_v002a/UI/Widgets/my_scaffold_widget.dart';
 
-class AppRouting extends StatelessWidget {
+class AppRouting extends StatefulWidget {
   const AppRouting({super.key});
+
+  @override
+  State<AppRouting> createState() => _AppRoutingState();
+}
+
+class _AppRoutingState extends State<AppRouting> {
+
+  @override
+  void initState() {
+    
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

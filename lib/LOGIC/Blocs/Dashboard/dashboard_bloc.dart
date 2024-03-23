@@ -14,6 +14,18 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
       print('miaw');
     });
     on<DashboardStateChange>(changeDashStatus);
+    on<DashboardUpdate>(dashboardRetrieveData);
+  }
+
+  Future<void> dashboardRetrieveData(
+      DashboardUpdate event, Emitter<DashboardState> emit) async {
+    try {
+      emit(state.copyWith(status: DashboardStateStatus.loading));
+      await dashBoard.getDashboardData();
+      emit(state.copyWith(status: DashboardStateStatus.ready));
+    } catch (e) {
+      emit(state.copyWith(status: DashboardStateStatus.error));
+    }
   }
 
   Future<void> changeDashStatus(
