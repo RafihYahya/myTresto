@@ -6,7 +6,7 @@ class LocalNotifications {
 
   static void initialize() async {
     const initializationSettingsAndroid =
-        AndroidInitializationSettings('@mipmap/ic_launcher');
+        AndroidInitializationSettings('@mipmap/launcher_icon');
 
     const initializationSettings =
         InitializationSettings(android: initializationSettingsAndroid);
