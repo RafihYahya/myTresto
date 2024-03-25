@@ -6,7 +6,7 @@ import 'package:tresto_v002a/LOGIC/Blocs/Dashboard/dashboard_bloc.dart';
 import 'package:tresto_v002a/LOGIC/Cubits/app_indexes_cubit.dart';
 import 'package:tresto_v002a/LOGIC/Models/Global/app_indexes_data.dart';
 import 'package:tresto_v002a/Global/constants.dart';
-import 'package:tresto_v002a/UI/Widgets/CustomUtils/custom_alert_dialogue.dart';
+import 'package:tresto_v002a/UI/Widgets/CustomUtils/custom_alert_auth_dialogue.dart';
 import 'package:tresto_v002a/UI/Widgets/navbar_popup_menu.dart';
 
 class AlternativeCNavBar extends StatelessWidget {
@@ -81,7 +81,7 @@ class AlternativeCNavBar extends StatelessWidget {
                           onTap: () {
                             showDialog(
                                 context: context,
-                                builder: (context) => const CustomAlert());
+                                builder: (context) => const CustomAuthAlert());
                           },
                           child: const HeroIcon(
                             HeroIcons.arrowLeftEndOnRectangle,

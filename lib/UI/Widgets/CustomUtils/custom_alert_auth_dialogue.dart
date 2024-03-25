@@ -7,8 +7,8 @@ import 'package:tresto_v002a/LOGIC/Blocs/AppStatus/app_status_state.dart';
 import 'package:tresto_v002a/LOGIC/Blocs/Auth/auth_bloc_bloc.dart';
 import 'package:tresto_v002a/LOGIC/Blocs/Dashboard/dashboard_bloc.dart';
 
-class CustomAlert extends StatelessWidget {
-  const CustomAlert({super.key});
+class CustomAuthAlert extends StatelessWidget {
+  const CustomAuthAlert({super.key});
 
   @override
   Widget build(BuildContext context) {
