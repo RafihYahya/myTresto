@@ -197,11 +197,14 @@ String changeRestoInWebViewHandler(int maxL, String restoName) {
       ''';
 }
 
-String loginFromHeadlessWebView() {
+String loginFromHeadlessWebView(String email, String password) {
   return '''
               console.log('praise the miaw miaw');
-              document.querySelector("#user-email").value = 'test2@gmail.com';
-              document.querySelector("#user-password").value = 'test2@gmail.com';
+              document.querySelector("#user-email").value = $email;
+              document.querySelector("#user-password").value = $password;
+                            console.log(document.querySelector("#user-email").value);
+                            console.log(document.querySelector("#user-password").value);
+
               document.querySelector("button").click();
 
           ''';
@@ -240,7 +243,8 @@ Future<void> headlessViewForLogin(String email, String password) async {
 
   final headlessWebView = HeadlessInAppWebView(
     initialUrlRequest: URLRequest(url: WebUri(WebViewUrls.login)),
-    onWebViewCreated: (controller) {
+    onWebViewCreated: (controller)  async {
+       
       /* controller.addJavaScriptHandler(
           handlerName: 'test',
           callback: ((args) {
@@ -250,16 +254,17 @@ Future<void> headlessViewForLogin(String email, String password) async {
     },
     onLoadStop: (controller, url) async {
       String temp = await myStorage.read(key: 'tresto_session') ?? '';
-      print(temp);
       if (temp.isEmpty || temp == '') {
-        await controller.evaluateJavascript(source: loginFromHeadlessWebView());
+        await controller.evaluateJavascript(source: loginFromHeadlessWebView(email,password));
         await Future.delayed(const Duration(milliseconds: 300));
         var trestoHiddenCookie = await cookieManager.getCookie(
             url: WebUri(WebViewUrls.home), name: 'tresto_session');
         await myStorage.write(
             key: 'tresto_session', value: trestoHiddenCookie?.value);
         print('Old Value');
-        print(trestoHiddenCookie?.value);
+        print(temp);
+        print(trestoHiddenCookie);
+        
       } else {
         String temp2 = await myStorage.read(key: 'tresto_session') ?? '';
         await cookieManager.setCookie(

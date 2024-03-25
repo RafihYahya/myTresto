@@ -11,7 +11,6 @@ import 'package:tresto_v002a/LOGIC/Blocs/Dashboard/dashboard_bloc.dart';
 import 'package:tresto_v002a/LOGIC/Cubits/app_indexes_cubit.dart';
 import 'package:tresto_v002a/LOGIC/Models/Global/app_indexes_data.dart';
 import 'package:tresto_v002a/UI/Widgets/CustomUtils/custom_error.dart';
-import 'package:tresto_v002a/UI/Widgets/CustomUtils/custom_loading.dart';
 import 'package:tresto_v002a/UI/Widgets/DashBoardComp/dashboard_chart.dart';
 import 'package:tresto_v002a/UI/Widgets/DashBoardComp/dashboard_tile.dart';
 
@@ -143,9 +142,9 @@ class _DashBoardPageState extends State<DashBoardPage> {
               return BlocBuilder<DashboardBloc, DashboardState>(
                 builder: (context, stateDash) {
                   return switch(stateDash.status) {
-                    DashboardStateStatus.initial => const MyCustomLoader(),
+                    DashboardStateStatus.initial => const SizedBox(),
                     DashboardStateStatus.error => const CustomError(),
-                    DashboardStateStatus.loading => const MyCustomLoader(),
+                    DashboardStateStatus.loading => const SizedBox(),
                     DashboardStateStatus.ready => ChartRevenueDashBoardWidget(
                       screenWidth: screenWidth,
                       selectedIndex: selectedIndex,
@@ -166,26 +165,6 @@ class _DashBoardPageState extends State<DashBoardPage> {
           ),
         ],
       ),
-    );
-  }
-}
-class MyCustomLoader extends StatelessWidget {
-  const MyCustomLoader({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const SizedBox(height: 150,),
-        Container(
-            decoration: BoxDecoration(borderRadius: BorderRadius.circular(12.0)),
-            child: const Padding(
-              padding: EdgeInsets.all(16.0),
-              child: Center(child: CustomLoading()),
-            )),
-      ],
     );
   }
 }

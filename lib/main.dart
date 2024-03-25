@@ -19,11 +19,14 @@ import 'package:tresto_v002a/LOGIC/Repos/orders_repo.dart';
 import 'package:tresto_v002a/UI/Pages/login_page.dart';
 import 'package:tresto_v002a/app_routing.dart';
 import 'package:tresto_v002a/mainobserver.dart';
+import 'package:tresto_v002a/notif_init.dart';
+import 'package:tresto_v002a/workmanager.dart';
 
 void main() async {
   //Observe State Changes For debugging
   Bloc.observer = MainObserver();
   WidgetsFlutterBinding.ensureInitialized();
+  LocalNotifications.initialize();
 
   runApp(MultiRepositoryProvider(
       providers: [
@@ -66,6 +69,7 @@ class _MainAppState extends State<MainApp> {
         .read<AppStatusBloc>()
         .add(BypassLogin(key: LocalStorageConsts.authToken));
     super.initState();
+    WorkManager.startWorkManager();
   }
 
   @override
