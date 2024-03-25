@@ -13,11 +13,11 @@ class LocalNotifications {
     flutterNotificationPlugin.initialize(initializationSettings);
   }
 
-  static void displayNotifs(int id, String title) async {
+  static void displayNotifs(int id, String title,String body) async {
     final notificationDetails = NotificationDetails(
         android: AndroidNotificationDetails(id.toString(), 'channelName',
             importance: Importance.max, priority: Priority.max));
     await flutterNotificationPlugin.show(
-        id, title, id.toString(), notificationDetails);
+        id, title, body, notificationDetails);
   }
 }

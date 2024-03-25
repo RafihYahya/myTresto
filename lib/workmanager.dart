@@ -6,7 +6,7 @@ import 'package:workmanager/workmanager.dart';
 void callbackDispatcher() async {
   Workmanager().executeTask((task, inputData) async {
     try {
-      LocalNotifications.displayNotifs(10, 'Worker Borker');
+      LocalNotifications.displayNotifs(10, 'New Orders Have Arrived','Click To See All');
       return Future.value(true);
     } catch (e) {
       return Future.value(true);
