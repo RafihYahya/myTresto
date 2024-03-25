@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tresto_v002a/Global/webview_url_consts.dart';
 import 'package:tresto_v002a/LOGIC/Cubits/app_indexes_cubit.dart';
@@ -17,10 +18,8 @@ class AppRouting extends StatefulWidget {
 }
 
 class _AppRoutingState extends State<AppRouting> {
-
   @override
   void initState() {
-    
     super.initState();
   }
 
@@ -34,8 +33,13 @@ class _AppRoutingState extends State<AppRouting> {
         changeTresto: false,
         url: WebViewUrls.createResto,
         allowRedirect: false,
-      ), //const MenuCreatePage(), he is Retarded,Trust Me
-      const MenuAlternativePage(),
+      ).animate().fade(
+          curve: Curves.easeIn,
+          duration: const Duration(
+              milliseconds:
+                  300)), //const MenuCreatePage(), he is Retarded,Trust Me
+      const MenuAlternativePage().animate().fade(
+          curve: Curves.easeIn, duration: const Duration(milliseconds: 300)),
     ];
     //Bloc builder rebuild the widget when the index changes
     return BlocBuilder<IndexesCubit, AppIndexes>(

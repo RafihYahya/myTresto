@@ -36,6 +36,7 @@ class OrderDetailsCard extends StatelessWidget {
                               width: 85,
                               decoration: BoxDecoration(
                                   color: Colors.black54,
+                                  image: DecorationImage(fit: BoxFit.cover,image: Image.asset('assets/Burger-11.webp').image),
                                   borderRadius: BorderRadius.circular(12.0)),
                               child: null,
                             ),

@@ -129,14 +129,14 @@ class _LoginPageState extends State<LoginPage> {
                                   keyboardType: TextInputType.emailAddress,
                                   decoration: InputDecoration(
                                     errorBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(8),
+                                      borderRadius: BorderRadius.circular(12),
                                       borderSide: const BorderSide(
                                         width: 1,
                                         color: AppColor.trestoRed,
                                       ),
                                     ),
                                     focusedErrorBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(8),
+                                      borderRadius: BorderRadius.circular(12),
                                       borderSide: const BorderSide(
                                         width: 1,
                                         color: AppColor.trestoRed,
@@ -145,13 +145,13 @@ class _LoginPageState extends State<LoginPage> {
                                     fillColor: Colors.red,
                                     focusedBorder: const OutlineInputBorder(
                                       borderRadius:
-                                          BorderRadius.all(Radius.circular(8)),
+                                          BorderRadius.all(Radius.circular(12)),
                                       borderSide: BorderSide(
                                           color: AppColor.trestoRed, width: 1),
                                     ),
                                     enabledBorder: const OutlineInputBorder(
                                       borderRadius: BorderRadius.all(
-                                        Radius.circular(8),
+                                        Radius.circular(12),
                                       ),
                                       borderSide: BorderSide(
                                           width: 1,
@@ -186,14 +186,14 @@ class _LoginPageState extends State<LoginPage> {
                                   keyboardType: TextInputType.visiblePassword,
                                   decoration: InputDecoration(
                                     errorBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(8),
+                                      borderRadius: BorderRadius.circular(12),
                                       borderSide: const BorderSide(
                                         width: 1,
                                         color: AppColor.primaryColor,
                                       ),
                                     ),
                                     focusedErrorBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(8),
+                                      borderRadius: BorderRadius.circular(12),
                                       borderSide: const BorderSide(
                                         width: 1,
                                         color: AppColor.primaryColor,
@@ -202,14 +202,14 @@ class _LoginPageState extends State<LoginPage> {
                                     fillColor: Colors.red,
                                     focusedBorder: const OutlineInputBorder(
                                       borderRadius:
-                                          BorderRadius.all(Radius.circular(8)),
+                                          BorderRadius.all(Radius.circular(12)),
                                       borderSide: BorderSide(
                                           color: AppColor.primaryColor,
                                           width: 1),
                                     ),
                                     enabledBorder: const OutlineInputBorder(
                                       borderRadius: BorderRadius.all(
-                                        Radius.circular(8),
+                                        Radius.circular(12),
                                       ),
                                       borderSide: BorderSide(
                                           width: 1,
