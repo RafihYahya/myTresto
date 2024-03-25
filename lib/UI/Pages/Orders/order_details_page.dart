@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:tresto_v002a/Global/constants.dart';
 import 'package:tresto_v002a/UI/Widgets/OrderComp/order_client_info_card.dart';
 import 'package:tresto_v002a/UI/Widgets/OrderComp/order_command_card.dart';
 import 'package:tresto_v002a/UI/Widgets/OrderComp/order_details_card.dart';
@@ -12,6 +13,11 @@ class OrderDetailsPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.grey[100],
       appBar: AppBar(
+        title: const Image(
+          image: AssetImage(Images.imgLink),
+          fit: BoxFit.cover,
+          height: 24,
+        ),
         backgroundColor: Colors.white,
         elevation: 0,
         shadowColor: Colors.transparent,
@@ -26,15 +32,15 @@ class OrderDetailsPage extends StatelessWidget {
               ),
               const CommandIdCard(),
               const SizedBox(
-                height: 2.0,
+                height: 4.0,
               ),
               const OrderDetailsCard(),
               const SizedBox(
-                height: 2.0,
+                height: 4.0,
               ),
               const ClientDataCard(),
               const SizedBox(
-                height: 12.0,
+                height: 24.0,
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 10.0),
@@ -43,7 +49,7 @@ class OrderDetailsPage extends StatelessWidget {
                   children: [
                     Expanded(
                       child: Container(
-                        height: 70,
+                        height: 60,
                         decoration: BoxDecoration(
                             color: Colors.green,
                             borderRadius: BorderRadius.circular(8.0)),
@@ -52,7 +58,7 @@ class OrderDetailsPage extends StatelessWidget {
                           'Accept',
                           style: GoogleFonts.poppins(
                               textStyle: const TextStyle(
-                                  fontSize: 16.0, fontWeight: FontWeight.w600)),
+                                  fontSize: 15.0, fontWeight: FontWeight.w500)),
                         )),
                       ),
                     ),
@@ -61,7 +67,7 @@ class OrderDetailsPage extends StatelessWidget {
                     ),
                     Expanded(
                       child: Container(
-                        height: 70,
+                        height: 60,
                         decoration: BoxDecoration(
                             color: Colors.red,
                             borderRadius: BorderRadius.circular(8.0)),
@@ -70,7 +76,7 @@ class OrderDetailsPage extends StatelessWidget {
                           'Reject',
                           style: GoogleFonts.poppins(
                               textStyle: const TextStyle(
-                                  fontSize: 16.0, fontWeight: FontWeight.w600)),
+                                  fontSize: 15.0, fontWeight: FontWeight.w500)),
                         )),
                       ),
                     ),
@@ -78,7 +84,7 @@ class OrderDetailsPage extends StatelessWidget {
                 ),
               ),
               const SizedBox(
-                height: 20.0,
+                height: 24.0,
               )
             ],
           ),

@@ -10,19 +10,26 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
   final DashBoardRepository dashBoard;
   DashboardBloc({required this.dashBoard})
       : super(const DashboardState.initial()) {
-    on<DashboardInit>((event, emit) {
-      print('miaw');
-    });
     on<DashboardStateChange>(changeDashStatus);
     on<DashboardUpdate>(dashboardRetrieveData);
+    on<DashboardReset>(dashboardResetState);
+  }
+
+  void dashboardResetState(DashboardReset event, Emitter<DashboardState> emit) async {
+    emit(state.copyWith(
+        isAlreadyLoadedOnce: false)
+        );
   }
 
   Future<void> dashboardRetrieveData(
       DashboardUpdate event, Emitter<DashboardState> emit) async {
     try {
-      emit(state.copyWith(status: DashboardStateStatus.loading));
-      await dashBoard.getDashboardData();
-      emit(state.copyWith(status: DashboardStateStatus.ready));
+      await Future.delayed(const Duration(seconds: 5));
+      var dashboardData = await dashBoard.getDashboardData();
+      emit(state.copyWith(
+          status: DashboardStateStatus.ready,
+          dashBoardRestoList: dashboardData,
+          isAlreadyLoadedOnce: true));
     } catch (e) {
       emit(state.copyWith(status: DashboardStateStatus.error));
     }

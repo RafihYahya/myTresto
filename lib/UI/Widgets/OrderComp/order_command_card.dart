@@ -38,7 +38,7 @@ class CommandIdCard extends StatelessWidget {
                               'Commande',
                               style: GoogleFonts.poppins(
                                   textStyle: const TextStyle(
-                                      fontSize: 15.0, fontWeight: FontWeight.w600)),
+                                      fontSize: 16.0, fontWeight: FontWeight.w600)),
                             ),
                             const SizedBox(width: 6.0,),
                             Text(

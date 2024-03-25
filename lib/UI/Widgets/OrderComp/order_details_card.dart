@@ -13,41 +13,37 @@ class OrderDetailsCard extends StatelessWidget {
         Expanded(
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 6.0),
-            height: 300,
+            height: 335,
             child: Card(
               color: Colors.white,
               elevation: 0,
               child: Column(
                 children: [
-                  const SizedBox(height: 10.0),
+                  const SizedBox(height: 24.0),
                   Padding(
                     padding: const EdgeInsets.symmetric(
                         vertical: 16.0, horizontal: 16.0),
                     child: Row(
-                      mainAxisAlignment:
-                          MainAxisAlignment.spaceBetween,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Row(
                           mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment:
-                              CrossAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Container(
                               height: 85,
                               width: 85,
                               decoration: BoxDecoration(
                                   color: Colors.black54,
-                                  borderRadius:
-                                      BorderRadius.circular(12.0)),
+                                  borderRadius: BorderRadius.circular(12.0)),
                               child: null,
                             ),
                             const SizedBox(
                               width: 12.0,
                             ),
                             Column(
-                              crossAxisAlignment:
-                                  CrossAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 const SizedBox(
                                   height: 10.0,
@@ -57,8 +53,7 @@ class OrderDetailsCard extends StatelessWidget {
                                   style: GoogleFonts.poppins(
                                       textStyle: const TextStyle(
                                           fontSize: 15,
-                                          fontWeight:
-                                              FontWeight.w600)),
+                                          fontWeight: FontWeight.w600)),
                                 ),
                                 Text(
                                   'Cafe Choco',
@@ -66,17 +61,15 @@ class OrderDetailsCard extends StatelessWidget {
                                       textStyle: TextStyle(
                                           color: Colors.grey[500],
                                           fontSize: 14,
-                                          fontWeight:
-                                              FontWeight.w500)),
+                                          fontWeight: FontWeight.w500)),
                                 ),
                                 Text(
                                   '3 Commandes',
                                   style: GoogleFonts.poppins(
-                                      textStyle:  TextStyle(
-                                        color: Colors.grey[400],
+                                      textStyle: TextStyle(
+                                          color: Colors.grey[400],
                                           fontSize: 10,
-                                          fontWeight:
-                                              FontWeight.w400)),
+                                          fontWeight: FontWeight.w400)),
                                 ),
                               ],
                             )
@@ -86,8 +79,7 @@ class OrderDetailsCard extends StatelessWidget {
                           '30\$',
                           style: GoogleFonts.poppins(
                               textStyle: const TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w600)),
+                                  fontSize: 16, fontWeight: FontWeight.w600)),
                         ),
                       ],
                     ),
@@ -97,28 +89,24 @@ class OrderDetailsCard extends StatelessWidget {
                   ),
                   const Divider(),
                   const SizedBox(
-                    height: 16.0,
+                    height: 20.0,
                   ),
                   Padding(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 16.0),
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
                     child: Row(
-                      mainAxisAlignment:
-                          MainAxisAlignment.spaceBetween,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
                           'Sous Total',
                           style: GoogleFonts.poppins(
                               textStyle: const TextStyle(
-                                  fontSize: 15.0,
-                                  fontWeight: FontWeight.w400)),
+                                  fontSize: 15.0, fontWeight: FontWeight.w400)),
                         ),
                         Text(
                           '42 Dhs',
                           style: GoogleFonts.poppins(
                               textStyle: const TextStyle(
-                                  fontSize: 15.0,
-                                  fontWeight: FontWeight.w400)),
+                                  fontSize: 15.0, fontWeight: FontWeight.w400)),
                         ),
                       ],
                     ),
@@ -127,52 +115,44 @@ class OrderDetailsCard extends StatelessWidget {
                     height: 4.0,
                   ),
                   Padding(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 16.0),
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
                     child: Row(
-                      mainAxisAlignment:
-                          MainAxisAlignment.spaceBetween,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
                           'Frais Total',
                           style: GoogleFonts.poppins(
                               textStyle: const TextStyle(
-                                  fontSize: 15.0,
-                                  fontWeight: FontWeight.w400)),
+                                  fontSize: 15.0, fontWeight: FontWeight.w400)),
                         ),
                         Text(
                           '65 Dhs',
                           style: GoogleFonts.poppins(
                               textStyle: const TextStyle(
-                                  fontSize: 15.0,
-                                  fontWeight: FontWeight.w400)),
+                                  fontSize: 15.0, fontWeight: FontWeight.w400)),
                         ),
                       ],
                     ),
                   ),
                   const SizedBox(
-                    height: 24.0,
+                    height: 32.0,
                   ),
                   Padding(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 16.0),
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
                     child: Row(
-                      mainAxisAlignment:
-                          MainAxisAlignment.spaceBetween,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
                           'Total Prix',
                           style: GoogleFonts.poppins(
                               textStyle: const TextStyle(
-                                  fontSize: 16.0,
-                                  fontWeight: FontWeight.w600)),
+                                  fontSize: 16.0, fontWeight: FontWeight.w600)),
                         ),
                         Text(
                           '80 Dhs',
                           style: GoogleFonts.poppins(
                               textStyle: const TextStyle(
-                                  fontSize: 16.0,
-                                  fontWeight: FontWeight.w600)),
+                                  fontSize: 16.0, fontWeight: FontWeight.w600)),
                         ),
                       ],
                     ),

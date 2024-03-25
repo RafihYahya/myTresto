@@ -2,7 +2,6 @@ import 'dart:collection';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:tresto_v002a/Global/webview_url_consts.dart';
 
 class InAppWebViewPage extends StatefulWidget {
@@ -34,8 +33,12 @@ class _InAppWebViewPageState extends State<InAppWebViewPage> {
     InAppWebViewSettings settings = InAppWebViewSettings(
       useShouldOverrideUrlLoading: true,
     );
+    /* 
+    -----------------------------------------------------------------------------------------------
     const myStorage = FlutterSecureStorage();
-    CookieManager cookieManager = CookieManager.instance();
+    CookieManager cookieManager = CookieManager.instance(); 
+    ------------------------------------------------------------------------------------------------
+    */
     /* myStorage.delete(key: 'tresto_session');
     cookieManager.deleteAllCookies(); */
     return InAppWebView(
@@ -53,14 +56,13 @@ class _InAppWebViewPageState extends State<InAppWebViewPage> {
             : NavigationActionPolicy.CANCEL;
       },
       onWebViewCreated: (controller) async {
-        String trestoCookie = await myStorage.read(key: 'tresto_session') ?? '';
+        // String trestoCookie = await myStorage.read(key: 'tresto_session') ?? '';
 
-        cookieManager.setCookie(
+        /* cookieManager.setCookie(
             url: WebUri(WebViewUrls.home),
             name: 'tresto_session',
-            value: trestoCookie);
-        print('myCookie');
-        print(trestoCookie);
+            value: trestoCookie); */
+
         webViewController = controller;
       },
       onLoadStart: (controller, url) {},

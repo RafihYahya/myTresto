@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:heroicons/heroicons.dart';
 import 'package:tresto_v002a/LOGIC/Blocs/Orders/orders_bloc.dart';
@@ -18,8 +19,8 @@ class OrderPage extends StatefulWidget {
 class _OrderPageState extends State<OrderPage> {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
+    BlocProvider.of<OrdersBloc>(context).add(GetOrders());
   }
 
   @override
@@ -105,10 +106,11 @@ class _OrderPageState extends State<OrderPage> {
             builder: (context, stateIndex) {
               return BlocBuilder<OrdersBloc, OrdersState>(
                 builder: (context, state) {
-                  if (state is OrdersError) {
-                    return const CustomError();
-                  } else if (state is OrdersReady) {
-                    return ListView.builder(
+                  return switch (state) {
+                    OrdersInitial() => const MyCustomOrderLoader(),
+                    OrdersError() => const CustomError(),
+                    OrdersLoading() => const MyCustomOrderLoader(),
+                    OrdersReady() => ListView.builder(
                         itemCount: state
                             .ordersRestoList
                             .ordersRestoList[stateIndex.restoIndex]
@@ -119,10 +121,10 @@ class _OrderPageState extends State<OrderPage> {
                                   .ordersRestoList
                                   .ordersRestoList[stateIndex.restoIndex]
                                   .ordersList[index],
-                            ));
-                  } else {
-                    return const MyCustomOrderLoader();
-                  }
+                            )).animate().fade(
+                        curve: Curves.easeIn,
+                        duration: const Duration(milliseconds: 500)),
+                  };
                 },
               );
             },

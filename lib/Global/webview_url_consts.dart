@@ -208,16 +208,21 @@ String loginFromHeadlessWebView() {
 }
 
 //     window.flutter_inappwebview.callHandler('test', ['$email','$password']);
-Future<void> headlessView(int maxL, String restoName) async {
-  /* CookieManager cookieManager = CookieManager.instance();
-  cookieManager.setCookie(
+/* cookieManager.setCookie(
       url: WebUri(WebViewUrls.home),
       name: 'tresto_session',
       value: token,
-      isSecure: true); */
+      isSecure: true);  */
+Future<void> headlessView(int maxL, String restoName) async {
+  var myStorage = const FlutterSecureStorage();
+  CookieManager cookieManager = CookieManager.instance();
+
   final headlessWebView = HeadlessInAppWebView(
     initialUrlRequest: URLRequest(url: WebUri(WebViewUrls.home)),
-    onLoadStop: (controller, url) {
+    onLoadStop: (controller, url) async {
+      String temp2 = await myStorage.read(key: 'tresto_session') ?? '';
+      await cookieManager.setCookie(
+          url: WebUri(WebViewUrls.home), name: 'tresto_session', value: temp2);
       controller.evaluateJavascript(
           source: changeRestoInWebViewHandler(maxL, restoName));
       controller.evaluateJavascript(source: JsInjection.rmNavBar);
@@ -245,6 +250,7 @@ Future<void> headlessViewForLogin(String email, String password) async {
     },
     onLoadStop: (controller, url) async {
       String temp = await myStorage.read(key: 'tresto_session') ?? '';
+      print(temp);
       if (temp.isEmpty || temp == '') {
         await controller.evaluateJavascript(source: loginFromHeadlessWebView());
         await Future.delayed(const Duration(milliseconds: 300));

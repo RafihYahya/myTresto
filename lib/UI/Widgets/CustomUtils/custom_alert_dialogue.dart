@@ -5,6 +5,7 @@ import 'package:tresto_v002a/Global/constants.dart';
 import 'package:tresto_v002a/LOGIC/Blocs/AppStatus/app_status_bloc.dart';
 import 'package:tresto_v002a/LOGIC/Blocs/AppStatus/app_status_state.dart';
 import 'package:tresto_v002a/LOGIC/Blocs/Auth/auth_bloc_bloc.dart';
+import 'package:tresto_v002a/LOGIC/Blocs/Dashboard/dashboard_bloc.dart';
 
 class CustomAlert extends StatelessWidget {
   const CustomAlert({super.key});
@@ -13,13 +14,13 @@ class CustomAlert extends StatelessWidget {
   Widget build(BuildContext context) {
     return AlertDialog(
       title: Text(
-        'You Are Going To Leave',
+        'Are You Sure ?',
         style: GoogleFonts.poppins(
             textStyle:
                 const TextStyle(fontWeight: FontWeight.w500, fontSize: 18)),
       ),
       content: const Text(
-          'The Action You Are About To Take shall Ruin The Human Race, ARe you Sure You wanna do this ?'),
+          'Are You Sure You Want To Logout From Your Account ?'),
       actions: [
         TextButton(
             style: TextButton.styleFrom(
@@ -44,7 +45,6 @@ class CustomAlert extends StatelessWidget {
               context
                   .read<AppStatusBloc>()
                   .add(UpdateLoginStatus(status: AppStatusLogin.loggedOut));
-              context.read<AuthBlocBloc>().add(EmptyToken());
             },
             child: Text(
               'Leave',

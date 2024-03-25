@@ -36,8 +36,7 @@ class AlternativeCNavBar extends StatelessWidget {
                   ),
                   Row(
                     children: [
-                      stateIndex.index !=
-                              2 && stateIndex.index != 3
+                      stateIndex.index != 2 && stateIndex.index != 3
                           ? Container(
                               padding: const EdgeInsets.symmetric(
                                   vertical: 5, horizontal: 8),
@@ -49,15 +48,14 @@ class AlternativeCNavBar extends StatelessWidget {
                                 children: [
                                   Text(
                                       context
-                                                  .read<DashboardBloc>()
-                                                  .restoListCollector()
-                                                  .length >
-                                              stateIndex.maxRestoNumber
-                                          ? context
+                                              .watch<DashboardBloc>()
+                                              .restoListCollector()
+                                              .isEmpty
+                                          ? 'Loading'
+                                          : context
                                                   .read<DashboardBloc>()
                                                   .restoListCollector()[
-                                              stateIndex.restoIndex]
-                                          : 'Loading...',
+                                              stateIndex.restoIndex],
                                       style: GoogleFonts.poppins(
                                           fontWeight: FontWeight.w400,
                                           fontSize: 12,
@@ -67,12 +65,11 @@ class AlternativeCNavBar extends StatelessWidget {
                                     width: 10,
                                   ),
                                   context
-                                              .read<DashboardBloc>()
+                                              .watch<DashboardBloc>()
                                               .restoListCollector()
-                                              .length >
-                                          stateIndex.maxRestoNumber
-                                      ? const NavPopupMenu()
-                                      : const SizedBox(),
+                                              .isEmpty
+                                      ? const SizedBox()
+                                      : const NavPopupMenu(),
                                 ],
                               ),
                             )

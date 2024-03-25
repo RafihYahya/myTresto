@@ -11,7 +11,7 @@ class ClientDataCard extends StatelessWidget {
     return Row(children: [
       Expanded(
         child: SizedBox(
-          height: 235,
+          height: 265,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 6.0),
             child: Card(
@@ -23,16 +23,16 @@ class ClientDataCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const SizedBox(
-                      height: 8.0,
+                      height: 20.0,
                     ),
                     Text(
                       'Client Informations',
                       style: GoogleFonts.poppins(
                           textStyle: const TextStyle(
-                              fontSize: 17, fontWeight: FontWeight.w600)),
+                              fontSize: 18, fontWeight: FontWeight.w600)),
                     ),
                     const SizedBox(
-                      height: 24.0,
+                      height: 32.0,
                     ),
                     Text(
                       'Hicham',
@@ -49,7 +49,7 @@ class ClientDataCard extends StatelessWidget {
                               fontWeight: FontWeight.w400)),
                     ),
                     const SizedBox(
-                      height: 24.0,
+                      height: 36.0,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,

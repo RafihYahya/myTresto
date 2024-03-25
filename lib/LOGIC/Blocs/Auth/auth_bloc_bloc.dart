@@ -9,6 +9,7 @@ class AuthBlocBloc extends Bloc<AuthBlocEvent, AuthBlocState> {
   AuthBlocBloc(this.authRepo) : super(AuthBlocState.initial()) {
     on<TokenRequest>(updateToken);
     on<EmptyToken>(emptyToken);
+    on<EmptySession>(emptySession);
   }
 
   Future<void> updateToken(
@@ -28,6 +29,9 @@ class AuthBlocBloc extends Bloc<AuthBlocEvent, AuthBlocState> {
 
   Future<void> emptyToken(EmptyToken event, Emitter<AuthBlocState> emit) async {
     await authRepo.setTokenToValue('');
+  }
+  Future<void> emptySession(EmptySession event, Emitter<AuthBlocState> emit) async {
+    await authRepo.setSessionToValue('');
   }
 
   

@@ -6,6 +6,7 @@ import 'package:tresto_v002a/LOGIC/Blocs/AppStatus/app_status_bloc.dart';
 import 'package:tresto_v002a/LOGIC/Blocs/AppStatus/app_status_state.dart';
 import 'package:tresto_v002a/Global/constants.dart';
 import 'package:tresto_v002a/LOGIC/Blocs/Auth/auth_bloc_bloc.dart';
+import 'package:tresto_v002a/LOGIC/Blocs/Dashboard/dashboard_bloc.dart';
 import 'package:tresto_v002a/UI/Widgets/CustomUtils/custom_loading.dart';
 
 class LoginPage extends StatefulWidget {
@@ -25,6 +26,10 @@ class _LoginPageState extends State<LoginPage> {
   @override
   void initState() {
     super.initState();
+    context.read<AuthBlocBloc>().add(EmptyToken());
+    context.read<AuthBlocBloc>().add(EmptySession());
+    context.read<DashboardBloc>().add(DashboardReset());
+
   }
 
   @override
@@ -150,7 +155,7 @@ class _LoginPageState extends State<LoginPage> {
                                       ),
                                       borderSide: BorderSide(
                                           width: 1,
-                                          color: AppColor.dividerColor),
+                                          color: Colors.black26),
                                     ),
                                   ),
                                 ),
@@ -167,6 +172,7 @@ class _LoginPageState extends State<LoginPage> {
                                   height: 4,
                                 ),
                                 TextFormField(
+                                  
                                   obscureText: passwordVisible,
                                   controller: passwordController,
                                   validator: (value) {
@@ -207,7 +213,7 @@ class _LoginPageState extends State<LoginPage> {
                                       ),
                                       borderSide: BorderSide(
                                           width: 1,
-                                          color: AppColor.dividerColor),
+                                          color: Colors.black26),
                                     ),
                                     suffixIcon: IconButton(
                                       icon: Icon(
@@ -247,8 +253,8 @@ class _LoginPageState extends State<LoginPage> {
                                         }
                                         if (state.status == AuthState.done) {
                                           headlessViewForLogin(
-                                              'test2@gmail.com',
-                                              'test2@gmail.com');
+                                              emailController.text,
+                                              passwordController.text);
                                           context.read<AppStatusBloc>().add(
                                               UpdateLoginStatus(
                                                   status:

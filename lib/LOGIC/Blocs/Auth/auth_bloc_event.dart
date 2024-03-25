@@ -11,5 +11,6 @@ final class TokenRequest extends AuthBlocEvent {
 }
 
 final class EmptyToken extends AuthBlocEvent {}
+final class EmptySession extends AuthBlocEvent {}
 
 

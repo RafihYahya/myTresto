@@ -14,4 +14,6 @@ final class DashboardStateChange extends DashboardEvent {
   DashboardStateChange({
     required this.status,
   });
+
 }
+  final class DashboardReset extends DashboardEvent {}

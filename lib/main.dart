@@ -30,6 +30,7 @@ void main() async {
         RepositoryProvider(create: (context) => AppSettingsRepository()),
         RepositoryProvider(create: (context) => AppStatusRepository()),
         RepositoryProvider(create: (context) => DashBoardRepository()),
+        RepositoryProvider(create: (context) => OrdersRepository()),
         RepositoryProvider(create: (context) => AuthRepository()),
       ],
       child: MultiBlocProvider(providers: [

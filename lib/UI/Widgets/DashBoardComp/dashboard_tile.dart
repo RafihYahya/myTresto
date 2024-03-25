@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:heroicons/heroicons.dart';
@@ -9,6 +10,7 @@ import 'package:tresto_v002a/UI/Widgets/CustomUtils/custom_error.dart';
 import 'package:tresto_v002a/UI/Widgets/CustomUtils/custom_loading.dart';
 
 class DashboardMainTile extends StatelessWidget {
+  final int fadeDelay;
   final int index;
   final Color tileColor;
   final Color textColor;
@@ -22,6 +24,7 @@ class DashboardMainTile extends StatelessWidget {
       required this.secondaryTextColor,
       required this.iconsColor,
       required this.index,
+      required this.fadeDelay,
       required this.icon});
 
   @override
@@ -31,9 +34,11 @@ class DashboardMainTile extends StatelessWidget {
         return BlocBuilder<DashboardBloc, DashboardState>(
           builder: (context, stateDash) {
             return switch (stateDash.status) {
-              DashboardStateStatus.initial => const MyCustomLoader(),
+              DashboardStateStatus.initial =>
+                const MyCustomLoader(),
               DashboardStateStatus.error => const CustomError(),
-              DashboardStateStatus.loading => const MyCustomLoader(),
+              DashboardStateStatus.loading =>
+                const MyCustomLoader(),
               DashboardStateStatus.ready => Container(
                   width: 190,
                   height: 110,
@@ -66,7 +71,7 @@ class DashboardMainTile extends StatelessWidget {
                                 .toString(),
                             style: GoogleFonts.poppins(
                               textStyle: TextStyle(
-                                  fontSize: 20.0,
+                                  fontSize: 18.0,
                                   fontWeight: FontWeight.bold,
                                   color: textColor),
                             )),
@@ -83,14 +88,18 @@ class DashboardMainTile extends StatelessWidget {
                                 .title,
                             style: GoogleFonts.poppins(
                               textStyle: TextStyle(
-                                  fontSize: 20.0,
-                                  fontWeight: FontWeight.bold,
+                                  fontSize: 13.0,
+                                  fontWeight: FontWeight.w500,
                                   color: textColor),
                             )),
                       ],
                     ),
                   ),
-                ),
+                ).animate().fade(
+                      curve: Curves.easeIn,
+                      duration: const Duration(milliseconds: 300),
+                      delay: Duration(milliseconds: fadeDelay),
+                    ),
             };
           },
         );

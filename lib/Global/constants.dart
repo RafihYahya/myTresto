@@ -109,6 +109,7 @@ final class DashBoardTitles {
 
 final class LocalStorageConsts {
   static const String authToken = 'authToken';
+  static const String sessionToken = 'tresto_session';
 }
 
 

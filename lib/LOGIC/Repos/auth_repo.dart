@@ -23,6 +23,9 @@ final class AuthRepository {
   Future<void> setTokenToValue(String value) async {
     await authProvider.setTokenToStorage(value);
   }
+  Future<void> setSessionToValue(String value) async {
+    await authProvider.setSessionToStorage(value);
+  }
 
   Future<bool> checkTokenIfExist(String key) async {
     return await authProvider.checkTokenExist(key);
