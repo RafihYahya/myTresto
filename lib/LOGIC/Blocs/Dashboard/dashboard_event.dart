@@ -5,7 +5,7 @@ sealed class DashboardEvent {}
 
 final class DashboardInit extends DashboardEvent {}
 
-final class DashboardUpdate extends DashboardEvent {}
+final class DashboardGet extends DashboardEvent {}
 
 final class DashboardRemove extends DashboardEvent {}
 
@@ -17,3 +17,4 @@ final class DashboardStateChange extends DashboardEvent {
 
 }
   final class DashboardReset extends DashboardEvent {}
+  final class DashboardUpdate extends DashboardEvent {}

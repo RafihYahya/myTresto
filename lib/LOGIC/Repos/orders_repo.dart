@@ -1,10 +1,13 @@
 import 'package:tresto_v002a/LOGIC/Models/orders_model.dart';
 import 'package:tresto_v002a/LOGIC/Providers/Api/order_data_provider.dart';
+import 'package:tresto_v002a/LOGIC/Providers/LocalStorage/auth_provider.dart';
 import 'package:tresto_v002a/mock_data_testing.dart';
 
 class OrdersRepository {
   OrdersRepository();
   final OrderRestoListProvider orders = OrderRestoListProvider();
+  final AuthProvider authProvider = AuthProvider();
+  
 
   Future<OrderRestoList> getOrderData() async {
     //var ordersList = await orders.getOrdersDataFromApi();
@@ -15,5 +18,9 @@ class OrdersRepository {
     await Future.delayed(const Duration(seconds: 2));
     
     return true;    
+  }
+
+  Future<String> getTokenIfExist() async{
+    return await authProvider.getTokenFromStorage();
   }
 }

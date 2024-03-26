@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tresto_v002a/Global/webview_url_consts.dart';
@@ -63,9 +64,13 @@ class _LoginPageState extends State<LoginPage> {
           BlocListener<AppStatusBloc, AppStatusState>(
             listener: (context, state) {
               if (state.apiStatus == AppStatusApi.failure) {
-                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                ScaffoldMessenger.of(context).showSnackBar( SnackBar(
                     backgroundColor: AppColor.trestoRed,
-                    content: Text('An Error Has Occurred')));
+                    content: Text('An Error Has Occurred',style: GoogleFonts.poppins(textStyle:const TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w400,
+                      color: Colors.black
+                    )),)));
               }
             },
           ),
@@ -85,8 +90,8 @@ class _LoginPageState extends State<LoginPage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Image.asset(
-                        Images.imgLink,
-                        height: 50,
+                        Images.logo2,
+                        height: 85,
                         fit: BoxFit.contain,
                       ),
                     ],
@@ -186,7 +191,7 @@ class _LoginPageState extends State<LoginPage> {
                                   height: 4,
                                 ),
                                 TextFormField(
-                                  obscureText: passwordVisible,
+                                  obscureText: !passwordVisible,
                                   controller: passwordController,
                                   validator: (value) {
                                     if (value!.isEmpty ||
@@ -258,10 +263,16 @@ class _LoginPageState extends State<LoginPage> {
                                       listener: (context, state) async {
                                         if (state.status == AuthState.failure) {
                                           ScaffoldMessenger.of(context)
-                                              .showSnackBar(const SnackBar(
-                                                  backgroundColor: Colors.red,
+                                              .showSnackBar( SnackBar(
+                                                  backgroundColor: AppColor.trestoRed,
                                                   content: Text(
-                                                      'An Error Has Occured')));
+                                                      'An Error Has Occured',style: GoogleFonts.poppins(
+                                                        textStyle:const TextStyle(
+                                                          fontSize: 12,
+                                                          fontWeight: FontWeight.w400,
+                                                          color: Colors.black
+                                                        )
+                                                      ),)));
                                         }
                                         if (state.status == AuthState.done) {
                                           headlessViewForLogin(
@@ -296,7 +307,7 @@ class _LoginPageState extends State<LoginPage> {
                                                 backgroundColor:
                                                     AppColor.trestoRed,
                                                 minimumSize:
-                                                    const Size(290, 50),
+                                                    const Size(315, 60),
                                                 shape: RoundedRectangleBorder(
                                                   borderRadius:
                                                       BorderRadius.circular(25),
@@ -307,9 +318,9 @@ class _LoginPageState extends State<LoginPage> {
                                                 style: GoogleFonts.poppins(
                                                     textStyle: const TextStyle(
                                                         color: Colors.white,
-                                                        fontSize: 14.0,
+                                                        fontSize: 15.0,
                                                         fontWeight:
-                                                            FontWeight.w500)),
+                                                            FontWeight.w600)),
                                               ));
                                         }
                                       },

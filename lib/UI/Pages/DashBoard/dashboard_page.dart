@@ -37,7 +37,7 @@ class _DashBoardPageState extends State<DashBoardPage> {
   void initState() {
     super.initState();
     if (!context.read<DashboardBloc>().state.isAlreadyLoadedOnce) {
-      BlocProvider.of<DashboardBloc>(context).add(DashboardUpdate());
+      BlocProvider.of<DashboardBloc>(context).add(DashboardGet());
     }
   }
 

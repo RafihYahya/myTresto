@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tresto_v002a/Global/constants.dart';
@@ -112,7 +113,13 @@ class _MainAppState extends State<MainApp> {
                     backgroundColor: Colors.green,
                     content: Text(
                       'Login Successful',
-                      style: GoogleFonts.poppins(),
+                      style: GoogleFonts.poppins(
+                        textStyle:const TextStyle(
+                          fontWeight: FontWeight.w400,
+                          fontSize: 12.0,
+                          color: Colors.black
+                        )
+                      ),
                     )));
               }
             }, builder: (context, state) {

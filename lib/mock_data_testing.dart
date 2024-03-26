@@ -29,6 +29,17 @@ final DashBoardRestoList dashboardFull = DashBoardRestoList(
                     title: tileTitles[Random().nextInt(tileTitles.length)])),
             dashBoardChartData: const DashBoardChartData(),
             restoName: restoName)));
+final DashBoardRestoList dashboardFull2 = DashBoardRestoList(
+    dashBoardRestoList: List.filled(
+        restoNum,
+        DashBoardListData(
+            dashBoardList: List.filled(
+                tilesNum,
+                DashboardTileData(
+                    number: Random().nextInt(1500),
+                    title: tileTitles[Random().nextInt(tileTitles.length)])),
+            dashBoardChartData: const DashBoardChartData(),
+            restoName: restoName)));
 
 final OrderRestoList ordersFull = OrderRestoList(
     ordersRestoList: List.filled(

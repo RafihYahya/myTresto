@@ -94,6 +94,7 @@ final class Images {
       'https://t3.ftcdn.net/jpg/03/24/73/92/360_F_324739203_keeq8udvv0P2h1MLYJ0GLSlTBagoXS48.jpg';
   static const String  logoTitle = 'assets/logo.png';
   static const String  logo = 'assets/download.png';
+  static const String  logo2 = 'assets/download2.png';
   static const String  burger = 'assets/burger.jpg';
   static const String  drinkCola = 'assets/coca_cola.png';
   static const String  fries = 'assets/fries.png';
