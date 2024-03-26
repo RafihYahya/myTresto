@@ -16,9 +16,8 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
   }
 
   void dashboardResetState(DashboardReset event, Emitter<DashboardState> emit) async {
-    emit(state.copyWith(
-        isAlreadyLoadedOnce: false)
-        );
+    emit(const DashboardState.initial());
+        
   }
 
   Future<void> dashboardRetrieveData(

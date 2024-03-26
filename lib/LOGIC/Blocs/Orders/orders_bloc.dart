@@ -16,17 +16,24 @@ part 'orders_state.dart';
 class OrdersBloc extends Bloc<OrdersEvent, OrdersState> {
   final OrdersRepository orders;
   OrdersBloc(this.orders) : super(OrdersInitial()) {
-    on<OrdersEvent>((event, emit) {});
     on<GetOrders>(ordersRetrieveData);
     on<NewOrder>(streamCheckAnyNewOrdersNotifier);
+    on<TurnOffStream>(turnOffStream);
   }
 
+
+  void turnOffStream(TurnOffStream event, Emitter<OrdersState> emit){
+    final state = this.state;
+    if(state is OrdersReady){
+      emit(state.copyWith(isStreamActive: false));
+    }
+  }
   Future<void> ordersRetrieveData(
       GetOrders event, Emitter<OrdersState> emit) async {
     try {
       //var ordersList = await orders.getOrderData();
       await Future.delayed(const Duration(seconds: 2));
-      emit(OrdersReady(ordersRestoList: ordersFull));
+      emit(OrdersReady(ordersRestoList: ordersFull,isAlreadyLoadedOnce: true,isStreamActive: true));
     } catch (e) {
       emit(OrdersError());
     }
@@ -35,9 +42,17 @@ class OrdersBloc extends Bloc<OrdersEvent, OrdersState> {
   void streamCheckAnyNewOrdersNotifier(
       NewOrder event, Emitter<OrdersState> emit) async {
     while (true) {
+        final state = this.state;
+      if(state is OrdersReady){
+        if ( state.isStreamActive == false ) {
+          emit(OrdersInitial());
+          break;
+        }
+      }
       var randomInt = Random().nextInt(100);
       try {
         var isNewOrderAvailable = await orders.checkAnyNewOrdersAreAvailable();
+        //jsson data with bool and new orders
         if (isNewOrderAvailable) {
           final localAndroidNotifDetails = NotificationDetails(
             android: AndroidNotificationDetails(
@@ -55,6 +70,9 @@ class OrdersBloc extends Bloc<OrdersEvent, OrdersState> {
           );
           LocalNotifications.displayNotifs2(
               randomInt, '', '', localAndroidNotifDetails);
+              if(state is OrdersReady){
+                print('Here to Add New Data');
+              }
         }
       } catch (e) {
           emit(OrdersError());

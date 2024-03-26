@@ -13,6 +13,8 @@ final class RemoveOrder extends OrdersEvent {}
 
 final class NewOrder extends OrdersEvent {}
 
+final class TurnOffStream extends OrdersEvent {}
+
 
 
 

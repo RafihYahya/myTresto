@@ -7,6 +7,9 @@ import 'package:tresto_v002a/LOGIC/Blocs/AppStatus/app_status_state.dart';
 import 'package:tresto_v002a/Global/constants.dart';
 import 'package:tresto_v002a/LOGIC/Blocs/Auth/auth_bloc_bloc.dart';
 import 'package:tresto_v002a/LOGIC/Blocs/Dashboard/dashboard_bloc.dart';
+import 'package:tresto_v002a/LOGIC/Blocs/Orders/orders_bloc.dart';
+import 'package:tresto_v002a/LOGIC/Cubits/app_indexes_cubit.dart';
+import 'package:tresto_v002a/LOGIC/Models/Global/app_status.dart';
 import 'package:tresto_v002a/UI/Widgets/CustomUtils/custom_loading.dart';
 
 class LoginPage extends StatefulWidget {
@@ -26,10 +29,14 @@ class _LoginPageState extends State<LoginPage> {
   @override
   void initState() {
     super.initState();
+    context.read<IndexesCubit>().changeIndex(index: 0);
     context.read<AuthBlocBloc>().add(EmptyToken());
     context.read<AuthBlocBloc>().add(EmptySession());
     context.read<DashboardBloc>().add(DashboardReset());
-
+    if (context.watch<AppStatusBloc>().state.loginStatus ==
+        AppStatusLogin.loggedOut) {
+      context.read<OrdersBloc>().add(TurnOffStream());
+    }
   }
 
   @override
@@ -47,14 +54,18 @@ class _LoginPageState extends State<LoginPage> {
       backgroundColor: AppColor.mainColor,
       // backgroundColor: AppColor.primaryBackgroundColor,
 
-      body: BlocListener<AppStatusBloc, AppStatusState>(
-        listener: (context, state) {
-          if (state.apiStatus == AppStatusApi.failure) {
-            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                backgroundColor: AppColor.trestoRed,
-                content: Text('An Error Has Occurred')));
-          }
-        },
+      body: MultiBlocListener(
+        listeners: [
+          BlocListener<AppStatusBloc, AppStatusState>(
+            listener: (context, state) {
+              if (state.apiStatus == AppStatusApi.failure) {
+                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                    backgroundColor: AppColor.trestoRed,
+                    content: Text('An Error Has Occurred')));
+              }
+            },
+          ),
+        ],
         child: SingleChildScrollView(
           child: Transform.scale(
             scale: 0.9,
@@ -119,7 +130,7 @@ class _LoginPageState extends State<LoginPage> {
                                   controller: emailController,
                                   validator: (value) {
                                     if (value!.isEmpty ||
-                                        !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                                        !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#//$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
                                             .hasMatch(value)) {
                                       return "ENTER_VALID_EMAIL";
                                     } else {
@@ -154,8 +165,7 @@ class _LoginPageState extends State<LoginPage> {
                                         Radius.circular(12),
                                       ),
                                       borderSide: BorderSide(
-                                          width: 1,
-                                          color: Colors.black26),
+                                          width: 1, color: Colors.black26),
                                     ),
                                   ),
                                 ),
@@ -172,7 +182,6 @@ class _LoginPageState extends State<LoginPage> {
                                   height: 4,
                                 ),
                                 TextFormField(
-                                  
                                   obscureText: passwordVisible,
                                   controller: passwordController,
                                   validator: (value) {
@@ -212,8 +221,7 @@ class _LoginPageState extends State<LoginPage> {
                                         Radius.circular(12),
                                       ),
                                       borderSide: BorderSide(
-                                          width: 1,
-                                          color: Colors.black26),
+                                          width: 1, color: Colors.black26),
                                     ),
                                     suffixIcon: IconButton(
                                       icon: Icon(
