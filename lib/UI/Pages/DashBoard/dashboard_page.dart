@@ -84,13 +84,13 @@ class _DashBoardPageState extends State<DashBoardPage> {
         },
         builder: (context, stateSt) {
           return switch (stateSt) {
-            DashboardStateStatus.initial => const CustomLoading(
-                height: 200,
-                width: 100,
+            DashboardStateStatus.initial =>  CustomLoading(
+                height:  MediaQuery.of(context).size.height,
+                width: MediaQuery.of(context).size.width,
               ),
-            DashboardStateStatus.loading => const CustomLoading(
-                height: 200,
-                width: 100,
+            DashboardStateStatus.loading =>  CustomLoading(
+                height: MediaQuery.of(context).size.height,
+                width: MediaQuery.of(context).size.width,
               ),
             DashboardStateStatus.error => const CustomError(),
             DashboardStateStatus.ready => SingleChildScrollView(
@@ -174,9 +174,12 @@ class _DashBoardPageState extends State<DashBoardPage> {
                     ),
                     BlocBuilder<IndexesCubit, AppIndexes>(
                       builder: (context, state) {
-                        return BlocBuilder<DashboardBloc, DashboardState>(
+                        return BlocSelector<DashboardBloc, DashboardState,DashboardStateStatus>(
+                          selector: (state) {
+                            return state.status;
+                          },
                           builder: (context, stateDash) {
-                            return switch (stateDash.status) {
+                            return switch (stateDash) {
                               DashboardStateStatus.initial => const SizedBox(),
                               DashboardStateStatus.error => const CustomError(),
                               DashboardStateStatus.loading => const SizedBox(),

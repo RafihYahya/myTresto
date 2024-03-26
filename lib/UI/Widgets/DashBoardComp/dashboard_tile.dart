@@ -6,8 +6,6 @@ import 'package:heroicons/heroicons.dart';
 import 'package:tresto_v002a/LOGIC/Blocs/Dashboard/dashboard_bloc.dart';
 import 'package:tresto_v002a/LOGIC/Cubits/app_indexes_cubit.dart';
 import 'package:tresto_v002a/LOGIC/Models/Global/app_indexes_data.dart';
-import 'package:tresto_v002a/UI/Widgets/CustomUtils/custom_error.dart';
-import 'package:tresto_v002a/UI/Widgets/CustomUtils/custom_loading.dart';
 
 class DashboardMainTile extends StatelessWidget {
   final int fadeDelay;
@@ -66,7 +64,7 @@ class DashboardMainTile extends StatelessWidget {
                                   fontSize: 18.0,
                                   fontWeight: FontWeight.bold,
                                   color: textColor),
-                            )),
+                            )).animate().fade(),
                         const SizedBox(
                           height: 1.0,
                         ),
@@ -83,7 +81,7 @@ class DashboardMainTile extends StatelessWidget {
                                   fontSize: 13.0,
                                   fontWeight: FontWeight.w500,
                                   color: textColor),
-                            )),
+                            )).animate().fade(),
                       ],
                     ),
                   ),

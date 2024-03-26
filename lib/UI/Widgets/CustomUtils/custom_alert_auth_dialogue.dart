@@ -4,8 +4,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:tresto_v002a/Global/constants.dart';
 import 'package:tresto_v002a/LOGIC/Blocs/AppStatus/app_status_bloc.dart';
 import 'package:tresto_v002a/LOGIC/Blocs/AppStatus/app_status_state.dart';
-import 'package:tresto_v002a/LOGIC/Blocs/Auth/auth_bloc_bloc.dart';
-import 'package:tresto_v002a/LOGIC/Blocs/Dashboard/dashboard_bloc.dart';
 
 class CustomAuthAlert extends StatelessWidget {
   const CustomAuthAlert({super.key});

@@ -184,6 +184,20 @@ setTimeout(function() {
 ''';
 }
 
+String waitAlittleBitThenRedirectBack(String url,String baseUrl){
+  // window.location.href.replace('https://tresto.ma','')
+  return 
+  '''
+window.addEventListener("DOMContentLoaded", (event) => {
+  if( window.location.href == '$baseUrl' ){
+    setTimeout(function() {
+    window.location.href = '$url';
+  },2500)
+  }
+});
+
+''';
+}
 String changeRestoInWebViewHandler(int maxL, String restoName) {
   return '''
                 for(i = 0; i < $maxL ; i++)

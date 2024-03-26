@@ -145,7 +145,7 @@ class _OrderPageState extends State<OrderPage> {
                                     .ordersList[index],
                               )).animate().fade(
                           curve: Curves.easeIn,
-                          duration: const Duration(milliseconds: 500)),
+                          duration: const Duration(milliseconds: 300)),
                     };
                   },
                 );

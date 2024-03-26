@@ -9,7 +9,6 @@ import 'package:tresto_v002a/LOGIC/Blocs/Auth/auth_bloc_bloc.dart';
 import 'package:tresto_v002a/LOGIC/Blocs/Dashboard/dashboard_bloc.dart';
 import 'package:tresto_v002a/LOGIC/Blocs/Orders/orders_bloc.dart';
 import 'package:tresto_v002a/LOGIC/Cubits/app_indexes_cubit.dart';
-import 'package:tresto_v002a/LOGIC/Models/Global/app_status.dart';
 import 'package:tresto_v002a/UI/Widgets/CustomUtils/custom_loading.dart';
 
 class LoginPage extends StatefulWidget {
@@ -33,6 +32,11 @@ class _LoginPageState extends State<LoginPage> {
     context.read<AuthBlocBloc>().add(EmptyToken());
     context.read<AuthBlocBloc>().add(EmptySession());
     context.read<DashboardBloc>().add(DashboardReset());
+    
+  }
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
     if (context.watch<AppStatusBloc>().state.loginStatus ==
         AppStatusLogin.loggedOut) {
       context.read<OrdersBloc>().add(TurnOffStream());
