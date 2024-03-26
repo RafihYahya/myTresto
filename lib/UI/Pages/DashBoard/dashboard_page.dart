@@ -10,6 +10,7 @@ import 'package:tresto_v002a/Global/constants.dart';
 import 'package:tresto_v002a/LOGIC/Blocs/Dashboard/dashboard_bloc.dart';
 import 'package:tresto_v002a/LOGIC/Cubits/app_indexes_cubit.dart';
 import 'package:tresto_v002a/LOGIC/Models/Global/app_indexes_data.dart';
+import 'package:tresto_v002a/UI/Widgets/CustomUtils/custom_alert_dialogue.dart';
 import 'package:tresto_v002a/UI/Widgets/CustomUtils/custom_error.dart';
 import 'package:tresto_v002a/UI/Widgets/DashBoardComp/dashboard_chart.dart';
 import 'package:tresto_v002a/UI/Widgets/DashBoardComp/dashboard_tile.dart';
@@ -34,9 +35,9 @@ class _DashBoardPageState extends State<DashBoardPage> {
   @override
   void initState() {
     super.initState();
-    if(!context.read<DashboardBloc>().state.isAlreadyLoadedOnce){
+    if (!context.read<DashboardBloc>().state.isAlreadyLoadedOnce) {
       BlocProvider.of<DashboardBloc>(context).add(DashboardUpdate());
-      }
+    }
   }
 
   @override
@@ -58,112 +59,130 @@ class _DashBoardPageState extends State<DashBoardPage> {
       dummyData3
     ];
 
-    return SingleChildScrollView(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const SizedBox(
-            height: 15.0,
-          ),
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 12.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Expanded(
-                  child: DashboardMainTile(
-                    index: 0,
-                    tileColor: Colors.white,
-                    iconsColor: Colors.pink,
-                    textColor: Color(0xFF141414),
-                    secondaryTextColor: AppColor.textGrey1,
-                    icon: HeroIcons.shoppingBag,
-                    fadeDelay: 100,
-                  ),
+    return BlocListener<DashboardBloc, DashboardState>(
+      listener: (context, state) {
+        if (state.status == DashboardStateStatus.error) {
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+              backgroundColor: AppColor.trestoRed,
+              content: Text(
+                'Something Wrong Has Occured',
+                style: GoogleFonts.poppins(
+                  textStyle: const TextStyle(
+                      fontSize: 12,
+                      color: Colors.black,
+                      fontWeight: FontWeight.w600),
                 ),
-                SizedBox(
-                  width: 12.0,
-                ),
-                Expanded(
-                  child: DashboardMainTile(
-                    index: 1,
-                    tileColor: Colors.white,
-                    iconsColor: Colors.green,
-                    textColor: Color(0xFF141414),
-                    secondaryTextColor: AppColor.textGrey1,
-                    icon: HeroIcons.banknotes,
-                    fadeDelay: 200,
-                  ),
-                ),
-              ],
+              )));
+          showDialog(
+              context: context, builder: (builder) => const CustomAlert());
+        }
+      },
+      child: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const SizedBox(
+              height: 15.0,
             ),
-          ),
-          const SizedBox(
-            height: 12.0,
-          ),
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 12.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Expanded(
-                  child: DashboardMainTile(
-                      index: 2,
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 12.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Expanded(
+                    child: DashboardMainTile(
+                      index: 0,
                       tileColor: Colors.white,
-                      iconsColor: Colors.purple,
+                      iconsColor: Colors.pink,
                       textColor: Color(0xFF141414),
                       secondaryTextColor: AppColor.textGrey1,
-                      fadeDelay: 300,
-                      icon: HeroIcons.arrowPathRoundedSquare),
-                ),
-                SizedBox(
-                  width: 12.0,
-                ),
-                Expanded(
-                  child: DashboardMainTile(
-                    index: 3,
-                    tileColor: Colors.white,
-                    iconsColor: Colors.blue,
-                    fadeDelay: 400,
-                    textColor: Color(0xFF141414),
-                    secondaryTextColor: AppColor.textGrey1,
-                    icon: HeroIcons.eye,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(
-            height: 12.0,
-          ),
-          BlocBuilder<IndexesCubit, AppIndexes>(
-            builder: (context, state) {
-              return BlocBuilder<DashboardBloc, DashboardState>(
-                builder: (context, stateDash) {
-                  return switch(stateDash.status) {
-                    DashboardStateStatus.initial => const SizedBox(),
-                    DashboardStateStatus.error => const CustomError(),
-                    DashboardStateStatus.loading => const SizedBox(),
-                    DashboardStateStatus.ready => ChartRevenueDashBoardWidget(
-                      screenWidth: screenWidth,
-                      selectedIndex: selectedIndex,
-                      dummyListData: dummyListData,
-                    ).animate().fade(
-                      curve: Curves.easeIn,
-                      duration: const Duration(milliseconds: 600),
-                      delay: const Duration(milliseconds: 500),
+                      icon: HeroIcons.shoppingBag,
+                      fadeDelay: 100,
                     ),
-
-                  };
-                },
-              );
-            },
-          ),
-          const SizedBox(
-            height: 24.0,
-          ),
-        ],
+                  ),
+                  SizedBox(
+                    width: 12.0,
+                  ),
+                  Expanded(
+                    child: DashboardMainTile(
+                      index: 1,
+                      tileColor: Colors.white,
+                      iconsColor: Colors.green,
+                      textColor: Color(0xFF141414),
+                      secondaryTextColor: AppColor.textGrey1,
+                      icon: HeroIcons.banknotes,
+                      fadeDelay: 200,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(
+              height: 12.0,
+            ),
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 12.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Expanded(
+                    child: DashboardMainTile(
+                        index: 2,
+                        tileColor: Colors.white,
+                        iconsColor: Colors.purple,
+                        textColor: Color(0xFF141414),
+                        secondaryTextColor: AppColor.textGrey1,
+                        fadeDelay: 300,
+                        icon: HeroIcons.arrowPathRoundedSquare),
+                  ),
+                  SizedBox(
+                    width: 12.0,
+                  ),
+                  Expanded(
+                    child: DashboardMainTile(
+                      index: 3,
+                      tileColor: Colors.white,
+                      iconsColor: Colors.blue,
+                      fadeDelay: 400,
+                      textColor: Color(0xFF141414),
+                      secondaryTextColor: AppColor.textGrey1,
+                      icon: HeroIcons.eye,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(
+              height: 12.0,
+            ),
+            BlocBuilder<IndexesCubit, AppIndexes>(
+              builder: (context, state) {
+                return BlocBuilder<DashboardBloc, DashboardState>(
+                  builder: (context, stateDash) {
+                    return switch (stateDash.status) {
+                      DashboardStateStatus.initial => const SizedBox(),
+                      DashboardStateStatus.error => const CustomError(),
+                      DashboardStateStatus.loading => const SizedBox(),
+                      DashboardStateStatus.ready => ChartRevenueDashBoardWidget(
+                          screenWidth: screenWidth,
+                          selectedIndex: selectedIndex,
+                          dummyListData: dummyListData,
+                        ).animate().fade(
+                              curve: Curves.easeIn,
+                              duration: const Duration(milliseconds: 600),
+                              delay: const Duration(milliseconds: 500),
+                            ),
+                    };
+                  },
+                );
+              },
+            ),
+            const SizedBox(
+              height: 24.0,
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -10,4 +10,10 @@ class OrdersRepository {
     //var ordersList = await orders.getOrdersDataFromApi();
     return ordersFull; // await _dashBoard.getDashBoardFullListData();
   }
+
+  Future<bool> checkAnyNewOrdersAreAvailable() async{
+    await Future.delayed(const Duration(seconds: 2));
+    
+    return true;    
+  }
 }

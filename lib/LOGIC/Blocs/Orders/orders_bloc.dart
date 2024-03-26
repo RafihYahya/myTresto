@@ -1,8 +1,14 @@
+import 'dart:math';
+
 import 'package:bloc/bloc.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:meta/meta.dart';
+import 'package:tresto_v002a/Global/constants.dart';
 import 'package:tresto_v002a/LOGIC/Models/orders_model.dart';
 import 'package:tresto_v002a/LOGIC/Repos/orders_repo.dart';
 import 'package:tresto_v002a/mock_data_testing.dart';
+import 'package:tresto_v002a/notif_init.dart';
 
 part 'orders_event.dart';
 part 'orders_state.dart';
@@ -12,6 +18,7 @@ class OrdersBloc extends Bloc<OrdersEvent, OrdersState> {
   OrdersBloc(this.orders) : super(OrdersInitial()) {
     on<OrdersEvent>((event, emit) {});
     on<GetOrders>(ordersRetrieveData);
+    on<NewOrder>(streamCheckAnyNewOrdersNotifier);
   }
 
   Future<void> ordersRetrieveData(
@@ -22,6 +29,40 @@ class OrdersBloc extends Bloc<OrdersEvent, OrdersState> {
       emit(OrdersReady(ordersRestoList: ordersFull));
     } catch (e) {
       emit(OrdersError());
+    }
+  }
+
+  void streamCheckAnyNewOrdersNotifier(
+      NewOrder event, Emitter<OrdersState> emit) async {
+    while (true) {
+      var randomInt = Random().nextInt(100);
+      try {
+        var isNewOrderAvailable = await orders.checkAnyNewOrdersAreAvailable();
+        if (isNewOrderAvailable) {
+          final localAndroidNotifDetails = NotificationDetails(
+            android: AndroidNotificationDetails(
+                randomInt.toString(), 'channelName',
+                color: AppColor.trestoRed,
+                styleInformation: BigTextStyleInformation(
+                    htmlFormatBigText: true,
+                    htmlFormatContentTitle: true,
+                    htmlFormatSummaryText: true,
+                    'Owner: John Doe <br /> Price: 450Dh <br /> Amount: 24',
+                    summaryText: 'New Order Have Arrived',
+                    contentTitle: 'Order N: ${randomInt * 10}'),
+                importance: Importance.max,
+                priority: Priority.max),
+          );
+          LocalNotifications.displayNotifs2(
+              randomInt, '', '', localAndroidNotifDetails);
+        }
+      } catch (e) {
+          emit(OrdersError());
+          break;
+        
+        
+      }
+      await Future.delayed(const Duration(minutes: 1));
     }
   }
 

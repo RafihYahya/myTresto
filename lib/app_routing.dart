@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tresto_v002a/Global/webview_url_consts.dart';
+import 'package:tresto_v002a/LOGIC/Blocs/Orders/orders_bloc.dart';
 import 'package:tresto_v002a/LOGIC/Cubits/app_indexes_cubit.dart';
 import 'package:tresto_v002a/LOGIC/Models/Global/app_indexes_data.dart';
 import 'package:tresto_v002a/UI/Pages/Orders/order_page.dart';
@@ -21,6 +22,7 @@ class _AppRoutingState extends State<AppRouting> {
   @override
   void initState() {
     super.initState();
+    BlocProvider.of<OrdersBloc>(context).add(NewOrder());
   }
 
   @override
