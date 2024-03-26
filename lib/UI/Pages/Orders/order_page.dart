@@ -166,6 +166,6 @@ class MyCustomOrderLoader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Center(
-        child: SizedBox(height: 100, width: 200, child: CustomLoading()));
+        child: SizedBox(height: 100, width: 200, child: CustomLoading(width: 20,height: 20,)));
   }
 }

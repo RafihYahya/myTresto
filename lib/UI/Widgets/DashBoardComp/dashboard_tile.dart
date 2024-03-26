@@ -31,15 +31,7 @@ class DashboardMainTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<IndexesCubit, AppIndexes>(
       builder: (context, state) {
-        return BlocBuilder<DashboardBloc, DashboardState>(
-          builder: (context, stateDash) {
-            return switch (stateDash.status) {
-              DashboardStateStatus.initial =>
-                const MyCustomLoader(),
-              DashboardStateStatus.error => const CustomError(),
-              DashboardStateStatus.loading =>
-                const MyCustomLoader(),
-              DashboardStateStatus.ready => Container(
+        return Container(
                   width: 190,
                   height: 110,
                   decoration: BoxDecoration(
@@ -62,7 +54,7 @@ class DashboardMainTile extends StatelessWidget {
                         ),
                         Text(
                             context
-                                .read<DashboardBloc>()
+                                .watch<DashboardBloc>()
                                 .state
                                 .dashBoardRestoList
                                 .dashBoardRestoList[state.restoIndex]
@@ -80,7 +72,7 @@ class DashboardMainTile extends StatelessWidget {
                         ),
                         Text(
                             context
-                                .read<DashboardBloc>()
+                                .watch<DashboardBloc>()
                                 .state
                                 .dashBoardRestoList
                                 .dashBoardRestoList[state.restoIndex]
@@ -99,16 +91,14 @@ class DashboardMainTile extends StatelessWidget {
                       curve: Curves.easeIn,
                       duration: const Duration(milliseconds: 300),
                       delay: Duration(milliseconds: fadeDelay),
-                    ),
-            };
-          },
+                    
         );
       },
     );
   }
 }
 
-class MyCustomLoader extends StatelessWidget {
+/* class MyCustomLoader extends StatelessWidget {
   const MyCustomLoader({
     super.key,
   });
@@ -124,4 +114,4 @@ class MyCustomLoader extends StatelessWidget {
           child: Center(child: CustomLoading()),
         ));
   }
-}
+} */

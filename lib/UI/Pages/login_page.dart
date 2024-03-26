@@ -271,7 +271,10 @@ class _LoginPageState extends State<LoginPage> {
                                       },
                                       builder: (context, state) {
                                         if (state.status == AuthState.loading) {
-                                          return const CustomLoading();
+                                          return const CustomLoading(
+                                            height: 20,
+                                            width: 20,
+                                          );
                                         } else {
                                           return ElevatedButton(
                                               onPressed: () async {

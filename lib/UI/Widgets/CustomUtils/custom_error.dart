@@ -9,11 +9,7 @@ class CustomError extends StatefulWidget {
 
 class _CustomErrorState extends State<CustomError> {
   @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    //ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('data')));
-  }
+  
 
   @override
   Widget build(BuildContext context) {
