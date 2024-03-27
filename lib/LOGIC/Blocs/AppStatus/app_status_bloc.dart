@@ -24,7 +24,9 @@ class AppStatusBloc extends Bloc<AppStatusEvent, AppStatusState> {
       BypassLogin event, Emitter<AppStatusState> emit) async {
         print('first');
     print(await authRepo.checkTokenIfExist(event.key));
+    print(event.key);
     var isTokenExist = await authRepo.checkTokenIfExist(event.key);
+    print(event.key);
     print('second');
     print(isTokenExist);
     if (isTokenExist) {
