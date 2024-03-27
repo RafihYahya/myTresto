@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:logger/logger.dart';
 
 final class AppColor {
   static const Color primaryColor = Color(0xffFF006B);
@@ -114,6 +115,6 @@ final class LocalStorageConsts {
   static const String sessionToken = 'tresto_session';
 }
 
-
+final logger = Logger();
 
 

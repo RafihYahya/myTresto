@@ -11,8 +11,9 @@ import 'package:tresto_v002a/UI/Widgets/navbar_popup_menu.dart';
 
 class AlternativeCNavBar extends StatelessWidget {
   final bool showresto;
+  final bool autoLead;
 
-  const AlternativeCNavBar({super.key, required this.showresto});
+  const AlternativeCNavBar({super.key,required this.autoLead, required this.showresto});
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +23,7 @@ class AlternativeCNavBar extends StatelessWidget {
           builder: (context, stateDash) {
             return AppBar(
               backgroundColor: Colors.white,
-              automaticallyImplyLeading: false,
+              automaticallyImplyLeading: autoLead,
               elevation: 0,
               shadowColor: Colors.transparent,
               surfaceTintColor: Colors.transparent,

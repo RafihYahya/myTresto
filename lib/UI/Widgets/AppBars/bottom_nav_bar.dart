@@ -31,6 +31,8 @@ class BotNavBarAlternative extends StatelessWidget {
                     borderRadius: BorderRadius.circular(16.0)),
                 child: GestureDetector(
                   onTap: () {
+                    Navigator.of(context).popUntil((route) => route.isFirst);
+
                     BlocProvider.of<IndexesCubit>(context)
                         .changeIndex(index: 0);
                   },
@@ -77,6 +79,8 @@ class BotNavBarAlternative extends StatelessWidget {
                     borderRadius: BorderRadius.circular(16.0)),
                 child: GestureDetector(
                   onTap: () {
+                    Navigator.of(context).popUntil((route) => route.isFirst);
+
                     BlocProvider.of<IndexesCubit>(context)
                         .changeIndex(index: 1);
                   },
@@ -123,6 +127,8 @@ class BotNavBarAlternative extends StatelessWidget {
                     borderRadius: BorderRadius.circular(16.0)),
                 child: GestureDetector(
                   onTap: () {
+                    Navigator.of(context).popUntil((route) => route.isFirst);
+
                     BlocProvider.of<IndexesCubit>(context)
                         .changeIndex(index: 2);
                   },
@@ -169,43 +175,41 @@ class BotNavBarAlternative extends StatelessWidget {
                         : Colors.transparent,
                     borderRadius: BorderRadius.circular(16.0)),
                 child: GestureDetector(
-                  onTap: () {},
-                  child: GestureDetector(
-                    onTap: () {
-                      BlocProvider.of<IndexesCubit>(context)
-                          .changeIndex(index: 3);
-                    },
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        HeroIcon(
-                          HeroIcons.listBullet,
-                          style: HeroIconStyle.outline,
-                          color: state.index == 3 ? Colors.red : Colors.grey,
-                          size: 28.0,
+                  onTap: () {
+                    Navigator.of(context).popUntil((route) => route.isFirst);
+
+                    BlocProvider.of<IndexesCubit>(context)
+                        .changeIndex(index: 3);
+                  },
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      HeroIcon(
+                        HeroIcons.listBullet,
+                        style: HeroIconStyle.outline,
+                        color: state.index == 3 ? Colors.red : Colors.grey,
+                        size: 28.0,
+                      ),
+                      const SizedBox(
+                        width: 4.0,
+                      ),
+                      AnimatedContainer(
+                        duration: const Duration(milliseconds: 300),
+                        curve: Curves.easeInOut,
+                        width: state.index == 3 ? 40 : 0,
+                        child: Text(
+                          softWrap: false,
+                          'Menu',
+                          style: GoogleFonts.poppins(
+                              textStyle: TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.w500,
+                            color: state.index == 3 ? Colors.red : Colors.grey,
+                          )),
                         ),
-                        const SizedBox(
-                          width: 4.0,
-                        ),
-                        AnimatedContainer(
-                          duration: const Duration(milliseconds: 300),
-                          curve: Curves.easeInOut,
-                          width: state.index == 3 ? 40 : 0,
-                          child: Text(
-                            softWrap: false,
-                            'Menu',
-                            style: GoogleFonts.poppins(
-                                textStyle: TextStyle(
-                              fontSize: 12,
-                              fontWeight: FontWeight.w500,
-                              color:
-                                  state.index == 3 ? Colors.red : Colors.grey,
-                            )),
-                          ),
-                        )
-                      ],
-                    ),
+                      )
+                    ],
                   ),
                 ),
               ),

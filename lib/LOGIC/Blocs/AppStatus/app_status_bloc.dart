@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
+import 'package:tresto_v002a/Global/constants.dart';
 import 'package:tresto_v002a/LOGIC/Blocs/AppStatus/app_status_state.dart';
 import 'package:tresto_v002a/LOGIC/Repos/app_status_repo.dart';
 import 'package:tresto_v002a/LOGIC/Repos/auth_repo.dart';
@@ -18,7 +19,7 @@ class AppStatusBloc extends Bloc<AppStatusEvent, AppStatusState> {
   void updateLoginStatus(
       UpdateLoginStatus event, Emitter<AppStatusState> emit) async {
     if(event.status == AppStatusLogin.loggedOut){
-      print('praise le miaw');
+      logger.i('praise le miaw');
       await authRepo.deleteTokenValue();
     }
     emit(state.copyWith(loginStatus: event.status));
@@ -29,10 +30,10 @@ class AppStatusBloc extends Bloc<AppStatusEvent, AppStatusState> {
     String? temp = await authRepo.readTokenValue();
     if (temp != null) {
       emit(state.copyWith(loginStatus: AppStatusLogin.loggedIn));
-      print(temp);
+      logger.e(temp);
     }
     if(temp ==null ){
-      print('nothing');
+      logger.w('nothing');
     }
     
   }
