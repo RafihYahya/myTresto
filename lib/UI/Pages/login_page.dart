@@ -30,11 +30,12 @@ class _LoginPageState extends State<LoginPage> {
   void initState() {
     super.initState();
     context.read<IndexesCubit>().changeIndex(index: 0);
-    context.read<AuthBlocBloc>().add(EmptyToken());
-    context.read<AuthBlocBloc>().add(EmptySession());
+    //context.read<AuthBlocBloc>().add(EmptyToken());
+    //context.read<AuthBlocBloc>().add(EmptySession());
     context.read<DashboardBloc>().add(DashboardReset());
     
   }
+
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
@@ -55,6 +56,7 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    
     return Scaffold(
       backgroundColor: AppColor.mainColor,
       // backgroundColor: AppColor.primaryBackgroundColor,
@@ -64,13 +66,16 @@ class _LoginPageState extends State<LoginPage> {
           BlocListener<AppStatusBloc, AppStatusState>(
             listener: (context, state) {
               if (state.apiStatus == AppStatusApi.failure) {
-                ScaffoldMessenger.of(context).showSnackBar( SnackBar(
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                     backgroundColor: AppColor.trestoRed,
-                    content: Text('An Error Has Occurred',style: GoogleFonts.poppins(textStyle:const TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.w400,
-                      color: Colors.black
-                    )),)));
+                    content: Text(
+                      'An Error Has Occurred',
+                      style: GoogleFonts.poppins(
+                          textStyle: const TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.w400,
+                              color: Colors.black)),
+                    )));
               }
             },
           ),
@@ -263,16 +268,21 @@ class _LoginPageState extends State<LoginPage> {
                                       listener: (context, state) async {
                                         if (state.status == AuthState.failure) {
                                           ScaffoldMessenger.of(context)
-                                              .showSnackBar( SnackBar(
-                                                  backgroundColor: AppColor.trestoRed,
+                                              .showSnackBar(SnackBar(
+                                                  backgroundColor:
+                                                      AppColor.trestoRed,
                                                   content: Text(
-                                                      'An Error Has Occured',style: GoogleFonts.poppins(
-                                                        textStyle:const TextStyle(
-                                                          fontSize: 12,
-                                                          fontWeight: FontWeight.w400,
-                                                          color: Colors.black
-                                                        )
-                                                      ),)));
+                                                    'An Error Has Occured',
+                                                    style: GoogleFonts.poppins(
+                                                        textStyle:
+                                                            const TextStyle(
+                                                                fontSize: 12,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w400,
+                                                                color: Colors
+                                                                    .black)),
+                                                  )));
                                         }
                                         if (state.status == AuthState.done) {
                                           headlessViewForLogin(
@@ -293,6 +303,7 @@ class _LoginPageState extends State<LoginPage> {
                                         } else {
                                           return ElevatedButton(
                                               onPressed: () async {
+
                                                 context
                                                     .read<AuthBlocBloc>()
                                                     .add(TokenRequest(
@@ -301,6 +312,8 @@ class _LoginPageState extends State<LoginPage> {
                                                         password:
                                                             passwordController
                                                                 .text));
+
+                                                
                                               },
                                               style: ElevatedButton.styleFrom(
                                                 elevation: 0,

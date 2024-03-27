@@ -2,33 +2,26 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:tresto_v002a/Global/constants.dart';
 
 class AuthProvider {
-  static const myLocalSecureStorage = FlutterSecureStorage();
+  static AndroidOptions _getAndroidOptions() => const AndroidOptions(
+        encryptedSharedPreferences: true,
+      );
+  final storage = FlutterSecureStorage(aOptions: _getAndroidOptions());
 
-  Future<String> getTokenFromStorage() async {
-    return await myLocalSecureStorage.read(key: LocalStorageConsts.authToken) ??
-        '';
+  Future<void> writeToSecureStorage(String? value) async {
+    await storage.write(key: LocalStorageConsts.authToken, value: value);
   }
 
-  Future<void> setTokenToStorage(String value) async {
-    await myLocalSecureStorage.write(
-        key: LocalStorageConsts.authToken, value: value);
-    print(await myLocalSecureStorage.read(key: LocalStorageConsts.authToken));
+  Future<String?> readFromSecureStorage() async {
+    String? temp = await storage.read(key: LocalStorageConsts.authToken);
+    return temp;
   }
 
-  Future<void> setSessionToStorage(String value) async {
-    await myLocalSecureStorage.write(
-        key: LocalStorageConsts.sessionToken, value: value);
-    print(
-        await myLocalSecureStorage.read(key: LocalStorageConsts.sessionToken));
-  }
-
-  Future<bool> checkTokenExist(String key) async {
-    var temp = await myLocalSecureStorage.read(key: key);
-    print(temp);
-    if (temp?.isNotEmpty ?? false) {
-      return true;
-    } else {
+  Future<bool> isExistKeySecureStorage(String key) async {
+    String? temp = await storage.read(key: key);
+    if (temp == null) {
       return false;
+    } else {
+      return true;
     }
   }
 }

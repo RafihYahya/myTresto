@@ -24,16 +24,11 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
   void dashboardUpdate(
       DashboardUpdate event, Emitter<DashboardState> emit) async {
     while (true) {
-      var token = await dashBoard.retrieveTokenIfExist();
       try {
-        if (token.isEmpty) {
-          break;
-        } else {
-          var dashboardData = await dashBoard.getDashboardData();
-          emit(state.copyWith(
-            dashBoardRestoList: dashboardData,
-          ));
-        }
+        var dashboardData = await dashBoard.getDashboardData();
+        emit(state.copyWith(
+          dashBoardRestoList: dashboardData,
+        ));
       } catch (e) {
         emit(state.copyWith(status: DashboardStateStatus.error));
         break;

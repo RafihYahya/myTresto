@@ -7,27 +7,22 @@ final class AuthRepository {
   final TokenProvider tokenProvider = TokenProvider();
   final AuthProvider authProvider = AuthProvider();
   Future<String> getTokenData(String email, String password) async {
-    var localAuth = await authProvider.getTokenFromStorage();
-
-    if (localAuth.isEmpty) {
-      final response = await tokenProvider.getTokenRaw(email, password);
-      print(response.body);
-      var usableToken = jsonDecode(response.body)['token'];
-      //await authProvider.setTokenToStorage(usableToken);
-      return usableToken;
-    } else {
-      return await authProvider.getTokenFromStorage();
-    }
+    final response = await tokenProvider.getTokenRaw(email, password);
+    print(response.body);
+    var usableToken = jsonDecode(response.body)['token'];
+    //await authProvider.setTokenToStorage(usableToken);
+    return usableToken;
   }
 
-  Future<void> setTokenToValue(String value) async {
-    await authProvider.setTokenToStorage(value);
+  Future<void> setTokenToValue(String? value) async {
+    await authProvider.writeToSecureStorage(value);
   }
+
   Future<void> setSessionToValue(String value) async {
-    await authProvider.setSessionToStorage(value);
   }
 
-  Future<bool> checkTokenIfExist(String key) async {
-    return await authProvider.checkTokenExist(key);
+  Future<String?> readTokenValue() async {
+    return await authProvider.readFromSecureStorage();
   }
+
 }

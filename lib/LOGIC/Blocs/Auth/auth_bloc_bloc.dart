@@ -8,8 +8,10 @@ class AuthBlocBloc extends Bloc<AuthBlocEvent, AuthBlocState> {
   final AuthRepository authRepo;
   AuthBlocBloc(this.authRepo) : super(AuthBlocState.initial()) {
     on<TokenRequest>(updateToken);
-    on<EmptyToken>(emptyToken);
-    on<EmptySession>(emptySession);
+  }
+
+  Future<String> getToken(String email, String password) async {
+    return await authRepo.getTokenData(email, password);
   }
 
   Future<void> updateToken(
@@ -17,23 +19,11 @@ class AuthBlocBloc extends Bloc<AuthBlocEvent, AuthBlocState> {
     emit(state.copyWith(status: AuthState.loading));
     try {
       var token = await getToken(event.email, event.password);
+      await authRepo.setTokenToValue(state.token);
       emit(state.copyWith(token: token, status: AuthState.done));
     } catch (e) {
       emit(state.copyWith(status: AuthState.failure));
       print('failure');
     }
   }
-
-  Future<String> getToken(String email, String password) async {
-    return await authRepo.getTokenData(email, password);
-  }
-
-  Future<void> emptyToken(EmptyToken event, Emitter<AuthBlocState> emit) async {
-    await authRepo.setTokenToValue('');
-  }
-  Future<void> emptySession(EmptySession event, Emitter<AuthBlocState> emit) async {
-    await authRepo.setSessionToValue('');
-  }
-
-  
 }

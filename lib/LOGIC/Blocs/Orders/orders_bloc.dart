@@ -45,11 +45,11 @@ class OrdersBloc extends Bloc<OrdersEvent, OrdersState> {
   void streamCheckAnyNewOrdersNotifier(
       NewOrder event, Emitter<OrdersState> emit) async {
     while (true) {
-      var token = await orders.getTokenIfExist();
       final state = this.state;
+      /* var token = await orders.getTokenIfExist();
       if (token.isEmpty) {
         break;
-      }
+      } */
       if (state is OrdersReady) {
         if (state.isStreamActive == false) {
           emit(OrdersInitial());

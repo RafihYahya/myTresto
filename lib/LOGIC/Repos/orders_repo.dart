@@ -20,7 +20,5 @@ class OrdersRepository {
     return true;    
   }
 
-  Future<String> getTokenIfExist() async{
-    return await authProvider.getTokenFromStorage();
-  }
+  
 }

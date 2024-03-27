@@ -16,7 +16,5 @@ class DashBoardRepository {
     return dashboardFull; // await _dashBoard.getDashBoardFullListData();
   }
 
-  Future<String> retrieveTokenIfExist() async {
-    return await authProvider.getTokenFromStorage();
-  }
+
 }

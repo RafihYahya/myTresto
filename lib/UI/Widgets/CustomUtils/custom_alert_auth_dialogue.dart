@@ -43,6 +43,7 @@ class CustomAuthAlert extends StatelessWidget {
               context
                   .read<AppStatusBloc>()
                   .add(UpdateLoginStatus(status: AppStatusLogin.loggedOut));
+                  
             },
             child: Text(
               'Leave',
