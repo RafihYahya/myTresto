@@ -13,7 +13,7 @@ final class AuthRepository {
       final response = await tokenProvider.getTokenRaw(email, password);
       print(response.body);
       var usableToken = jsonDecode(response.body)['token'];
-      await authProvider.setTokenToStorage(usableToken);
+      //await authProvider.setTokenToStorage(usableToken);
       return usableToken;
     } else {
       return await authProvider.getTokenFromStorage();

@@ -20,6 +20,7 @@ class AuthBlocBloc extends Bloc<AuthBlocEvent, AuthBlocState> {
       emit(state.copyWith(token: token, status: AuthState.done));
     } catch (e) {
       emit(state.copyWith(status: AuthState.failure));
+      print('failure');
     }
   }
 
