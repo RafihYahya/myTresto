@@ -16,6 +16,10 @@ class AuthProvider {
     return temp;
   }
 
+  Future<void> deleteTokenSecureStorage() async {
+    await storage.delete(key: LocalStorageConsts.authToken);
+  }
+
   Future<bool> isExistKeySecureStorage(String key) async {
     String? temp = await storage.read(key: key);
     if (temp == null) {

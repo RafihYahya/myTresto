@@ -15,7 +15,10 @@ final class AuthRepository {
   }
 
   Future<void> setTokenToValue(String? value) async {
+    print(value);
+    print('miaw');
     await authProvider.writeToSecureStorage(value);
+    print(await readTokenValue());
   }
 
   Future<void> setSessionToValue(String value) async {

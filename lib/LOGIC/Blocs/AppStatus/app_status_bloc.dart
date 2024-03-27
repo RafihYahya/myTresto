@@ -27,6 +27,9 @@ class AppStatusBloc extends Bloc<AppStatusEvent, AppStatusState> {
       emit(state.copyWith(loginStatus: AppStatusLogin.loggedIn));
       print(temp);
     }
-    print('nothing');
+    if(temp ==null ){
+      print('nothing');
+    }
+    
   }
 }
