@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:tresto_v002a/Global/constants.dart';
 import 'package:tresto_v002a/LOGIC/Providers/Api/token_provider.dart';
 import 'package:tresto_v002a/LOGIC/Providers/LocalStorage/auth_provider.dart';
 
@@ -11,9 +12,9 @@ final class AuthRepository {
 
     if (localAuth.isEmpty) {
       final response = await tokenProvider.getTokenRaw(email, password);
-      print(response.body);
+      logger.d(response.body);
       var usableToken = jsonDecode(response.body)['token'];
-      //await authProvider.setTokenToStorage(usableToken);
+      await authProvider.setTokenToStorage(usableToken);
       return usableToken;
     } else {
       return await authProvider.getTokenFromStorage();

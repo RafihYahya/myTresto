@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
+import 'package:tresto_v002a/Global/constants.dart';
 import 'package:tresto_v002a/LOGIC/Blocs/AppStatus/app_status_state.dart';
 import 'package:tresto_v002a/LOGIC/Repos/app_status_repo.dart';
 import 'package:tresto_v002a/LOGIC/Repos/auth_repo.dart';
@@ -22,13 +23,13 @@ class AppStatusBloc extends Bloc<AppStatusEvent, AppStatusState> {
 
   Future<void> checkIfTokenIsLocalSaved(
       BypassLogin event, Emitter<AppStatusState> emit) async {
-        print('first');
-    print(await authRepo.checkTokenIfExist(event.key));
-    print(event.key);
+    logger.d('first');
+    logger.w(await authRepo.checkTokenIfExist(event.key));
+    logger.w(event.key);
     var isTokenExist = await authRepo.checkTokenIfExist(event.key);
-    print(event.key);
-    print('second');
-    print(isTokenExist);
+    logger.w(event.key);
+    logger.d('second');
+    logger.i(isTokenExist);
     if (isTokenExist) {
       emit(state.copyWith(loginStatus: AppStatusLogin.loggedIn));
     }

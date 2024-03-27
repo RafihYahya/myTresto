@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:tresto_v002a/Global/constants.dart';
 import 'package:tresto_v002a/LOGIC/Repos/auth_repo.dart';
 
 part 'auth_bloc_event.dart';
@@ -20,7 +21,7 @@ class AuthBlocBloc extends Bloc<AuthBlocEvent, AuthBlocState> {
       emit(state.copyWith(token: token, status: AuthState.done));
     } catch (e) {
       emit(state.copyWith(status: AuthState.failure));
-      print('failure');
+      logger.e('failure');
     }
   }
 
@@ -29,7 +30,7 @@ class AuthBlocBloc extends Bloc<AuthBlocEvent, AuthBlocState> {
   }
 
   Future<void> emptyToken(EmptyToken event, Emitter<AuthBlocState> emit) async {
-    await authRepo.setTokenToValue('');
+    await authRepo.setTokenToValue('null');
   }
   Future<void> emptySession(EmptySession event, Emitter<AuthBlocState> emit) async {
     await authRepo.setSessionToValue('');

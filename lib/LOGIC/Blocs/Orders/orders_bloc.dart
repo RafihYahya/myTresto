@@ -66,20 +66,21 @@ class OrdersBloc extends Bloc<OrdersEvent, OrdersState> {
             android: AndroidNotificationDetails(
                 randomInt.toString(), 'channelName',
                 color: AppColor.trestoRed,
-                styleInformation: BigTextStyleInformation(
+                /* styleInformation: BigTextStyleInformation(
                     htmlFormatBigText: true,
                     htmlFormatContentTitle: true,
                     htmlFormatSummaryText: true,
                     'Owner: John Doe <br /> Price: 450Dh <br /> Amount: 24',
                     summaryText: 'New Order Have Arrived',
-                    contentTitle: 'Order N: ${randomInt * 10}'),
+                    contentTitle: 'Order N: ${randomInt * 10}'), */
+                    styleInformation: const DefaultStyleInformation(false, false),
                 importance: Importance.max,
                 priority: Priority.max),
           );
           LocalNotifications.displayNotifs2(
-              randomInt, '', '', localAndroidNotifDetails);
+              randomInt, 'Order N: 92828', 'User: Rafih Yahya', localAndroidNotifDetails);
           if (state is OrdersReady) {
-            print('Here to Add New Data');
+            logger.d('Here to Add New Data');
           }
         }
       } catch (e) {

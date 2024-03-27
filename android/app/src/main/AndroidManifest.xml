@@ -1,5 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
-  <uses-permission android:name="android.permission.INTERNET"/> <!-- Add this -->
+  <uses-permission android:name="android.permission.INTERNET"/>
+  <application android:allowBackup="false" >
+    </application> <!-- Add this -->
     <application
         android:label="tresto_v002a"
         android:name="${applicationName}"

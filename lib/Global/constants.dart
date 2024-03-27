@@ -1,5 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:logger/logger.dart';
+
+
+
+var logger = Logger();
 
 final class AppColor {
   static const Color primaryColor = Color(0xffFF006B);

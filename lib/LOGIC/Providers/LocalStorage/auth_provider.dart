@@ -12,23 +12,23 @@ class AuthProvider {
   Future<void> setTokenToStorage(String value) async {
     await myLocalSecureStorage.write(
         key: LocalStorageConsts.authToken, value: value);
-    print(await myLocalSecureStorage.read(key: LocalStorageConsts.authToken));
+    logger.w(await myLocalSecureStorage.read(key: LocalStorageConsts.authToken));
   }
 
   Future<void> setSessionToStorage(String value) async {
     await myLocalSecureStorage.write(
         key: LocalStorageConsts.sessionToken, value: value);
-    print(
+    logger.w(
         await myLocalSecureStorage.read(key: LocalStorageConsts.sessionToken));
   }
 
   Future<bool> checkTokenExist(String key) async {
     var temp = await myLocalSecureStorage.read(key: key);
-    print(temp);
-    if (temp?.isNotEmpty ?? false) {
-      return true;
-    } else {
+    logger.w(temp);
+    if (temp == 'null' || temp == null) {
       return false;
+    } else {
+      return true;
     }
   }
 }
