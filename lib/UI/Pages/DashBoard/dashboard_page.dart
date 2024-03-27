@@ -14,6 +14,8 @@ import 'package:tresto_v002a/UI/Widgets/CustomUtils/custom_alert_dialogue.dart';
 import 'package:tresto_v002a/UI/Widgets/CustomUtils/custom_error.dart';
 import 'package:tresto_v002a/UI/Widgets/CustomUtils/custom_loading.dart';
 import 'package:tresto_v002a/UI/Widgets/DashBoardComp/dashboard_chart.dart';
+import 'package:tresto_v002a/UI/Widgets/DashBoardComp/dashboard_chart_loading.dart';
+import 'package:tresto_v002a/UI/Widgets/DashBoardComp/dashboard_loading.dart';
 import 'package:tresto_v002a/UI/Widgets/DashBoardComp/dashboard_tile.dart';
 
 class DashBoardPage extends StatefulWidget {
@@ -78,20 +80,18 @@ class _DashBoardPageState extends State<DashBoardPage> {
               context: context, builder: (builder) => const CustomAlert());
         }
       },
-      child: BlocSelector<DashboardBloc, DashboardState,DashboardStateStatus>(
+      child: BlocSelector<DashboardBloc, DashboardState, DashboardStateStatus>(
         selector: (state) {
           return state.status;
         },
         builder: (context, stateSt) {
           return switch (stateSt) {
-            DashboardStateStatus.initial =>  CustomLoading(
+            DashboardStateStatus.initial => const DashboardLoading(),
+            /* CustomLoading(
                 height:  MediaQuery.of(context).size.height,
                 width: MediaQuery.of(context).size.width,
-              ),
-            DashboardStateStatus.loading =>  CustomLoading(
-                height: MediaQuery.of(context).size.height,
-                width: MediaQuery.of(context).size.width,
-              ),
+              ), */
+            DashboardStateStatus.loading => const DashboardLoading(),
             DashboardStateStatus.error => const CustomError(),
             DashboardStateStatus.ready => SingleChildScrollView(
                 child: Column(
@@ -174,15 +174,18 @@ class _DashBoardPageState extends State<DashBoardPage> {
                     ),
                     BlocBuilder<IndexesCubit, AppIndexes>(
                       builder: (context, state) {
-                        return BlocSelector<DashboardBloc, DashboardState,DashboardStateStatus>(
+                        return BlocSelector<DashboardBloc, DashboardState,
+                            DashboardStateStatus>(
                           selector: (state) {
                             return state.status;
                           },
                           builder: (context, stateDash) {
                             return switch (stateDash) {
-                              DashboardStateStatus.initial => const SizedBox(),
+                              DashboardStateStatus.initial =>
+                                const DashboardChartLoading(),
                               DashboardStateStatus.error => const CustomError(),
-                              DashboardStateStatus.loading => const SizedBox(),
+                              DashboardStateStatus.loading =>
+                                const DashboardChartLoading(),
                               DashboardStateStatus.ready =>
                                 ChartRevenueDashBoardWidget(
                                   screenWidth: screenWidth,

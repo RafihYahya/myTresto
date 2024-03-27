@@ -31,8 +31,8 @@ class OrdersBloc extends Bloc<OrdersEvent, OrdersState> {
   Future<void> ordersRetrieveData(
       GetOrders event, Emitter<OrdersState> emit) async {
     try {
-      //var ordersList = await orders.getOrderData();
-      await Future.delayed(const Duration(seconds: 2));
+      var ordersList = await orders.getOrderData();
+      await Future.delayed(const Duration(seconds: 5));
       emit(OrdersReady(
           ordersRestoList: ordersFull,
           isAlreadyLoadedOnce: true,
@@ -80,7 +80,7 @@ class OrdersBloc extends Bloc<OrdersEvent, OrdersState> {
           LocalNotifications.displayNotifs2(randomInt, 'Order N: 83338',
               'Owner: Rafih Yahya', localAndroidNotifDetails);
           if (state is OrdersReady) {
-            print('Here to Add New Data');
+            logger.i('Here to Add New Data');
           }
         }
       } catch (e) {
