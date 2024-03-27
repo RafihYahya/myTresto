@@ -46,10 +46,10 @@ class OrdersBloc extends Bloc<OrdersEvent, OrdersState> {
       NewOrder event, Emitter<OrdersState> emit) async {
     while (true) {
       final state = this.state;
-      /* var token = await orders.getTokenIfExist();
-      if (token.isEmpty) {
+      String? token = await orders.authProvider.readFromSecureStorage();
+      if (token == null) {
         break;
-      } */
+      }
       if (state is OrdersReady) {
         if (state.isStreamActive == false) {
           emit(OrdersInitial());
@@ -66,18 +66,19 @@ class OrdersBloc extends Bloc<OrdersEvent, OrdersState> {
             android: AndroidNotificationDetails(
                 randomInt.toString(), 'channelName',
                 color: AppColor.trestoRed,
-                styleInformation: BigTextStyleInformation(
+                /* styleInformation: BigTextStyleInformation(
                     htmlFormatBigText: true,
                     htmlFormatContentTitle: true,
                     htmlFormatSummaryText: true,
                     'Owner: John Doe <br /> Price: 450Dh <br /> Amount: 24',
                     summaryText: 'New Order Have Arrived',
-                    contentTitle: 'Order N: ${randomInt * 10}'),
+                    contentTitle: 'Order N: ${randomInt * 10}'), */
+                styleInformation: const DefaultStyleInformation(false, false),
                 importance: Importance.max,
                 priority: Priority.max),
           );
-          LocalNotifications.displayNotifs2(
-              randomInt, '', '', localAndroidNotifDetails);
+          LocalNotifications.displayNotifs2(randomInt, 'Order N: 83338',
+              'Owner: Rafih Yahya', localAndroidNotifDetails);
           if (state is OrdersReady) {
             print('Here to Add New Data');
           }

@@ -25,6 +25,10 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
       DashboardUpdate event, Emitter<DashboardState> emit) async {
     while (true) {
       try {
+        String? token = await dashBoard.authProvider.readFromSecureStorage();
+        if (token == null) {
+          break;
+        }
         var dashboardData = await dashBoard.getDashboardData();
         emit(state.copyWith(
           dashBoardRestoList: dashboardData,

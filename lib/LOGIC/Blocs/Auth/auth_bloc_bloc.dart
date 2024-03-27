@@ -19,7 +19,7 @@ class AuthBlocBloc extends Bloc<AuthBlocEvent, AuthBlocState> {
     emit(state.copyWith(status: AuthState.loading));
     try {
       var token = await getToken(event.email, event.password);
-      await authRepo.setTokenToValue(state.token);
+      await authRepo.setTokenToValue(token);
       emit(state.copyWith(token: token, status: AuthState.done));
     } catch (e) {
       emit(state.copyWith(status: AuthState.failure));

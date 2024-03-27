@@ -33,6 +33,9 @@ class _InAppWebViewPageState extends State<InAppWebViewPage> {
         isSecure: true); */
     InAppWebViewSettings settings = InAppWebViewSettings(
       useShouldOverrideUrlLoading: true,
+      useHybridComposition: true,
+      horizontalScrollBarEnabled: false,
+      supportZoom: false
     );
     
     //-----------------------------------------------------------------------------------------------

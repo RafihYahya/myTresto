@@ -16,7 +16,11 @@ class AppStatusBloc extends Bloc<AppStatusEvent, AppStatusState> {
   }
 
   void updateLoginStatus(
-      UpdateLoginStatus event, Emitter<AppStatusState> emit) {
+      UpdateLoginStatus event, Emitter<AppStatusState> emit) async {
+    if(event.status == AppStatusLogin.loggedOut){
+      print('praise le miaw');
+      await authRepo.deleteTokenValue();
+    }
     emit(state.copyWith(loginStatus: event.status));
   }
 
