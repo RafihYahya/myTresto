@@ -22,8 +22,12 @@ class AppStatusBloc extends Bloc<AppStatusEvent, AppStatusState> {
 
   Future<void> checkIfTokenIsLocalSaved(
       BypassLogin event, Emitter<AppStatusState> emit) async {
-        print(await authRepo.checkTokenIfExist(event.key));
-    if (await authRepo.checkTokenIfExist(event.key)) {
+        print('first');
+    print(await authRepo.checkTokenIfExist(event.key));
+    var isTokenExist = await authRepo.checkTokenIfExist(event.key);
+    print('second');
+    print(isTokenExist);
+    if (isTokenExist) {
       emit(state.copyWith(loginStatus: AppStatusLogin.loggedIn));
     }
   }

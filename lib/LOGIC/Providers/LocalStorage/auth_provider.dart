@@ -24,6 +24,7 @@ class AuthProvider {
 
   Future<bool> checkTokenExist(String key) async {
     var temp = await myLocalSecureStorage.read(key: key);
+    print(temp);
     if (temp?.isNotEmpty ?? false) {
       return true;
     } else {
