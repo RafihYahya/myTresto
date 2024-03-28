@@ -24,7 +24,6 @@ class _OrderPageState extends State<OrderPage> {
   void initState() {
     super.initState();
     BlocProvider.of<OrdersBloc>(context).add(GetOrders());
-    
   }
 
   @override
@@ -166,6 +165,12 @@ class MyCustomOrderLoader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Center(
-        child: SizedBox(height: 100, width: 200, child: CustomLoading(width: 20,height: 20,)));
+        child: SizedBox(
+            height: 100,
+            width: 200,
+            child: CustomLoading(
+              width: 20,
+              height: 20,
+            )));
   }
 }
