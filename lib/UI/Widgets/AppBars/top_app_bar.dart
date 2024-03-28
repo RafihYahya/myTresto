@@ -7,17 +7,34 @@ import 'package:tresto_v002a/LOGIC/Cubits/app_indexes_cubit.dart';
 import 'package:tresto_v002a/LOGIC/Models/Global/app_indexes_data.dart';
 import 'package:tresto_v002a/Global/constants.dart';
 import 'package:tresto_v002a/UI/Widgets/CustomUtils/custom_alert_auth_dialogue.dart';
+import 'package:tresto_v002a/UI/Widgets/CustomUtils/custom_loading.dart';
 import 'package:tresto_v002a/UI/Widgets/navbar_popup_menu.dart';
 
 class AlternativeCNavBar extends StatelessWidget {
   final bool showresto;
   final bool autoLead;
 
-  const AlternativeCNavBar({super.key,required this.autoLead, required this.showresto});
+  const AlternativeCNavBar(
+      {super.key, required this.autoLead, required this.showresto});
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<IndexesCubit, AppIndexes>(
+    return BlocConsumer<IndexesCubit, AppIndexes>(
+      listener: (context, state) {
+        if (state.status == Status.error) {
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            content: Text(
+              'Error Happened While Changing Restaurant, Please Retry',
+              style: GoogleFonts.poppins(
+                  textStyle: const TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.black)),
+            ),
+            backgroundColor: AppColor.trestoRed,
+          ));
+        }
+      },
       builder: (context, stateIndex) {
         return BlocBuilder<DashboardBloc, DashboardState>(
           builder: (context, stateDash) {
@@ -47,28 +64,43 @@ class AlternativeCNavBar extends StatelessWidget {
                               ),
                               child: Row(
                                 children: [
-                                  Text(
-                                      context
-                                              .watch<DashboardBloc>()
-                                              .restoListCollector()
-                                              .isEmpty
-                                          ? 'Loading'
-                                          : context
-                                                  .read<DashboardBloc>()
-                                                  .restoListCollector()[
-                                              stateIndex.restoIndex],
-                                      style: GoogleFonts.poppins(
-                                          fontWeight: FontWeight.w400,
-                                          fontSize: 12,
-                                          textStyle: const TextStyle(
-                                              color: AppColor.primaryColor))),
+                                  context.watch<IndexesCubit>().state.status ==
+                                              Status.loading ||
+                                          context
+                                                  .watch<IndexesCubit>()
+                                                  .state
+                                                  .status ==
+                                              Status.error
+                                      ? const Padding(
+                                          padding: EdgeInsets.only(right: 16.0),
+                                          child: CustomLoading(
+                                            height: 10,
+                                            width: 10,
+                                          ),
+                                        )
+                                      : Text(
+                                          context
+                                                  .watch<DashboardBloc>()
+                                                  .restoListCollector()
+                                                  .isEmpty
+                                              ? 'Loading'
+                                              : context
+                                                      .read<DashboardBloc>()
+                                                      .restoListCollector()[
+                                                  stateIndex.restoIndex],
+                                          style: GoogleFonts.poppins(
+                                              fontWeight: FontWeight.w400,
+                                              fontSize: 12,
+                                              textStyle: const TextStyle(
+                                                  color:
+                                                      AppColor.primaryColor))),
                                   const SizedBox(
                                     width: 10,
                                   ),
                                   context
-                                              .watch<DashboardBloc>()
-                                              .restoListCollector()
-                                              .isEmpty
+                                          .watch<DashboardBloc>()
+                                          .restoListCollector()
+                                          .isEmpty
                                       ? const SizedBox()
                                       : const NavPopupMenu(),
                                 ],

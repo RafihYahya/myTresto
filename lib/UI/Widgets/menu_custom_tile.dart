@@ -20,14 +20,8 @@ class AlternativeMenuCustomTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedContainer(
-      duration: const Duration(milliseconds: 300),
-      margin: const EdgeInsets.symmetric(horizontal: 4.0, vertical: 4.0),
-      height: 30,
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(8.0), color: Colors.transparent),
-      child: InkWell(
-        onTap: () => Navigator.of(context).push(MaterialPageRoute(
+    return InkWell(
+      onTap: () => Navigator.of(context).push(MaterialPageRoute(
             builder: (ctx) => BlocProvider.value(
                   value: BlocProvider.of<IndexesCubit>(ctx),
                   child: Scaffold(
@@ -40,6 +34,12 @@ class AlternativeMenuCustomTile extends StatelessWidget {
                           )),
                       body: widget),
                 ))),
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 300),
+        margin: const EdgeInsets.symmetric(horizontal: 4.0, vertical: 4.0),
+        height: 35,
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(8.0), color: Colors.transparent),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
