@@ -1,7 +1,7 @@
 import 'package:tresto_v002a/LOGIC/Providers/Api/dashboard_data_provider.dart';
 import 'package:tresto_v002a/LOGIC/Models/dashboard_model.dart';
 import 'package:tresto_v002a/LOGIC/Providers/LocalStorage/auth_provider.dart';
-import 'package:tresto_v002a/mock_data_testing.dart';
+import 'package:tresto_v002a/Debug/mock_data_testing.dart';
 
 class DashBoardRepository {
   DashBoardRepository();

@@ -7,7 +7,7 @@ import 'package:meta/meta.dart';
 import 'package:tresto_v002a/Global/constants.dart';
 import 'package:tresto_v002a/LOGIC/Models/orders_model.dart';
 import 'package:tresto_v002a/LOGIC/Repos/orders_repo.dart';
-import 'package:tresto_v002a/mock_data_testing.dart';
+import 'package:tresto_v002a/Debug/mock_data_testing.dart';
 import 'package:tresto_v002a/notif_init.dart';
 
 part 'orders_event.dart';

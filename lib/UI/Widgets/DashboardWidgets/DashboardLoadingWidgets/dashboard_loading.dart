@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:tresto_v002a/UI/Widgets/DashBoardComp/dashboard_chart_loading.dart';
-import 'package:tresto_v002a/UI/Widgets/DashBoardComp/dashboard_tile_loading.dart';
+import 'package:tresto_v002a/UI/Widgets/DashboardWidgets/DashboardLoadingWidgets/dashboard_chart_loading.dart';
+import 'package:tresto_v002a/UI/Widgets/DashboardWidgets/DashboardLoadingWidgets/dashboard_tile_loading.dart';
 
 class DashboardLoading extends StatelessWidget {
   const DashboardLoading({super.key});
