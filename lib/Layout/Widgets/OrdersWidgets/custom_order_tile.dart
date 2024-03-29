@@ -5,7 +5,7 @@ import 'package:heroicons/heroicons.dart';
 import 'package:tresto_v002a/Global/constants.dart';
 import 'package:tresto_v002a/LOGIC/Blocs/Orders/orders_bloc.dart';
 import 'package:tresto_v002a/LOGIC/Models/orders_model.dart';
-import 'package:tresto_v002a/UI/Pages/Orders/order_details_page.dart';
+import 'package:tresto_v002a/Layout/Pages/Orders/order_details_page.dart';
 
 class CustomOrdersTile extends StatelessWidget {
   final OrderData? orders;

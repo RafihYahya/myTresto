@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tresto_v002a/LOGIC/Cubits/app_indexes_cubit.dart';
-import 'package:tresto_v002a/UI/Widgets/AppBars/bottom_nav_bar.dart';
-import 'package:tresto_v002a/UI/Widgets/AppBars/top_app_bar.dart';
+import 'package:tresto_v002a/Layout/Widgets/AppBars/bottom_nav_bar.dart';
+import 'package:tresto_v002a/Layout/Widgets/AppBars/top_app_bar.dart';
 
 class AlternativeMenuCustomTile extends StatelessWidget {
   final String title;

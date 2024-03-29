@@ -19,7 +19,7 @@ import 'package:tresto_v002a/LOGIC/Repos/auth_repo.dart';
 import 'package:tresto_v002a/LOGIC/Repos/dashboard_repo.dart';
 import 'package:tresto_v002a/LOGIC/Models/Global/app_indexes_data.dart';
 import 'package:tresto_v002a/LOGIC/Repos/orders_repo.dart';
-import 'package:tresto_v002a/UI/Pages/login_page.dart';
+import 'package:tresto_v002a/Layout/Pages/login_page.dart';
 import 'package:tresto_v002a/app_routing.dart';
 import 'package:tresto_v002a/Debug/mainobserver.dart';
 import 'package:tresto_v002a/notif_init.dart';
