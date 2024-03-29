@@ -1,3 +1,4 @@
+import 'package:tresto_v002a/Global/constants.dart';
 import 'package:tresto_v002a/notif_init.dart';
 import 'package:workmanager/workmanager.dart';
 
@@ -9,7 +10,8 @@ void callbackDispatcher() async {
       LocalNotifications.displayNotifs(10, 'New Orders Have Arrived','Click To See All');
       return Future.value(true);
     } catch (e) {
-      return Future.value(true);
+      logger.w('Error In WorkManager Execution');
+      return Future.value(false);
     }
     //simpleTask will be emitted here.
   });
@@ -24,6 +26,7 @@ class WorkManager {
         );
     Workmanager().registerPeriodicTask("SendReminder", "simpleTask",
         existingWorkPolicy: ExistingWorkPolicy.replace,
+        tag: 'NewOrderCheck',
         frequency: const Duration(minutes: 15));
   }
 }

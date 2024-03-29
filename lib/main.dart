@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tresto_v002a/Global/constants.dart';
 import 'package:tresto_v002a/LOGIC/Blocs/AppStatus/app_status_bloc.dart';
@@ -20,7 +19,7 @@ import 'package:tresto_v002a/LOGIC/Models/Global/app_indexes_data.dart';
 import 'package:tresto_v002a/LOGIC/Repos/orders_repo.dart';
 import 'package:tresto_v002a/Layout/Pages/login_page.dart';
 import 'package:tresto_v002a/app_routing.dart';
-import 'package:tresto_v002a/mainobserver.dart';
+import 'package:tresto_v002a/Debug/mainobserver.dart';
 import 'package:tresto_v002a/notif_init.dart';
 import 'package:tresto_v002a/workmanager.dart';
 
@@ -67,12 +66,11 @@ class MainApp extends StatefulWidget {
 class _MainAppState extends State<MainApp> {
   @override
   void initState() {
+    super.initState();
     context
         .read<AppStatusBloc>()
         .add(BypassLogin(key: LocalStorageConsts.authToken));
-    super.initState();
     WorkManager.startWorkManager();
-
   }
 
   @override
@@ -116,18 +114,28 @@ class _MainAppState extends State<MainApp> {
                     content: Text(
                       'Login Successful',
                       style: GoogleFonts.poppins(
-                        textStyle:const TextStyle(
-                          fontWeight: FontWeight.w400,
-                          fontSize: 12.0,
-                          color: Colors.black
-                        )
-                      ),
+                          textStyle: const TextStyle(
+                              fontWeight: FontWeight.w400,
+                              fontSize: 12.0,
+                              color: Colors.black)),
                     )));
               }
             }, builder: (context, state) {
               return switch (state.loginStatus) {
                 AppStatusLogin.loggedIn => const AppRouting(),
-                AppStatusLogin.loggedOut => const LoginPage()
+                AppStatusLogin.loggedOut => FutureBuilder(future: () async {
+                    await Future.delayed(const Duration(seconds: 1));
+                    return true;
+                  }(), builder:
+                      (BuildContext context, AsyncSnapshot<void> snapshot) {
+                    if (snapshot.hasData) {
+                      return const LoginPage().animate().fadeIn(
+                          curve: Curves.easeIn,
+                          duration: const Duration(milliseconds: 500));
+                    } else {
+                      return const SizedBox();
+                    }
+                  })
               };
             }),
           )),

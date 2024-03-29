@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:tresto_v002a/Global/constants.dart';
 import 'package:tresto_v002a/LOGIC/Repos/auth_repo.dart';
 
 part 'auth_bloc_event.dart';
@@ -23,7 +24,7 @@ class AuthBlocBloc extends Bloc<AuthBlocEvent, AuthBlocState> {
       emit(state.copyWith(token: token, status: AuthState.done));
     } catch (e) {
       emit(state.copyWith(status: AuthState.failure));
-      print('failure');
+      logger.w('Failure Update Token');
     }
   }
 }

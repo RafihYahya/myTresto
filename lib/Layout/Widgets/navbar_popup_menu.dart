@@ -1,5 +1,6 @@
-
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tresto_v002a/Global/constants.dart';
@@ -51,6 +52,7 @@ class _NavPopupMenuState extends State<NavPopupMenu> {
               child: const Icon(
                 Icons.storefront,
                 color: AppColor.primaryColor,
+                size: 28,
               ),
               itemBuilder: (context) => context
                   .read<DashboardBloc>()

@@ -13,8 +13,10 @@ import 'package:tresto_v002a/LOGIC/Models/Global/app_indexes_data.dart';
 import 'package:tresto_v002a/Layout/Widgets/CustomUtils/custom_alert_dialogue.dart';
 import 'package:tresto_v002a/Layout/Widgets/CustomUtils/custom_error.dart';
 import 'package:tresto_v002a/Layout/Widgets/CustomUtils/custom_loading.dart';
-import 'package:tresto_v002a/Layout/Widgets/DashBoardComp/dashboard_chart.dart';
-import 'package:tresto_v002a/Layout/Widgets/DashBoardComp/dashboard_tile.dart';
+import 'package:tresto_v002a/Layout/Widgets/DashboardWidgets/dashboard_chart.dart';
+import 'package:tresto_v002a/Layout/Widgets/DashboardWidgets/DashboardLoadingWidgets/dashboard_chart_loading.dart';
+import 'package:tresto_v002a/Layout/Widgets/DashboardWidgets/DashboardLoadingWidgets/dashboard_loading.dart';
+import 'package:tresto_v002a/Layout/Widgets/DashboardWidgets/dashboard_tile.dart';
 
 class DashBoardPage extends StatefulWidget {
   const DashBoardPage({
@@ -78,20 +80,18 @@ class _DashBoardPageState extends State<DashBoardPage> {
               context: context, builder: (builder) => const CustomAlert());
         }
       },
-      child: BlocSelector<DashboardBloc, DashboardState,DashboardStateStatus>(
+      child: BlocSelector<DashboardBloc, DashboardState, DashboardStateStatus>(
         selector: (state) {
           return state.status;
         },
         builder: (context, stateSt) {
           return switch (stateSt) {
-            DashboardStateStatus.initial =>  CustomLoading(
+            DashboardStateStatus.initial => const DashboardLoading(),
+            /* CustomLoading(
                 height:  MediaQuery.of(context).size.height,
                 width: MediaQuery.of(context).size.width,
-              ),
-            DashboardStateStatus.loading =>  CustomLoading(
-                height: MediaQuery.of(context).size.height,
-                width: MediaQuery.of(context).size.width,
-              ),
+              ), */
+            DashboardStateStatus.loading => const DashboardLoading(),
             DashboardStateStatus.error => const CustomError(),
             DashboardStateStatus.ready => SingleChildScrollView(
                 child: Column(
@@ -174,15 +174,18 @@ class _DashBoardPageState extends State<DashBoardPage> {
                     ),
                     BlocBuilder<IndexesCubit, AppIndexes>(
                       builder: (context, state) {
-                        return BlocSelector<DashboardBloc, DashboardState,DashboardStateStatus>(
+                        return BlocSelector<DashboardBloc, DashboardState,
+                            DashboardStateStatus>(
                           selector: (state) {
                             return state.status;
                           },
                           builder: (context, stateDash) {
                             return switch (stateDash) {
-                              DashboardStateStatus.initial => const SizedBox(),
+                              DashboardStateStatus.initial =>
+                                const DashboardChartLoading(),
                               DashboardStateStatus.error => const CustomError(),
-                              DashboardStateStatus.loading => const SizedBox(),
+                              DashboardStateStatus.loading =>
+                                const DashboardChartLoading(),
                               DashboardStateStatus.ready =>
                                 ChartRevenueDashBoardWidget(
                                   screenWidth: screenWidth,

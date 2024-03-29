@@ -18,7 +18,8 @@ class CustomOrdersTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12.0),
-      child: Container(
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 300),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(12.0),
             border: Border.all(color: Colors.grey[300]!),

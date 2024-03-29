@@ -7,7 +7,7 @@ import 'package:meta/meta.dart';
 import 'package:tresto_v002a/Global/constants.dart';
 import 'package:tresto_v002a/LOGIC/Models/orders_model.dart';
 import 'package:tresto_v002a/LOGIC/Repos/orders_repo.dart';
-import 'package:tresto_v002a/mock_data_testing.dart';
+import 'package:tresto_v002a/Debug/mock_data_testing.dart';
 import 'package:tresto_v002a/notif_init.dart';
 
 part 'orders_event.dart';
@@ -31,8 +31,8 @@ class OrdersBloc extends Bloc<OrdersEvent, OrdersState> {
   Future<void> ordersRetrieveData(
       GetOrders event, Emitter<OrdersState> emit) async {
     try {
-      //var ordersList = await orders.getOrderData();
-      await Future.delayed(const Duration(seconds: 2));
+      var ordersList = await orders.getOrderData();
+      await Future.delayed(const Duration(seconds: 5));
       emit(OrdersReady(
           ordersRestoList: ordersFull,
           isAlreadyLoadedOnce: true,
@@ -80,7 +80,7 @@ class OrdersBloc extends Bloc<OrdersEvent, OrdersState> {
           LocalNotifications.displayNotifs2(randomInt, 'Order N: 83338',
               'Owner: Rafih Yahya', localAndroidNotifDetails);
           if (state is OrdersReady) {
-            print('Here to Add New Data');
+            logger.i('Here to Add New Data');
           }
         }
       } catch (e) {

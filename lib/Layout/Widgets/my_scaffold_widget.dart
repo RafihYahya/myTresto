@@ -20,6 +20,7 @@ class MyScaffold extends StatelessWidget {
             
             preferredSize:  Size.fromHeight(50.0),
             child: AlternativeCNavBar(
+              autoLead: false,
               showresto: true,
             )),
         bottomNavigationBar: const BotNavBarAlternative(),

@@ -9,20 +9,30 @@ class IndexesCubit extends Cubit<AppIndexes> {
     emit(AppIndexes(
         index: index,
         restoIndex: state.restoIndex,
-        maxRestoNumber: state.maxRestoNumber));
+        maxRestoNumber: state.maxRestoNumber,
+        status: Status.success));
   }
 
-  void changeRestoIndex({required int restoIndex}) {
-    emit(AppIndexes(
+  void changeRestoIndex({required int restoIndex}) async {
+    try {
+      emit(state.copyWith(status: Status.loading));
+      await Future.delayed(const Duration(seconds: 4));
+      emit(AppIndexes(
         index: state.index,
         restoIndex: restoIndex,
-        maxRestoNumber: state.maxRestoNumber));
+        maxRestoNumber: state.maxRestoNumber,
+        status: Status.success,
+      ));
+    } catch (e) {
+      emit(state.copyWith(status: Status.error));
+    }
   }
 
   void changeMaxRestoNum({required int maxRestoNumber}) {
     emit(AppIndexes(
         index: state.index,
         restoIndex: state.restoIndex,
-        maxRestoNumber: maxRestoNumber));
+        maxRestoNumber: maxRestoNumber,
+        status: Status.success));
   }
 }

@@ -236,8 +236,8 @@ Future<void> headlessView(int maxL, String restoName) async {
     initialUrlRequest: URLRequest(url: WebUri(WebViewUrls.home)),
     onLoadStop: (controller, url) async {
       String temp2 = await myStorage.read(key: 'tresto_session') ?? '';
-      await cookieManager.setCookie(
-          url: WebUri(WebViewUrls.home), name: 'tresto_session', value: temp2);
+      /* await cookieManager.setCookie(
+          url: WebUri(WebViewUrls.home), name: 'tresto_session', value: temp2); */
       controller.evaluateJavascript(
           source: changeRestoInWebViewHandler(maxL, restoName));
       controller.evaluateJavascript(source: JsInjection.rmNavBar);
