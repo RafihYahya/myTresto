@@ -16,14 +16,28 @@ final class AppColor {
   static const Color textGrey1Half = Color(0x668F8F8F);
   static const Color mainTextWhite = Color(0xFFFFFFFF);
 
+  static const Color trestoindigo = Color(0xFF3F51B5);
+  static const Color trestolime = Color(0xFFCDDC39);
+
+  static const Color trestoGreen = Color(0xFF4CAF50);
+  static const Color trestoBlue = Color(0xFF2196F3);
+  static const Color trestoOrange = Color(0xFFFF9800);
+  static const Color trestoPurple = Color(0xFF9C27B0);
+  static const Color trestoPink = Color(0xFFE91E63);
   static const Color trestoRed = Color.fromRGBO(244, 67, 54, 1);
-  static const Color trestoGreen = Colors.green;
-  static const Color trestoBlue = Colors.blue;
-  static const Color trestoOrange = Colors.orange;
-  static const Color trestoPurple = Colors.purple;
-  static const Color trestoPink = Colors.pink;
+  static const Color trestobrown = Color(0xFF795548);
+  static const Color trestocyan = Color(0xFF00BCD4);
+  static const Color trestoblack = Color(0xFF000000);
 
-
+  static const String hexTrestoGreen = '#4CAF50';
+  static const String hexTrestoBlue = '#2196F3';
+  static const String hexTrestoOrange = '#FF9800';
+  static const String hexTrestoPurple = '#9C27B0';
+  static const String hexTrestoPink = '#E91E63';
+  static const String hexTrestoRed = '#F44336';
+  static const String hexTrestobrown = '#795548';
+  static const String hexTrestocyan = '#00BCD4';
+  static const String hexTrestoblack = '#000000';
 
   static const Color trestoRed025 = Color.fromRGBO(244, 67, 54, 0.20);
   static const Color trestoGreen25 = Color.fromRGBO(76, 175, 80, 0.20);
@@ -31,6 +45,9 @@ final class AppColor {
   static const Color trestoOrange25 = Color.fromRGBO(255, 152, 0, 0.20);
   static const Color trestoPurple25 = Color.fromRGBO(156, 39, 176, 0.20);
   static const Color trestoPink25 = Color.fromRGBO(233, 30, 99, 0.20);
+  static const Color trestocyan25 = Color.fromRGBO(0, 188, 212, 0.20);
+  static const Color trestobrown25 = Color.fromRGBO(121, 85, 72, 0.20);
+  static const Color trestoblack25 = Color.fromRGBO(0, 0, 0, 0.20);
 
   static const List<Color> colorIndexTrestoList = [
     trestoGreen,
@@ -38,7 +55,21 @@ final class AppColor {
     trestoOrange,
     trestoPurple,
     trestoPink,
-    trestoRed
+    trestoRed,
+    trestobrown,
+    trestocyan,
+    trestoblack,
+  ];
+  static const List<String> hexColorIndexTrestoList = [
+    hexTrestoGreen,
+    hexTrestoBlue,
+    hexTrestoOrange,
+    hexTrestoPurple,
+    hexTrestoPink,
+    hexTrestoRed,
+    hexTrestobrown,
+    hexTrestocyan,
+    hexTrestoblack,
   ];
   static const List<Color> colorIndexTrestoList25 = [
     trestoGreen25,
@@ -46,7 +77,10 @@ final class AppColor {
     trestoOrange25,
     trestoPurple25,
     trestoPink25,
-    trestoRed25
+    trestoRed25,
+    trestobrown25,
+    trestocyan25,
+    trestoblack25,
   ];
 }
 

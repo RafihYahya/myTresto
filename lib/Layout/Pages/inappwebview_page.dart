@@ -1,9 +1,12 @@
 import 'dart:collection';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:tresto_v002a/Global/constants.dart';
 import 'package:tresto_v002a/Global/webview_url_consts.dart';
+import 'package:tresto_v002a/LOGIC/Cubits/app_settings.cubit.dart';
 
 class InAppWebViewPage extends StatefulWidget {
   final String url;
@@ -24,7 +27,7 @@ class _InAppWebViewPageState extends State<InAppWebViewPage> {
   @override
   Widget build(BuildContext context) {
     // CookieManager cookieManager = CookieManager.instance();
- 
+
     final GlobalKey webViewKey = GlobalKey();
     /* cookieManager.setCookie(
         url: WebUri(widget.url),
@@ -32,17 +35,16 @@ class _InAppWebViewPageState extends State<InAppWebViewPage> {
         value: BlocProvider.of<DashBoardCubit>(context).state.token,
         isSecure: true); */
     InAppWebViewSettings settings = InAppWebViewSettings(
-      useShouldOverrideUrlLoading: true,
-      useHybridComposition: true,
-      horizontalScrollBarEnabled: false,
-      supportZoom: false
-    );
-    
+        useShouldOverrideUrlLoading: true,
+        useHybridComposition: true,
+        horizontalScrollBarEnabled: false,
+        supportZoom: false);
+
     //-----------------------------------------------------------------------------------------------
     const myStorage = FlutterSecureStorage();
-    CookieManager cookieManager = CookieManager.instance(); 
+    CookieManager cookieManager = CookieManager.instance();
     //------------------------------------------------------------------------------------------------
-    
+
     /* myStorage.delete(key: 'tresto_session');
     cookieManager.deleteAllCookies(); */
     return InAppWebView(
@@ -69,8 +71,16 @@ class _InAppWebViewPageState extends State<InAppWebViewPage> {
 
         webViewController = controller;
       },
-      onLoadStart: (controller, url) {},
+      onLoadStart: (controller, url) {
+        controller.evaluateJavascript(
+            source: changeBackgroundColor(AppColor.hexColorIndexTrestoList[
+                context.read<AppSettingsCubit>().state.colorIndex]));
+      },
       onProgressChanged: (controller, progress) {
+        controller.evaluateJavascript(
+            source: changeBackgroundColor(AppColor.hexColorIndexTrestoList[
+                context.read<AppSettingsCubit>().state.colorIndex]));
+
         /*  widget.changeTresto ? controller.evaluateJavascript(source: '''
                 document.querySelectorAll("div > a#menu-item-0")[0].click();
                 window.location.href = '${widget.url.substring(baseUrl.length, widget.url.length)}'

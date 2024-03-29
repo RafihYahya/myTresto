@@ -198,6 +198,15 @@ window.addEventListener("DOMContentLoaded", (event) => {
 
 ''';
 }
+
+String changeBackgroundColor(String color){
+  return ''' 
+  document.querySelector("body > div").style.backgroundColor = '$color';
+  document.querySelector('button.rounded-md').style.backgroundColor = '$color';
+  ''';
+}
+
+
 String changeRestoInWebViewHandler(int maxL, String restoName) {
   return '''
                 for(i = 0; i < $maxL ; i++)
