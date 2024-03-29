@@ -76,71 +76,67 @@ class _MainAppState extends State<MainApp> {
   @override
   Widget build(BuildContext context) {
     //rebuild entire App when Settings Change
-    return BlocBuilder<AppSettingsCubit, AppSettings>(
-      builder: (context, stateSettings) {
-        return MaterialApp(
-          debugShowCheckedModeBanner: false,
-          title: 'Tresto',
-          theme: ThemeData(
-            useMaterial3: true,
-          ),
-          home: Scaffold(
-              //Rebuild the widget when the Status changes
-              body: MultiBlocListener(
-            listeners: [
-              BlocListener<DashboardBloc, DashboardState>(
-                  listener: (context, state) => context
-                      .read<IndexesCubit>()
-                      .changeMaxRestoNum(
-                          maxRestoNumber: context
-                              .read<DashboardBloc>()
-                              .restoListCollector()
-                              .length)),
-              BlocListener<OrdersBloc, OrdersState>(
-                listener: (context, state) {
-                  BlocProvider.of<IndexesCubit>(context).changeMaxRestoNum(
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Tresto',
+      theme: ThemeData(
+        useMaterial3: true,
+      ),
+      home: Scaffold(
+          //Rebuild the widget when the Status changes
+          body: MultiBlocListener(
+        listeners: [
+          BlocListener<DashboardBloc, DashboardState>(
+              listener: (context, state) => context
+                  .read<IndexesCubit>()
+                  .changeMaxRestoNum(
                       maxRestoNumber: context
-                          .read<OrdersBloc>()
+                          .read<DashboardBloc>()
                           .restoListCollector()
-                          .length);
-                },
-              ),
-            ],
-            child: BlocConsumer<AppStatusBloc, AppStatusState>(
-                listener: (context, state) {
-              if (state.loginStatus == AppStatusLogin.loggedIn) {
-                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                    backgroundColor: Colors.green,
-                    content: Text(
-                      'Login Successful',
-                      style: GoogleFonts.poppins(
-                          textStyle: const TextStyle(
-                              fontWeight: FontWeight.w400,
-                              fontSize: 12.0,
-                              color: Colors.black)),
-                    )));
-              }
-            }, builder: (context, state) {
-              return switch (state.loginStatus) {
-                AppStatusLogin.loggedIn => const AppRouting(),
-                AppStatusLogin.loggedOut => FutureBuilder(future: () async {
-                    await Future.delayed(const Duration(seconds: 1));
-                    return true;
-                  }(), builder:
-                      (BuildContext context, AsyncSnapshot<void> snapshot) {
-                    if (snapshot.hasData) {
-                      return const LoginPage().animate().fadeIn(
-                          curve: Curves.easeIn,
-                          duration: const Duration(milliseconds: 500));
-                    } else {
-                      return const SizedBox();
-                    }
-                  })
-              };
-            }),
-          )),
-        );
-      },
+                          .length)),
+          BlocListener<OrdersBloc, OrdersState>(
+            listener: (context, state) {
+              BlocProvider.of<IndexesCubit>(context).changeMaxRestoNum(
+                  maxRestoNumber: context
+                      .read<OrdersBloc>()
+                      .restoListCollector()
+                      .length);
+            },
+          ),
+        ],
+        child: BlocConsumer<AppStatusBloc, AppStatusState>(
+            listener: (context, state) {
+          if (state.loginStatus == AppStatusLogin.loggedIn) {
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                backgroundColor: Colors.green,
+                content: Text(
+                  'Login Successful',
+                  style: GoogleFonts.poppins(
+                      textStyle: const TextStyle(
+                          fontWeight: FontWeight.w400,
+                          fontSize: 12.0,
+                          color: Colors.black)),
+                )));
+          }
+        }, builder: (context, state) {
+          return switch (state.loginStatus) {
+            AppStatusLogin.loggedIn => const AppRouting(),
+            AppStatusLogin.loggedOut => FutureBuilder(future: () async {
+                await Future.delayed(const Duration(seconds: 1));
+                return true;
+              }(), builder:
+                  (BuildContext context, AsyncSnapshot<void> snapshot) {
+                if (snapshot.hasData) {
+                  return const LoginPage().animate().fadeIn(
+                      curve: Curves.easeIn,
+                      duration: const Duration(milliseconds: 500));
+                } else {
+                  return const SizedBox();
+                }
+              })
+          };
+        }),
+      )),
     );
   }
 }

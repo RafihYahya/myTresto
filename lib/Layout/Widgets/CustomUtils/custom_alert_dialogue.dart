@@ -6,6 +6,7 @@ import 'package:tresto_v002a/LOGIC/Blocs/AppStatus/app_status_bloc.dart';
 import 'package:tresto_v002a/LOGIC/Blocs/AppStatus/app_status_state.dart';
 import 'package:tresto_v002a/LOGIC/Blocs/Dashboard/dashboard_bloc.dart';
 import 'package:tresto_v002a/LOGIC/Blocs/Orders/orders_bloc.dart';
+import 'package:tresto_v002a/LOGIC/Cubits/app_settings.cubit.dart';
 
 class CustomAlert extends StatelessWidget {
   const CustomAlert({super.key});
@@ -30,8 +31,9 @@ class CustomAlert extends StatelessWidget {
               Navigator.of(context).pop();
               context.read<DashboardBloc>().add(DashboardUpdate());
               context.read<OrdersBloc>().add(GetOrders());
-              BlocProvider.of<OrdersBloc>(context).add(NewOrder());
-
+              BlocProvider.of<OrdersBloc>(context).add(NewOrder(
+                  color: AppColor.colorIndexTrestoList[
+                      context.watch<AppSettingsCubit>().state.colorIndex]));
             },
             child: Text(
               'Reload',

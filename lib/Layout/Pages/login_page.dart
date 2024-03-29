@@ -9,6 +9,7 @@ import 'package:tresto_v002a/LOGIC/Blocs/Auth/auth_bloc_bloc.dart';
 import 'package:tresto_v002a/LOGIC/Blocs/Dashboard/dashboard_bloc.dart';
 import 'package:tresto_v002a/LOGIC/Blocs/Orders/orders_bloc.dart';
 import 'package:tresto_v002a/LOGIC/Cubits/app_indexes_cubit.dart';
+import 'package:tresto_v002a/LOGIC/Cubits/app_settings.cubit.dart';
 import 'package:tresto_v002a/Layout/Widgets/CustomUtils/custom_loading.dart';
 
 class LoginPage extends StatefulWidget {
@@ -32,7 +33,6 @@ class _LoginPageState extends State<LoginPage> {
     //context.read<AuthBlocBloc>().add(EmptyToken());
     //context.read<AuthBlocBloc>().add(EmptySession());
     context.read<DashboardBloc>().add(DashboardReset());
-    
   }
 
   @override
@@ -55,7 +55,6 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
       backgroundColor: AppColor.mainColor,
       // backgroundColor: AppColor.primaryBackgroundColor,
@@ -66,7 +65,8 @@ class _LoginPageState extends State<LoginPage> {
             listener: (context, state) {
               if (state.apiStatus == AppStatusApi.failure) {
                 ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                    backgroundColor: AppColor.trestoRed,
+                    backgroundColor: AppColor.colorIndexTrestoList[
+                        context.read<AppSettingsCubit>().state.colorIndex],
                     content: Text(
                       'An Error Has Occurred',
                       style: GoogleFonts.poppins(
@@ -154,24 +154,37 @@ class _LoginPageState extends State<LoginPage> {
                                   decoration: InputDecoration(
                                     errorBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(12),
-                                      borderSide: const BorderSide(
+                                      borderSide: BorderSide(
                                         width: 1,
-                                        color: AppColor.trestoRed,
+                                        color: AppColor.colorIndexTrestoList[context.read<AppSettingsCubit>().state.colorIndex],
                                       ),
                                     ),
                                     focusedErrorBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(12),
-                                      borderSide: const BorderSide(
+                                      borderSide: BorderSide(
                                         width: 1,
-                                        color: AppColor.trestoRed,
+                                        color: AppColor.colorIndexTrestoList[
+                                            context
+                                                .read<AppSettingsCubit>()
+                                                .state
+                                                .colorIndex],
                                       ),
                                     ),
-                                    fillColor: Colors.red,
-                                    focusedBorder: const OutlineInputBorder(
+                                    fillColor: AppColor.colorIndexTrestoList[
+                                        context
+                                            .read<AppSettingsCubit>()
+                                            .state
+                                            .colorIndex],
+                                    focusedBorder: OutlineInputBorder(
                                       borderRadius:
-                                          BorderRadius.all(Radius.circular(12)),
+                                          const BorderRadius.all(Radius.circular(12)),
                                       borderSide: BorderSide(
-                                          color: AppColor.trestoRed, width: 1),
+                                          color: AppColor.colorIndexTrestoList[
+                                              context
+                                                  .read<AppSettingsCubit>()
+                                                  .state
+                                                  .colorIndex],
+                                          width: 1),
                                     ),
                                     enabledBorder: const OutlineInputBorder(
                                       borderRadius: BorderRadius.all(
@@ -209,24 +222,40 @@ class _LoginPageState extends State<LoginPage> {
                                   decoration: InputDecoration(
                                     errorBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(12),
-                                      borderSide: const BorderSide(
+                                      borderSide: BorderSide(
                                         width: 1,
-                                        color: AppColor.primaryColor,
+                                        color: AppColor.colorIndexTrestoList[
+                                            context
+                                                .read<AppSettingsCubit>()
+                                                .state
+                                                .colorIndex],
                                       ),
                                     ),
                                     focusedErrorBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(12),
-                                      borderSide:  BorderSide(
+                                      borderSide: BorderSide(
                                         width: 1,
-                                        color: AppColor.colorIndexTrestoList[stateSettings],
+                                        color: AppColor.colorIndexTrestoList[
+                                            context
+                                                .read<AppSettingsCubit>()
+                                                .state
+                                                .colorIndex],
                                       ),
                                     ),
-                                    fillColor: Colors.red,
-                                    focusedBorder: const OutlineInputBorder(
+                                    fillColor: AppColor.colorIndexTrestoList[
+                                        context
+                                            .read<AppSettingsCubit>()
+                                            .state
+                                            .colorIndex],
+                                    focusedBorder: OutlineInputBorder(
                                       borderRadius:
-                                          BorderRadius.all(Radius.circular(12)),
+                                          const BorderRadius.all(Radius.circular(12)),
                                       borderSide: BorderSide(
-                                          color: AppColor.primaryColor,
+                                          color: AppColor.colorIndexTrestoList[
+                                              context
+                                                  .read<AppSettingsCubit>()
+                                                  .state
+                                                  .colorIndex],
                                           width: 1),
                                     ),
                                     enabledBorder: const OutlineInputBorder(
@@ -268,8 +297,13 @@ class _LoginPageState extends State<LoginPage> {
                                         if (state.status == AuthState.failure) {
                                           ScaffoldMessenger.of(context)
                                               .showSnackBar(SnackBar(
-                                                  backgroundColor:
-                                                      AppColor.trestoRed,
+                                                  backgroundColor: AppColor
+                                                          .colorIndexTrestoList[
+                                                      context
+                                                          .read
+                                                          <AppSettingsCubit>()
+                                                          .state
+                                                          .colorIndex],
                                                   content: Text(
                                                     'An Error Has Occured',
                                                     style: GoogleFonts.poppins(
@@ -302,7 +336,6 @@ class _LoginPageState extends State<LoginPage> {
                                         } else {
                                           return ElevatedButton(
                                               onPressed: () async {
-
                                                 context
                                                     .read<AuthBlocBloc>()
                                                     .add(TokenRequest(
@@ -311,13 +344,16 @@ class _LoginPageState extends State<LoginPage> {
                                                         password:
                                                             passwordController
                                                                 .text));
-
-                                                
                                               },
                                               style: ElevatedButton.styleFrom(
                                                 elevation: 0,
-                                                backgroundColor:
-                                                    AppColor.trestoRed,
+                                                backgroundColor: AppColor
+                                                        .colorIndexTrestoList[
+                                                    context
+                                                        .read
+                                                        <AppSettingsCubit>()
+                                                        .state
+                                                        .colorIndex],
                                                 minimumSize:
                                                     const Size(315, 60),
                                                 shape: RoundedRectangleBorder(

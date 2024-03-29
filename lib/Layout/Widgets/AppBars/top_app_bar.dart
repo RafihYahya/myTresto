@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:heroicons/heroicons.dart';
 import 'package:tresto_v002a/LOGIC/Blocs/Dashboard/dashboard_bloc.dart';
 import 'package:tresto_v002a/LOGIC/Cubits/app_indexes_cubit.dart';
+import 'package:tresto_v002a/LOGIC/Cubits/app_settings.cubit.dart';
 import 'package:tresto_v002a/LOGIC/Models/Global/app_indexes_data.dart';
 import 'package:tresto_v002a/Global/constants.dart';
 import 'package:tresto_v002a/Layout/Widgets/CustomUtils/custom_alert_auth_dialogue.dart';
@@ -31,7 +32,8 @@ class AlternativeCNavBar extends StatelessWidget {
                       fontWeight: FontWeight.w500,
                       color: Colors.black)),
             ),
-            backgroundColor: AppColor.trestoRed,
+            backgroundColor: AppColor.colorIndexTrestoList[
+                context.watch<AppSettingsCubit>().state.colorIndex],
           ));
         }
       },
@@ -60,7 +62,7 @@ class AlternativeCNavBar extends StatelessWidget {
                                   vertical: 5, horizontal: 8),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(8),
-                                color: AppColor.primaryColor1,
+                                color: AppColor.colorIndexTrestoList25[context.watch<AppSettingsCubit>().state.colorIndex] //Color.fromRGBO(255, 237, 244, 1),
                               ),
                               child: Row(
                                 children: [
@@ -91,9 +93,13 @@ class AlternativeCNavBar extends StatelessWidget {
                                           style: GoogleFonts.poppins(
                                               fontWeight: FontWeight.w400,
                                               fontSize: 12,
-                                              textStyle: const TextStyle(
-                                                  color:
-                                                      AppColor.primaryColor))),
+                                              textStyle: TextStyle(
+                                                  color: AppColor
+                                                          .colorIndexTrestoList[
+                                                      context
+                                                          .read<AppSettingsCubit>()
+                                                          .state
+                                                          .colorIndex]))),
                                   const SizedBox(
                                     width: 10,
                                   ),

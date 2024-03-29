@@ -7,6 +7,7 @@ import 'package:tresto_v002a/Global/constants.dart';
 import 'package:tresto_v002a/Global/webview_url_consts.dart';
 import 'package:tresto_v002a/LOGIC/Blocs/Dashboard/dashboard_bloc.dart';
 import 'package:tresto_v002a/LOGIC/Cubits/app_indexes_cubit.dart';
+import 'package:tresto_v002a/LOGIC/Cubits/app_settings.cubit.dart';
 
 class NavPopupMenu extends StatefulWidget {
   const NavPopupMenu({super.key});
@@ -43,15 +44,15 @@ class _NavPopupMenuState extends State<NavPopupMenu> {
                 reverseIconReverser(); // this basically show and hide the popup on click
               },
               position: PopupMenuPosition.under,
-              color: const Color.fromRGBO(196, 48, 71,
-                  0.95), //const Color.fromRGBO(0, 0, 0, 0.95), //colors['MainTextWhite'],
+              color: AppColor.colorIndexTrestoList[context.watch<AppSettingsCubit>().state.colorIndex],
+              //const Color.fromRGBO(196, 48, 71,    0.95), //const Color.fromRGBO(0, 0, 0, 0.95), //colors['MainTextWhite'],
               elevation: 0,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(6.0),
               ),
-              child: const Icon(
+              child:  Icon(
                 Icons.storefront,
-                color: AppColor.primaryColor,
+                color: AppColor.colorIndexTrestoList[context.watch<AppSettingsCubit>().state.colorIndex],
                 size: 28,
               ),
               itemBuilder: (context) => context

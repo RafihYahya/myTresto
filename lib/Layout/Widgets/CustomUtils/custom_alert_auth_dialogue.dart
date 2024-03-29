@@ -17,8 +17,8 @@ class CustomAuthAlert extends StatelessWidget {
             textStyle:
                 const TextStyle(fontWeight: FontWeight.w500, fontSize: 18)),
       ),
-      content: const Text(
-          'Are You Sure You Want To Logout From Your Account ?'),
+      content:
+          const Text('Are You Sure You Want To Logout From Your Account ?'),
       actions: [
         TextButton(
             style: TextButton.styleFrom(
@@ -30,9 +30,8 @@ class CustomAuthAlert extends StatelessWidget {
             child: Text(
               'Stay',
               style: GoogleFonts.poppins(
-                  textStyle: const TextStyle(
-                fontSize: 14,
-              )),
+                  textStyle:
+                      const TextStyle(fontSize: 14, color: Colors.black)),
             )),
         TextButton(
             style: TextButton.styleFrom(
@@ -43,7 +42,6 @@ class CustomAuthAlert extends StatelessWidget {
               context
                   .read<AppStatusBloc>()
                   .add(UpdateLoginStatus(status: AppStatusLogin.loggedOut));
-                  
             },
             child: Text(
               'Leave',

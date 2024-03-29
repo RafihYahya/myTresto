@@ -65,7 +65,7 @@ class OrdersBloc extends Bloc<OrdersEvent, OrdersState> {
           final localAndroidNotifDetails = NotificationDetails(
             android: AndroidNotificationDetails(
                 randomInt.toString(), 'channelName',
-                color: AppColor.trestoRed,
+                color: event.color,
                 /* styleInformation: BigTextStyleInformation(
                     htmlFormatBigText: true,
                     htmlFormatContentTitle: true,

@@ -1,18 +1,18 @@
-
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tresto_v002a/Global/constants.dart';
+import 'package:tresto_v002a/LOGIC/Cubits/app_settings.cubit.dart';
 
 class DashboardChart extends StatelessWidget {
   final List<FlSpot> data;
   final int selectedIndex;
-  const DashboardChart({super.key,required this.data,required this.selectedIndex});
+  const DashboardChart(
+      {super.key, required this.data, required this.selectedIndex});
 
   @override
   Widget build(BuildContext context) {
-    
-
     Widget getBottomAxisDays(double value) {
       String text = '';
       switch (value.toInt()) {
@@ -50,6 +50,7 @@ class DashboardChart extends StatelessWidget {
         ),
       );
     }
+
     Widget getBottomAxisToday(double value) {
       String text = '';
       switch (value.toInt()) {
@@ -71,7 +72,6 @@ class DashboardChart extends StatelessWidget {
         case 5:
           text = '11';
           break;
-        
       }
       return Padding(
         padding: const EdgeInsets.only(top: 24.0),
@@ -85,6 +85,7 @@ class DashboardChart extends StatelessWidget {
         ),
       );
     }
+
     Widget getBottomAxisMonth(double value) {
       String text = '';
       switch (value.toInt()) {
@@ -121,8 +122,6 @@ class DashboardChart extends StatelessWidget {
         case 10:
           text = 'D';
           break;
-
-        
       }
       return Padding(
         padding: const EdgeInsets.only(top: 24.0),
@@ -149,7 +148,7 @@ class DashboardChart extends StatelessWidget {
                   tooltipBgColor: Colors.transparent,
                   tooltipRoundedRadius: 12.0,
                 )),
-            maxX: selectedIndex == 0 ? 6 : (selectedIndex == 1 ? 10: 5),
+            maxX: selectedIndex == 0 ? 6 : (selectedIndex == 1 ? 10 : 5),
             maxY: 15000,
             gridData: const FlGridData(
               show: false,
@@ -160,7 +159,11 @@ class DashboardChart extends StatelessWidget {
                 reservedSize: 45,
                 showTitles: true,
                 interval: 1,
-                getTitlesWidget: (value, meta) => selectedIndex == 0 ? getBottomAxisDays(value) : (selectedIndex == 1 ?  getBottomAxisMonth(value) : getBottomAxisToday(value) ),
+                getTitlesWidget: (value, meta) => selectedIndex == 0
+                    ? getBottomAxisDays(value)
+                    : (selectedIndex == 1
+                        ? getBottomAxisMonth(value)
+                        : getBottomAxisToday(value)),
               )),
               rightTitles: const AxisTitles(
                   sideTitles: SideTitles(
@@ -195,7 +198,8 @@ class DashboardChart extends StatelessWidget {
                 isCurved: true,
                 preventCurveOverShooting: true,
                 barWidth: 3,
-                color: AppColor.trestoRed,
+                color: AppColor.colorIndexTrestoList[
+                    context.watch<AppSettingsCubit>().state.colorIndex],
               ),
             ],
           )),

@@ -6,6 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:heroicons/heroicons.dart';
 import 'package:tresto_v002a/LOGIC/Cubits/app_indexes_cubit.dart';
 import 'package:tresto_v002a/Global/constants.dart';
+import 'package:tresto_v002a/LOGIC/Cubits/app_settings.cubit.dart';
 import 'package:tresto_v002a/LOGIC/Models/Global/app_indexes_data.dart';
 
 class BotNavBarAlternative extends StatelessWidget {
@@ -33,7 +34,8 @@ class BotNavBarAlternative extends StatelessWidget {
                   height: 35,
                   decoration: BoxDecoration(
                       color: state.index == 0
-                          ? AppColor.trestoRed25
+                          ? AppColor.colorIndexTrestoList25[
+                              context.watch<AppSettingsCubit>().state.colorIndex]
                           : Colors.transparent,
                       borderRadius: BorderRadius.circular(16.0)),
                   child: Row(
@@ -43,7 +45,12 @@ class BotNavBarAlternative extends StatelessWidget {
                       HeroIcon(
                         HeroIcons.home,
                         style: HeroIconStyle.outline,
-                        color: state.index == 0 ? Colors.red : Colors.grey,
+                        color: state.index == 0
+                            ? AppColor.colorIndexTrestoList[context
+                                .watch<AppSettingsCubit>()
+                                .state
+                                .colorIndex]
+                            : Colors.grey,
                         size: 28.0,
                       ),
                       const SizedBox(
@@ -57,10 +64,13 @@ class BotNavBarAlternative extends StatelessWidget {
                           softWrap: false,
                           'Dashboard',
                           style: GoogleFonts.poppins(
-                              textStyle: const TextStyle(
+                              textStyle: TextStyle(
                             fontSize: 12,
                             fontWeight: FontWeight.w500,
-                            color: Colors.red,
+                            color: AppColor.colorIndexTrestoList[context
+                                .watch<AppSettingsCubit>()
+                                .state
+                                .colorIndex],
                           )),
                         ),
                       )
@@ -80,7 +90,8 @@ class BotNavBarAlternative extends StatelessWidget {
                   height: 35,
                   decoration: BoxDecoration(
                       color: state.index == 1
-                          ? AppColor.trestoRed25
+                          ? AppColor.colorIndexTrestoList25[
+                              context.watch<AppSettingsCubit>().state.colorIndex]
                           : Colors.transparent,
                       borderRadius: BorderRadius.circular(16.0)),
                   child: Row(
@@ -90,7 +101,12 @@ class BotNavBarAlternative extends StatelessWidget {
                       HeroIcon(
                         HeroIcons.shoppingBag,
                         style: HeroIconStyle.outline,
-                        color: state.index == 1 ? Colors.red : Colors.grey,
+                        color: state.index == 1
+                            ? AppColor.colorIndexTrestoList[context
+                                .watch<AppSettingsCubit>()
+                                .state
+                                .colorIndex]
+                            : Colors.grey,
                         size: 28.0,
                       ),
                       const SizedBox(
@@ -104,10 +120,13 @@ class BotNavBarAlternative extends StatelessWidget {
                           softWrap: false,
                           'Orders',
                           style: GoogleFonts.poppins(
-                              textStyle: const TextStyle(
+                              textStyle: TextStyle(
                             fontSize: 12,
                             fontWeight: FontWeight.w500,
-                            color: Colors.red,
+                            color: AppColor.colorIndexTrestoList[context
+                                .watch<AppSettingsCubit>()
+                                .state
+                                .colorIndex],
                           )),
                         ),
                       )
@@ -127,7 +146,8 @@ class BotNavBarAlternative extends StatelessWidget {
                   height: 35,
                   decoration: BoxDecoration(
                       color: state.index == 2
-                          ? AppColor.trestoRed25
+                          ? AppColor.colorIndexTrestoList25[
+                              context.watch<AppSettingsCubit>().state.colorIndex]
                           : Colors.transparent,
                       borderRadius: BorderRadius.circular(16.0)),
                   child: Row(
@@ -137,7 +157,12 @@ class BotNavBarAlternative extends StatelessWidget {
                       HeroIcon(
                         HeroIcons.plus,
                         style: HeroIconStyle.outline,
-                        color: state.index == 2 ? Colors.red : Colors.grey,
+                        color: state.index == 2
+                            ? AppColor.colorIndexTrestoList[context
+                                .watch<AppSettingsCubit>()
+                                .state
+                                .colorIndex]
+                            : Colors.grey,
                         size: 28.0,
                       ),
                       const SizedBox(
@@ -151,10 +176,13 @@ class BotNavBarAlternative extends StatelessWidget {
                           softWrap: false,
                           'Create',
                           style: GoogleFonts.poppins(
-                              textStyle: const TextStyle(
+                              textStyle: TextStyle(
                             fontSize: 12,
                             fontWeight: FontWeight.w500,
-                            color: Colors.red,
+                            color: AppColor.colorIndexTrestoList[context
+                                .watch<AppSettingsCubit>()
+                                .state
+                                .colorIndex],
                           )),
                         ),
                       )
@@ -175,7 +203,8 @@ class BotNavBarAlternative extends StatelessWidget {
                   height: 35,
                   decoration: BoxDecoration(
                       color: state.index == 3
-                          ? AppColor.trestoRed25
+                          ? AppColor.colorIndexTrestoList25[
+                              context.watch<AppSettingsCubit>().state.colorIndex]
                           : Colors.transparent,
                       borderRadius: BorderRadius.circular(16.0)),
                   child: Row(
@@ -185,7 +214,12 @@ class BotNavBarAlternative extends StatelessWidget {
                       HeroIcon(
                         HeroIcons.listBullet,
                         style: HeroIconStyle.outline,
-                        color: state.index == 3 ? Colors.red : Colors.grey,
+                        color: state.index == 3
+                            ? AppColor.colorIndexTrestoList[context
+                                .watch<AppSettingsCubit>()
+                                .state
+                                .colorIndex]
+                            : Colors.grey,
                         size: 28.0,
                       ),
                       const SizedBox(
@@ -202,7 +236,12 @@ class BotNavBarAlternative extends StatelessWidget {
                               textStyle: TextStyle(
                             fontSize: 12,
                             fontWeight: FontWeight.w500,
-                            color: state.index == 3 ? Colors.red : Colors.grey,
+                            color: state.index == 3
+                                ? AppColor.colorIndexTrestoList[context
+                                    .watch<AppSettingsCubit>()
+                                    .state
+                                    .colorIndex]
+                                : Colors.grey,
                           )),
                         ),
                       )

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:heroicons/heroicons.dart';
 import 'package:tresto_v002a/Global/constants.dart';
+import 'package:tresto_v002a/LOGIC/Cubits/app_settings.cubit.dart';
 
 class CommandIdCard extends StatelessWidget {
   const CommandIdCard({
@@ -32,24 +34,35 @@ class CommandIdCard extends StatelessWidget {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            const HeroIcon(HeroIcons.shoppingBag,size: 20,),
-                            const SizedBox(width: 2.0,),
+                            const HeroIcon(
+                              HeroIcons.shoppingBag,
+                              size: 24,
+                            ),
+                            const SizedBox(
+                              width: 2.0,
+                            ),
                             Text(
                               'Commande',
                               style: GoogleFonts.poppins(
                                   textStyle: const TextStyle(
-                                      fontSize: 16.0, fontWeight: FontWeight.w600)),
+                                      fontSize: 16.0,
+                                      fontWeight: FontWeight.w600)),
                             ),
-                            const SizedBox(width: 6.0,),
+                            const SizedBox(
+                              width: 6.0,
+                            ),
                             Text(
                               '#137465',
                               style: GoogleFonts.poppins(
                                   textStyle: const TextStyle(
-                                      fontSize: 18.0, fontWeight: FontWeight.w600)),
+                                      fontSize: 18.0,
+                                      fontWeight: FontWeight.w600)),
                             ),
                           ],
                         ),
-                        const SizedBox(height: 4.0,),
+                        const SizedBox(
+                          height: 4.0,
+                        ),
                         Text(
                           'Thursday, January 31, 2008	',
                           style: GoogleFonts.poppins(
@@ -58,12 +71,15 @@ class CommandIdCard extends StatelessWidget {
                       ],
                     ),
                     Text(
-                      'En Attentes',
+                      'En Attente',
                       style: GoogleFonts.poppins(
-                          textStyle: const TextStyle(
-                              fontSize: 13.0,
-                              fontWeight: FontWeight.w500,
-                               color: AppColor.trestoRed)),
+                          textStyle: TextStyle(
+                              fontSize: 14.0,
+                              fontWeight: FontWeight.w600,
+                              color: AppColor.colorIndexTrestoList[context
+                                  .watch<AppSettingsCubit>()
+                                  .state
+                                  .colorIndex])),
                     ),
                   ],
                 ),

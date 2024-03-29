@@ -4,6 +4,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:heroicons/heroicons.dart';
 import 'package:tresto_v002a/Global/constants.dart';
 import 'package:tresto_v002a/LOGIC/Blocs/Orders/orders_bloc.dart';
+import 'package:tresto_v002a/LOGIC/Cubits/app_settings.cubit.dart';
+import 'package:tresto_v002a/LOGIC/Models/Global/app_settings.dart';
 import 'package:tresto_v002a/LOGIC/Models/orders_model.dart';
 import 'package:tresto_v002a/Layout/Pages/Orders/order_details_page.dart';
 
@@ -133,7 +135,10 @@ class CustomOrdersTile extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(horizontal: 6),
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(5),
-                            color: AppColor.primaryColor1),
+                            color: AppColor.colorIndexTrestoList25[context
+                                .watch<AppSettingsCubit>()
+                                .state
+                                .colorIndex]),
                         child: Text(orders?.amount == null
                             ? 'Error'
                             : orders!.amount.toString()),
@@ -173,7 +178,11 @@ class CustomOrdersTile extends StatelessWidget {
                   ),
                   Text(
                     "Element +${(orders?.amount == null ? 0 : orders!.amount!) < 2 ? "" : "s"}",
-                    style: const TextStyle(color: Colors.deepOrange),
+                    style: TextStyle(
+                        color: AppColor.colorIndexTrestoList[context
+                            .watch<AppSettingsCubit>()
+                            .state
+                            .colorIndex]),
                   )
                 ],
               ),
@@ -218,24 +227,31 @@ class CustomOrdersTile extends StatelessWidget {
                       Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) => BlocProvider.value(
                               value: BlocProvider.of<OrdersBloc>(context),
-                              child: const OrderDetailsPage())));
+                              child: BlocProvider.value(
+                                value: BlocProvider.of<AppSettingsCubit>(context),
+                                child: const OrderDetailsPage(),
+                              ))));
                     },
                     child: Text(
                       'Details',
                       style: GoogleFonts.poppins(
-                          textStyle: const TextStyle(
+                          textStyle: TextStyle(
                               fontWeight: FontWeight.w500,
                               fontSize: 11,
-                              color: AppColor.trestoRed)),
+                              color: AppColor.colorIndexTrestoList[context
+                                  .watch<AppSettingsCubit>()
+                                  .state
+                                  .colorIndex])),
                     ),
                   ),
                   const SizedBox(
                     width: 3,
                   ),
-                  const Icon(
+                  Icon(
                     Icons.keyboard_double_arrow_right,
                     size: 20,
-                    color: AppColor.primaryColor,
+                    color: AppColor.colorIndexTrestoList[
+                        context.watch<AppSettingsCubit>().state.colorIndex],
                   )
                 ],
               ),

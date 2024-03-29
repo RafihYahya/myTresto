@@ -39,7 +39,8 @@ class _SettingsPageState extends State<SettingsPage> {
                     ),
                     Expanded(
                       child: Slider(
-                        activeColor: AppColor.trestoRed,
+                        activeColor: AppColor.colorIndexTrestoList[
+                            context.watch<AppSettingsCubit>().state.colorIndex],
                         value: BlocProvider.of<AppSettingsCubit>(context)
                             .state
                             .textSize,
@@ -49,7 +50,7 @@ class _SettingsPageState extends State<SettingsPage> {
                         },
                         max: 18,
                         min: 8,
-                        divisions: 10,
+                        divisions: 5,
                         label:
                             "${BlocProvider.of<AppSettingsCubit>(context).state.textSize.toInt()}",
                       ),
@@ -75,7 +76,8 @@ class _SettingsPageState extends State<SettingsPage> {
                     ),
                     Expanded(
                       child: Slider(
-                        activeColor: AppColor.trestoRed,
+                        activeColor: AppColor.colorIndexTrestoList[
+                            context.watch<AppSettingsCubit>().state.colorIndex],
                         value: BlocProvider.of<AppSettingsCubit>(context)
                             .state
                             .appScale,
@@ -85,7 +87,7 @@ class _SettingsPageState extends State<SettingsPage> {
                         },
                         max: 2,
                         min: 0.2,
-                        divisions: 10,
+                        divisions: 5,
                         label: BlocProvider.of<AppSettingsCubit>(context)
                             .state
                             .appScale
@@ -116,8 +118,10 @@ class _SettingsPageState extends State<SettingsPage> {
                       )),
                     ),
                     Switch(
-                        focusColor: AppColor.trestoRed,
-                        activeColor: AppColor.trestoRed,
+                        focusColor: AppColor.colorIndexTrestoList[
+                            context.watch<AppSettingsCubit>().state.colorIndex],
+                        activeColor: AppColor.colorIndexTrestoList[
+                            context.watch<AppSettingsCubit>().state.colorIndex],
                         value: BlocProvider.of<AppSettingsCubit>(context)
                             .state
                             .isNotificationOn,
@@ -149,14 +153,16 @@ class _SettingsPageState extends State<SettingsPage> {
                       )),
                     ),
                     Switch(
-                        focusColor: AppColor.trestoRed,
-                        activeColor: AppColor.trestoRed,
+                        focusColor: AppColor.colorIndexTrestoList[
+                            context.watch<AppSettingsCubit>().state.colorIndex],
+                        activeColor: AppColor.colorIndexTrestoList[
+                            context.watch<AppSettingsCubit>().state.colorIndex],
                         value: BlocProvider.of<AppSettingsCubit>(context)
                             .state
                             .isDarkMode,
                         onChanged: (bool value) {
-                          BlocProvider.of<AppSettingsCubit>(context)
-                              .changeSettings(darkOn: value);
+                          /* BlocProvider.of<AppSettingsCubit>(context)
+                              .changeSettings(darkOn: value); */
                         }),
                   ],
                 ),
@@ -182,8 +188,10 @@ class _SettingsPageState extends State<SettingsPage> {
                       )),
                     ),
                     Switch(
-                        focusColor: AppColor.trestoRed,
-                        activeColor: AppColor.trestoRed,
+                        focusColor: AppColor.colorIndexTrestoList[
+                            context.watch<AppSettingsCubit>().state.colorIndex],
+                        activeColor: AppColor.colorIndexTrestoList[
+                            context.watch<AppSettingsCubit>().state.colorIndex],
                         value: BlocProvider.of<AppSettingsCubit>(context)
                             .state
                             .stayLoggedIn,
@@ -289,6 +297,7 @@ class ColorChoiceWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
+        logger.w(context.read<AppSettingsCubit>().state.colorIndex);
         BlocProvider.of<AppSettingsCubit>(context)
             .changeSettings(colorIndex: initialIndex);
       },

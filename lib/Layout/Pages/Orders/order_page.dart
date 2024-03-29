@@ -6,6 +6,7 @@ import 'package:heroicons/heroicons.dart';
 import 'package:tresto_v002a/Global/constants.dart';
 import 'package:tresto_v002a/LOGIC/Blocs/Orders/orders_bloc.dart';
 import 'package:tresto_v002a/LOGIC/Cubits/app_indexes_cubit.dart';
+import 'package:tresto_v002a/LOGIC/Cubits/app_settings.cubit.dart';
 import 'package:tresto_v002a/LOGIC/Models/Global/app_indexes_data.dart';
 import 'package:tresto_v002a/Layout/Widgets/CustomUtils/custom_alert_dialogue.dart';
 import 'package:tresto_v002a/Layout/Widgets/CustomUtils/custom_error.dart';
@@ -31,11 +32,12 @@ class _OrderPageState extends State<OrderPage> {
 
   @override
   Widget build(BuildContext context) {
+
     return BlocListener<OrdersBloc, OrdersState>(
       listener: (context, state) {
         if (state is OrdersError) {
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-              backgroundColor: AppColor.trestoRed,
+              backgroundColor: AppColor.colorIndexTrestoList[context.watch<AppSettingsCubit>().state.colorIndex],
               content: Text(
                 'Something Wrong Has Occured',
                 style: GoogleFonts.poppins(
@@ -127,7 +129,7 @@ class _OrderPageState extends State<OrderPage> {
                               size: 20,
                               color: isLiveOrderSelected
                                   ? Colors.grey[300]!
-                                  : AppColor.trestoRed,
+                                  : AppColor.colorIndexTrestoList[context.watch<AppSettingsCubit>().state.colorIndex],
                             ),
                             const SizedBox(
                               width: 10,
@@ -139,7 +141,7 @@ class _OrderPageState extends State<OrderPage> {
                                   fontSize: 15,
                                   color: isLiveOrderSelected
                                       ? Colors.grey[300]!
-                                      : AppColor.trestoRed),
+                                      : AppColor.colorIndexTrestoList[context.watch<AppSettingsCubit>().state.colorIndex],),
                             ),
                           ],
                         ),

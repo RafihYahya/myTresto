@@ -11,7 +11,10 @@ final class UpdateOrder extends OrdersEvent {}
 
 final class RemoveOrder extends OrdersEvent {}
 
-final class NewOrder extends OrdersEvent {}
+final class NewOrder extends OrdersEvent {
+  final Color color;
+  NewOrder({required this.color});
+}
 
 final class TurnOffStream extends OrdersEvent {}
 

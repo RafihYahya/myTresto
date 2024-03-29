@@ -9,6 +9,7 @@ import 'package:heroicons/heroicons.dart';
 import 'package:tresto_v002a/Global/constants.dart';
 import 'package:tresto_v002a/LOGIC/Blocs/Dashboard/dashboard_bloc.dart';
 import 'package:tresto_v002a/LOGIC/Cubits/app_indexes_cubit.dart';
+import 'package:tresto_v002a/LOGIC/Cubits/app_settings.cubit.dart';
 import 'package:tresto_v002a/LOGIC/Models/Global/app_indexes_data.dart';
 import 'package:tresto_v002a/Layout/Widgets/CustomUtils/custom_alert_dialogue.dart';
 import 'package:tresto_v002a/Layout/Widgets/CustomUtils/custom_error.dart';
@@ -66,7 +67,7 @@ class _DashBoardPageState extends State<DashBoardPage> {
       listener: (context, state) {
         if (state.status == DashboardStateStatus.error) {
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-              backgroundColor: AppColor.trestoRed,
+              backgroundColor: AppColor.colorIndexTrestoList[context.read<AppSettingsCubit>().state.colorIndex],
               content: Text(
                 'Something Wrong Has Occured',
                 style: GoogleFonts.poppins(

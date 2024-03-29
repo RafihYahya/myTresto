@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tresto_v002a/Global/constants.dart';
 import 'package:tresto_v002a/Global/webview_url_consts.dart';
 import 'package:tresto_v002a/LOGIC/Blocs/Dashboard/dashboard_bloc.dart';
 import 'package:tresto_v002a/LOGIC/Blocs/Orders/orders_bloc.dart';
 import 'package:tresto_v002a/LOGIC/Cubits/app_indexes_cubit.dart';
+import 'package:tresto_v002a/LOGIC/Cubits/app_settings.cubit.dart';
 import 'package:tresto_v002a/LOGIC/Models/Global/app_indexes_data.dart';
+import 'package:tresto_v002a/LOGIC/Models/Global/app_settings.dart';
 import 'package:tresto_v002a/Layout/Pages/Orders/order_page.dart';
 import 'package:tresto_v002a/Layout/Pages/DashBoard/dashboard_page.dart';
 import 'package:tresto_v002a/Layout/Pages/inappwebview_page.dart';
@@ -23,7 +26,9 @@ class _AppRoutingState extends State<AppRouting> {
   @override
   void initState() {
     super.initState();
-    BlocProvider.of<OrdersBloc>(context).add(NewOrder());
+    BlocProvider.of<OrdersBloc>(context).add(NewOrder(
+        color: AppColor.colorIndexTrestoList[
+            context.read<AppSettingsCubit>().state.colorIndex]));
     BlocProvider.of<DashboardBloc>(context).add(DashboardUpdate());
     //context.read<AuthBlocBloc>().add(UpdateToken());
   }
