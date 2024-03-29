@@ -77,7 +77,7 @@ class _MainAppState extends State<MainApp> {
   Widget build(BuildContext context) {
     //rebuild entire App when Settings Change
     return BlocBuilder<AppSettingsCubit, AppSettings>(
-      builder: (context, state) {
+      builder: (context, stateSettings) {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
           title: 'Tresto',

@@ -3,6 +3,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:heroicons/heroicons.dart';
 import 'package:tresto_v002a/Global/webview_url_consts.dart';
 import 'package:tresto_v002a/Layout/Pages/inappwebview_page.dart';
+import 'package:tresto_v002a/Layout/Pages/settings._page.dart';
 import 'package:tresto_v002a/Layout/Widgets/menu_custom_tile.dart';
 
 class MenuAlternativePage extends StatelessWidget {
@@ -16,7 +17,7 @@ class MenuAlternativePage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const SizedBox(
-            height: 28.0,
+            height: 20.0,
           ),
           /* AlternativeMenuCustomTile(
               showtitle: false,
@@ -277,6 +278,17 @@ class MenuAlternativePage extends StatelessWidget {
               color: Colors.black12,
             ),
           ),
+          AlternativeMenuCustomTile(
+              showtitle: false,
+              title: 'App Settings',
+              widget:const SettingsPage().animate().fadeIn(
+                  curve: Curves.easeInOut,
+                  duration: const Duration(milliseconds: 1200)),
+              myicon: const Icon(
+                Icons.settings,
+                size: 23,
+                color: Colors.grey,
+              )),
         ],
       ),
     );

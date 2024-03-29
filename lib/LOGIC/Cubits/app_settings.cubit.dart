@@ -8,5 +8,16 @@ class AppSettingsCubit extends Cubit<AppSettings> {
   final AppSettingsRepository settingsRepo;
   AppSettingsCubit(super.initialState, this.settingsRepo);
 
-  //implement function that update and change the  state 
+  //implement function that update and change the  state
+
+  void changeSettings({double? fontSize, double? appScale, bool? notifOn,
+      bool? darkOn, bool? remLogin, int? colorIndex}) {
+    emit(state.copyWith(
+        isDarkMode: darkOn,
+        isNotificationOn: notifOn,
+        colorIndex: colorIndex,
+        stayLoggedIn: remLogin,
+        textSize: fontSize,
+        appScale: appScale));
+  }
 }
