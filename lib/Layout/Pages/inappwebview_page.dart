@@ -55,6 +55,12 @@ class _InAppWebViewPageState extends State<InAppWebViewPage> {
         UserScript(
             source: widget.changeTresto ? JsInjection.rmNavBarNoFlicker : '',
             injectionTime: UserScriptInjectionTime.AT_DOCUMENT_START),
+        UserScript(
+            source: !widget.changeTresto
+                ? changeColorMutateObserver(AppColor.hexColorIndexTrestoList[
+                    context.read<AppSettingsCubit>().state.colorIndex])
+                : '',
+            injectionTime: UserScriptInjectionTime.AT_DOCUMENT_START)
       ]),
       shouldOverrideUrlLoading: (controller, navigationAction) async {
         return widget.allowRedirect
@@ -72,14 +78,14 @@ class _InAppWebViewPageState extends State<InAppWebViewPage> {
         webViewController = controller;
       },
       onLoadStart: (controller, url) {
-        controller.evaluateJavascript(
+        /*  controller.evaluateJavascript(
             source: changeBackgroundColor(AppColor.hexColorIndexTrestoList[
-                context.read<AppSettingsCubit>().state.colorIndex]));
+                context.read<AppSettingsCubit>().state.colorIndex])); */
       },
       onProgressChanged: (controller, progress) {
-        controller.evaluateJavascript(
+         controller.evaluateJavascript(
             source: changeBackgroundColor(AppColor.hexColorIndexTrestoList[
-                context.read<AppSettingsCubit>().state.colorIndex]));
+                context.read<AppSettingsCubit>().state.colorIndex])); 
 
         /*  widget.changeTresto ? controller.evaluateJavascript(source: '''
                 document.querySelectorAll("div > a#menu-item-0")[0].click();

@@ -199,9 +199,45 @@ window.addEventListener("DOMContentLoaded", (event) => {
 ''';
 }
 
+String changeColorMutateObserver(String color){
+  return 
+  
+  ''' 
+  const DEL_SELECTOR1 = 'body > div.absolute';
+const mo1 = new MutationObserver(onMutation);
+onMutation([{addedNodes: [document.documentElement]}]);
+observe();
+function onMutation(mutations) {
+  let stopped;
+  for (const {addedNodes} of mutations) {
+    for (const n of addedNodes) {
+      if (n.tagName) {
+        if (n.matches(DEL_SELECTOR1)) {
+          stopped = true;
+          mo1.disconnect();
+          n.style.backgroundColor = '$color'; 
+        } else if (n.querySelector(DEL_SELECTOR1)) {
+          stopped = true;
+          mo1.disconnect();
+          for (const el of n.querySelectorAll(DEL_SELECTOR1)) el.style.backgroundColor = '$color';
+        }
+      }
+    }
+  }
+  if (stopped) observe();
+}
+
+function observe() {
+  mo1.observe(document, {
+    subtree: true,
+    childList: true,
+  });
+}
+  ''';
+}
+
 String changeBackgroundColor(String color){
   return ''' 
-  document.querySelector("body > div").style.backgroundColor = '$color';
   document.querySelector('button.rounded-md').style.backgroundColor = '$color';
   ''';
 }
