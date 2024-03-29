@@ -216,9 +216,9 @@ class _LoginPageState extends State<LoginPage> {
                                     ),
                                     focusedErrorBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(12),
-                                      borderSide: const BorderSide(
+                                      borderSide:  BorderSide(
                                         width: 1,
-                                        color: AppColor.primaryColor,
+                                        color: AppColor.colorIndexTrestoList[stateSettings],
                                       ),
                                     ),
                                     fillColor: Colors.red,
@@ -241,7 +241,7 @@ class _LoginPageState extends State<LoginPage> {
                                         passwordVisible
                                             ? Icons.visibility
                                             : Icons.visibility_off,
-                                        color: AppColor.gray,
+                                        color: Colors.grey,
                                       ),
                                       onPressed: () {
                                         setState(
