@@ -70,7 +70,7 @@ class _MainAppState extends State<MainApp> {
     context
         .read<AppStatusBloc>()
         .add(BypassLogin(key: LocalStorageConsts.authToken));
-   // WorkManager.startWorkManager();
+    WorkManager.startWorkManager();
   }
 
   @override
