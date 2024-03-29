@@ -7,11 +7,11 @@ import 'package:tresto_v002a/LOGIC/Blocs/Dashboard/dashboard_bloc.dart';
 import 'package:tresto_v002a/LOGIC/Blocs/Orders/orders_bloc.dart';
 import 'package:tresto_v002a/LOGIC/Cubits/app_indexes_cubit.dart';
 import 'package:tresto_v002a/LOGIC/Models/Global/app_indexes_data.dart';
-import 'package:tresto_v002a/UI/Pages/Orders/order_page.dart';
-import 'package:tresto_v002a/UI/Pages/DashBoard/dashboard_page.dart';
-import 'package:tresto_v002a/UI/Pages/inappwebview_page.dart';
-import 'package:tresto_v002a/UI/Pages/Menu/menu_page.dart';
-import 'package:tresto_v002a/UI/Widgets/my_scaffold_widget.dart';
+import 'package:tresto_v002a/Layout/Pages/Orders/order_page.dart';
+import 'package:tresto_v002a/Layout/Pages/DashBoard/dashboard_page.dart';
+import 'package:tresto_v002a/Layout/Pages/inappwebview_page.dart';
+import 'package:tresto_v002a/Layout/Pages/Menu/menu_page.dart';
+import 'package:tresto_v002a/Layout/Widgets/my_scaffold_widget.dart';
 
 class AppRouting extends StatefulWidget {
   const AppRouting({super.key});

@@ -10,7 +10,7 @@ import 'package:tresto_v002a/LOGIC/Blocs/Auth/auth_bloc_bloc.dart';
 import 'package:tresto_v002a/LOGIC/Blocs/Dashboard/dashboard_bloc.dart';
 import 'package:tresto_v002a/LOGIC/Blocs/Orders/orders_bloc.dart';
 import 'package:tresto_v002a/LOGIC/Cubits/app_indexes_cubit.dart';
-import 'package:tresto_v002a/UI/Widgets/CustomUtils/custom_loading.dart';
+import 'package:tresto_v002a/Layout/Widgets/CustomUtils/custom_loading.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tresto_v002a/Global/constants.dart';
-import 'package:tresto_v002a/UI/Widgets/AppBars/bottom_nav_bar.dart';
-import 'package:tresto_v002a/UI/Widgets/AppBars/top_app_bar.dart';
+import 'package:tresto_v002a/Layout/Widgets/AppBars/bottom_nav_bar.dart';
+import 'package:tresto_v002a/Layout/Widgets/AppBars/top_app_bar.dart';
 
 class MyScaffold extends StatelessWidget {
   final Widget widget;

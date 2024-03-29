@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:heroicons/heroicons.dart';
 import 'package:tresto_v002a/Global/webview_url_consts.dart';
-import 'package:tresto_v002a/UI/Pages/inappwebview_page.dart';
+import 'package:tresto_v002a/Layout/Pages/inappwebview_page.dart';
 import 'package:tresto_v002a/Archive/MenuPageComps/menu_custom_tile.dart.old';
 
 class MenuAlternativePage extends StatelessWidget {

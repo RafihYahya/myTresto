@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tresto_v002a/Global/constants.dart';
-import 'package:tresto_v002a/UI/Widgets/OrderComp/order_client_info_card.dart';
-import 'package:tresto_v002a/UI/Widgets/OrderComp/order_command_card.dart';
-import 'package:tresto_v002a/UI/Widgets/OrderComp/order_details_card.dart';
+import 'package:tresto_v002a/Layout/Widgets/OrderComp/order_client_info_card.dart';
+import 'package:tresto_v002a/Layout/Widgets/OrderComp/order_command_card.dart';
+import 'package:tresto_v002a/Layout/Widgets/OrderComp/order_details_card.dart';
 
 class OrderDetailsPage extends StatelessWidget {
   const OrderDetailsPage({super.key});

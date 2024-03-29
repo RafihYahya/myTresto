@@ -7,10 +7,10 @@ import 'package:tresto_v002a/Global/constants.dart';
 import 'package:tresto_v002a/LOGIC/Blocs/Orders/orders_bloc.dart';
 import 'package:tresto_v002a/LOGIC/Cubits/app_indexes_cubit.dart';
 import 'package:tresto_v002a/LOGIC/Models/Global/app_indexes_data.dart';
-import 'package:tresto_v002a/UI/Widgets/CustomUtils/custom_alert_dialogue.dart';
-import 'package:tresto_v002a/UI/Widgets/CustomUtils/custom_error.dart';
-import 'package:tresto_v002a/UI/Widgets/CustomUtils/custom_loading.dart';
-import 'package:tresto_v002a/UI/Widgets/OrderComp/custom_order_tile.dart';
+import 'package:tresto_v002a/Layout/Widgets/CustomUtils/custom_alert_dialogue.dart';
+import 'package:tresto_v002a/Layout/Widgets/CustomUtils/custom_error.dart';
+import 'package:tresto_v002a/Layout/Widgets/CustomUtils/custom_loading.dart';
+import 'package:tresto_v002a/Layout/Widgets/OrderComp/custom_order_tile.dart';
 
 class OrderPage extends StatefulWidget {
   const OrderPage({super.key});
