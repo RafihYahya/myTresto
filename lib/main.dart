@@ -66,11 +66,11 @@ class MainApp extends StatefulWidget {
 class _MainAppState extends State<MainApp> {
   @override
   void initState() {
+    super.initState();
     context
         .read<AppStatusBloc>()
         .add(BypassLogin(key: LocalStorageConsts.authToken));
-    super.initState();
-    WorkManager.startWorkManager();
+   // WorkManager.startWorkManager();
   }
 
   @override
