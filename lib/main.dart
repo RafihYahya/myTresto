@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tresto_v002a/Global/constants.dart';
@@ -66,11 +66,12 @@ class MainApp extends StatefulWidget {
 class _MainAppState extends State<MainApp> {
   @override
   void initState() {
-    super.initState();
     context
         .read<AppStatusBloc>()
         .add(BypassLogin(key: LocalStorageConsts.authToken));
+    super.initState();
     WorkManager.startWorkManager();
+
   }
 
   @override
@@ -114,28 +115,18 @@ class _MainAppState extends State<MainApp> {
                     content: Text(
                       'Login Successful',
                       style: GoogleFonts.poppins(
-                          textStyle: const TextStyle(
-                              fontWeight: FontWeight.w400,
-                              fontSize: 12.0,
-                              color: Colors.black)),
+                        textStyle:const TextStyle(
+                          fontWeight: FontWeight.w400,
+                          fontSize: 12.0,
+                          color: Colors.black
+                        )
+                      ),
                     )));
               }
             }, builder: (context, state) {
               return switch (state.loginStatus) {
                 AppStatusLogin.loggedIn => const AppRouting(),
-                AppStatusLogin.loggedOut => FutureBuilder(future: () async {
-                    await Future.delayed(const Duration(seconds: 1));
-                    return true;
-                  }(), builder:
-                      (BuildContext context, AsyncSnapshot<void> snapshot) {
-                    if (snapshot.hasData) {
-                      return const LoginPage().animate().fadeIn(
-                          curve: Curves.easeIn,
-                          duration: const Duration(milliseconds: 500));
-                    } else {
-                      return const SizedBox();
-                    }
-                  })
+                AppStatusLogin.loggedOut => const LoginPage()
               };
             }),
           )),
