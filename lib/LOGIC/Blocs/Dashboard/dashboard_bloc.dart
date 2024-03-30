@@ -44,7 +44,7 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
   Future<void> dashboardRetrieveData(
       DashboardGet event, Emitter<DashboardState> emit) async {
     try {
-      await Future.delayed(const Duration(seconds: 6));
+      await Future.delayed(const Duration(seconds: 4));
       var dashboardData = await dashBoard.getDashboardData();
       emit(state.copyWith(
           status: DashboardStateStatus.ready,

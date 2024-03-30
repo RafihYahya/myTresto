@@ -32,7 +32,7 @@ class OrdersBloc extends Bloc<OrdersEvent, OrdersState> {
       GetOrders event, Emitter<OrdersState> emit) async {
     try {
       var ordersList = await orders.getOrderData();
-      await Future.delayed(const Duration(seconds: 5));
+      await Future.delayed(const Duration(seconds: 2));
       emit(OrdersReady(
           ordersRestoList: ordersFull,
           isAlreadyLoadedOnce: true,
