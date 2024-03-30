@@ -47,7 +47,7 @@ class _NavPopupMenuState extends State<NavPopupMenu> {
               position: PopupMenuPosition.under,
               color: Colors.white,
               //const Color.fromRGBO(196, 48, 71,    0.95), //const Color.fromRGBO(0, 0, 0, 0.95), //colors['MainTextWhite'],
-              elevation: 10,
+              elevation: 5,
               surfaceTintColor: Colors.white,
               
               shape: RoundedRectangleBorder(
@@ -82,7 +82,7 @@ class _NavPopupMenuState extends State<NavPopupMenu> {
                         },
                         child: Padding(
                           padding: const EdgeInsets.symmetric(
-                              vertical: 20.0, horizontal: 8.0),
+                              vertical: 16.0, horizontal: 8.0),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
