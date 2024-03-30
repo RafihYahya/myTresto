@@ -44,15 +44,17 @@ class _NavPopupMenuState extends State<NavPopupMenu> {
                 reverseIconReverser(); // this basically show and hide the popup on click
               },
               position: PopupMenuPosition.under,
-              color: AppColor.colorIndexTrestoList[context.watch<AppSettingsCubit>().state.colorIndex],
+              color: AppColor.colorIndexTrestoList[
+                  context.watch<AppSettingsCubit>().state.colorIndex],
               //const Color.fromRGBO(196, 48, 71,    0.95), //const Color.fromRGBO(0, 0, 0, 0.95), //colors['MainTextWhite'],
               elevation: 0,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(6.0),
               ),
-              child:  Icon(
+              child: Icon(
                 Icons.storefront,
-                color: AppColor.colorIndexTrestoList[context.watch<AppSettingsCubit>().state.colorIndex],
+                color: AppColor.colorIndexTrestoList[
+                    context.watch<AppSettingsCubit>().state.colorIndex],
                 size: 28,
               ),
               itemBuilder: (context) => context
@@ -76,16 +78,32 @@ class _NavPopupMenuState extends State<NavPopupMenu> {
                           });
                         },
                         child: Padding(
-                          padding: const EdgeInsets.all(24.0),
-                          child: Center(
-                              child: Text(
-                            e.substring(0, e.length - 1), //Same as Above
-                            style: GoogleFonts.poppins(
-                                textStyle: const TextStyle(
-                                    color: AppColor.mainTextWhite,
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 16)),
-                          )),
+                          padding: const EdgeInsets.symmetric(vertical: 20.0,horizontal: 2.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Container(
+                                height: 50,
+                                width: 50,
+                                decoration: const BoxDecoration(
+                                  color: Colors.black87,
+                                  shape: BoxShape.circle,
+                                ),
+                                child: null,
+                              ),
+                              const SizedBox(
+                                width: 12.0,
+                              ),
+                              Text(
+                                e.substring(0, e.length - 1), //Same as Above
+                                style: GoogleFonts.poppins(
+                                    textStyle: const TextStyle(
+                                        color: AppColor.mainTextWhite,
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 16)),
+                              ),
+                            ],
+                          ),
                         )),
                   )
                   .toList());
