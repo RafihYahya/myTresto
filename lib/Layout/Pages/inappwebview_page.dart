@@ -1,9 +1,11 @@
 import 'dart:collection';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:tresto_v002a/Global/constants.dart';
 import 'package:tresto_v002a/Global/webview_url_consts.dart';
 import 'package:tresto_v002a/LOGIC/Cubits/app_settings.cubit.dart';
@@ -63,11 +65,33 @@ class _InAppWebViewPageState extends State<InAppWebViewPage> {
             injectionTime: UserScriptInjectionTime.AT_DOCUMENT_START)
       ]),
       shouldOverrideUrlLoading: (controller, navigationAction) async {
-        return widget.allowRedirect
-            ? NavigationActionPolicy.ALLOW
-            : NavigationActionPolicy.CANCEL;
+        if (!widget.allowRedirect) {
+          !widget.changeTresto
+              ? controller.evaluateJavascript(
+                  source: JsInjection.callDartFunction)
+              : '';
+          return NavigationActionPolicy.CANCEL;
+        } else {
+          return NavigationActionPolicy.ALLOW;
+        }
       },
       onWebViewCreated: (controller) async {
+        if (!widget.changeTresto) {
+          controller.addJavaScriptHandler(
+              handlerName: 'DisplaySnackBar',
+              callback: (args) {
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                    backgroundColor: Colors.green,
+                    content: Text(
+                      'Restaurant Created Successfully!',
+                      style: GoogleFonts.poppins(
+                          textStyle: const TextStyle(
+                              fontSize: 12.0,
+                              fontWeight: FontWeight.w400,
+                              color: Colors.black87)),
+                    )));
+              });
+        }
         // String trestoCookie = await myStorage.read(key: 'tresto_session') ?? '';
 
         /* cookieManager.setCookie(
@@ -83,9 +107,9 @@ class _InAppWebViewPageState extends State<InAppWebViewPage> {
                 context.read<AppSettingsCubit>().state.colorIndex])); */
       },
       onProgressChanged: (controller, progress) {
-         controller.evaluateJavascript(
+        controller.evaluateJavascript(
             source: changeBackgroundColor(AppColor.hexColorIndexTrestoList[
-                context.read<AppSettingsCubit>().state.colorIndex])); 
+                context.read<AppSettingsCubit>().state.colorIndex]));
 
         /*  widget.changeTresto ? controller.evaluateJavascript(source: '''
                 document.querySelectorAll("div > a#menu-item-0")[0].click();
@@ -100,10 +124,6 @@ class _InAppWebViewPageState extends State<InAppWebViewPage> {
           /* controller.evaluateJavascript(
               source: JsInjection.removeConfigLongButton); */
         }
-        !widget.changeTresto
-            ? controller.evaluateJavascript(
-                source: JsInjection.addEventListenerAndRedirect)
-            : '';
       },
     );
   }

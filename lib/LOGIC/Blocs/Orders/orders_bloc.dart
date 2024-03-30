@@ -64,7 +64,14 @@ class OrdersBloc extends Bloc<OrdersEvent, OrdersState> {
         if (isNewOrderAvailable) {
           final localAndroidNotifDetails = NotificationDetails(
             android: AndroidNotificationDetails(
-                randomInt.toString(), 'channelName',
+                ledColor: AppColor.trestoRed,
+                ledOnMs: 1,
+                ledOffMs: 1,
+                icon: '@mipmap/launcher_icon',
+                largeIcon: const DrawableResourceAndroidBitmap(
+                    '@mipmap/launcher_icon'),
+                randomInt.toString(),
+                'channelName',
                 color: event.color,
                 /* styleInformation: BigTextStyleInformation(
                     htmlFormatBigText: true,
@@ -73,12 +80,15 @@ class OrdersBloc extends Bloc<OrdersEvent, OrdersState> {
                     'Owner: John Doe <br /> Price: 450Dh <br /> Amount: 24',
                     summaryText: 'New Order Have Arrived',
                     contentTitle: 'Order N: ${randomInt * 10}'), */
-                styleInformation: const DefaultStyleInformation(false, false),
+                styleInformation: const DefaultStyleInformation(true, true),
                 importance: Importance.max,
                 priority: Priority.max),
           );
-          LocalNotifications.displayNotifs2(randomInt, 'Order N: 83338',
-              'Owner: Rafih Yahya', localAndroidNotifDetails);
+          LocalNotifications.displayNotifs2(
+              randomInt,
+              'Restaurant: TrestoA',
+              'Order N:292930 <br ><br /> Client: Rafih Yahya',
+              localAndroidNotifDetails);
           if (state is OrdersReady) {
             logger.i('Here to Add New Data');
           }

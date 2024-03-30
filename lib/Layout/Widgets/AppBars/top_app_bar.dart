@@ -14,9 +14,10 @@ import 'package:tresto_v002a/Layout/Widgets/navbar_popup_menu.dart';
 class AlternativeCNavBar extends StatelessWidget {
   final bool showresto;
   final bool autoLead;
+  final bool showLogout;
 
   const AlternativeCNavBar(
-      {super.key, required this.autoLead, required this.showresto});
+      {super.key, required this.autoLead, required this.showresto,required this.showLogout});
 
   @override
   Widget build(BuildContext context) {
@@ -116,7 +117,7 @@ class AlternativeCNavBar extends StatelessWidget {
                       const SizedBox(
                         width: 20,
                       ),
-                      GestureDetector(
+                     showLogout ? GestureDetector(
                           onTap: () {
                             showDialog(
                                 context: context,
@@ -125,7 +126,7 @@ class AlternativeCNavBar extends StatelessWidget {
                           child: const HeroIcon(
                             HeroIcons.arrowLeftEndOnRectangle,
                             size: 24.0,
-                          ))
+                          )) : const SizedBox(),
                     ],
                   )
                 ],

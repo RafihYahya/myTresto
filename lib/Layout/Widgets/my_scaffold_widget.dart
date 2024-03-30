@@ -22,6 +22,7 @@ class MyScaffold extends StatelessWidget {
             child: AlternativeCNavBar(
               autoLead: false,
               showresto: true,
+              showLogout: true,
             )),
         bottomNavigationBar: const BotNavBarAlternative(),
         body:widget);

@@ -34,6 +34,7 @@ class AlternativeMenuCustomTile extends StatelessWidget {
                             child: AlternativeCNavBar(
                               autoLead: true,
                               showresto: true,
+                              showLogout: false,
                             )),
                         body: widget),
                   ))),

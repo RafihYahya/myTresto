@@ -169,8 +169,10 @@ function observe() {
   static const String addEventListenerAndRedirect =
       '''document.querySelector("div > button").addEventListener("click",() => 
                 { 
- window.flutter_inappwebview.callHandler('Test');
+ window.flutter_inappwebview.callHandler('DisplaySnackBar');
                 })''';
+
+  static const String callDartFunction = '''  window.flutter_inappwebview.callHandler('DisplaySnackBar');''';
   static const String onClickHandler = r'''
  ''';
   static const String jsUnhideShow = r'''
