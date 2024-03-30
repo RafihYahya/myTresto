@@ -78,7 +78,7 @@ class _NavPopupMenuState extends State<NavPopupMenu> {
                           });
                         },
                         child: Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 20.0,horizontal: 2.0),
+                          padding: const EdgeInsets.symmetric(vertical: 20.0,horizontal: 8.0),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -92,7 +92,7 @@ class _NavPopupMenuState extends State<NavPopupMenu> {
                                 child: null,
                               ),
                               const SizedBox(
-                                width: 12.0,
+                                width: 15.0,
                               ),
                               Text(
                                 e.substring(0, e.length - 1), //Same as Above
