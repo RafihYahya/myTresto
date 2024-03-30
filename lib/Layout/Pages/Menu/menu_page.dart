@@ -278,7 +278,7 @@ class MenuAlternativePage extends StatelessWidget {
               color: Colors.black12,
             ),
           ),
-          AlternativeMenuCustomTile(
+         /*  AlternativeMenuCustomTile(
               showtitle: false,
               title: 'App Settings',
               widget:const SettingsPage().animate().fadeIn(
@@ -288,7 +288,7 @@ class MenuAlternativePage extends StatelessWidget {
                 Icons.settings,
                 size: 23,
                 color: Colors.grey,
-              )),
+              )), */
         ],
       ),
     );
