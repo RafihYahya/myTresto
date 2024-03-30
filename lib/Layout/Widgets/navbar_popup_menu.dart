@@ -34,6 +34,7 @@ class _NavPopupMenuState extends State<NavPopupMenu> {
       child: BlocBuilder<DashboardBloc, DashboardState>(
         builder: (context, state) {
           return PopupMenuButton(
+            
               onOpened: () {
                 reverseIconReverser(); // this basically show and hide the popup on click
               },
@@ -44,11 +45,13 @@ class _NavPopupMenuState extends State<NavPopupMenu> {
                 reverseIconReverser(); // this basically show and hide the popup on click
               },
               position: PopupMenuPosition.under,
-              color: AppColor.colorIndexTrestoList[
-                  context.watch<AppSettingsCubit>().state.colorIndex],
+              color: Colors.white,
               //const Color.fromRGBO(196, 48, 71,    0.95), //const Color.fromRGBO(0, 0, 0, 0.95), //colors['MainTextWhite'],
-              elevation: 0,
+              elevation: 10,
+              surfaceTintColor: Colors.white,
+              
               shape: RoundedRectangleBorder(
+                
                 borderRadius: BorderRadius.circular(6.0),
               ),
               child: Icon(
@@ -78,29 +81,32 @@ class _NavPopupMenuState extends State<NavPopupMenu> {
                           });
                         },
                         child: Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 20.0,horizontal: 8.0),
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 20.0, horizontal: 8.0),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Container(
-                                height: 50,
-                                width: 50,
-                                decoration: const BoxDecoration(
-                                  color: Colors.black87,
-                                  shape: BoxShape.circle,
-                                ),
+                                height: 60,
+                                width: 60,
+                                decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    image: DecorationImage(
+                                        fit: BoxFit.cover,
+                                        image:
+                                            Image.asset(Images.burger).image)),
                                 child: null,
                               ),
                               const SizedBox(
-                                width: 15.0,
+                                width: 20.0,
                               ),
                               Text(
                                 e.substring(0, e.length - 1), //Same as Above
                                 style: GoogleFonts.poppins(
                                     textStyle: const TextStyle(
-                                        color: AppColor.mainTextWhite,
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 16)),
+                                        color: AppColor.trestoblack90,
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 15)),
                               ),
                             ],
                           ),

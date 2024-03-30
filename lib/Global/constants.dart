@@ -49,6 +49,16 @@ final class AppColor {
   static const Color trestobrown25 = Color.fromRGBO(121, 85, 72, 0.20);
   static const Color trestoblack25 = Color.fromRGBO(0, 0, 0, 0.20);
 
+  static const Color trestoRed090 = Color.fromRGBO(244, 67, 54, 0.90);
+  static const Color trestoGreen90 = Color.fromRGBO(76, 175, 80, 0.90);
+  static const Color trestoBlue90 = Color.fromRGBO(33, 150, 243, 0.90);
+  static const Color trestoOrange90 = Color.fromRGBO(255, 152, 0, 0.90);
+  static const Color trestoPurple90 = Color.fromRGBO(156, 39, 176, 0.90);
+  static const Color trestoPink90 = Color.fromRGBO(233, 30, 99, 0.90);
+  static const Color trestocyan90 = Color.fromRGBO(0, 188, 212, 0.90);
+  static const Color trestobrown90 = Color.fromRGBO(121, 85, 72, 0.90);
+  static const Color trestoblack90 = Color.fromRGBO(0, 0, 0, 0.90);
+
   static const List<Color> colorIndexTrestoList = [
     trestoGreen,
     trestoBlue,
@@ -81,6 +91,17 @@ final class AppColor {
     trestobrown25,
     trestocyan25,
     trestoblack25,
+  ];
+  static const List<Color> colorIndexTrestoList90 = [
+    trestoGreen90,
+    trestoBlue90,
+    trestoOrange90,
+    trestoPurple90,
+    trestoPink90,
+    trestoRed090,
+    trestobrown90,
+    trestocyan90,
+    trestoblack90,
   ];
 }
 
