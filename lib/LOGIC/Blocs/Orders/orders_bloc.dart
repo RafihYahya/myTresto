@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:math';
 
 import 'package:bloc/bloc.dart';
@@ -9,6 +10,7 @@ import 'package:tresto_v002a/LOGIC/Models/orders_model.dart';
 import 'package:tresto_v002a/LOGIC/Repos/orders_repo.dart';
 import 'package:tresto_v002a/Debug/mock_data_testing.dart';
 import 'package:tresto_v002a/notif_init.dart';
+import 'package:http/http.dart' as http;
 
 part 'orders_event.dart';
 part 'orders_state.dart';
@@ -62,17 +64,21 @@ class OrdersBloc extends Bloc<OrdersEvent, OrdersState> {
         var isNewOrderAvailable = await orders.checkAnyNewOrdersAreAvailable();
         //jsson data with bool and new orders
         if (isNewOrderAvailable) {
+          final http.Response response = await http.get(Uri.parse(
+              'https://lh5.googleusercontent.com/p/AF1QipPtNBIXNFKRihvNWiG0zBqN2efVvkLrBkBJfYb_=w160-h160-k-no'));
+
           final localAndroidNotifDetails = NotificationDetails(
             android: AndroidNotificationDetails(
                 ledColor: AppColor.trestoRed,
                 ledOnMs: 1,
                 ledOffMs: 1,
                 icon: '@mipmap/launcher_icon',
-                largeIcon: const DrawableResourceAndroidBitmap(
-                    '@mipmap/launcher_icon'),
+                largeIcon: ByteArrayAndroidBitmap.fromBase64String(
+                    base64Encode(response.bodyBytes)),
                 randomInt.toString(),
                 'channelName',
                 color: event.color,
+                colorized: true,
                 /* styleInformation: BigTextStyleInformation(
                     htmlFormatBigText: true,
                     htmlFormatContentTitle: true,
