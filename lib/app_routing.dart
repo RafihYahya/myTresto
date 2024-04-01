@@ -11,6 +11,7 @@ import 'package:tresto_v002a/LOGIC/Models/Global/app_indexes_data.dart';
 import 'package:tresto_v002a/LOGIC/Models/Global/app_settings.dart';
 import 'package:tresto_v002a/Layout/Pages/Orders/order_page.dart';
 import 'package:tresto_v002a/Layout/Pages/DashBoard/dashboard_page.dart';
+import 'package:tresto_v002a/Layout/Pages/create_order_page.dart';
 import 'package:tresto_v002a/Layout/Pages/inappwebview_page.dart';
 import 'package:tresto_v002a/Layout/Pages/Menu/menu_page.dart';
 import 'package:tresto_v002a/Layout/Widgets/my_scaffold_widget.dart';
@@ -39,7 +40,8 @@ class _AppRoutingState extends State<AppRouting> {
     List<Widget> routes = [
       const DashBoardPage(),
       const OrderPage(),
-      const InAppWebViewPage(
+      const CreateOrder(),
+      /* const InAppWebViewPage(
         changeTresto: false,
         url: WebViewUrls.createResto,
         allowRedirect: false,
@@ -47,7 +49,7 @@ class _AppRoutingState extends State<AppRouting> {
           curve: Curves.easeIn,
           duration: const Duration(
               milliseconds:
-                  300)), //const MenuCreatePage(), he is Retarded,Trust Me
+                  300)),  */ //const MenuCreatePage(), he is Retarded,Trust Me
       const MenuAlternativePage().animate().fade(
           curve: Curves.easeIn, duration: const Duration(milliseconds: 300)),
     ];

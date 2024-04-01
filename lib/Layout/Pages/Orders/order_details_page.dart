@@ -23,72 +23,87 @@ class OrderDetailsPage extends StatelessWidget {
         shadowColor: Colors.transparent,
         surfaceTintColor: Colors.transparent,
       ),
-      body: SingleChildScrollView(
-        child: Center(
-          child: Column(
-            children: [
-              const SizedBox(
-                height: 8.0,
-              ),
-              const CommandIdCard(),
-              const SizedBox(
-                height: 4.0,
-              ),
-              const OrderDetailsCard(),
-              const SizedBox(
-                height: 4.0,
-              ),
-              const ClientDataCard(),
-              const SizedBox(
-                height: 24.0,
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Expanded(
-                      child: Container(
-                        height: 60,
-                        decoration: BoxDecoration(
-                            color: Colors.green,
-                            borderRadius: BorderRadius.circular(8.0)),
-                        child: Center(
-                            child: Text(
-                          'Accept',
-                          style: GoogleFonts.poppins(
-                              textStyle: const TextStyle(
-                                  fontSize: 15.0, fontWeight: FontWeight.w500)),
-                        )),
-                      ),
-                    ),
-                    const SizedBox(
-                      width: 12.0,
-                    ),
-                    Expanded(
-                      child: Container(
-                        height: 60,
-                        decoration: BoxDecoration(
-                            color: Colors.red,
-                            borderRadius: BorderRadius.circular(8.0)),
-                        child: Center(
-                            child: Text(
-                          'Reject',
-                          style: GoogleFonts.poppins(
-                              textStyle: const TextStyle(
-                                  fontSize: 15.0, fontWeight: FontWeight.w500)),
-                        )),
-                      ),
-                    ),
-                  ],
+      body: const Stack(alignment: Alignment.bottomCenter, children: [
+        SingleChildScrollView(
+          child: Center(
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 8.0,
                 ),
-              ),
-              const SizedBox(
-                height: 24.0,
-              )
-            ],
+                CommandIdCard(),
+                SizedBox(
+                  height: 4.0,
+                ),
+                OrderDetailsCard(),
+                SizedBox(
+                  height: 4.0,
+                ),
+                ClientDataCard(),
+                SizedBox(
+                  height: 24.0,
+                ),
+                SizedBox(
+                  height: 24.0,
+                )
+              ],
+            ),
           ),
         ),
+        Padding(
+          padding: EdgeInsets.only(bottom: 16.0),
+          child: CallToAction(),
+        ),
+      ]),
+    );
+  }
+}
+
+class CallToAction extends StatelessWidget {
+  const CallToAction({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 10.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Expanded(
+            child: Container(
+              height: 55,
+              decoration: BoxDecoration(
+                  color: Colors.green,
+                  borderRadius: BorderRadius.circular(8.0)),
+              child: Center(
+                  child: Text(
+                'Accept',
+                style: GoogleFonts.poppins(
+                    textStyle: const TextStyle(
+                        fontSize: 15.0, fontWeight: FontWeight.w500)),
+              )),
+            ),
+          ),
+          const SizedBox(
+            width: 16.0,
+          ),
+          Expanded(
+            child: Container(
+              height: 55,
+              decoration: BoxDecoration(
+                  color: Colors.red, borderRadius: BorderRadius.circular(8.0)),
+              child: Center(
+                  child: Text(
+                'Reject',
+                style: GoogleFonts.poppins(
+                    textStyle: const TextStyle(
+                        fontSize: 15.0, fontWeight: FontWeight.w500)),
+              )),
+            ),
+          ),
+        ],
       ),
     );
   }

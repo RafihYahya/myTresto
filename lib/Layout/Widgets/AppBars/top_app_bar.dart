@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:heroicons/heroicons.dart';
 import 'package:tresto_v002a/LOGIC/Blocs/Dashboard/dashboard_bloc.dart';
 import 'package:tresto_v002a/LOGIC/Cubits/app_indexes_cubit.dart';
 import 'package:tresto_v002a/LOGIC/Cubits/app_settings.cubit.dart';
 import 'package:tresto_v002a/LOGIC/Models/Global/app_indexes_data.dart';
 import 'package:tresto_v002a/Global/constants.dart';
-import 'package:tresto_v002a/Layout/Widgets/CustomUtils/custom_alert_auth_dialogue.dart';
 import 'package:tresto_v002a/Layout/Widgets/CustomUtils/custom_loading.dart';
 import 'package:tresto_v002a/Layout/Widgets/navbar_popup_menu.dart';
 
@@ -17,7 +15,10 @@ class AlternativeCNavBar extends StatelessWidget {
   final bool showLogout;
 
   const AlternativeCNavBar(
-      {super.key, required this.autoLead, required this.showresto,required this.showLogout});
+      {super.key,
+      required this.autoLead,
+      required this.showresto,
+      required this.showLogout});
 
   @override
   Widget build(BuildContext context) {
@@ -62,9 +63,12 @@ class AlternativeCNavBar extends StatelessWidget {
                               padding: const EdgeInsets.symmetric(
                                   vertical: 5, horizontal: 8),
                               decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(8),
-                                color: AppColor.colorIndexTrestoList25[context.watch<AppSettingsCubit>().state.colorIndex] //Color.fromRGBO(255, 237, 244, 1),
-                              ),
+                                  borderRadius: BorderRadius.circular(8),
+                                  color: AppColor.colorIndexTrestoList25[context
+                                      .watch<AppSettingsCubit>()
+                                      .state
+                                      .colorIndex] //Color.fromRGBO(255, 237, 244, 1),
+                                  ),
                               child: Row(
                                 children: [
                                   context.watch<IndexesCubit>().state.status ==
@@ -115,18 +119,8 @@ class AlternativeCNavBar extends StatelessWidget {
                             )
                           : const SizedBox(),
                       const SizedBox(
-                        width: 20,
+                        width: 8.0,
                       ),
-                     showLogout ? GestureDetector(
-                          onTap: () {
-                            showDialog(
-                                context: context,
-                                builder: (context) => const CustomAuthAlert());
-                          },
-                          child: const HeroIcon(
-                            HeroIcons.arrowLeftEndOnRectangle,
-                            size: 24.0,
-                          )) : const SizedBox(),
                     ],
                   )
                 ],

@@ -82,13 +82,13 @@ class _NavPopupMenuState extends State<NavPopupMenu> {
                         },
                         child: Padding(
                           padding: const EdgeInsets.symmetric(
-                              vertical: 16.0, horizontal: 8.0),
+                              vertical: 16.0, horizontal: 2.0),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Container(
-                                height: 60,
-                                width: 60,
+                                height: 35,
+                                width: 35,
                                 decoration: BoxDecoration(
                                     shape: BoxShape.circle,
                                     image: DecorationImage(
@@ -98,7 +98,7 @@ class _NavPopupMenuState extends State<NavPopupMenu> {
                                 child: null,
                               ),
                               const SizedBox(
-                                width: 20.0,
+                                width: 16.0,
                               ),
                               Text(
                                 e.substring(0, e.length - 1), //Same as Above
@@ -106,7 +106,7 @@ class _NavPopupMenuState extends State<NavPopupMenu> {
                                     textStyle: const TextStyle(
                                         color: AppColor.trestoblack90,
                                         fontWeight: FontWeight.w500,
-                                        fontSize: 15)),
+                                        fontSize: 12)),
                               ),
                             ],
                           ),
