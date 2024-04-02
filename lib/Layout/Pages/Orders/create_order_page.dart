@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tresto_v002a/Global/constants.dart';
+import 'package:tresto_v002a/LOGIC/Cubits/OrderForm/order_form_cubit.dart';
 import 'package:tresto_v002a/Layout/Widgets/OrdersWidgets/OrderCreateWidgets/create_order_form_choice.dart';
 import 'package:tresto_v002a/Layout/Widgets/OrdersWidgets/OrderCreateWidgets/create_order_form_delivery_section.dart';
 import 'package:tresto_v002a/Layout/Widgets/OrdersWidgets/OrderCreateWidgets/new_client_form_create_order.dart';
@@ -20,34 +22,16 @@ final List<Widget> tabs = [
 ];
 
 class _CreateOrderState extends State<CreateOrder> {
-  late FocusNode myFocusNode;
 
-  @override
-  void initState() {
-    super.initState();
-    myFocusNode = FocusNode();
-  }
+ 
 
-  @override
-  void dispose() {
-    myFocusNode.dispose();
-    super.dispose();
-  }
+  
 
-  bool isClient = false;
-  int deliveryMethodIndex = 0;
+  
   String? dropDownDeliverySelectedValue;
-  void toggleIsClient(bool value) {
-    setState(() {
-      isClient = value;
-    });
-  }
+ 
 
-  void changeDeliveryIndex(int index) {
-    setState(() {
-      deliveryMethodIndex = index;
-    });
-  }
+  
 
   @override
   Widget build(BuildContext context) {
@@ -75,17 +59,15 @@ class _CreateOrderState extends State<CreateOrder> {
                       const SizedBox(
                         height: 24,
                       ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                      const Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 10.0),
                         child: CreateOrderFormChoice(
-                          isClient: isClient,
-                          togglebool: toggleIsClient,
                         ),
                       ),
                       const SizedBox(
                         height: 18.0,
                       ),
-                      NewClientFormCreateOrder(myFocusNode: myFocusNode),
+                      const NewClientFormCreateOrder(),
                       const SizedBox(
                         height: 12,
                       ),
@@ -105,17 +87,16 @@ class _CreateOrderState extends State<CreateOrder> {
                       ),
                       OutlineButtonFullWidth(
                         initialValue: 0,
-                        changeIndex: changeDeliveryIndex,
-                        borderColor: deliveryMethodIndex == 0
+                        borderColor: context.watch<OrderFormCubit>().state.deliveryMethodIndex == 0
                             ? AppColor.trestoRed
                             : Colors.grey[300]!,
                         title: 'Livraison',
-                        textColor: deliveryMethodIndex == 0
+                        textColor: context.watch<OrderFormCubit>().state.deliveryMethodIndex == 0
                             ? Colors.black87
                             : Colors.grey[300]!,
                         icon: Icon(
                           Icons.delivery_dining_outlined,
-                          color: deliveryMethodIndex == 0
+                          color: context.watch<OrderFormCubit>().state.deliveryMethodIndex == 0
                               ? Colors.black87
                               : Colors.grey[300]!,
                           size: 24,
@@ -126,17 +107,16 @@ class _CreateOrderState extends State<CreateOrder> {
                       ),
                       OutlineButtonFullWidth(
                         initialValue: 1,
-                        changeIndex: changeDeliveryIndex,
-                        borderColor: deliveryMethodIndex == 1
+                        borderColor: context.watch<OrderFormCubit>().state.deliveryMethodIndex == 1
                             ? AppColor.trestoRed
                             : Colors.grey[300]!,
                         title: 'A Importer',
-                        textColor: deliveryMethodIndex == 1
+                        textColor: context.watch<OrderFormCubit>().state.deliveryMethodIndex == 1
                             ? Colors.black87
                             : Colors.grey[300]!,
                         icon: Icon(
                           Icons.shopping_bag_outlined,
-                          color: deliveryMethodIndex == 1
+                          color: context.watch<OrderFormCubit>().state.deliveryMethodIndex == 1
                               ? Colors.black87
                               : Colors.grey[300]!,
                           size: 24,
@@ -147,17 +127,16 @@ class _CreateOrderState extends State<CreateOrder> {
                       ),
                       OutlineButtonFullWidth(
                         initialValue: 2,
-                        changeIndex: changeDeliveryIndex,
-                        borderColor: deliveryMethodIndex == 2
+                        borderColor: context.watch<OrderFormCubit>().state.deliveryMethodIndex == 2
                             ? AppColor.trestoRed
                             : Colors.grey[300]!,
                         title: 'Sur Place',
-                        textColor: deliveryMethodIndex == 2
+                        textColor: context.watch<OrderFormCubit>().state.deliveryMethodIndex == 2
                             ? Colors.black87
                             : Colors.grey[300]!,
                         icon: Icon(
                           Icons.place_outlined,
-                          color: deliveryMethodIndex == 2
+                          color: context.watch<OrderFormCubit>().state.deliveryMethodIndex == 2
                               ? Colors.black87
                               : Colors.grey[300]!,
                           size: 24,
@@ -180,8 +159,7 @@ class _CreateOrderState extends State<CreateOrder> {
                       const SizedBox(
                         height: 14.0,
                       ),
-                      CreateOrderFormDeliverySection(
-                        selectedValue: dropDownDeliverySelectedValue,
+                      const CreateOrderFormDeliverySection(
                       ),
                       const SizedBox(
                         height: 18,

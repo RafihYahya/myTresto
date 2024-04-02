@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tresto_v002a/Global/constants.dart';
+import 'package:tresto_v002a/LOGIC/Cubits/OrderForm/order_form_cubit.dart';
 
 class CreateOrderFormDeliverySection extends StatefulWidget {
-  final String? selectedValue;
   const CreateOrderFormDeliverySection({
     super.key,
-    required this.selectedValue,
   });
 
   @override
@@ -15,7 +16,21 @@ class CreateOrderFormDeliverySection extends StatefulWidget {
       _CreateOrderFormDeliverySectionState();
 }
 
-List<String> listOfValue = ['1', '2', '3', '4', '5'];
+List<String> listOfZoneValue = ['Empty For Now'];
+List<String> listOfDelayValue = [
+  '11:30 - 12:00',
+  '12:00 - 12:30',
+  '12:30 - 13:00',
+  '13:00 - 13:30',
+  '13:30 - 14:00',
+  '14:00 - 14:30',
+  '14:30 - 15:00',
+  '15:00 - 15:30',
+  '15:30 - 16:00',
+  '16:00 - 16:30',
+  '16:30 - 17:00',
+  '17:00 - 17:30',
+];
 
 class _CreateOrderFormDeliverySectionState
     extends State<CreateOrderFormDeliverySection> {
@@ -26,6 +41,8 @@ class _CreateOrderFormDeliverySectionState
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
           child: DropdownButtonFormField(
+              menuMaxHeight: MediaQuery.of(context).size.height * 0.75,
+              isExpanded: true,
               hint: Text(
                 '-- Sélectionnez une zone --',
                 style: GoogleFonts.poppins(
@@ -56,21 +73,32 @@ class _CreateOrderFormDeliverySectionState
                       color: Colors.grey[300]!,
                     )),
               ),
-              items: listOfValue
+              items: listOfZoneValue
                   .map((e) => DropdownMenuItem(
-                    value: e,
-                    child: Text(e)))
+                      value: e,
+                      child: Text(
+                        e,
+                        style: GoogleFonts.poppins(
+                            textStyle: const TextStyle(
+                                fontSize: 12.0, fontWeight: FontWeight.w500)),
+                      )))
                   .toList(),
-                  onSaved: (value) {
-                 
-               },
+              onSaved: (value) {
+                context
+                    .read<OrderFormCubit>()
+                    .updateSelectedDeliveryZoneValue(value!);
+              },
               onChanged: (value) {
-                
+                context
+                    .read<OrderFormCubit>()
+                    .updateSelectedDeliveryZoneValue(value!);
               }),
         ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
           child: DropdownButtonFormField(
+              menuMaxHeight: MediaQuery.of(context).size.height * 0.75,
+              isExpanded: true,
               hint: Text(
                 "-- Sélectionnez l'heure --",
                 style: GoogleFonts.poppins(
@@ -101,26 +129,25 @@ class _CreateOrderFormDeliverySectionState
                       color: Colors.grey[300]!,
                     )),
               ),
-              items: const [
-                DropdownMenuItem(
-                  value: "miaw",
-                  child: Text('miaw'),
-                ),
-                DropdownMenuItem(
-                  value: "miaw",
-                  child: Text('miaw'),
-                ),
-                DropdownMenuItem(
-                  value: "miaw",
-                  child: Text('miaw'),
-                ),
-                DropdownMenuItem(
-                  value: "miaw",
-                  child: Text('miaw'),
-                ),
-              ],
+              items: listOfDelayValue
+                  .map((e) => DropdownMenuItem(
+                      value: e,
+                      child: Text(
+                        e,
+                        style: GoogleFonts.poppins(
+                            textStyle: const TextStyle(
+                                fontSize: 12.0, fontWeight: FontWeight.w500)),
+                      )))
+                  .toList(),
+              onSaved: (newValue) {
+                context
+                    .read<OrderFormCubit>()
+                    .updateSelectedDeliveryDelayValue(newValue!);
+              },
               onChanged: (value) {
-                print(value);
+                context
+                    .read<OrderFormCubit>()
+                    .updateSelectedDeliveryDelayValue(value!);
               }),
         ),
         Padding(

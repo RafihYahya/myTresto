@@ -8,6 +8,7 @@ import 'package:tresto_v002a/LOGIC/Blocs/AppStatus/app_status_state.dart';
 import 'package:tresto_v002a/LOGIC/Blocs/Dashboard/dashboard_bloc.dart';
 import 'package:tresto_v002a/LOGIC/Blocs/Orders/orders_bloc.dart';
 import 'package:tresto_v002a/LOGIC/Blocs/Auth/auth_bloc_bloc.dart';
+import 'package:tresto_v002a/LOGIC/Cubits/OrderForm/order_form_cubit.dart';
 import 'package:tresto_v002a/LOGIC/Cubits/app_indexes_cubit.dart';
 import 'package:tresto_v002a/LOGIC/Cubits/app_settings.cubit.dart';
 import 'package:tresto_v002a/LOGIC/Models/Global/app_settings.dart';
@@ -41,6 +42,7 @@ void main() async {
         BlocProvider(
             create: (context) => AppSettingsCubit(const AppSettings.initial(),
                 context.read<AppSettingsRepository>())),
+                BlocProvider(create: (context) => OrderFormCubit()),
         BlocProvider(
             create: (context) => AppStatusBloc(
                 context.read<AppStatusRepository>(),

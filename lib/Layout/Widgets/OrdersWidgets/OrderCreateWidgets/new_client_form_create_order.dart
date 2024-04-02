@@ -5,10 +5,8 @@ import 'package:tresto_v002a/Global/constants.dart';
 class NewClientFormCreateOrder extends StatelessWidget {
   const NewClientFormCreateOrder({
     super.key,
-    required this.myFocusNode,
   });
 
-  final FocusNode myFocusNode;
 
   @override
   Widget build(BuildContext context) {

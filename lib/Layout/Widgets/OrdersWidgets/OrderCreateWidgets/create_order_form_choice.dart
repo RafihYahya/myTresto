@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tresto_v002a/Global/constants.dart';
+import 'package:tresto_v002a/LOGIC/Cubits/OrderForm/order_form_cubit.dart';
 
 class CreateOrderFormChoice extends StatelessWidget {
-  final bool isClient;
-  final Function togglebool;
   const CreateOrderFormChoice({
     super.key,
-    required this.isClient,
-    required this.togglebool,
   });
 
   @override
@@ -26,13 +24,14 @@ class CreateOrderFormChoice extends StatelessWidget {
                     overlayColor:
                         const MaterialStatePropertyAll(AppColor.trestoRed025),
                     side: MaterialStatePropertyAll(BorderSide(
-                        color:
-                            isClient ? AppColor.trestoRed : Colors.grey[300]!)),
+                        color: (context.watch<OrderFormCubit>().state.isClient)
+                            ? AppColor.trestoRed
+                            : Colors.grey[300]!)),
                     shape: MaterialStatePropertyAll(RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12.0))),
                   ),
                   onPressed: () {
-                    togglebool(true);
+                    context.read<OrderFormCubit>().toggleisClient(true);
                   },
                   child: Text(
                     'New Client',
@@ -40,9 +39,10 @@ class CreateOrderFormChoice extends StatelessWidget {
                         textStyle: TextStyle(
                             fontWeight: FontWeight.w500,
                             fontSize: 14,
-                            color: isClient
-                                ? AppColor.trestoblack90
-                                : Colors.grey[400]!)),
+                            color:
+                                (context.watch<OrderFormCubit>().state.isClient)
+                                    ? AppColor.trestoblack90
+                                    : Colors.grey[400]!)),
                   ))),
         ),
         const SizedBox(
@@ -58,14 +58,14 @@ class CreateOrderFormChoice extends StatelessWidget {
                     overlayColor:
                         const MaterialStatePropertyAll(AppColor.trestoRed025),
                     side: MaterialStatePropertyAll(BorderSide(
-                        color: !isClient
+                        color: !(context.watch<OrderFormCubit>().state.isClient)
                             ? AppColor.trestoRed
                             : Colors.grey[300]!)),
                     shape: MaterialStatePropertyAll(RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12.0))),
                   ),
                   onPressed: () {
-                    togglebool(false);
+                    context.read<OrderFormCubit>().toggleisClient(false);
                   },
                   child: Text(
                     'Existing Client',
@@ -73,7 +73,10 @@ class CreateOrderFormChoice extends StatelessWidget {
                         textStyle: TextStyle(
                             fontWeight: FontWeight.w500,
                             fontSize: 14,
-                            color: !isClient
+                            color: !(context
+                                    .watch<OrderFormCubit>()
+                                    .state
+                                    .isClient)
                                 ? AppColor.trestoblack90
                                 : Colors.grey[400]!)),
                   ))),

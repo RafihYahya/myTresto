@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tresto_v002a/Global/constants.dart';
+import 'package:tresto_v002a/LOGIC/Cubits/OrderForm/order_form_cubit.dart';
 
 class OutlineButtonFullWidth extends StatelessWidget {
   final Color borderColor;
@@ -8,13 +10,11 @@ class OutlineButtonFullWidth extends StatelessWidget {
   final String title;
   final Icon icon;
   final int initialValue;
-  final Function changeIndex;
   const OutlineButtonFullWidth({
     required this.borderColor,
     required this.title,
     required this.textColor,
     required this.icon,
-    required this.changeIndex,
     required this.initialValue,
     super.key,
   });
@@ -40,7 +40,9 @@ class OutlineButtonFullWidth extends StatelessWidget {
                         borderRadius: BorderRadius.circular(12.0))),
                   ),
                   onPressed: () {
-                    changeIndex(initialValue);
+                    context
+                        .read<OrderFormCubit>()
+                        .changeDeliveryIndex(initialValue);
                   },
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
