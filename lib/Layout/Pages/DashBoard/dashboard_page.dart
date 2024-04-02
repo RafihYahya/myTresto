@@ -69,7 +69,7 @@ class _DashBoardPageState extends State<DashBoardPage> {
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
               backgroundColor: AppColor.colorIndexTrestoList[context.read<AppSettingsCubit>().state.colorIndex],
               content: Text(
-                'Something Wrong Has Occured',
+                'Something Wrong Has Occured!',
                 style: GoogleFonts.poppins(
                   textStyle: const TextStyle(
                       fontSize: 12,

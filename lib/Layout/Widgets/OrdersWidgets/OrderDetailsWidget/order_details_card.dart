@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class OrderDetailsCard extends StatelessWidget {
+  final Color bgColor;
   const OrderDetailsCard({
+    required this.bgColor,
     super.key,
   });
 
@@ -15,7 +17,7 @@ class OrderDetailsCard extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 6.0),
             height: 335,
             child: Card(
-              color: Colors.white,
+              color: bgColor,
               elevation: 0,
               child: Column(
                 children: [

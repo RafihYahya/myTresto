@@ -6,7 +6,7 @@ final class AppColor {
   static const Color primaryColor = Color(0xffFF006B);
   static const Color primaryColor1 = Color(0xffFFEDF4);
 
-  static const Color trestoRed25 = Color.fromRGBO(244, 67, 54, 0.25);
+  static const Color trestoRed25 = Color.fromRGBO(244, 67, 54, 0.15);
   static const Color trestoRed50 = Color.fromRGBO(244, 67, 54, 0.5);
   static const Color mainColor =
       Color.fromRGBO(245, 245, 245, 1); //Color(0xFFFBF1F3);

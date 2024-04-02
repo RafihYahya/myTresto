@@ -82,7 +82,7 @@ class _NavPopupMenuState extends State<NavPopupMenu> {
                         },
                         child: Padding(
                           padding: const EdgeInsets.symmetric(
-                              vertical: 16.0, horizontal: 2.0),
+                              vertical: 16.0, horizontal: 0.0),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [

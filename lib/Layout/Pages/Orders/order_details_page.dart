@@ -35,7 +35,7 @@ class OrderDetailsPage extends StatelessWidget {
                 SizedBox(
                   height: 4.0,
                 ),
-                OrderDetailsCard(),
+                OrderDetailsCard(bgColor: Colors.white,),
                 SizedBox(
                   height: 4.0,
                 ),

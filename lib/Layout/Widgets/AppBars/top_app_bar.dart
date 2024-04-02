@@ -58,7 +58,7 @@ class AlternativeCNavBar extends StatelessWidget {
                   ),
                   Row(
                     children: [
-                      stateIndex.index != 2 && stateIndex.index != 3
+                      stateIndex.index != 3
                           ? Container(
                               padding: const EdgeInsets.symmetric(
                                   vertical: 5, horizontal: 8),

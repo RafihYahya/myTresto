@@ -68,12 +68,12 @@ class _LoginPageState extends State<LoginPage> {
                     backgroundColor: AppColor.colorIndexTrestoList[
                         context.read<AppSettingsCubit>().state.colorIndex],
                     content: Text(
-                      'An Error Has Occurred',
+                      'An Error Has Occurred!',
                       style: GoogleFonts.poppins(
                           textStyle: const TextStyle(
                               fontSize: 12,
                               fontWeight: FontWeight.w400,
-                              color: Colors.black)),
+                              color: Colors.black87)),
                     )));
               }
             },
@@ -362,11 +362,11 @@ class _LoginPageState extends State<LoginPage> {
                                                 ),
                                               ),
                                               child: Text(
-                                                'Login',
+                                                'LOGIN',
                                                 style: GoogleFonts.poppins(
                                                     textStyle: const TextStyle(
                                                         color: Colors.white,
-                                                        fontSize: 15.0,
+                                                        fontSize: 16.0,
                                                         fontWeight:
                                                             FontWeight.w600)),
                                               ));
