@@ -36,6 +36,7 @@ class _CreateOrderState extends State<CreateOrder> {
 
   bool isClient = false;
   int deliveryMethodIndex = 0;
+  String? dropDownDeliverySelectedValue;
   void toggleIsClient(bool value) {
     setState(() {
       isClient = value;
@@ -179,7 +180,9 @@ class _CreateOrderState extends State<CreateOrder> {
                       const SizedBox(
                         height: 14.0,
                       ),
-                      const CreateOrderFormDeliverySection(),
+                      CreateOrderFormDeliverySection(
+                        selectedValue: dropDownDeliverySelectedValue,
+                      ),
                       const SizedBox(
                         height: 18,
                       ),
@@ -257,7 +260,7 @@ class _CreateOrderState extends State<CreateOrder> {
                         ),
                       ),
                       const SizedBox(
-                        height: 24.0,
+                        height: 18.0,
                       )
                     ],
                   ),

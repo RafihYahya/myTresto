@@ -32,7 +32,7 @@ class NewClientFormCreateOrder extends StatelessWidget {
                 'Nom Du Client',
                 style: GoogleFonts.poppins(
                     textStyle: const TextStyle(
-                  fontSize: 14,
+                  fontSize: 12,
                   fontWeight: FontWeight.w400,
                 )),
               ),
@@ -61,7 +61,7 @@ class NewClientFormCreateOrder extends StatelessWidget {
                 'Numero du telephone',
                 style: GoogleFonts.poppins(
                     textStyle: const TextStyle(
-                  fontSize: 14,
+                  fontSize: 12,
                   fontWeight: FontWeight.w400,
                 )),
               ),
