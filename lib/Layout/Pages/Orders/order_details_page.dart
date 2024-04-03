@@ -96,7 +96,7 @@ class CallToAction extends StatelessWidget {
                   'Accept',
                   style: GoogleFonts.poppins(
                       textStyle: const TextStyle(
-                          fontSize: 15.0, fontWeight: FontWeight.w500)),
+                          fontSize: 15.0, fontWeight: FontWeight.w500,color: Colors.white)),
                 )),
               ),
             ),

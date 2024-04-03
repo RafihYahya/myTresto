@@ -30,8 +30,10 @@ class CustomAuthAlert extends StatelessWidget {
             child: Text(
               'Stay',
               style: GoogleFonts.poppins(
-                  textStyle:
-                      const TextStyle(fontSize: 14, color: Colors.black)),
+                  textStyle: const TextStyle(
+                      fontSize: 16,
+                      color: Colors.greenAccent,
+                      fontWeight: FontWeight.w600)),
             )),
         TextButton(
             style: TextButton.styleFrom(
@@ -47,8 +49,8 @@ class CustomAuthAlert extends StatelessWidget {
               'Leave',
               style: GoogleFonts.poppins(
                   textStyle: const TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w600,
+                      fontSize: 12,
+                      fontWeight: FontWeight.w500,
                       color: AppColor.trestoRed)),
             ))
       ],

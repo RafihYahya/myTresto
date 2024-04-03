@@ -36,6 +36,7 @@ class CommandIdCard extends StatelessWidget {
                           children: [
                             const HeroIcon(
                               HeroIcons.shoppingBag,
+                              color: Colors.black87,
                               size: 24,
                             ),
                             const SizedBox(
@@ -46,7 +47,9 @@ class CommandIdCard extends StatelessWidget {
                               style: GoogleFonts.poppins(
                                   textStyle: const TextStyle(
                                       fontSize: 16.0,
-                                      fontWeight: FontWeight.w600)),
+                                      fontWeight: FontWeight.w600,
+                                      color: Colors.black87
+                                      )),
                             ),
                             const SizedBox(
                               width: 6.0,
