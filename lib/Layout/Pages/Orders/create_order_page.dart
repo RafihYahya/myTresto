@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -6,6 +7,7 @@ import 'package:tresto_v002a/Global/constants.dart';
 import 'package:tresto_v002a/LOGIC/Cubits/OrderForm/order_form_cubit.dart';
 import 'package:tresto_v002a/Layout/Widgets/OrdersWidgets/OrderCreateWidgets/create_order_form_choice.dart';
 import 'package:tresto_v002a/Layout/Widgets/OrdersWidgets/OrderCreateWidgets/create_order_form_delivery_section.dart';
+import 'package:tresto_v002a/Layout/Widgets/OrdersWidgets/OrderCreateWidgets/form_actions_buttons.dart';
 import 'package:tresto_v002a/Layout/Widgets/OrdersWidgets/OrderCreateWidgets/new_client_form_create_order.dart';
 import 'package:tresto_v002a/Layout/Widgets/OrdersWidgets/OrderCreateWidgets/outline_button_full_width.dart';
 import 'package:tresto_v002a/Layout/Widgets/OrdersWidgets/OrderDetailsWidget/order_details_card.dart';
@@ -235,81 +237,10 @@ class _CreateOrderState extends State<CreateOrder> {
                           child: const OrderDetailsCard(
                             bgColor: Colors.transparent,
                           )),
-                      Transform(
-                        transform: Matrix4.translationValues(0, -15, 0),
-                        child: GestureDetector(
-                          onTap: () {
-                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                                backgroundColor: Colors.greenAccent,
-                                content: Text(
-                                  'Fields Cleared',
-                                  style: GoogleFonts.poppins(
-                                      textStyle: const TextStyle(
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.w500,
-                                          color: Colors.black87)),
-                                )));
-                            nameCtrl.clear();
-                            phoneCtrl.clear();
-                            adrsCtrl.clear();
-                          },
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 18.0, vertical: 8.0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  'Annuler',
-                                  style: GoogleFonts.poppins(
-                                      textStyle: const TextStyle(
-                                          fontWeight: FontWeight.w400,
-                                          fontSize: 13,
-                                          color: AppColor.trestoRed)),
-                                ),
-                                const SizedBox(
-                                  width: 45,
-                                ),
-                                Expanded(
-                                  child: SizedBox(
-                                    height: 50,
-                                    child: FilledButton(
-                                        style: const ButtonStyle(
-                                            backgroundColor:
-                                                MaterialStatePropertyAll(
-                                                    AppColor.trestoRed),
-                                            shape: MaterialStatePropertyAll(
-                                                RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.all(
-                                                            Radius.circular(
-                                                                8.0))))),
-                                        onPressed: () {
-                                          ScaffoldMessenger.of(context)
-                                              .showSnackBar(const SnackBar(
-                                                  backgroundColor:
-                                                      Colors.yellow,
-                                                  content: Text(
-                                                    'Work In Progress',
-                                                    style: TextStyle(
-                                                        color: Colors.black),
-                                                  )));
-                                        },
-                                        child: Text(
-                                          'Enregistrer les changements',
-                                          style: GoogleFonts.poppins(
-                                              textStyle: const TextStyle(
-                                                  fontWeight: FontWeight.w500,
-                                                  fontSize: 13,
-                                                  color: Colors.white)),
-                                        )),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
+                      FormActionsButtons(
+                          nameCtrl: nameCtrl,
+                          phoneCtrl: phoneCtrl,
+                          adrsCtrl: adrsCtrl),
                       const SizedBox(
                         height: 18.0,
                       )
@@ -317,7 +248,39 @@ class _CreateOrderState extends State<CreateOrder> {
                   ),
                 ),
               ),
-              const SizedBox()
+              SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 18.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const SizedBox(
+                        height: 32,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                        child: Text(
+                          'You have no categories yet',
+                          style: GoogleFonts.poppins(
+                              textStyle: const TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w400,
+                                  color: Colors.black87)),
+                        ),
+                      ),
+                      Transform(
+                          transform: Matrix4.translationValues(-10, -12, 0),
+                          child: const OrderDetailsCard(
+                            bgColor: Colors.transparent,
+                          )),
+                      FormActionsButtons(
+                          nameCtrl: nameCtrl,
+                          phoneCtrl: phoneCtrl,
+                          adrsCtrl: adrsCtrl)
+                    ],
+                  ),
+                ),
+              ),
             ]),
           );
         })));
