@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:tresto_v002a/LOGIC/Models/create_order_model.dart';
 
 part 'order_form_state.dart';
 
@@ -13,11 +14,7 @@ class OrderFormCubit extends Cubit<OrderFormState> {
     emit(state.copyWith(deliveryMethodIndex: value));
   }
 
-  void updateSelectedDeliveryZoneValue(String value) {
-    emit(state.copyWith(selectedDeliveryValue: value));
-  }
-
-  void updateSelectedDeliveryDelayValue(String value) {
-    emit(state.copyWith(selectedDeliveryDelayValue: value));
+  void updateSelectedValues(SelectedValues values) {
+    emit(state.copyWith(selectedValues: values));
   }
 }

@@ -7,14 +7,29 @@ class NewClientFormCreateOrder extends StatelessWidget {
     super.key,
   });
 
-
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0),
-          child: TextField(
+          child: TextFormField(
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                /* ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                    backgroundColor: Colors.yellow,
+                    content: Text(
+                      'Some Field Were Incorrect',
+                      style: GoogleFonts.poppins(
+                          textStyle: const TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.w500,
+                              color: Colors.black)),
+                    ))); */
+                return 'Must Not be Empty';
+              }
+              return null;
+            },
             decoration: InputDecoration(
               focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(8.0),
@@ -72,4 +87,3 @@ class NewClientFormCreateOrder extends StatelessWidget {
     );
   }
 }
-

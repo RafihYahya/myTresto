@@ -27,12 +27,6 @@ class _CreateOrderState extends State<CreateOrder> {
 
   
 
-  
-  String? dropDownDeliverySelectedValue;
- 
-
-  
-
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
