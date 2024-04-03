@@ -18,4 +18,25 @@ final class SelectedValues {
         selectedTableValue = null,
         selectedTimeValue = null,
         selectedZoneValue = null;
+
+  SelectedValues copyWith({
+    String? selectedZoneValue,
+    String? selectedDelayValue,
+    String? selectedTimeValue,
+    String? selectedTableValue,
+    String? selectedClientValue,
+  }) {
+    return SelectedValues(
+      selectedClientValue: selectedClientValue ?? this.selectedClientValue,
+      selectedZoneValue: selectedZoneValue ?? this.selectedZoneValue,
+      selectedDelayValue: selectedDelayValue ?? this.selectedDelayValue,
+      selectedTimeValue: selectedTimeValue ?? this.selectedTimeValue,
+      selectedTableValue: selectedTableValue ?? this.selectedTableValue,
+    );
+  }
+
+  @override
+  String toString() {
+    return '{zone:$selectedZoneValue,delay:$selectedDelayValue,time:$selectedTimeValue,table:$selectedTableValue,client:$selectedClientValue}';
+  }
 }
