@@ -2,9 +2,13 @@
   <uses-permission android:name="android.permission.INTERNET"/> <!-- Add this -->
   <!-- <application android:allowBackup="true"></application> -->
     <application
+        
         android:label="tresto_v002a"
         android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon">
+        <meta-data
+        android:name="io.flutter.embedding.android.EnableImpeller"
+        android:value="true" />
         <activity
             android:name=".MainActivity"
             android:exported="true"
