@@ -57,10 +57,11 @@ class _CreateOrderState extends State<CreateOrder> {
                 indicatorSize: TabBarIndicatorSize.tab,
                 labelColor: AppColor.trestoRed,
                 unselectedLabelColor: Colors.black87,
-                labelStyle: const TextStyle(
-                  fontWeight: FontWeight.w700,
-                  fontSize: 14,
-                ),
+                labelStyle: GoogleFonts.poppins(
+                    textStyle: const TextStyle(
+                  fontWeight: FontWeight.w600,
+                  fontSize: 13,
+                )),
                 indicatorColor: AppColor.trestoRed,
                 tabs: tabs),
             body: TabBarView(children: [

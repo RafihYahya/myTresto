@@ -44,10 +44,7 @@ class OrderDetailsPage extends StatelessWidget {
                 ),
                 ClientDataCard(),
                 SizedBox(
-                  height: 24.0,
-                ),
-                SizedBox(
-                  height: 24.0,
+                  height: 85.0,
                 )
               ],
             ),
@@ -96,7 +93,9 @@ class CallToAction extends StatelessWidget {
                   'Accept',
                   style: GoogleFonts.poppins(
                       textStyle: const TextStyle(
-                          fontSize: 15.0, fontWeight: FontWeight.w500,color: Colors.white)),
+                          fontSize: 15.0,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.white)),
                 )),
               ),
             ),
