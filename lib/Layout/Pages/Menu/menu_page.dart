@@ -1,13 +1,18 @@
+import 'dart:io';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:heroicons/heroicons.dart';
+import 'package:tresto_v002a/Global/constants.dart';
 import 'package:tresto_v002a/Global/webview_url_consts.dart';
 import 'package:tresto_v002a/Layout/Pages/inappwebview_page.dart';
 import 'package:tresto_v002a/Layout/Pages/settings._page.dart';
 import 'package:tresto_v002a/Layout/Widgets/CustomUtils/custom_alert_auth_dialogue.dart';
 import 'package:tresto_v002a/Layout/Widgets/menu_custom_tile.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class MenuAlternativePage extends StatelessWidget {
   const MenuAlternativePage({super.key});
@@ -260,21 +265,45 @@ class MenuAlternativePage extends StatelessWidget {
               color: Colors.black12,
             ),
           ),
-          AlternativeMenuCustomTile(
-              showtitle: false,
-              title: 'Contactez-nous',
-              widget: const InAppWebViewPage(
-                changeTresto: true,
-                url: 'https://youtube.com',
-                allowRedirect: false,
-              ).animate().fadeIn(
-                  curve: Curves.easeInOut,
-                  duration: const Duration(milliseconds: 1200)),
-              myicon: const Icon(
-                Icons.help_outline,
-                size: 23,
-                color: Colors.grey,
-              )),
+          SizedBox(
+            height: 40,
+            child: GestureDetector(
+              behavior: HitTestBehavior.translucent,
+              onTap: () async {
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                    backgroundColor: Colors.greenAccent,
+                    content: Text(
+                      'Redirecting To WhatsApp ...',
+                      style: GoogleFonts.poppins(
+                          textStyle: const TextStyle(
+                              fontSize: 12, fontWeight: FontWeight.w500)),
+                    )));
+                await launchUrl(Uri.parse(
+                    'https://api.whatsapp.com/send?phone=+212708900709&text=Bonjour'));
+                logger.i('miaw');
+              },
+              child: Row(
+                children: [
+                  const SizedBox(
+                    width: 24,
+                  ),
+                  const Icon(
+                    Icons.help_outline,
+                    color: Colors.black38,
+                  ),
+                  const SizedBox(
+                    width: 8.0,
+                  ),
+                  Text(
+                    'Contact Us',
+                    style: GoogleFonts.poppins(
+                        textStyle:
+                            const TextStyle(fontSize: 12, color: Colors.black)),
+                  )
+                ],
+              ),
+            ),
+          ),
           const Padding(
             padding: EdgeInsets.symmetric(horizontal: 28.0),
             child: Divider(
@@ -282,6 +311,7 @@ class MenuAlternativePage extends StatelessWidget {
             ),
           ),
           GestureDetector(
+            behavior: HitTestBehavior.translucent,
             onTap: () {
               showDialog(
                   context: context,

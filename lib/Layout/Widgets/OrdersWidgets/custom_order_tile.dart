@@ -26,13 +26,15 @@ class CustomOrdersTile extends StatelessWidget {
           borderRadius: BorderRadius.circular(12.0),
           splashColor: AppColor.trestoRed025,
           onTap: () {
-            Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => BlocProvider.value(
-                    value: BlocProvider.of<OrdersBloc>(context),
-                    child: BlocProvider.value(
-                      value: BlocProvider.of<AppSettingsCubit>(context),
-                      child: const OrderDetailsPage(),
-                    ))));
+            Future.delayed(const Duration(milliseconds: 250), () {
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => BlocProvider.value(
+                      value: BlocProvider.of<OrdersBloc>(context),
+                      child: BlocProvider.value(
+                        value: BlocProvider.of<AppSettingsCubit>(context),
+                        child: const OrderDetailsPage(),
+                      ))));
+            });
           },
           child: Ink(
             child: AnimatedContainer(
