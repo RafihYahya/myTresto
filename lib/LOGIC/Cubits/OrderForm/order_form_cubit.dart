@@ -8,11 +8,29 @@ class OrderFormCubit extends Cubit<OrderFormState> {
   OrderFormCubit() : super(const OrderFormState.initial());
 
   void toggleisClient(bool value) {
-    emit(state.copyWith(isClient: value));
+    if (value == false) {
+      emit(state.copyWith(
+          isClient: value, clientState: FormClientState.existingClient));
+    } else {
+      emit(state.copyWith(
+          isClient: value, clientState: FormClientState.newClient));
+    }
   }
 
+  
+
   void changeDeliveryIndex(int value) {
-    emit(state.copyWith(deliveryMethodIndex: value));
+    return switch (value) {
+      0 => emit(state.copyWith(
+          deliveryMethodIndex: value,
+          deliveryState: FormDeliveryState.delivery)),
+      1 => emit(state.copyWith(
+          deliveryMethodIndex: value, deliveryState: FormDeliveryState.import)),
+      2 => emit(state.copyWith(
+          deliveryMethodIndex: value,
+          deliveryState: FormDeliveryState.immediate)),
+      _ => logger.w('Value Higher Than Expected Index'),
+    };
   }
 
   void updateSelectedValues(SelectedValues values) {

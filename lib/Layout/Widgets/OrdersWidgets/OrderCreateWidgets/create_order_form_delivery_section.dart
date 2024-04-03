@@ -9,8 +9,10 @@ import 'package:tresto_v002a/LOGIC/Cubits/OrderForm/order_form_cubit.dart';
 import 'package:tresto_v002a/LOGIC/Models/create_order_model.dart';
 
 class CreateOrderFormDeliverySection extends StatefulWidget {
+  final TextEditingController adresseController;
   const CreateOrderFormDeliverySection({
     super.key,
+    required this.adresseController
   });
 
   @override
@@ -41,7 +43,7 @@ class _CreateOrderFormDeliverySectionState
   @override
   Widget build(BuildContext context) {
     return switch (context.watch<OrderFormCubit>().state.deliveryMethodIndex) {
-      0 => const OnDeliveryForm(),
+      0 =>  OnDeliveryForm(controller: widget.adresseController,),
       1 => const OnImportForm(),
       2 => const OnImmediateForm(),
       _ => const SizedBox(),
@@ -50,8 +52,10 @@ class _CreateOrderFormDeliverySectionState
 }
 
 class OnDeliveryForm extends StatelessWidget {
+  final TextEditingController controller;
   const OnDeliveryForm({
     super.key,
+    required this.controller
   });
 
   @override
@@ -169,6 +173,7 @@ class OnDeliveryForm extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0),
           child: TextField(
+            controller: controller,
             decoration: InputDecoration(
               focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(8.0),

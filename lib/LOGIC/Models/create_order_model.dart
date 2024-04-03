@@ -37,6 +37,6 @@ final class SelectedValues {
 
   @override
   String toString() {
-    return '{zone:$selectedZoneValue,delay:$selectedDelayValue,time:$selectedTimeValue,table:$selectedTableValue,client:$selectedClientValue}';
+    return '{ \n zone:$selectedZoneValue , \n delay:$selectedDelayValue, \n time:$selectedTimeValue, \n table:$selectedTableValue, \n client:$selectedClientValue \n}';
   }
 }

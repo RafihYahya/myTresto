@@ -42,7 +42,7 @@ void main() async {
         BlocProvider(
             create: (context) => AppSettingsCubit(const AppSettings.initial(),
                 context.read<AppSettingsRepository>())),
-                BlocProvider(create: (context) => OrderFormCubit()),
+        BlocProvider(create: (context) => OrderFormCubit()),
         BlocProvider(
             create: (context) => AppStatusBloc(
                 context.read<AppStatusRepository>(),
@@ -99,10 +99,8 @@ class _MainAppState extends State<MainApp> {
           BlocListener<OrdersBloc, OrdersState>(
             listener: (context, state) {
               BlocProvider.of<IndexesCubit>(context).changeMaxRestoNum(
-                  maxRestoNumber: context
-                      .read<OrdersBloc>()
-                      .restoListCollector()
-                      .length);
+                  maxRestoNumber:
+                      context.read<OrdersBloc>().restoListCollector().length);
             },
           ),
         ],
@@ -110,14 +108,14 @@ class _MainAppState extends State<MainApp> {
             listener: (context, state) {
           if (state.loginStatus == AppStatusLogin.loggedIn) {
             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                backgroundColor: Colors.green,
+                backgroundColor: Colors.greenAccent,
                 content: Text(
                   'Login Successful',
                   style: GoogleFonts.poppins(
                       textStyle: const TextStyle(
                           fontWeight: FontWeight.w400,
                           fontSize: 12.0,
-                          color: Colors.black)),
+                          color: Colors.black87)),
                 )));
           }
         }, builder: (context, state) {

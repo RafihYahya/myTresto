@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tresto_v002a/Global/constants.dart';
 import 'package:tresto_v002a/Layout/Widgets/OrdersWidgets/OrderDetailsWidget/order_client_info_card.dart';
@@ -35,7 +36,9 @@ class OrderDetailsPage extends StatelessWidget {
                 SizedBox(
                   height: 4.0,
                 ),
-                OrderDetailsCard(bgColor: Colors.white,),
+                OrderDetailsCard(
+                  bgColor: Colors.white,
+                ),
                 SizedBox(
                   height: 4.0,
                 ),
@@ -72,35 +75,60 @@ class CallToAction extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Expanded(
-            child: Container(
-              height: 55,
-              decoration: BoxDecoration(
-                  color: Colors.green,
-                  borderRadius: BorderRadius.circular(8.0)),
-              child: Center(
-                  child: Text(
-                'Accept',
-                style: GoogleFonts.poppins(
-                    textStyle: const TextStyle(
-                        fontSize: 15.0, fontWeight: FontWeight.w500)),
-              )),
+            child: GestureDetector(
+              onTap: () {
+                SystemSound.play(SystemSoundType.click);
+
+                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                    backgroundColor: Colors.yellow,
+                    content: Text(
+                      'Work In Progress',
+                      style: TextStyle(color: Colors.black87),
+                    )));
+              },
+              child: Container(
+                height: 55,
+                decoration: BoxDecoration(
+                    color: Colors.green,
+                    borderRadius: BorderRadius.circular(8.0)),
+                child: Center(
+                    child: Text(
+                  'Accept',
+                  style: GoogleFonts.poppins(
+                      textStyle: const TextStyle(
+                          fontSize: 15.0, fontWeight: FontWeight.w500)),
+                )),
+              ),
             ),
           ),
           const SizedBox(
             width: 16.0,
           ),
           Expanded(
-            child: Container(
-              height: 55,
-              decoration: BoxDecoration(
-                  color: Colors.red, borderRadius: BorderRadius.circular(8.0)),
-              child: Center(
-                  child: Text(
-                'Reject',
-                style: GoogleFonts.poppins(
-                    textStyle: const TextStyle(
-                        fontSize: 15.0, fontWeight: FontWeight.w500)),
-              )),
+            child: GestureDetector(
+              onTap: () {
+                SystemSound.play(SystemSoundType.click);
+
+                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                    backgroundColor: Colors.yellow,
+                    content: Text(
+                      'As I Said , Its Work In Progress',
+                      style: TextStyle(color: Colors.black87),
+                    )));
+              },
+              child: Container(
+                height: 55,
+                decoration: BoxDecoration(
+                    color: Colors.red,
+                    borderRadius: BorderRadius.circular(8.0)),
+                child: Center(
+                    child: Text(
+                  'Reject',
+                  style: GoogleFonts.poppins(
+                      textStyle: const TextStyle(
+                          fontSize: 15.0, fontWeight: FontWeight.w500)),
+                )),
+              ),
             ),
           ),
         ],
