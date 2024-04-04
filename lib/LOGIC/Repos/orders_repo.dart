@@ -7,18 +7,24 @@ class OrdersRepository {
   OrdersRepository();
   final OrderRestoListProvider orders = OrderRestoListProvider();
   final AuthProvider authProvider = AuthProvider();
-  
 
   Future<OrderRestoList> getOrderData() async {
     //var ordersList = await orders.getOrdersDataFromApi();
     return ordersFull; // await _dashBoard.getDashBoardFullListData();
   }
 
-  Future<bool> checkAnyNewOrdersAreAvailable() async{
+  Future<bool> checkAnyNewOrdersAreAvailable() async {
     await Future.delayed(const Duration(seconds: 2));
-    
-    return true;    
+
+    return true;
   }
 
-  
+  Future<void> testFunction(bool showError) async {
+    if (showError) {
+      await Future.delayed(const Duration(seconds: 2));
+      throw Exception('Error');
+    } else {
+      await Future.delayed(const Duration(seconds: 2));
+    }
+  }
 }

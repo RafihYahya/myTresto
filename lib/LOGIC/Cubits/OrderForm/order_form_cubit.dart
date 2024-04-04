@@ -2,12 +2,14 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:tresto_v002a/Global/constants.dart';
 import 'package:tresto_v002a/LOGIC/Models/create_order_model.dart';
+import 'package:tresto_v002a/LOGIC/Repos/orders_repo.dart';
 import 'package:tresto_v002a/Layout/Pages/Orders/create_order_page.dart';
 
 part 'order_form_state.dart';
 
 class OrderFormCubit extends Cubit<OrderFormState> {
-  OrderFormCubit() : super(const OrderFormState.initial());
+  final OrdersRepository ordersRep;
+  OrderFormCubit(this.ordersRep) : super(const OrderFormState.initial());
 
   void toggleisClient(bool value) {
     if (value == false) {
@@ -42,6 +44,29 @@ class OrderFormCubit extends Cubit<OrderFormState> {
             selectedTimeValue: values.selectedTimeValue,
             selectedZoneValue: values.selectedZoneValue)));
     logger.d(state.selectedValues);
+  }
+
+  Future<void> createNewOrder() async {
+    try {
+      emit(state.copyWith(netState: FormRequestState.loading));
+      await ordersRep.testFunction(false);
+      emit(state.copyWith(netState: FormRequestState.success));
+      emit(state.copyWith(netState: FormRequestState.idle));
+    } catch (e) {
+      emit(state.copyWith(netState: FormRequestState.error));
+    }
+  }
+
+  void clearTheDropDownFieldValues(List<GlobalKey<FormState>> keys) {
+    var [_, key2, key3, key4, key5] = keys;
+    state.clientState == FormClientState.newClient
+        ? null
+        : key2.currentState!.reset();
+    return switch (state.deliveryState) {
+      FormDeliveryState.delivery => key3.currentState!.reset(),
+      FormDeliveryState.import => key4.currentState!.reset(),
+      FormDeliveryState.immediate => key5.currentState!.reset(),
+    };
   }
 
   bool theGrandValidator(List<GlobalKey<FormState>> keys) {

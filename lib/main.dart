@@ -42,7 +42,9 @@ void main() async {
         BlocProvider(
             create: (context) => AppSettingsCubit(const AppSettings.initial(),
                 context.read<AppSettingsRepository>())),
-        BlocProvider(create: (context) => OrderFormCubit()),
+        BlocProvider(
+            create: (context) =>
+                OrderFormCubit(context.read<OrdersRepository>())),
         BlocProvider(
             create: (context) => AppStatusBloc(
                 context.read<AppStatusRepository>(),
