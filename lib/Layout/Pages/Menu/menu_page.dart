@@ -21,7 +21,9 @@ class MenuAlternativePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MediaQuery.of(context).size.width > 1080
+            ? MainAxisAlignment.start
+            : MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const SizedBox(
@@ -297,8 +299,8 @@ class MenuAlternativePage extends StatelessWidget {
                   Text(
                     'Contact Us',
                     style: GoogleFonts.poppins(
-                        textStyle:
-                            const TextStyle(fontSize: 12, color: Colors.black)),
+                        textStyle: const TextStyle(
+                            fontSize: 12, color: Colors.black)),
                   )
                 ],
               ),
@@ -355,7 +357,7 @@ class MenuAlternativePage extends StatelessWidget {
               ),
             ),
           ),
-
+      
           /*  AlternativeMenuCustomTile(
               showtitle: false,
               title: 'App Settings',

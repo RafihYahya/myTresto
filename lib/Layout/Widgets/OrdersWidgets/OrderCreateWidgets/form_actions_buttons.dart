@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tresto_v002a/Global/constants.dart';
+import 'package:tresto_v002a/LOGIC/Cubits/OrderForm/order_form_cubit.dart';
+import 'package:tresto_v002a/LOGIC/Models/create_order_model.dart';
+import 'package:tresto_v002a/Layout/Pages/Orders/create_order_page.dart';
 
 class FormActionsButtons extends StatelessWidget {
   const FormActionsButtons({
@@ -62,13 +66,35 @@ class FormActionsButtons extends StatelessWidget {
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(8.0))))),
                       onPressed: () {
-                        ScaffoldMessenger.of(context)
-                            .showSnackBar(const SnackBar(
-                                backgroundColor: Colors.yellow,
-                                content: Text(
-                                  'Work In Progress',
-                                  style: TextStyle(color: Colors.black),
-                                )));
+                        if (context.read<OrderFormCubit>().theGrandValidator([
+                          formKey1,
+                          formKey2,
+                          formKey3,
+                          formKey4,
+                          formKey5,
+                        ])) {
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              backgroundColor: Colors.yellow,
+                              content: Text(
+                                'Work In Progress',
+                                style: GoogleFonts.poppins(
+                                    textStyle: const TextStyle(
+                                        fontSize: 12,
+                                        color: Colors.black87,
+                                        fontWeight: FontWeight.w500)),
+                              )));
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              backgroundColor: Colors.redAccent,
+                              content: Text(
+                                'Some Field Were Left Out',
+                                style: GoogleFonts.poppins(
+                                    textStyle: const TextStyle(
+                                        fontSize: 12,
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.w500)),
+                              )));
+                        }
                       },
                       child: Text(
                         'Enregistrer les changements',

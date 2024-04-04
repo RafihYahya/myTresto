@@ -21,6 +21,7 @@ class CustomOrdersTile extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12.0),
       child: Material(
+        borderRadius: BorderRadius.circular(12.0),
         color: Colors.white,
         child: InkWell(
           borderRadius: BorderRadius.circular(12.0),

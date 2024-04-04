@@ -24,6 +24,12 @@ final List<Widget> tabs = [
   const Tab(text: 'Produit'),
 ];
 
+final formKey1 = GlobalKey<FormState>();
+final formKey2 = GlobalKey<FormState>();
+final formKey3 = GlobalKey<FormState>();
+final formKey4 = GlobalKey<FormState>();
+final formKey5 = GlobalKey<FormState>();
+
 class _CreateOrderState extends State<CreateOrder> {
   final List<TextEditingController> controllers =
       List.generate(3, (index) => TextEditingController());
@@ -241,7 +247,8 @@ class _CreateOrderState extends State<CreateOrder> {
                       FormActionsButtons(
                           nameCtrl: nameCtrl,
                           phoneCtrl: phoneCtrl,
-                          adrsCtrl: adrsCtrl),
+                          adrsCtrl: adrsCtrl,
+                          ),
                       const SizedBox(
                         height: 18.0,
                       )
@@ -277,7 +284,8 @@ class _CreateOrderState extends State<CreateOrder> {
                       FormActionsButtons(
                           nameCtrl: nameCtrl,
                           phoneCtrl: phoneCtrl,
-                          adrsCtrl: adrsCtrl)
+                          adrsCtrl: adrsCtrl,
+                          )
                     ],
                   ),
                 ),

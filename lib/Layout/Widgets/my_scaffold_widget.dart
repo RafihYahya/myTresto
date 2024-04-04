@@ -5,26 +5,22 @@ import 'package:tresto_v002a/Layout/Widgets/AppBars/top_app_bar.dart';
 
 class MyScaffold extends StatelessWidget {
   final Widget widget;
-  const MyScaffold({
-    super.key,
-    required this.widget
-  });
-
+  const MyScaffold({super.key, required this.widget});
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
         backgroundColor: AppColor.mainColor, //const Color(0xFFF3F4F6),
         appBar: const PreferredSize(
-            
-            preferredSize:  Size.fromHeight(50.0),
+            preferredSize: Size.fromHeight(50.0),
             child: AlternativeCNavBar(
               autoLead: false,
               showresto: true,
               showLogout: true,
             )),
-        bottomNavigationBar: const BotNavBarAlternative(),
-        body:widget);
+        bottomNavigationBar: MediaQuery.of(context).size.width > 1080
+            ? const SizedBox()
+            : const BotNavBarAlternative(),
+        body: widget);
   }
 }

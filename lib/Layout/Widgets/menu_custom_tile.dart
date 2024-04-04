@@ -25,25 +25,29 @@ class AlternativeMenuCustomTile extends StatelessWidget {
       value: BlocProvider.of<AppSettingsCubit>(context),
       child: InkWell(
         onTap: () => Navigator.of(context).push(MaterialPageRoute(
-              builder: (ctx) => BlocProvider.value(
-                    value: BlocProvider.of<IndexesCubit>(ctx),
-                    child: Scaffold(
-                      bottomNavigationBar: const BotNavBarAlternative(),
-                        appBar: const PreferredSize(
-                            preferredSize: Size.fromHeight(50.0),
-                            child: AlternativeCNavBar(
-                              autoLead: true,
-                              showresto: true,
-                              showLogout: false,
-                            )),
-                        body: widget),
-                  ))),
+            builder: (ctx) => BlocProvider.value(
+                  value: BlocProvider.of<IndexesCubit>(ctx),
+                  child: Scaffold(
+                      bottomNavigationBar:
+                          MediaQuery.of(context).size.width > 1080
+                              ? const SizedBox()
+                              : const BotNavBarAlternative(),
+                      appBar: const PreferredSize(
+                          preferredSize: Size.fromHeight(50.0),
+                          child: AlternativeCNavBar(
+                            autoLead: true,
+                            showresto: true,
+                            showLogout: false,
+                          )),
+                      body: widget),
+                ))),
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 300),
           margin: const EdgeInsets.symmetric(horizontal: 4.0, vertical: 4.0),
           height: 35,
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(8.0), color: Colors.transparent),
+              borderRadius: BorderRadius.circular(8.0),
+              color: Colors.transparent),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,

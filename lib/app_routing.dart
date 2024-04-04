@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -14,6 +15,7 @@ import 'package:tresto_v002a/Layout/Pages/DashBoard/dashboard_page.dart';
 import 'package:tresto_v002a/Layout/Pages/Orders/create_order_page.dart';
 import 'package:tresto_v002a/Layout/Pages/inappwebview_page.dart';
 import 'package:tresto_v002a/Layout/Pages/Menu/menu_page.dart';
+import 'package:tresto_v002a/Layout/Widgets/PlatformSpecific/custom_drawer.dart';
 import 'package:tresto_v002a/Layout/Widgets/my_scaffold_widget.dart';
 
 class AppRouting extends StatefulWidget {
@@ -57,7 +59,16 @@ class _AppRoutingState extends State<AppRouting> {
     return BlocBuilder<IndexesCubit, AppIndexes>(
       builder: (context, state) {
         return MyScaffold(
-          widget: routes[state.index],
+          widget: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              MediaQuery.of(context).size.width > 1080
+                  ? const CustomDrawer()
+                  : const SizedBox(),
+              Expanded(child: routes[state.index]),
+            ],
+          ),
         );
       },
     );
