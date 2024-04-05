@@ -76,7 +76,7 @@ class _CreateOrderState extends State<CreateOrder> {
                   children: [
                     MediaQuery.of(context).size.width > 1080
                         ? SizedBox(
-                            width: MediaQuery.of(context).size.width * 0.15,
+                            width: MediaQuery.of(context).size.width * 0.05,
                           )
                         : const SizedBox(),
                     Expanded(
@@ -278,7 +278,7 @@ class _CreateOrderState extends State<CreateOrder> {
                     ),
                     MediaQuery.of(context).size.width > 1080
                         ? SizedBox(
-                            width: MediaQuery.of(context).size.width * 0.15,
+                            width: MediaQuery.of(context).size.width * 0.05,
                           )
                         : const SizedBox(),
                   ],
@@ -289,7 +289,7 @@ class _CreateOrderState extends State<CreateOrder> {
                   children: [
                     MediaQuery.of(context).size.width > 1080
                         ? SizedBox(
-                            width: MediaQuery.of(context).size.width * 0.15,
+                            width: MediaQuery.of(context).size.width * 0.05,
                           )
                         : const SizedBox(),
                     Expanded(
@@ -330,7 +330,7 @@ class _CreateOrderState extends State<CreateOrder> {
                     ),
                     MediaQuery.of(context).size.width > 1080
                         ? SizedBox(
-                            width: MediaQuery.of(context).size.width * 0.15,
+                            width: MediaQuery.of(context).size.width * 0.05,
                           )
                         : const SizedBox(),
                   ],

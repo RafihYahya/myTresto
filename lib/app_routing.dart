@@ -10,6 +10,7 @@ import 'package:tresto_v002a/LOGIC/Cubits/app_indexes_cubit.dart';
 import 'package:tresto_v002a/LOGIC/Cubits/app_settings.cubit.dart';
 import 'package:tresto_v002a/LOGIC/Models/Global/app_indexes_data.dart';
 import 'package:tresto_v002a/LOGIC/Models/Global/app_settings.dart';
+import 'package:tresto_v002a/Layout/Pages/Orders/Web/create_order_page_web.dart';
 import 'package:tresto_v002a/Layout/Pages/Orders/order_page.dart';
 import 'package:tresto_v002a/Layout/Pages/DashBoard/dashboard_page.dart';
 import 'package:tresto_v002a/Layout/Pages/Orders/create_order_page.dart';
@@ -42,7 +43,9 @@ class _AppRoutingState extends State<AppRouting> {
     List<Widget> routes = [
       const DashBoardPage(),
       const OrderPage(),
-      const CreateOrder(),
+      MediaQuery.of(context).size.width > 1080
+          ? const CreateOrderWeb()
+          : const CreateOrder(),
       /* const InAppWebViewPage(
         changeTresto: false,
         url: WebViewUrls.createResto,

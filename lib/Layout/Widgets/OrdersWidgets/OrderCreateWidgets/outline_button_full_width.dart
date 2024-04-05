@@ -27,7 +27,7 @@ class OutlineButtonFullWidth extends StatelessWidget {
         children: [
           Expanded(
             child: SizedBox(
-              height: 60,
+              height:  MediaQuery.of(context).size.width > 1080 ? 55 : 60,
               child: OutlinedButton(
                   style: ButtonStyle(
                     surfaceTintColor:
