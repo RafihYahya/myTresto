@@ -10,7 +10,8 @@ class MyScaffold extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: AppColor.mainColor, //const Color(0xFFF3F4F6),
+        backgroundColor: AppColor.mainColor,
+            //const Color(0xFFF3F4F6),
         appBar: const PreferredSize(
             preferredSize: Size.fromHeight(50.0),
             child: AlternativeCNavBar(

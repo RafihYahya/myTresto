@@ -72,222 +72,268 @@ class _CreateOrderState extends State<CreateOrder> {
                 tabs: tabs),
             body: TabBarView(children: [
               SingleChildScrollView(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 18.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const SizedBox(
-                        height: 24,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                        child: const CreateOrderFormChoice().animate().fade(),
-                      ),
-                      const SizedBox(
-                        height: 18.0,
-                      ),
-                      NewClientFormCreateOrder(
-                        nameController: nameCtrl,
-                        phoneController: phoneCtrl,
-                      ),
-                      const SizedBox(
-                        height: 12,
-                      ),
-                      Padding(
+                child: Row(
+                  children: [
+                    MediaQuery.of(context).size.width > 1080
+                        ? SizedBox(
+                            width: MediaQuery.of(context).size.width * 0.15,
+                          )
+                        : const SizedBox(),
+                    Expanded(
+                      child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 18.0),
-                        child: Text(
-                          'Method De Livraison',
-                          style: GoogleFonts.poppins(
-                              textStyle: const TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w700,
-                                  color: Colors.black87)),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const SizedBox(
+                              height: 24,
+                            ),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 10.0),
+                              child: const CreateOrderFormChoice()
+                                  .animate()
+                                  .fade(),
+                            ),
+                            const SizedBox(
+                              height: 18.0,
+                            ),
+                            NewClientFormCreateOrder(
+                              nameController: nameCtrl,
+                              phoneController: phoneCtrl,
+                            ),
+                            const SizedBox(
+                              height: 12,
+                            ),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 18.0),
+                              child: Text(
+                                'Method De Livraison',
+                                style: GoogleFonts.poppins(
+                                    textStyle: const TextStyle(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w700,
+                                        color: Colors.black87)),
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 14,
+                            ),
+                            OutlineButtonFullWidth(
+                              initialValue: 0,
+                              borderColor: context
+                                          .watch<OrderFormCubit>()
+                                          .state
+                                          .deliveryMethodIndex ==
+                                      0
+                                  ? AppColor.trestoRed
+                                  : Colors.grey[300]!,
+                              title: 'Livraison',
+                              textColor: context
+                                          .watch<OrderFormCubit>()
+                                          .state
+                                          .deliveryMethodIndex ==
+                                      0
+                                  ? Colors.black87
+                                  : Colors.grey[300]!,
+                              icon: Icon(
+                                Icons.delivery_dining_outlined,
+                                color: context
+                                            .watch<OrderFormCubit>()
+                                            .state
+                                            .deliveryMethodIndex ==
+                                        0
+                                    ? Colors.black87
+                                    : Colors.grey[300]!,
+                                size: 24,
+                              ),
+                            ).animate().fade(),
+                            const SizedBox(
+                              height: 12.0,
+                            ),
+                            OutlineButtonFullWidth(
+                              initialValue: 1,
+                              borderColor: context
+                                          .watch<OrderFormCubit>()
+                                          .state
+                                          .deliveryMethodIndex ==
+                                      1
+                                  ? AppColor.trestoRed
+                                  : Colors.grey[300]!,
+                              title: 'A Importer',
+                              textColor: context
+                                          .watch<OrderFormCubit>()
+                                          .state
+                                          .deliveryMethodIndex ==
+                                      1
+                                  ? Colors.black87
+                                  : Colors.grey[300]!,
+                              icon: Icon(
+                                Icons.shopping_bag_outlined,
+                                color: context
+                                            .watch<OrderFormCubit>()
+                                            .state
+                                            .deliveryMethodIndex ==
+                                        1
+                                    ? Colors.black87
+                                    : Colors.grey[300]!,
+                                size: 24,
+                              ),
+                            )
+                                .animate()
+                                .fade(delay: const Duration(milliseconds: 100)),
+                            const SizedBox(
+                              height: 12.0,
+                            ),
+                            OutlineButtonFullWidth(
+                              initialValue: 2,
+                              borderColor: context
+                                          .watch<OrderFormCubit>()
+                                          .state
+                                          .deliveryMethodIndex ==
+                                      2
+                                  ? AppColor.trestoRed
+                                  : Colors.grey[300]!,
+                              title: 'Sur Place',
+                              textColor: context
+                                          .watch<OrderFormCubit>()
+                                          .state
+                                          .deliveryMethodIndex ==
+                                      2
+                                  ? Colors.black87
+                                  : Colors.grey[300]!,
+                              icon: Icon(
+                                Icons.place_outlined,
+                                color: context
+                                            .watch<OrderFormCubit>()
+                                            .state
+                                            .deliveryMethodIndex ==
+                                        2
+                                    ? Colors.black87
+                                    : Colors.grey[300]!,
+                                size: 24,
+                              ),
+                            )
+                                .animate()
+                                .fade(delay: const Duration(milliseconds: 200)),
+                            const SizedBox(
+                              height: 20,
+                            ),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 18.0),
+                              child: Text(
+                                'Informations de livraison',
+                                style: GoogleFonts.poppins(
+                                    textStyle: const TextStyle(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w700,
+                                        color: Colors.black87)),
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 14.0,
+                            ),
+                            CreateOrderFormDeliverySection(
+                              adresseController: adrsCtrl,
+                            ),
+                            const SizedBox(
+                              height: 18,
+                            ),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 18.0),
+                              child: Text(
+                                'Détails de la commande',
+                                style: GoogleFonts.poppins(
+                                    textStyle: const TextStyle(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w700,
+                                        color: Colors.black87)),
+                              ),
+                            ),
+                            Transform(
+                                transform:
+                                    Matrix4.translationValues(-10, -10, 0),
+                                child: const OrderDetailsCard(
+                                  bgColor: Colors.transparent,
+                                )),
+                            MediaQuery.of(context).size.width > 1080
+                                ? const SizedBox(
+                                    height: 36.0,
+                                  )
+                                : const SizedBox(),
+                            FormActionsButtons(
+                              nameCtrl: nameCtrl,
+                              phoneCtrl: phoneCtrl,
+                              adrsCtrl: adrsCtrl,
+                            ),
+                            const SizedBox(
+                              height: 18.0,
+                            )
+                          ],
                         ),
                       ),
-                      const SizedBox(
-                        height: 14,
-                      ),
-                      OutlineButtonFullWidth(
-                        initialValue: 0,
-                        borderColor: context
-                                    .watch<OrderFormCubit>()
-                                    .state
-                                    .deliveryMethodIndex ==
-                                0
-                            ? AppColor.trestoRed
-                            : Colors.grey[300]!,
-                        title: 'Livraison',
-                        textColor: context
-                                    .watch<OrderFormCubit>()
-                                    .state
-                                    .deliveryMethodIndex ==
-                                0
-                            ? Colors.black87
-                            : Colors.grey[300]!,
-                        icon: Icon(
-                          Icons.delivery_dining_outlined,
-                          color: context
-                                      .watch<OrderFormCubit>()
-                                      .state
-                                      .deliveryMethodIndex ==
-                                  0
-                              ? Colors.black87
-                              : Colors.grey[300]!,
-                          size: 24,
-                        ),
-                      ).animate().fade(),
-                      const SizedBox(
-                        height: 12.0,
-                      ),
-                      OutlineButtonFullWidth(
-                        initialValue: 1,
-                        borderColor: context
-                                    .watch<OrderFormCubit>()
-                                    .state
-                                    .deliveryMethodIndex ==
-                                1
-                            ? AppColor.trestoRed
-                            : Colors.grey[300]!,
-                        title: 'A Importer',
-                        textColor: context
-                                    .watch<OrderFormCubit>()
-                                    .state
-                                    .deliveryMethodIndex ==
-                                1
-                            ? Colors.black87
-                            : Colors.grey[300]!,
-                        icon: Icon(
-                          Icons.shopping_bag_outlined,
-                          color: context
-                                      .watch<OrderFormCubit>()
-                                      .state
-                                      .deliveryMethodIndex ==
-                                  1
-                              ? Colors.black87
-                              : Colors.grey[300]!,
-                          size: 24,
-                        ),
-                      )
-                          .animate()
-                          .fade(delay: const Duration(milliseconds: 100)),
-                      const SizedBox(
-                        height: 12.0,
-                      ),
-                      OutlineButtonFullWidth(
-                        initialValue: 2,
-                        borderColor: context
-                                    .watch<OrderFormCubit>()
-                                    .state
-                                    .deliveryMethodIndex ==
-                                2
-                            ? AppColor.trestoRed
-                            : Colors.grey[300]!,
-                        title: 'Sur Place',
-                        textColor: context
-                                    .watch<OrderFormCubit>()
-                                    .state
-                                    .deliveryMethodIndex ==
-                                2
-                            ? Colors.black87
-                            : Colors.grey[300]!,
-                        icon: Icon(
-                          Icons.place_outlined,
-                          color: context
-                                      .watch<OrderFormCubit>()
-                                      .state
-                                      .deliveryMethodIndex ==
-                                  2
-                              ? Colors.black87
-                              : Colors.grey[300]!,
-                          size: 24,
-                        ),
-                      )
-                          .animate()
-                          .fade(delay: const Duration(milliseconds: 200)),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 18.0),
-                        child: Text(
-                          'Informations de livraison',
-                          style: GoogleFonts.poppins(
-                              textStyle: const TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w700,
-                                  color: Colors.black87)),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 14.0,
-                      ),
-                      CreateOrderFormDeliverySection(
-                        adresseController: adrsCtrl,
-                      ),
-                      const SizedBox(
-                        height: 18,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 18.0),
-                        child: Text(
-                          'Détails de la commande',
-                          style: GoogleFonts.poppins(
-                              textStyle: const TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w700,
-                                  color: Colors.black87)),
-                        ),
-                      ),
-                      Transform(
-                          transform: Matrix4.translationValues(-10, -10, 0),
-                          child: const OrderDetailsCard(
-                            bgColor: Colors.transparent,
-                          )),
-                      FormActionsButtons(
-                          nameCtrl: nameCtrl,
-                          phoneCtrl: phoneCtrl,
-                          adrsCtrl: adrsCtrl,
-                          ),
-                      const SizedBox(
-                        height: 18.0,
-                      )
-                    ],
-                  ),
+                    ),
+                    MediaQuery.of(context).size.width > 1080
+                        ? SizedBox(
+                            width: MediaQuery.of(context).size.width * 0.15,
+                          )
+                        : const SizedBox(),
+                  ],
                 ),
               ),
               SingleChildScrollView(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 18.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const SizedBox(
-                        height: 32,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 15.0),
-                        child: Text(
-                          'You have no categories yet',
-                          style: GoogleFonts.poppins(
-                              textStyle: const TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w400,
-                                  color: Colors.black87)),
+                child: Row(
+                  children: [
+                    MediaQuery.of(context).size.width > 1080
+                        ? SizedBox(
+                            width: MediaQuery.of(context).size.width * 0.15,
+                          )
+                        : const SizedBox(),
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 18.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const SizedBox(
+                              height: 32,
+                            ),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 15.0),
+                              child: Text(
+                                'You have no categories yet',
+                                style: GoogleFonts.poppins(
+                                    textStyle: const TextStyle(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w400,
+                                        color: Colors.black87)),
+                              ),
+                            ),
+                            Transform(
+                                transform:
+                                    Matrix4.translationValues(-10, -12, 0),
+                                child: const OrderDetailsCard(
+                                  bgColor: Colors.transparent,
+                                )),
+                            FormActionsButtons(
+                              nameCtrl: nameCtrl,
+                              phoneCtrl: phoneCtrl,
+                              adrsCtrl: adrsCtrl,
+                            )
+                          ],
                         ),
                       ),
-                      Transform(
-                          transform: Matrix4.translationValues(-10, -12, 0),
-                          child: const OrderDetailsCard(
-                            bgColor: Colors.transparent,
-                          )),
-                      FormActionsButtons(
-                          nameCtrl: nameCtrl,
-                          phoneCtrl: phoneCtrl,
-                          adrsCtrl: adrsCtrl,
+                    ),
+                    MediaQuery.of(context).size.width > 1080
+                        ? SizedBox(
+                            width: MediaQuery.of(context).size.width * 0.15,
                           )
-                    ],
-                  ),
+                        : const SizedBox(),
+                  ],
                 ),
               ),
             ]),

@@ -26,34 +26,11 @@ class OrderDetailsPage extends StatelessWidget {
         shadowColor: Colors.transparent,
         surfaceTintColor: Colors.transparent,
       ),
-      body: Stack(alignment: Alignment.bottomCenter, children: [
-        SingleChildScrollView(
-          child: Center(
-            child: MediaQuery.of(context).size.width > 1080
-                ? const Column(
-                    children: [
-                      SizedBox(
-                        height: 8.0,
-                      ),
-                      CommandIdCard(),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Expanded(
-                            child: OrderDetailsCard(
-                              bgColor: Colors.white,
-                            ),
-                          ),
-                          SizedBox(
-                            height: 4.0,
-                          ),
-                          Expanded(child: ClientDataCard()),
-                        ],
-                      ),
-                    ],
-                  )
-                : const Column(
+      body: MediaQuery.of(context).size.width < 1080
+          ? const Stack(alignment: Alignment.bottomCenter, children: [
+              SingleChildScrollView(
+                child: Center(
+                  child: Column(
                     children: [
                       SizedBox(
                         height: 8.0,
@@ -74,13 +51,56 @@ class OrderDetailsPage extends StatelessWidget {
                       )
                     ],
                   ),
-          ),
-        ),
-        const Padding(
-          padding: EdgeInsets.only(bottom: 16.0),
-          child: CallToAction(),
-        ),
-      ]),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.only(bottom: 16.0),
+                child: CallToAction(),
+              ),
+            ])
+          :  Row(
+              children: [
+                SizedBox(
+                  width: MediaQuery.of(context).size.width*0.10,
+                ),
+                const Expanded(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        height: 8.0,
+                      ),
+                      CommandIdCard(),
+                      Expanded(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Expanded(
+                              child: OrderDetailsCard(
+                                bgColor: Colors.white,
+                              ),
+                            ),
+                            SizedBox(
+                              height: 4.0,
+                            ),
+                            Expanded(child: ClientDataCard()),
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.symmetric(vertical: 12.0),
+                        child: CallToAction(),
+                      )
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  width:  MediaQuery.of(context).size.width*0.10,
+                ),
+              ],
+            ),
     );
   }
 }
