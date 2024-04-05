@@ -81,14 +81,16 @@ class _LoginPageState extends State<LoginPage> {
         ],
         child: SingleChildScrollView(
           child: Transform.scale(
-            scale: 0.9,
+            scale: MediaQuery.of(context).size.width > 720 ? 1 : 0.9,
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 14),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const SizedBox(
-                    height: 100,
+                  SizedBox(
+                    height: MediaQuery.of(context).size.width > 720
+                        ? MediaQuery.of(context).size.height * 0.20
+                        : 100,
                   ),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -122,260 +124,293 @@ class _LoginPageState extends State<LoginPage> {
                                 )),
                           ),
                         ),
-                        Form(
-                          // key: formKey,
-                          child: Padding(
-                            padding: const EdgeInsets.only(
-                                top: 32, left: 16, right: 16),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'E-mail',
-                                  style: GoogleFonts.rubik(
-                                      fontWeight: FontWeight.w400,
-                                      fontSize: 12),
-                                ),
-                                const SizedBox(
-                                  height: 4,
-                                ),
-                                TextFormField(
-                                  controller: emailController,
-                                  validator: (value) {
-                                    if (value!.isEmpty ||
-                                        !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#//$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                                            .hasMatch(value)) {
-                                      return "ENTER_VALID_EMAIL";
-                                    } else {
-                                      return null;
-                                    }
-                                  },
-                                  keyboardType: TextInputType.emailAddress,
-                                  decoration: InputDecoration(
-                                    errorBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(12),
-                                      borderSide: BorderSide(
-                                        width: 1,
-                                        color: AppColor.colorIndexTrestoList[context.read<AppSettingsCubit>().state.colorIndex],
-                                      ),
-                                    ),
-                                    focusedErrorBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(12),
-                                      borderSide: BorderSide(
-                                        width: 1,
-                                        color: AppColor.colorIndexTrestoList[
-                                            context
-                                                .read<AppSettingsCubit>()
-                                                .state
-                                                .colorIndex],
-                                      ),
-                                    ),
-                                    fillColor: AppColor.colorIndexTrestoList[
-                                        context
-                                            .read<AppSettingsCubit>()
-                                            .state
-                                            .colorIndex],
-                                    focusedBorder: OutlineInputBorder(
-                                      borderRadius:
-                                          const BorderRadius.all(Radius.circular(12)),
-                                      borderSide: BorderSide(
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width > 720
+                              ? MediaQuery.of(context).size.width * 0.25
+                              : MediaQuery.of(context).size.width * 1,
+                          child: Form(
+                            // key: formKey,
+                            child: Padding(
+                              padding: const EdgeInsets.only(
+                                  top: 32, left: 16, right: 16),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'E-mail',
+                                    style: GoogleFonts.rubik(
+                                        fontWeight: FontWeight.w400,
+                                        fontSize: 12),
+                                  ),
+                                  const SizedBox(
+                                    height: 4,
+                                  ),
+                                  TextFormField(
+                                    controller: emailController,
+                                    validator: (value) {
+                                      if (value!.isEmpty ||
+                                          !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#//$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                                              .hasMatch(value)) {
+                                        return "ENTER_VALID_EMAIL";
+                                      } else {
+                                        return null;
+                                      }
+                                    },
+                                    keyboardType: TextInputType.emailAddress,
+                                    decoration: InputDecoration(
+                                      errorBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(12),
+                                        borderSide: BorderSide(
+                                          width: 1,
                                           color: AppColor.colorIndexTrestoList[
                                               context
                                                   .read<AppSettingsCubit>()
                                                   .state
                                                   .colorIndex],
-                                          width: 1),
-                                    ),
-                                    enabledBorder: const OutlineInputBorder(
-                                      borderRadius: BorderRadius.all(
-                                        Radius.circular(12),
+                                        ),
                                       ),
-                                      borderSide: BorderSide(
-                                          width: 1, color: Colors.black26),
-                                    ),
-                                  ),
-                                ),
-                                const SizedBox(
-                                  height: 16,
-                                ),
-                                Text(
-                                  'Mot De Passe',
-                                  style: GoogleFonts.rubik(
-                                      fontWeight: FontWeight.w400,
-                                      fontSize: 12),
-                                ),
-                                const SizedBox(
-                                  height: 4,
-                                ),
-                                TextFormField(
-                                  obscureText: !passwordVisible,
-                                  controller: passwordController,
-                                  validator: (value) {
-                                    if (value!.isEmpty ||
-                                        !RegExp(r"^.{6,}").hasMatch(value)) {
-                                      return "PASSWORD_MUST";
-                                    } else {
-                                      return null;
-                                    }
-                                  },
-                                  keyboardType: TextInputType.visiblePassword,
-                                  decoration: InputDecoration(
-                                    errorBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(12),
-                                      borderSide: BorderSide(
-                                        width: 1,
-                                        color: AppColor.colorIndexTrestoList[
-                                            context
-                                                .read<AppSettingsCubit>()
-                                                .state
-                                                .colorIndex],
-                                      ),
-                                    ),
-                                    focusedErrorBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(12),
-                                      borderSide: BorderSide(
-                                        width: 1,
-                                        color: AppColor.colorIndexTrestoList[
-                                            context
-                                                .read<AppSettingsCubit>()
-                                                .state
-                                                .colorIndex],
-                                      ),
-                                    ),
-                                    fillColor: AppColor.colorIndexTrestoList[
-                                        context
-                                            .read<AppSettingsCubit>()
-                                            .state
-                                            .colorIndex],
-                                    focusedBorder: OutlineInputBorder(
-                                      borderRadius:
-                                          const BorderRadius.all(Radius.circular(12)),
-                                      borderSide: BorderSide(
+                                      focusedErrorBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(12),
+                                        borderSide: BorderSide(
+                                          width: 1,
                                           color: AppColor.colorIndexTrestoList[
                                               context
                                                   .read<AppSettingsCubit>()
                                                   .state
                                                   .colorIndex],
-                                          width: 1),
-                                    ),
-                                    enabledBorder: const OutlineInputBorder(
-                                      borderRadius: BorderRadius.all(
-                                        Radius.circular(12),
+                                        ),
                                       ),
-                                      borderSide: BorderSide(
-                                          width: 1, color: Colors.black26),
-                                    ),
-                                    suffixIcon: IconButton(
-                                      icon: Icon(
-                                        passwordVisible
-                                            ? Icons.visibility
-                                            : Icons.visibility_off,
-                                        color: Colors.grey,
+                                      fillColor: AppColor.colorIndexTrestoList[
+                                          context
+                                              .read<AppSettingsCubit>()
+                                              .state
+                                              .colorIndex],
+                                      focusedBorder: OutlineInputBorder(
+                                        borderRadius: const BorderRadius.all(
+                                            Radius.circular(12)),
+                                        borderSide: BorderSide(
+                                            color: AppColor
+                                                    .colorIndexTrestoList[
+                                                context
+                                                    .read<AppSettingsCubit>()
+                                                    .state
+                                                    .colorIndex],
+                                            width: 1),
                                       ),
-                                      onPressed: () {
-                                        setState(
-                                          () {
-                                            passwordVisible = !passwordVisible;
-                                          },
-                                        );
-                                      },
+                                      enabledBorder: const OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                          Radius.circular(12),
+                                        ),
+                                        borderSide: BorderSide(
+                                            width: 1, color: Colors.black26),
+                                      ),
                                     ),
                                   ),
-                                ),
-                                const SizedBox(
-                                  height: 16,
-                                ),
-                                const SizedBox(
-                                  height: 24,
-                                ),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    BlocConsumer<AuthBlocBloc, AuthBlocState>(
-                                      listener: (context, state) async {
-                                        if (state.status == AuthState.failure) {
-                                          ScaffoldMessenger.of(context)
-                                              .showSnackBar(SnackBar(
-                                                  backgroundColor: AppColor
-                                                          .colorIndexTrestoList[
-                                                      context
-                                                          .read
-                                                          <AppSettingsCubit>()
-                                                          .state
-                                                          .colorIndex],
-                                                  content: Text(
-                                                    'An Error Has Occured',
+                                  const SizedBox(
+                                    height: 16,
+                                  ),
+                                  Text(
+                                    'Mot De Passe',
+                                    style: GoogleFonts.rubik(
+                                        fontWeight: FontWeight.w400,
+                                        fontSize: 12),
+                                  ),
+                                  const SizedBox(
+                                    height: 4,
+                                  ),
+                                  TextFormField(
+                                    obscureText: !passwordVisible,
+                                    controller: passwordController,
+                                    validator: (value) {
+                                      if (value!.isEmpty ||
+                                          !RegExp(r"^.{6,}").hasMatch(value)) {
+                                        return "PASSWORD_MUST";
+                                      } else {
+                                        return null;
+                                      }
+                                    },
+                                    keyboardType: TextInputType.visiblePassword,
+                                    decoration: InputDecoration(
+                                      errorBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(12),
+                                        borderSide: BorderSide(
+                                          width: 1,
+                                          color: AppColor.colorIndexTrestoList[
+                                              context
+                                                  .read<AppSettingsCubit>()
+                                                  .state
+                                                  .colorIndex],
+                                        ),
+                                      ),
+                                      focusedErrorBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(12),
+                                        borderSide: BorderSide(
+                                          width: 1,
+                                          color: AppColor.colorIndexTrestoList[
+                                              context
+                                                  .read<AppSettingsCubit>()
+                                                  .state
+                                                  .colorIndex],
+                                        ),
+                                      ),
+                                      fillColor: AppColor.colorIndexTrestoList[
+                                          context
+                                              .read<AppSettingsCubit>()
+                                              .state
+                                              .colorIndex],
+                                      focusedBorder: OutlineInputBorder(
+                                        borderRadius: const BorderRadius.all(
+                                            Radius.circular(12)),
+                                        borderSide: BorderSide(
+                                            color: AppColor
+                                                    .colorIndexTrestoList[
+                                                context
+                                                    .read<AppSettingsCubit>()
+                                                    .state
+                                                    .colorIndex],
+                                            width: 1),
+                                      ),
+                                      enabledBorder: const OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                          Radius.circular(12),
+                                        ),
+                                        borderSide: BorderSide(
+                                            width: 1, color: Colors.black26),
+                                      ),
+                                      suffixIcon: IconButton(
+                                        icon: Icon(
+                                          passwordVisible
+                                              ? Icons.visibility
+                                              : Icons.visibility_off,
+                                          color: Colors.grey,
+                                        ),
+                                        onPressed: () {
+                                          setState(
+                                            () {
+                                              passwordVisible =
+                                                  !passwordVisible;
+                                            },
+                                          );
+                                        },
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    height: 16,
+                                  ),
+                                  const SizedBox(
+                                    height: 24,
+                                  ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      BlocConsumer<AuthBlocBloc, AuthBlocState>(
+                                        listener: (context, state) async {
+                                          if (state.status ==
+                                              AuthState.failure) {
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(SnackBar(
+                                                    backgroundColor: AppColor
+                                                            .colorIndexTrestoList[
+                                                        context
+                                                            .read<
+                                                                AppSettingsCubit>()
+                                                            .state
+                                                            .colorIndex],
+                                                    content: Text(
+                                                      'An Error Has Occured',
+                                                      style: GoogleFonts.poppins(
+                                                          textStyle:
+                                                              const TextStyle(
+                                                                  fontSize: 12,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w400,
+                                                                  color: Colors
+                                                                      .black)),
+                                                    )));
+                                          }
+                                          if (state.status == AuthState.done) {
+                                            headlessViewForLogin(
+                                                emailController.text,
+                                                passwordController.text);
+                                            context.read<AppStatusBloc>().add(
+                                                UpdateLoginStatus(
+                                                    status: AppStatusLogin
+                                                        .loggedIn));
+                                          }
+                                        },
+                                        builder: (context, state) {
+                                          if (state.status ==
+                                              AuthState.loading) {
+                                            return const CustomLoading(
+                                              height: 20,
+                                              width: 20,
+                                            );
+                                          } else {
+                                            return SizedBox(
+                                              width: MediaQuery.of(context)
+                                                          .size
+                                                          .width >
+                                                      720
+                                                  ? MediaQuery.of(context)
+                                                          .size
+                                                          .width *
+                                                      0.20
+                                                  : null,
+                                              child: ElevatedButton(
+                                                  onPressed: () async {
+                                                    context
+                                                        .read<AuthBlocBloc>()
+                                                        .add(TokenRequest(
+                                                            email:
+                                                                emailController
+                                                                    .text,
+                                                            password:
+                                                                passwordController
+                                                                    .text));
+                                                  },
+                                                  style:
+                                                      ElevatedButton.styleFrom(
+                                                    elevation: 0,
+                                                    backgroundColor: AppColor
+                                                            .colorIndexTrestoList[
+                                                        context
+                                                            .read<
+                                                                AppSettingsCubit>()
+                                                            .state
+                                                            .colorIndex],
+                                                    minimumSize:
+                                                        const Size(315, 60),
+                                                    shape:
+                                                        RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              25),
+                                                    ),
+                                                  ),
+                                                  child: Text(
+                                                    'LOGIN',
                                                     style: GoogleFonts.poppins(
                                                         textStyle:
                                                             const TextStyle(
-                                                                fontSize: 12,
+                                                                color: Colors
+                                                                    .white,
+                                                                fontSize: 16.0,
                                                                 fontWeight:
                                                                     FontWeight
-                                                                        .w400,
-                                                                color: Colors
-                                                                    .black)),
-                                                  )));
-                                        }
-                                        if (state.status == AuthState.done) {
-                                          headlessViewForLogin(
-                                              emailController.text,
-                                              passwordController.text);
-                                          context.read<AppStatusBloc>().add(
-                                              UpdateLoginStatus(
-                                                  status:
-                                                      AppStatusLogin.loggedIn));
-                                        }
-                                      },
-                                      builder: (context, state) {
-                                        if (state.status == AuthState.loading) {
-                                          return const CustomLoading(
-                                            height: 20,
-                                            width: 20,
-                                          );
-                                        } else {
-                                          return ElevatedButton(
-                                              onPressed: () async {
-                                                context
-                                                    .read<AuthBlocBloc>()
-                                                    .add(TokenRequest(
-                                                        email: emailController
-                                                            .text,
-                                                        password:
-                                                            passwordController
-                                                                .text));
-                                              },
-                                              style: ElevatedButton.styleFrom(
-                                                elevation: 0,
-                                                backgroundColor: AppColor
-                                                        .colorIndexTrestoList[
-                                                    context
-                                                        .read
-                                                        <AppSettingsCubit>()
-                                                        .state
-                                                        .colorIndex],
-                                                minimumSize:
-                                                    const Size(315, 60),
-                                                shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(25),
-                                                ),
-                                              ),
-                                              child: Text(
-                                                'LOGIN',
-                                                style: GoogleFonts.poppins(
-                                                    textStyle: const TextStyle(
-                                                        color: Colors.white,
-                                                        fontSize: 16.0,
-                                                        fontWeight:
-                                                            FontWeight.w600)),
-                                              ));
-                                        }
-                                      },
-                                    ),
-                                  ],
-                                ),
-                              ],
+                                                                        .w600)),
+                                                  )),
+                                            );
+                                          }
+                                        },
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         ),

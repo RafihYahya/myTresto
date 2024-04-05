@@ -15,7 +15,7 @@ class OrderDetailsCard extends StatelessWidget {
         Expanded(
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 6.0),
-            height: 335,
+            height: MediaQuery.of(context).size.width > 1080 ? MediaQuery.of(context).size.height*0.97 : 335,
             child: Card(
               color: bgColor,
               elevation: 0,

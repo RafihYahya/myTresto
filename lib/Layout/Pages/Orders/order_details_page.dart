@@ -1,5 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tresto_v002a/Global/constants.dart';
 import 'package:tresto_v002a/Layout/Widgets/OrdersWidgets/OrderDetailsWidget/order_client_info_card.dart';
@@ -24,33 +26,57 @@ class OrderDetailsPage extends StatelessWidget {
         shadowColor: Colors.transparent,
         surfaceTintColor: Colors.transparent,
       ),
-      body: const Stack(alignment: Alignment.bottomCenter, children: [
+      body: Stack(alignment: Alignment.bottomCenter, children: [
         SingleChildScrollView(
           child: Center(
-            child: Column(
-              children: [
-                SizedBox(
-                  height: 8.0,
-                ),
-                CommandIdCard(),
-                SizedBox(
-                  height: 4.0,
-                ),
-                OrderDetailsCard(
-                  bgColor: Colors.white,
-                ),
-                SizedBox(
-                  height: 4.0,
-                ),
-                ClientDataCard(),
-                SizedBox(
-                  height: 85.0,
-                )
-              ],
-            ),
+            child: MediaQuery.of(context).size.width > 1080
+                ? const Column(
+                    children: [
+                      SizedBox(
+                        height: 8.0,
+                      ),
+                      CommandIdCard(),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Expanded(
+                            child: OrderDetailsCard(
+                              bgColor: Colors.white,
+                            ),
+                          ),
+                          SizedBox(
+                            height: 4.0,
+                          ),
+                          Expanded(child: ClientDataCard()),
+                        ],
+                      ),
+                    ],
+                  )
+                : const Column(
+                    children: [
+                      SizedBox(
+                        height: 8.0,
+                      ),
+                      CommandIdCard(),
+                      SizedBox(
+                        height: 4.0,
+                      ),
+                      OrderDetailsCard(
+                        bgColor: Colors.white,
+                      ),
+                      SizedBox(
+                        height: 4.0,
+                      ),
+                      ClientDataCard(),
+                      SizedBox(
+                        height: 85.0,
+                      )
+                    ],
+                  ),
           ),
         ),
-        Padding(
+        const Padding(
           padding: EdgeInsets.only(bottom: 16.0),
           child: CallToAction(),
         ),

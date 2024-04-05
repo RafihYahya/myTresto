@@ -68,7 +68,8 @@ class _DashBoardPageState extends State<DashBoardPage> {
       listener: (context, state) {
         if (state.status == DashboardStateStatus.error) {
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-              backgroundColor: AppColor.colorIndexTrestoList[context.read<AppSettingsCubit>().state.colorIndex],
+              backgroundColor: AppColor.colorIndexTrestoList[
+                  context.read<AppSettingsCubit>().state.colorIndex],
               content: Text(
                 'Something Wrong Has Occured!',
                 style: GoogleFonts.poppins(
@@ -96,117 +97,135 @@ class _DashBoardPageState extends State<DashBoardPage> {
             DashboardStateStatus.loading => const DashboardLoading(),
             DashboardStateStatus.error => const CustomError(),
             DashboardStateStatus.ready => SingleChildScrollView(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                child: Row(
                   children: [
-                    const SizedBox(
-                      height: 15.0,
-                    ),
-                    const Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 12.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
+                    MediaQuery.of(context).size.width > 1080
+                        ? const SizedBox(
+                            width: 125,
+                          )
+                        : const SizedBox(),
+                    Expanded(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Expanded(
-                            child: DashboardMainTile(
-                              index: 0,
-                              tileColor: Colors.white,
-                              iconsColor: Colors.pink,
-                              textColor: Color(0xFF141414),
-                              secondaryTextColor: AppColor.textGrey1,
-                              icon: HeroIcons.shoppingBag,
-                              fadeDelay: 100,
+                          const SizedBox(
+                            height: 15.0,
+                          ),
+                          const Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 12.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Expanded(
+                                  child: DashboardMainTile(
+                                    index: 0,
+                                    tileColor: Colors.white,
+                                    iconsColor: Colors.pink,
+                                    textColor: Color(0xFF141414),
+                                    secondaryTextColor: AppColor.textGrey1,
+                                    icon: HeroIcons.shoppingBag,
+                                    fadeDelay: 100,
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 12.0,
+                                ),
+                                Expanded(
+                                  child: DashboardMainTile(
+                                    index: 1,
+                                    tileColor: Colors.white,
+                                    iconsColor: Colors.green,
+                                    textColor: Color(0xFF141414),
+                                    secondaryTextColor: AppColor.textGrey1,
+                                    icon: HeroIcons.banknotes,
+                                    fadeDelay: 200,
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
-                          SizedBox(
-                            width: 12.0,
+                          const SizedBox(
+                            height: 12.0,
                           ),
-                          Expanded(
-                            child: DashboardMainTile(
-                              index: 1,
-                              tileColor: Colors.white,
-                              iconsColor: Colors.green,
-                              textColor: Color(0xFF141414),
-                              secondaryTextColor: AppColor.textGrey1,
-                              icon: HeroIcons.banknotes,
-                              fadeDelay: 200,
+                          const Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 12.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Expanded(
+                                  child: DashboardMainTile(
+                                      index: 2,
+                                      tileColor: Colors.white,
+                                      iconsColor: Colors.purple,
+                                      textColor: Color(0xFF141414),
+                                      secondaryTextColor: AppColor.textGrey1,
+                                      fadeDelay: 300,
+                                      icon: HeroIcons.arrowPathRoundedSquare),
+                                ),
+                                SizedBox(
+                                  width: 12.0,
+                                ),
+                                Expanded(
+                                  child: DashboardMainTile(
+                                    index: 3,
+                                    tileColor: Colors.white,
+                                    iconsColor: Colors.blue,
+                                    fadeDelay: 400,
+                                    textColor: Color(0xFF141414),
+                                    secondaryTextColor: AppColor.textGrey1,
+                                    icon: HeroIcons.eye,
+                                  ),
+                                ),
+                              ],
                             ),
+                          ),
+                          const SizedBox(
+                            height: 12.0,
+                          ),
+                          BlocBuilder<IndexesCubit, AppIndexes>(
+                            builder: (context, state) {
+                              return BlocSelector<DashboardBloc, DashboardState,
+                                  DashboardStateStatus>(
+                                selector: (state) {
+                                  return state.status;
+                                },
+                                builder: (context, stateDash) {
+                                  return switch (stateDash) {
+                                    DashboardStateStatus.initial =>
+                                      const DashboardChartLoading(),
+                                    DashboardStateStatus.error =>
+                                      const CustomError(),
+                                    DashboardStateStatus.loading =>
+                                      const DashboardChartLoading(),
+                                    DashboardStateStatus.ready =>
+                                      ChartRevenueDashBoardWidget(
+                                        screenWidth: screenWidth,
+                                        selectedIndex: selectedIndex,
+                                        dummyListData: dummyListData,
+                                      ).animate().fade(
+                                            curve: Curves.easeIn,
+                                            duration: const Duration(
+                                                milliseconds: 600),
+                                            delay: const Duration(
+                                                milliseconds: 500),
+                                          ),
+                                  };
+                                },
+                              );
+                            },
+                          ),
+                          const SizedBox(
+                            height: 24.0,
                           ),
                         ],
                       ),
                     ),
-                    const SizedBox(
-                      height: 12.0,
-                    ),
-                    const Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 12.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Expanded(
-                            child: DashboardMainTile(
-                                index: 2,
-                                tileColor: Colors.white,
-                                iconsColor: Colors.purple,
-                                textColor: Color(0xFF141414),
-                                secondaryTextColor: AppColor.textGrey1,
-                                fadeDelay: 300,
-                                icon: HeroIcons.arrowPathRoundedSquare),
-                          ),
-                          SizedBox(
-                            width: 12.0,
-                          ),
-                          Expanded(
-                            child: DashboardMainTile(
-                              index: 3,
-                              tileColor: Colors.white,
-                              iconsColor: Colors.blue,
-                              fadeDelay: 400,
-                              textColor: Color(0xFF141414),
-                              secondaryTextColor: AppColor.textGrey1,
-                              icon: HeroIcons.eye,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 12.0,
-                    ),
-                    BlocBuilder<IndexesCubit, AppIndexes>(
-                      builder: (context, state) {
-                        return BlocSelector<DashboardBloc, DashboardState,
-                            DashboardStateStatus>(
-                          selector: (state) {
-                            return state.status;
-                          },
-                          builder: (context, stateDash) {
-                            return switch (stateDash) {
-                              DashboardStateStatus.initial =>
-                                const DashboardChartLoading(),
-                              DashboardStateStatus.error => const CustomError(),
-                              DashboardStateStatus.loading =>
-                                const DashboardChartLoading(),
-                              DashboardStateStatus.ready =>
-                                ChartRevenueDashBoardWidget(
-                                  screenWidth: screenWidth,
-                                  selectedIndex: selectedIndex,
-                                  dummyListData: dummyListData,
-                                ).animate().fade(
-                                      curve: Curves.easeIn,
-                                      duration:
-                                          const Duration(milliseconds: 600),
-                                      delay: const Duration(milliseconds: 500),
-                                    ),
-                            };
-                          },
-                        );
-                      },
-                    ),
-                    const SizedBox(
-                      height: 24.0,
-                    ),
+                    MediaQuery.of(context).size.width > 1080
+                        ? const SizedBox(
+                            width: 125,
+                          )
+                        : const SizedBox(),
                   ],
                 ),
               )

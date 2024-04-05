@@ -32,12 +32,12 @@ class _OrderPageState extends State<OrderPage> {
 
   @override
   Widget build(BuildContext context) {
-
     return BlocListener<OrdersBloc, OrdersState>(
       listener: (context, state) {
         if (state is OrdersError) {
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-              backgroundColor: AppColor.colorIndexTrestoList[context.watch<AppSettingsCubit>().state.colorIndex],
+              backgroundColor: AppColor.colorIndexTrestoList[
+                  context.watch<AppSettingsCubit>().state.colorIndex],
               content: Text(
                 'Something Wrong Has Occured',
                 style: GoogleFonts.poppins(
@@ -129,7 +129,10 @@ class _OrderPageState extends State<OrderPage> {
                               size: 20,
                               color: isLiveOrderSelected
                                   ? Colors.grey[300]!
-                                  : AppColor.colorIndexTrestoList[context.watch<AppSettingsCubit>().state.colorIndex],
+                                  : AppColor.colorIndexTrestoList[context
+                                      .watch<AppSettingsCubit>()
+                                      .state
+                                      .colorIndex],
                             ),
                             const SizedBox(
                               width: 10,
@@ -137,11 +140,15 @@ class _OrderPageState extends State<OrderPage> {
                             Text(
                               "All Orders",
                               style: TextStyle(
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 15,
-                                  color: isLiveOrderSelected
-                                      ? Colors.grey[300]!
-                                      : AppColor.colorIndexTrestoList[context.watch<AppSettingsCubit>().state.colorIndex],),
+                                fontWeight: FontWeight.w600,
+                                fontSize: 15,
+                                color: isLiveOrderSelected
+                                    ? Colors.grey[300]!
+                                    : AppColor.colorIndexTrestoList[context
+                                        .watch<AppSettingsCubit>()
+                                        .state
+                                        .colorIndex],
+                              ),
                             ),
                           ],
                         ),
@@ -164,17 +171,48 @@ class _OrderPageState extends State<OrderPage> {
                       OrdersInitial() => const CustomTileLoadingListView(),
                       OrdersError() => const CustomError(),
                       OrdersLoading() => const CustomTileLoadingListView(),
-                      OrdersReady() => ListView.builder(
-                          itemCount: state.ordersRestoList
-                              .ordersRestoList[stateIndex].ordersList.length,
-                          itemBuilder: (context, index) => CustomOrdersTile(
-                                orders: state
-                                    .ordersRestoList
-                                    .ordersRestoList[stateIndex]
-                                    .ordersList[index],
-                              )).animate().fade(
-                          curve: Curves.easeIn,
-                          duration: const Duration(milliseconds: 300)),
+                      OrdersReady() => MediaQuery.of(context).size.width > 1080
+                          ? Padding(
+                            padding: const EdgeInsets.only(top: 12.0),
+                            child: ListView(children: [
+                                Wrap(
+                                  spacing: 8.0,
+                                  runSpacing: 8.0,
+                                  children: List<Widget>.generate(
+                                      state
+                                          .ordersRestoList
+                                          .ordersRestoList[stateIndex]
+                                          .ordersList
+                                          .length,
+                                      (index) => SizedBox(
+                                        width: 350,
+                                        child: CustomOrdersTile(
+                                              orders: state
+                                                  .ordersRestoList
+                                                  .ordersRestoList[stateIndex]
+                                                  .ordersList[index],
+                                            ),
+                                      )).animate().fade(
+                                      curve: Curves.easeIn,
+                                      duration:
+                                          const Duration(milliseconds: 300)),
+                                ),
+                              ]),
+                          )
+                          : ListView.builder(
+                              itemCount: state
+                                  .ordersRestoList
+                                  .ordersRestoList[stateIndex]
+                                  .ordersList
+                                  .length,
+                              itemBuilder: (context, index) => CustomOrdersTile(
+                                    orders: state
+                                        .ordersRestoList
+                                        .ordersRestoList[stateIndex]
+                                        .ordersList[index],
+                                  )).animate().fade(
+                              curve: Curves.easeIn,
+                              duration: const Duration(milliseconds: 300)),
                     };
                   },
                 );

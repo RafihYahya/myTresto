@@ -11,7 +11,7 @@ class ClientDataCard extends StatelessWidget {
     return Row(children: [
       Expanded(
         child: SizedBox(
-          height: 265,
+          height: MediaQuery.of(context).size.width > 1080 ? MediaQuery.of(context).size.height*0.9 : 265,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 6.0),
             child: Card(
