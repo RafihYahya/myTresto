@@ -26,7 +26,7 @@ import 'package:tresto_v002a/workmanager.dart';
 
 void main() async {
   //Observe State Changes For debugging
-  Bloc.observer = MainObserver();
+  //Bloc.observer = MainObserver();
   WidgetsFlutterBinding.ensureInitialized();
   LocalNotifications.initialize();
 

@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:heroicons/heroicons.dart';
@@ -24,7 +22,9 @@ class BotNavBarAlternative extends StatelessWidget {
             children: [
               GestureDetector(
                 onTap: () {
-                  Navigator.of(context).popUntil((route) => route.isFirst);
+                  if (context.read<IndexesCubit>().state.index == 3) {
+                    Navigator.of(context).popUntil((route) => route.isFirst);
+                  }
                   BlocProvider.of<IndexesCubit>(context).changeIndex(index: 0);
                 },
                 child: Container(
@@ -34,8 +34,10 @@ class BotNavBarAlternative extends StatelessWidget {
                   height: 35,
                   decoration: BoxDecoration(
                       color: state.index == 0
-                          ? AppColor.colorIndexTrestoList25[
-                              context.watch<AppSettingsCubit>().state.colorIndex]
+                          ? AppColor.colorIndexTrestoList25[context
+                              .read<AppSettingsCubit>()
+                              .state
+                              .colorIndex]
                           : Colors.transparent,
                       borderRadius: BorderRadius.circular(16.0)),
                   child: Row(
@@ -47,7 +49,7 @@ class BotNavBarAlternative extends StatelessWidget {
                         style: HeroIconStyle.outline,
                         color: state.index == 0
                             ? AppColor.colorIndexTrestoList[context
-                                .watch<AppSettingsCubit>()
+                                .read<AppSettingsCubit>()
                                 .state
                                 .colorIndex]
                             : Colors.grey,
@@ -68,7 +70,7 @@ class BotNavBarAlternative extends StatelessWidget {
                             fontSize: 12,
                             fontWeight: FontWeight.w500,
                             color: AppColor.colorIndexTrestoList[context
-                                .watch<AppSettingsCubit>()
+                                .read<AppSettingsCubit>()
                                 .state
                                 .colorIndex],
                           )),
@@ -81,7 +83,9 @@ class BotNavBarAlternative extends StatelessWidget {
               GestureDetector(
                 behavior: HitTestBehavior.translucent,
                 onTap: () {
-                  Navigator.of(context).popUntil((route) => route.isFirst);
+                  if (context.read<IndexesCubit>().state.index == 3) {
+                    Navigator.of(context).popUntil((route) => route.isFirst);
+                  }
                   BlocProvider.of<IndexesCubit>(context).changeIndex(index: 1);
                 },
                 child: Container(
@@ -90,8 +94,10 @@ class BotNavBarAlternative extends StatelessWidget {
                   height: 35,
                   decoration: BoxDecoration(
                       color: state.index == 1
-                          ? AppColor.colorIndexTrestoList25[
-                              context.watch<AppSettingsCubit>().state.colorIndex]
+                          ? AppColor.colorIndexTrestoList25[context
+                              .read<AppSettingsCubit>()
+                              .state
+                              .colorIndex]
                           : Colors.transparent,
                       borderRadius: BorderRadius.circular(16.0)),
                   child: Row(
@@ -103,7 +109,7 @@ class BotNavBarAlternative extends StatelessWidget {
                         style: HeroIconStyle.outline,
                         color: state.index == 1
                             ? AppColor.colorIndexTrestoList[context
-                                .watch<AppSettingsCubit>()
+                                .read<AppSettingsCubit>()
                                 .state
                                 .colorIndex]
                             : Colors.grey,
@@ -124,7 +130,7 @@ class BotNavBarAlternative extends StatelessWidget {
                             fontSize: 12,
                             fontWeight: FontWeight.w500,
                             color: AppColor.colorIndexTrestoList[context
-                                .watch<AppSettingsCubit>()
+                                .read<AppSettingsCubit>()
                                 .state
                                 .colorIndex],
                           )),
@@ -137,7 +143,9 @@ class BotNavBarAlternative extends StatelessWidget {
               GestureDetector(
                 behavior: HitTestBehavior.translucent,
                 onTap: () {
-                  Navigator.of(context).popUntil((route) => route.isFirst);
+                  if (context.read<IndexesCubit>().state.index == 3) {
+                    Navigator.of(context).popUntil((route) => route.isFirst);
+                  }
                   BlocProvider.of<IndexesCubit>(context).changeIndex(index: 2);
                 },
                 child: Container(
@@ -146,8 +154,10 @@ class BotNavBarAlternative extends StatelessWidget {
                   height: 35,
                   decoration: BoxDecoration(
                       color: state.index == 2
-                          ? AppColor.colorIndexTrestoList25[
-                              context.watch<AppSettingsCubit>().state.colorIndex]
+                          ? AppColor.colorIndexTrestoList25[context
+                              .read<AppSettingsCubit>()
+                              .state
+                              .colorIndex]
                           : Colors.transparent,
                       borderRadius: BorderRadius.circular(16.0)),
                   child: Row(
@@ -159,7 +169,7 @@ class BotNavBarAlternative extends StatelessWidget {
                         style: HeroIconStyle.outline,
                         color: state.index == 2
                             ? AppColor.colorIndexTrestoList[context
-                                .watch<AppSettingsCubit>()
+                                .read<AppSettingsCubit>()
                                 .state
                                 .colorIndex]
                             : Colors.grey,
@@ -180,7 +190,7 @@ class BotNavBarAlternative extends StatelessWidget {
                             fontSize: 12,
                             fontWeight: FontWeight.w500,
                             color: AppColor.colorIndexTrestoList[context
-                                .watch<AppSettingsCubit>()
+                                .read<AppSettingsCubit>()
                                 .state
                                 .colorIndex],
                           )),
@@ -193,7 +203,9 @@ class BotNavBarAlternative extends StatelessWidget {
               GestureDetector(
                 behavior: HitTestBehavior.translucent,
                 onTap: () {
-                  Navigator.of(context).popUntil((route) => route.isFirst);
+                  if (context.read<IndexesCubit>().state.index == 3) {
+                    Navigator.of(context).popUntil((route) => route.isFirst);
+                  }
                   BlocProvider.of<IndexesCubit>(context).changeIndex(index: 3);
                 },
                 child: Container(
@@ -203,8 +215,10 @@ class BotNavBarAlternative extends StatelessWidget {
                   height: 35,
                   decoration: BoxDecoration(
                       color: state.index == 3
-                          ? AppColor.colorIndexTrestoList25[
-                              context.watch<AppSettingsCubit>().state.colorIndex]
+                          ? AppColor.colorIndexTrestoList25[context
+                              .read<AppSettingsCubit>()
+                              .state
+                              .colorIndex]
                           : Colors.transparent,
                       borderRadius: BorderRadius.circular(16.0)),
                   child: Row(
@@ -216,7 +230,7 @@ class BotNavBarAlternative extends StatelessWidget {
                         style: HeroIconStyle.outline,
                         color: state.index == 3
                             ? AppColor.colorIndexTrestoList[context
-                                .watch<AppSettingsCubit>()
+                                .read<AppSettingsCubit>()
                                 .state
                                 .colorIndex]
                             : Colors.grey,
@@ -238,7 +252,7 @@ class BotNavBarAlternative extends StatelessWidget {
                             fontWeight: FontWeight.w500,
                             color: state.index == 3
                                 ? AppColor.colorIndexTrestoList[context
-                                    .watch<AppSettingsCubit>()
+                                    .read<AppSettingsCubit>()
                                     .state
                                     .colorIndex]
                                 : Colors.grey,

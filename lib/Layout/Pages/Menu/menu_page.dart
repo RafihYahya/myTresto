@@ -1,15 +1,10 @@
-import 'dart:io';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:heroicons/heroicons.dart';
 import 'package:tresto_v002a/Global/constants.dart';
 import 'package:tresto_v002a/Global/webview_url_consts.dart';
 import 'package:tresto_v002a/Layout/Pages/inappwebview_page.dart';
-import 'package:tresto_v002a/Layout/Pages/settings._page.dart';
 import 'package:tresto_v002a/Layout/Widgets/CustomUtils/custom_alert_auth_dialogue.dart';
 import 'package:tresto_v002a/Layout/Widgets/menu_custom_tile.dart';
 import 'package:url_launcher/url_launcher.dart';

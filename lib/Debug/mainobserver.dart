@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tresto_v002a/Global/constants.dart';
 
 
 class MainObserver extends BlocObserver {
@@ -15,7 +16,7 @@ class MainObserver extends BlocObserver {
   @override
   void onChange(BlocBase bloc, Change change) {
     super.onChange(bloc, change);
-    print('${bloc.runtimeType} $change');
+    logger.d('${bloc.runtimeType} $change');
   }
 
   @override

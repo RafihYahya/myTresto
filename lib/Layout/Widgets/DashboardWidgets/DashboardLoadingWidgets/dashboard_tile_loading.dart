@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:shimmer/shimmer.dart';
-import 'package:tresto_v002a/Global/constants.dart';
 
 class DashboardMainTileLoading extends StatelessWidget {
   const DashboardMainTileLoading({

@@ -320,8 +320,6 @@ Future<void> headlessViewForLogin(String email, String password) async {
             url: WebUri(WebViewUrls.home), name: 'tresto_session');
         await myStorage.write(
             key: 'tresto_session', value: trestoHiddenCookie?.value);
-        print('Old Value');
-        print(trestoHiddenCookie);
 
       } else {
         String temp2 = await myStorage.read(key: 'tresto_session') ?? '';
@@ -329,8 +327,6 @@ Future<void> headlessViewForLogin(String email, String password) async {
             url: WebUri(WebViewUrls.home),
             name: 'tresto_session',
             value: temp2);
-        print('NewValue');
-        print(temp2);
       }
     },
   );
