@@ -50,6 +50,7 @@ class OrderFormCubit extends Cubit<OrderFormState> {
       emit(state.copyWith(netState: FormRequestState.loading));
       await ordersRep.testFunction(false);
       emit(state.copyWith(netState: FormRequestState.success));
+
       emit(state.copyWith(netState: FormRequestState.idle));
     } catch (e) {
       emit(state.copyWith(netState: FormRequestState.error));
@@ -71,7 +72,7 @@ class OrderFormCubit extends Cubit<OrderFormState> {
   bool theGrandValidator(List<GlobalKey<FormState>> keys) {
     var [key1, key2, key3, key4, key5] = keys;
     if (state.clientState == FormClientState.newClient) {
-      if (!key1.currentState!.validate()) {
+      if (key1.currentState!.validate()) {
         return switch (state.deliveryState) {
           FormDeliveryState.delivery => key3.currentState!.validate(),
           FormDeliveryState.import => key4.currentState!.validate(),
@@ -79,13 +80,13 @@ class OrderFormCubit extends Cubit<OrderFormState> {
         };
       } else {
         return switch (state.deliveryState) {
-          FormDeliveryState.delivery => key3.currentState!.validate(),
-          FormDeliveryState.import => key4.currentState!.validate(),
-          FormDeliveryState.immediate => key5.currentState!.validate(),
+          FormDeliveryState.delivery => key3.currentState!.validate() && false,
+          FormDeliveryState.import => key4.currentState!.validate() && false,
+          FormDeliveryState.immediate => key5.currentState!.validate() && false,
         };
       }
     } else {
-      if (!key2.currentState!.validate()) {
+      if (key2.currentState!.validate()) {
         return switch (state.deliveryState) {
           FormDeliveryState.delivery => key3.currentState!.validate(),
           FormDeliveryState.import => key4.currentState!.validate(),
@@ -93,9 +94,9 @@ class OrderFormCubit extends Cubit<OrderFormState> {
         };
       } else {
         return switch (state.deliveryState) {
-          FormDeliveryState.delivery => key3.currentState!.validate(),
-          FormDeliveryState.import => key4.currentState!.validate(),
-          FormDeliveryState.immediate => key5.currentState!.validate(),
+          FormDeliveryState.delivery => key3.currentState!.validate() && false,
+          FormDeliveryState.import => key4.currentState!.validate() && false,
+          FormDeliveryState.immediate => key5.currentState!.validate() && false,
         };
       }
     }
