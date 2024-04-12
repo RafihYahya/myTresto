@@ -5,7 +5,6 @@ import 'package:heroicons/heroicons.dart';
 import 'package:tresto_v002a/LOGIC/Cubits/app_indexes_cubit.dart';
 import 'package:tresto_v002a/Global/constants.dart';
 import 'package:tresto_v002a/LOGIC/Cubits/app_settings.cubit.dart';
-import 'package:tresto_v002a/LOGIC/Models/Global/app_indexes_data.dart';
 
 class BotNavBarAlternative extends StatelessWidget {
   const BotNavBarAlternative({super.key});
