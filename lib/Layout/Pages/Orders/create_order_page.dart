@@ -54,6 +54,8 @@ class _CreateOrderState extends State<CreateOrder> {
   @override
   Widget build(BuildContext context) {
     var [nameCtrl, phoneCtrl, adrsCtrl] = controllers;
+    var deliveryIndex =
+        context.watch<OrderFormCubit>().state.deliveryMethodIndex;
     return DefaultTabController(
         length: 2,
         child: Builder(builder: ((context) {
@@ -107,103 +109,89 @@ class _CreateOrderState extends State<CreateOrder> {
                       const SizedBox(
                         height: 14,
                       ),
-                      OutlineButtonFullWidth(
-                        initialValue: 0,
-                        borderColor: context
-                                    .watch<OrderFormCubit>()
-                                    .state
-                                    .deliveryMethodIndex ==
-                                0
-                            ? AppColor.trestoRed
-                            : Colors.grey[300]!,
-                        title: 'Livraison',
-                        textColor: context
-                                    .watch<OrderFormCubit>()
-                                    .state
-                                    .deliveryMethodIndex ==
-                                0
-                            ? Colors.black87
-                            : Colors.grey[300]!,
-                        icon: Icon(
-                          Icons.delivery_dining_outlined,
-                          color: context
-                                      .watch<OrderFormCubit>()
-                                      .state
-                                      .deliveryMethodIndex ==
-                                  0
-                              ? Colors.black87
-                              : Colors.grey[300]!,
-                          size: 24,
-                        ),
-                      ).animate().fade(),
+                      deliveryIndex == 0
+                          ? const OutlineButtonFullWidth(
+                              initialValue: 0,
+                              borderColor: AppColor.trestoRed,
+                              title: 'Livraison',
+                              textColor: Colors.black87,
+                              icon: Icon(
+                                Icons.delivery_dining_outlined,
+                                color: Colors.black87,
+                                size: 24,
+                              ),
+                            ).animate().fade()
+                          : OutlineButtonFullWidth(
+                              initialValue: 0,
+                              borderColor: Colors.grey[300]!,
+                              title: 'Livraison',
+                              textColor: Colors.grey[300]!,
+                              icon: Icon(
+                                Icons.delivery_dining_outlined,
+                                color: Colors.grey[300]!,
+                                size: 24,
+                              ),
+                            ).animate().fade(),
                       const SizedBox(
                         height: 12.0,
                       ),
-                      OutlineButtonFullWidth(
-                        initialValue: 1,
-                        borderColor: context
-                                    .watch<OrderFormCubit>()
-                                    .state
-                                    .deliveryMethodIndex ==
-                                1
-                            ? AppColor.trestoRed
-                            : Colors.grey[300]!,
-                        title: 'A Importer',
-                        textColor: context
-                                    .watch<OrderFormCubit>()
-                                    .state
-                                    .deliveryMethodIndex ==
-                                1
-                            ? Colors.black87
-                            : Colors.grey[300]!,
-                        icon: Icon(
-                          Icons.shopping_bag_outlined,
-                          color: context
-                                      .watch<OrderFormCubit>()
-                                      .state
-                                      .deliveryMethodIndex ==
-                                  1
-                              ? Colors.black87
-                              : Colors.grey[300]!,
-                          size: 24,
-                        ),
-                      )
-                          .animate()
-                          .fade(delay: const Duration(milliseconds: 100)),
+                      deliveryIndex == 1
+                          ? const OutlineButtonFullWidth(
+                              initialValue: 1,
+                              borderColor: AppColor.trestoRed,
+                              title: 'A Importer',
+                              textColor: Colors.black87,
+                              icon: Icon(
+                                Icons.shopping_bag_outlined,
+                                color: Colors.black87,
+                                size: 24,
+                              ),
+                            )
+                              .animate()
+                              .fade(delay: const Duration(milliseconds: 100))
+                          : OutlineButtonFullWidth(
+                              initialValue: 1,
+                              borderColor: Colors.grey[300]!,
+                              title: 'A Importer',
+                              textColor: Colors.grey[300]!,
+                              icon: Icon(
+                                Icons.shopping_bag_outlined,
+                                color: Colors.grey[300]!,
+                                size: 24,
+                              ),
+                            )
+                              .animate()
+                              .fade(delay: const Duration(milliseconds: 100)),
                       const SizedBox(
                         height: 12.0,
                       ),
-                      OutlineButtonFullWidth(
-                        initialValue: 2,
-                        borderColor: context
-                                    .watch<OrderFormCubit>()
-                                    .state
-                                    .deliveryMethodIndex ==
-                                2
-                            ? AppColor.trestoRed
-                            : Colors.grey[300]!,
-                        title: 'Sur Place',
-                        textColor: context
-                                    .watch<OrderFormCubit>()
-                                    .state
-                                    .deliveryMethodIndex ==
-                                2
-                            ? Colors.black87
-                            : Colors.grey[300]!,
-                        icon: Icon(
-                          Icons.place_outlined,
-                          color: context
-                                      .watch<OrderFormCubit>()
-                                      .state
-                                      .deliveryMethodIndex ==
-                                  2
-                              ? Colors.black87
-                              : Colors.grey[300]!,
-                          size: 24,
-                        ),
-                      )
-                          .animate()
-                          .fade(delay: const Duration(milliseconds: 200)),
+                      deliveryIndex == 2
+                          ? const OutlineButtonFullWidth(
+                              initialValue: 2,
+                              borderColor: AppColor.trestoRed,
+                              title: 'Sur Place',
+                              textColor: Colors.black87,
+                              icon: Icon(
+                                Icons.place_outlined,
+                                color: Colors.black87,
+                                size: 24,
+                              ),
+                            )
+                              .animate()
+                              .fade(delay: const Duration(milliseconds: 200))
+                          : OutlineButtonFullWidth(
+                              initialValue: 2,
+                              borderColor: Colors.grey[300]!,
+                              title: 'Sur Place',
+                              textColor: Colors.grey[300]!,
+                              icon: Icon(
+                                Icons.place_outlined,
+                                color: Colors.grey[300]!,
+                                size: 24,
+                              ),
+                            )
+                              .animate()
+                              .fade(delay: const Duration(milliseconds: 200)),
                       const SizedBox(
                         height: 20,
                       ),
@@ -244,10 +232,10 @@ class _CreateOrderState extends State<CreateOrder> {
                             bgColor: Colors.transparent,
                           )),
                       FormActionsButtons(
-                          nameCtrl: nameCtrl,
-                          phoneCtrl: phoneCtrl,
-                          adrsCtrl: adrsCtrl,
-                          ),
+                        nameCtrl: nameCtrl,
+                        phoneCtrl: phoneCtrl,
+                        adrsCtrl: adrsCtrl,
+                      ),
                       const SizedBox(
                         height: 18.0,
                       )
@@ -281,10 +269,10 @@ class _CreateOrderState extends State<CreateOrder> {
                             bgColor: Colors.transparent,
                           )),
                       FormActionsButtons(
-                          nameCtrl: nameCtrl,
-                          phoneCtrl: phoneCtrl,
-                          adrsCtrl: adrsCtrl,
-                          )
+                        nameCtrl: nameCtrl,
+                        phoneCtrl: phoneCtrl,
+                        adrsCtrl: adrsCtrl,
+                      )
                     ],
                   ),
                 ),

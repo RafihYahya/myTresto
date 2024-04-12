@@ -12,261 +12,237 @@ class BotNavBarAlternative extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<IndexesCubit, AppIndexes>(
-      builder: (context, state) {
-        return Container(
-          height: 50,
-          color: Colors.white,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              GestureDetector(
-                onTap: () {
-                  if (context.read<IndexesCubit>().state.index == 3) {
-                    Navigator.of(context).popUntil((route) => route.isFirst);
-                  }
-                  BlocProvider.of<IndexesCubit>(context).changeIndex(index: 0);
-                },
-                child: Container(
-                  margin: const EdgeInsets.only(left: 12.0),
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 12.0, vertical: 8.0),
-                  height: 35,
-                  decoration: BoxDecoration(
-                      color: state.index == 0
-                          ? AppColor.colorIndexTrestoList25[context
-                              .read<AppSettingsCubit>()
-                              .state
-                              .colorIndex]
-                          : Colors.transparent,
-                      borderRadius: BorderRadius.circular(16.0)),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      HeroIcon(
-                        HeroIcons.home,
-                        style: HeroIconStyle.outline,
-                        color: state.index == 0
-                            ? AppColor.colorIndexTrestoList[context
-                                .read<AppSettingsCubit>()
-                                .state
-                                .colorIndex]
-                            : Colors.grey,
-                        size: 28.0,
-                      ),
-                      const SizedBox(
-                        width: 4.0,
-                      ),
-                      AnimatedContainer(
-                        duration: const Duration(milliseconds: 300),
-                        curve: Curves.easeInOut,
-                        width: state.index == 0 ? 70 : 0,
-                        child: Text(
-                          softWrap: false,
-                          'Dashboard',
-                          style: GoogleFonts.poppins(
-                              textStyle: TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.w500,
-                            color: AppColor.colorIndexTrestoList[context
-                                .read<AppSettingsCubit>()
-                                .state
-                                .colorIndex],
-                          )),
-                        ),
-                      )
-                    ],
+    var indexValue = context.watch<IndexesCubit>().state.index;
+    var indexValueRead = context.read<IndexesCubit>().state.index;
+    return Container(
+      height: 50,
+      color: Colors.white,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          GestureDetector(
+            onTap: () {
+              if (indexValueRead == 3) {
+                Navigator.of(context).popUntil((route) => route.isFirst);
+              }
+              BlocProvider.of<IndexesCubit>(context).changeIndex(index: 0);
+            },
+            child: Container(
+              margin: const EdgeInsets.only(left: 12.0),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0),
+              height: 35,
+              decoration: BoxDecoration(
+                  color: indexValue == 0
+                      ? AppColor.colorIndexTrestoList25[
+                          context.read<AppSettingsCubit>().state.colorIndex]
+                      : Colors.transparent,
+                  borderRadius: BorderRadius.circular(16.0)),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  HeroIcon(
+                    HeroIcons.home,
+                    style: HeroIconStyle.outline,
+                    color: indexValueRead == 0
+                        ? AppColor.colorIndexTrestoList[
+                            context.read<AppSettingsCubit>().state.colorIndex]
+                        : Colors.grey,
+                    size: 28.0,
                   ),
-                ),
-              ),
-              GestureDetector(
-                behavior: HitTestBehavior.translucent,
-                onTap: () {
-                  if (context.read<IndexesCubit>().state.index == 3) {
-                    Navigator.of(context).popUntil((route) => route.isFirst);
-                  }
-                  BlocProvider.of<IndexesCubit>(context).changeIndex(index: 1);
-                },
-                child: Container(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 12.0, vertical: 8.0),
-                  height: 35,
-                  decoration: BoxDecoration(
-                      color: state.index == 1
-                          ? AppColor.colorIndexTrestoList25[context
-                              .read<AppSettingsCubit>()
-                              .state
-                              .colorIndex]
-                          : Colors.transparent,
-                      borderRadius: BorderRadius.circular(16.0)),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      HeroIcon(
-                        HeroIcons.shoppingBag,
-                        style: HeroIconStyle.outline,
-                        color: state.index == 1
-                            ? AppColor.colorIndexTrestoList[context
-                                .read<AppSettingsCubit>()
-                                .state
-                                .colorIndex]
-                            : Colors.grey,
-                        size: 28.0,
-                      ),
-                      const SizedBox(
-                        width: 4.0,
-                      ),
-                      AnimatedContainer(
-                        duration: const Duration(milliseconds: 300),
-                        curve: Curves.easeInOut,
-                        width: state.index == 1 ? 45 : 0,
-                        child: Text(
-                          softWrap: false,
-                          'Orders',
-                          style: GoogleFonts.poppins(
-                              textStyle: TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.w500,
-                            color: AppColor.colorIndexTrestoList[context
-                                .read<AppSettingsCubit>()
-                                .state
-                                .colorIndex],
-                          )),
-                        ),
-                      )
-                    ],
+                  const SizedBox(
+                    width: 4.0,
                   ),
-                ),
+                  AnimatedContainer(
+                    duration: const Duration(milliseconds: 300),
+                    curve: Curves.easeInOut,
+                    width: indexValueRead == 0 ? 70 : 0,
+                    child: Text(
+                      softWrap: false,
+                      'Dashboard',
+                      style: GoogleFonts.poppins(
+                          textStyle: TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w500,
+                        color: AppColor.colorIndexTrestoList[
+                            context.read<AppSettingsCubit>().state.colorIndex],
+                      )),
+                    ),
+                  )
+                ],
               ),
-              GestureDetector(
-                behavior: HitTestBehavior.translucent,
-                onTap: () {
-                  if (context.read<IndexesCubit>().state.index == 3) {
-                    Navigator.of(context).popUntil((route) => route.isFirst);
-                  }
-                  BlocProvider.of<IndexesCubit>(context).changeIndex(index: 2);
-                },
-                child: Container(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 12.0, vertical: 8.0),
-                  height: 35,
-                  decoration: BoxDecoration(
-                      color: state.index == 2
-                          ? AppColor.colorIndexTrestoList25[context
-                              .read<AppSettingsCubit>()
-                              .state
-                              .colorIndex]
-                          : Colors.transparent,
-                      borderRadius: BorderRadius.circular(16.0)),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      HeroIcon(
-                        HeroIcons.plus,
-                        style: HeroIconStyle.outline,
-                        color: state.index == 2
-                            ? AppColor.colorIndexTrestoList[context
-                                .read<AppSettingsCubit>()
-                                .state
-                                .colorIndex]
-                            : Colors.grey,
-                        size: 28.0,
-                      ),
-                      const SizedBox(
-                        width: 4.0,
-                      ),
-                      AnimatedContainer(
-                        duration: const Duration(milliseconds: 300),
-                        curve: Curves.easeInOut,
-                        width: state.index == 2 ? 45 : 0,
-                        child: Text(
-                          softWrap: false,
-                          'Create',
-                          style: GoogleFonts.poppins(
-                              textStyle: TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.w500,
-                            color: AppColor.colorIndexTrestoList[context
-                                .read<AppSettingsCubit>()
-                                .state
-                                .colorIndex],
-                          )),
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              ),
-              GestureDetector(
-                behavior: HitTestBehavior.translucent,
-                onTap: () {
-                  if (context.read<IndexesCubit>().state.index == 3) {
-                    Navigator.of(context).popUntil((route) => route.isFirst);
-                  }
-                  BlocProvider.of<IndexesCubit>(context).changeIndex(index: 3);
-                },
-                child: Container(
-                  margin: const EdgeInsets.only(right: 12.0),
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 12.0, vertical: 8.0),
-                  height: 35,
-                  decoration: BoxDecoration(
-                      color: state.index == 3
-                          ? AppColor.colorIndexTrestoList25[context
-                              .read<AppSettingsCubit>()
-                              .state
-                              .colorIndex]
-                          : Colors.transparent,
-                      borderRadius: BorderRadius.circular(16.0)),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      HeroIcon(
-                        HeroIcons.listBullet,
-                        style: HeroIconStyle.outline,
-                        color: state.index == 3
-                            ? AppColor.colorIndexTrestoList[context
-                                .read<AppSettingsCubit>()
-                                .state
-                                .colorIndex]
-                            : Colors.grey,
-                        size: 28.0,
-                      ),
-                      const SizedBox(
-                        width: 4.0,
-                      ),
-                      AnimatedContainer(
-                        duration: const Duration(milliseconds: 300),
-                        curve: Curves.easeInOut,
-                        width: state.index == 3 ? 40 : 0,
-                        child: Text(
-                          softWrap: false,
-                          'Menu',
-                          style: GoogleFonts.poppins(
-                              textStyle: TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.w500,
-                            color: state.index == 3
-                                ? AppColor.colorIndexTrestoList[context
-                                    .read<AppSettingsCubit>()
-                                    .state
-                                    .colorIndex]
-                                : Colors.grey,
-                          )),
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              ),
-            ],
+            ),
           ),
-        );
-      },
+          GestureDetector(
+            behavior: HitTestBehavior.translucent,
+            onTap: () {
+              if (indexValueRead == 3) {
+                Navigator.of(context).popUntil((route) => route.isFirst);
+              }
+              BlocProvider.of<IndexesCubit>(context).changeIndex(index: 1);
+            },
+            child: Container(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0),
+              height: 35,
+              decoration: BoxDecoration(
+                  color: indexValue == 1
+                      ? AppColor.colorIndexTrestoList25[
+                          context.read<AppSettingsCubit>().state.colorIndex]
+                      : Colors.transparent,
+                  borderRadius: BorderRadius.circular(16.0)),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  HeroIcon(
+                    HeroIcons.shoppingBag,
+                    style: HeroIconStyle.outline,
+                    color: indexValueRead == 1
+                        ? AppColor.colorIndexTrestoList[
+                            context.read<AppSettingsCubit>().state.colorIndex]
+                        : Colors.grey,
+                    size: 28.0,
+                  ),
+                  const SizedBox(
+                    width: 4.0,
+                  ),
+                  AnimatedContainer(
+                    duration: const Duration(milliseconds: 300),
+                    curve: Curves.easeInOut,
+                    width: indexValueRead == 1 ? 45 : 0,
+                    child: Text(
+                      softWrap: false,
+                      'Orders',
+                      style: GoogleFonts.poppins(
+                          textStyle: TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w500,
+                        color: AppColor.colorIndexTrestoList[
+                            context.read<AppSettingsCubit>().state.colorIndex],
+                      )),
+                    ),
+                  )
+                ],
+              ),
+            ),
+          ),
+          GestureDetector(
+            behavior: HitTestBehavior.translucent,
+            onTap: () {
+              if (indexValueRead == 3) {
+                Navigator.of(context).popUntil((route) => route.isFirst);
+              }
+              BlocProvider.of<IndexesCubit>(context).changeIndex(index: 2);
+            },
+            child: Container(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0),
+              height: 35,
+              decoration: BoxDecoration(
+                  color: indexValue == 2
+                      ? AppColor.colorIndexTrestoList25[
+                          context.read<AppSettingsCubit>().state.colorIndex]
+                      : Colors.transparent,
+                  borderRadius: BorderRadius.circular(16.0)),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  HeroIcon(
+                    HeroIcons.plus,
+                    style: HeroIconStyle.outline,
+                    color: indexValueRead == 2
+                        ? AppColor.colorIndexTrestoList[
+                            context.read<AppSettingsCubit>().state.colorIndex]
+                        : Colors.grey,
+                    size: 28.0,
+                  ),
+                  const SizedBox(
+                    width: 4.0,
+                  ),
+                  AnimatedContainer(
+                    duration: const Duration(milliseconds: 300),
+                    curve: Curves.easeInOut,
+                    width: indexValueRead == 2 ? 45 : 0,
+                    child: Text(
+                      softWrap: false,
+                      'Create',
+                      style: GoogleFonts.poppins(
+                          textStyle: TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w500,
+                        color: AppColor.colorIndexTrestoList[
+                            context.read<AppSettingsCubit>().state.colorIndex],
+                      )),
+                    ),
+                  )
+                ],
+              ),
+            ),
+          ),
+          GestureDetector(
+            behavior: HitTestBehavior.translucent,
+            onTap: () {
+              if (indexValueRead == 3) {
+                Navigator.of(context).popUntil((route) => route.isFirst);
+              }
+              BlocProvider.of<IndexesCubit>(context).changeIndex(index: 3);
+            },
+            child: Container(
+              margin: const EdgeInsets.only(right: 12.0),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0),
+              height: 35,
+              decoration: BoxDecoration(
+                  color: indexValue == 3
+                      ? AppColor.colorIndexTrestoList25[
+                          context.read<AppSettingsCubit>().state.colorIndex]
+                      : Colors.transparent,
+                  borderRadius: BorderRadius.circular(16.0)),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  HeroIcon(
+                    HeroIcons.listBullet,
+                    style: HeroIconStyle.outline,
+                    color: indexValueRead == 3
+                        ? AppColor.colorIndexTrestoList[
+                            context.read<AppSettingsCubit>().state.colorIndex]
+                        : Colors.grey,
+                    size: 28.0,
+                  ),
+                  const SizedBox(
+                    width: 4.0,
+                  ),
+                  AnimatedContainer(
+                    duration: const Duration(milliseconds: 300),
+                    curve: Curves.easeInOut,
+                    width: indexValue == 3 ? 40 : 0,
+                    child: Text(
+                      softWrap: false,
+                      'Menu',
+                      style: GoogleFonts.poppins(
+                          textStyle: TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w500,
+                        color: indexValueRead == 3
+                            ? AppColor.colorIndexTrestoList[context
+                                .read<AppSettingsCubit>()
+                                .state
+                                .colorIndex]
+                            : Colors.grey,
+                      )),
+                    ),
+                  )
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
